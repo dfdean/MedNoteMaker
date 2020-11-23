@@ -1,0 +1,49 @@
+/*******************************************************************************
+Dawson's Medical Tools CSS rules
+The CSS spec is http://www.w3.org/TR/CSS21/
+
+The "#" character means this is an element id.
+These rules apply to the element whose id attribute is "xxxx". Id attribute
+values are unique, so there can only be 1 mainContent.
+
+The "." character means this is any element with a specific value of the class attribute.
+Class attribute values are NOT unique, so it can apply to many elements in one document.
+*/
+
+.CPLabInCellStyle { height:35px; width:120px; }
+.LabInCellStyle { height:50px; width:120px; }
+.ToggleValueCellStyle { height:20px; width:90px; text-align:center; }
+
+.planOnStyle { height:50px; width:90px; border:1px outset;  box-shadow: 2px 2px #888888; color:#000000; background-color:#00FF00; }
+.planOffStyle { height:50px; width:90px; border:1px outset; box-shadow: 2px 2px #888888; color:#000000; background-color:#FFFFCC; }
+
+/*****************************/
+/* Toggle and Units buttons */
+.ToggleStyle { height:30px; width:90px; border:1px outset; color:#000000; background-color:#717D7E; }
+.UnitsButtonStyle { width:25px; height:20px; border:1px outset;  box-shadow: 2px 2px #888888; color:#000000; background-color:#CFECEC; font-size:12px; text-align:center; }
+
+.OptionBtnStyle { height:30px; width:120px; border:1px outset;  box-shadow: 2px 2px #888888; color:#000000; background-color:#CFECEC; }
+.optionOnStyle { height:30px; width:120px; border:1px outset;  box-shadow: 2px 2px #888888; color:#000000; background-color:#CFECEC; }
+.optionOffStyle { height:30px; width:120px; border:1px outset;  box-shadow: 2px 2px #888888; color:#000000; background-color:#CFECEC; }
+
+.smallTextBox {width: 50px; height: 20px; padding: 1px}
+
+tr.top td { border-top: thin solid black; }
+tr.bottom td { border-bottom: thin solid black; }
+tr.boxed td { border-top: thin solid black; border-bottom: thin solid black; }
+
+.CPOptionOnStyle { height:25px; width:90px; border:1px outset;  box-shadow: 2px 2px #888888; color:#000000; background-color:#00FF00; }
+.CPOptionOtherStyle { height:25px; width:90px; border:1px outset;  box-shadow: 2px 2px #888888; color:#000000; background-color:#00FFFF; }
+.CPOptionOffStyle { height:25px; width:90px; border:1px outset;  box-shadow: 2px 2px #888888; color:#000000; background-color:#FF0000; }
+.CPOptionDisabledStyle { height:25px; width:90px; border:1px outset;  box-shadow: 2px 2px #888888; color:#000000; background-color:#AAAAAA; }
+
+.CPGroupOnStyle { height:25px; width:90px; border:1px outset;  box-shadow: 2px 2px #888888; color:#000000; background-color:#FFFFFF; }
+.CPGroupOffStyle { height:25px; width:90px; border:1px outset;  box-shadow: 2px 2px #888888; color:#000000; background-color:#AAAAAA; }
+
+.CPGBNaGoodStyle { height:25px; width:90px; border:1px outset;  box-shadow: 2px 2px #888888; color:#000000; background-color:#00FF00; }
+.CPGBNaBadStyle { height:25px; width:90px; border:1px outset;  box-shadow: 2px 2px #888888; color:#000000; background-color:#FF0000; }
+.CPGBNaOffStyle { height:25px; width:90px; border:1px outset;  box-shadow: 2px 2px #888888; color:#000000; background-color:#AAAAAA; }
+
+
+/* //////////////////////////////////////////////// */
+/* Header */
