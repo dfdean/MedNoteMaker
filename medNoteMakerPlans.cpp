@@ -2236,6 +2236,8 @@ WriteHemodialysisPlan() {
     WriteActionIfSelected(activeControlPanel, "ESRDLasixPOOption");
     WriteActionIfSelected(activeControlPanel, "ESRDTorsemideOption");
 
+    WriteActionIfSelected(activeControlPanel, "ESRDHoldBPMedsOption");
+    WriteActionIfSelected(activeControlPanel, "ESRDMidodrineOption");
     WriteActionIfSelected(activeControlPanel, "ESRDMiralaxOption");
     WriteActionIfSelected(activeControlPanel, "ESRDGentamycinOption");
     WriteActionIfSelected(activeControlPanel, "ESRDHeparinInPDOption");
@@ -3512,12 +3514,12 @@ ComputeScoreFromSelectedValues(activeControlPanel, optionNameList) {
     var score = 0;
 
     for (index = 0; index < optionNameList.length; index++) {
-        LogEvent("ComputeScoreFromSelectedValues. index: " + index);
+        //LogEvent("ComputeScoreFromSelectedValues. index: " + index);
         currentOptionName = optionNameList[index];
         currentOptionValue = MedNote_GetCPOptionToggleState(currentOptionName);
 
-        LogEvent("ComputeScoreFromSelectedValues. Check option: " + currentOptionName);
-        LogEvent("ComputeScoreFromSelectedValues. currentOptionValue: " + currentOptionValue);
+        //LogEvent("ComputeScoreFromSelectedValues. Check option: " + currentOptionName);
+        //LogEvent("ComputeScoreFromSelectedValues. currentOptionValue: " + currentOptionValue);
         if (currentOptionValue >= 0) {
             score += currentOptionValue;
         }
@@ -4262,6 +4264,8 @@ WriteDICPlan() {
 // Updated 2020-4-17
 // Updated 2020-5-1
 // Updated 2020-5-23
+// Updated 2020-11-1
+// Updated 2020-12-2
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteCovidPlan() {
@@ -4290,7 +4294,6 @@ WriteCovidPlan() {
         return;
     }
 
-
     // Symptoms
     var optionNameList = [ "CovidFeversOption", "CovidCoughOption", "CovidDyspneaOption", "CovidDiarrheaOption", "CovidMyalgiaOption"];
     WriteListOfSelectedValues(activeControlPanel, "Symptoms include: ", false, "", optionNameList, "")
@@ -4305,7 +4308,6 @@ WriteCovidPlan() {
     WriteCommentIfSelected(activeControlPanel, "CovidSpO2TrendOption");
     WriteCommentIfSelected(activeControlPanel, "CovidDDimerTrendOption");
     WriteCommentIfSelected(activeControlPanel, "CovidLDHTrendOption");
-    //WriteCommentIfSelected(activeControlPanel, "CovidProcalTrendOption");
     //WriteCommentIfSelected(activeControlPanel, "CovidFibrinogenTrendOption");
 
     // Workup
@@ -4319,24 +4321,26 @@ WriteCovidPlan() {
     // Monitor
     // "CovidWUDDimerOption", "CovidLDHDailyOption",  "CovidFibrinogenDailyOption", "CovidWUFerritinOption", 
     var optionNameList = [ "CovidCRPDailyOption", "CovidCBCDiffPDailyOption", "CovidVBGDailyOption",
-                           "CovidVBGDailyOption"];
+                           "CovidVBGDailyOption", "CovidDDimerDailyOption"];
     WriteListOfSelectedActions(activeControlPanel, "Check daily labs: ", false, "", optionNameList, "")
 
     // Treat
-    WriteActionIfSelected(activeControlPanel, "CovidSteroidsOption");
+    WriteActionIfSelected(activeControlPanel, "CovidDexamethasoneOption");
+    WriteActionIfSelected(activeControlPanel, "CovidMethylpredOption");
     WriteActionIfSelected(activeControlPanel, "CovidRemdesivirOption");
-    WriteActionIfSelected(activeControlPanel, "CovidApapOption");
-    WriteActionIfSelected(activeControlPanel, "CovidGuaifenesinOption");
-    WriteActionIfSelected(activeControlPanel, "CovidDextromethorphanOption");
+    WriteActionIfSelected(activeControlPanel, "CovidDiureticsOption");
+    WriteActionIfSelected(activeControlPanel, "CovidAntibioticsOption");
 
     // Other treat
     WriteActionIfSelected(activeControlPanel, "CovidO2Option");
     WriteActionIfSelected(activeControlPanel, "CovidPrecautionsOption");
     WriteActionIfSelected(activeControlPanel, "CovidProneOption");
-    WriteActionIfSelected(activeControlPanel, "CovidLasixOption");
-    WriteActionIfSelected(activeControlPanel, "CovidNoBronchoDilatorsOption");
+
+    WriteActionIfSelected(activeControlPanel, "CovidAlbuterolOption");
+    WriteActionIfSelected(activeControlPanel, "CovidApapOption");
+    WriteActionIfSelected(activeControlPanel, "CovidGuaifenesinOption");
+    WriteActionIfSelected(activeControlPanel, "CovidPPIOption");
     WriteActionIfSelected(activeControlPanel, "CovidNoNebsOption");
-    WriteActionIfSelected(activeControlPanel, "CovidACEOKOption");
 } // WriteCovidPlan
 
 

@@ -1279,6 +1279,7 @@ ShowSubWindow(windowName, statusTextStr, showHelpClose) {
                 AddTextToHTML(infoDiv, "Language: " + navigator.language);
                 AddTextToHTML(infoDiv, "Cookies Enabled: " + navigator.cookieEnabled);
                 AddTextToHTML(infoDiv, "Java Enabled: " + navigator.javaEnabled());
+                AddTextToHTML(infoDiv, "Requested URL: " + document.referrer);
                 //AddTextToHTML(infoDiv, "Product: " + window.navigator.product);
             } // if (infoDiv)
             g_CollectedSystemInfo = true;

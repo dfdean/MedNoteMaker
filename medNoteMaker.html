@@ -256,6 +256,7 @@
 <h2>Medical Note Maker</h2>
 <br>Written by Dawson Dean
 <br>For comments and questions, email mednotemaker@gmail.com
+<br>Code is available at <a href="https://github.com/dfdean/MedNoteMaker" target="_blank">https://github.com/dfdean/MedNoteMaker</a>
 <br><br><br><br>
 <input type="button" id="CloseHelpButtonID" value="Close" class="OptionBtnStyle" onclick="MedNote_OnCloseChildWindow(this)" />
 <div id="HelpStatusTextID">
@@ -3105,6 +3106,8 @@ SGLT2 Criteria
 
     <tr>
         <td></td>
+        <td><input type="button" id="ESRDHoldBPMedsOption" value="Hold BP Meds" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
+        <td><input type="button" id="ESRDMidodrineOption" value="Midodrine 5mgTID" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
         <td><input type="button" id="ESRDMiralaxOption" value="Miralax" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
         <td><input type="button" id="ESRDGentamycinOption" value="Gentamycin" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
         <td><input type="button" id="ESRDHeparinInPDOption" value="Heparin In PD" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
@@ -6658,15 +6661,16 @@ Stage IV pressure ulcers extend into bone or muscle, as is seen in Figure 5
         <td><input type="button" id="CovidCRPDailyOption" value="CRP" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
         <td><input type="button" id="CovidCBCDiffPDailyOption" value="CBC" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
         <td><input type="button" id="CovidVBGDailyOption" value="VBG" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
+        <td><input type="button" id="CovidDDimerDailyOption" value="D-Dimer" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
     </tr>
 
     <tr>
         <td><input type="button" value="Treat" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" /></td>
-        <td><input type="button" id="CovidSteroidsOption" value="Steroids" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
+        <td><input type="button" id="CovidDexamethasoneOption" value="Dexamethasone" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
+        <td><input type="button" id="CovidMethylpredOption" value="Methylpred Q12" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
         <td><input type="button" id="CovidRemdesivirOption" value="Remdesivir" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
-        <td><input type="button" id="CovidApapOption" value="Apap" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
-        <td><input type="button" id="CovidGuaifenesinOption" value="Guaifenesin" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
-        <td><input type="button" id="CovidDextromethorphanOption" value="Dextrometh" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
+        <td><input type="button" id="CovidDiureticsOption" value="Lasix 20IV" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
+        <td><input type="button" id="CovidAntibioticsOption" value="Ceftriaxone" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
     </tr>
 
     <tr>
@@ -6674,14 +6678,16 @@ Stage IV pressure ulcers extend into bone or muscle, as is seen in Figure 5
         <td><input type="button" id="CovidO2Option" value="O2" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
         <td><input type="button" id="CovidPrecautionsOption" value="Precautions" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
         <td><input type="button" id="CovidProneOption" value="Prone" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
-        <td><input type="button" id="CovidLasixOption" value="Diurese" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
+        <td><input type="button" id="CovidApapOption" value="Apap" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
+        <td><input type="button" id="CovidGuaifenesinOption" value="Guaifenesin" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
     </tr>
 
     <tr>
         <td></td>
-        <td><input type="button" id="CovidNoBronchoDilatorsOption" value="No Albuterol" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
+        <td><input type="button" id="CovidAlbuterolOption" value="Albuterol" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
+        <td><input type="button" id="CovidPPIOption" value="PPI" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
         <td><input type="button" id="CovidNoNebsOption" value="No Nebs" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
-        <td><input type="button" id="CovidACEOKOption" value="ACEi OK" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
+
     </tr>
 
     </table>
@@ -6689,6 +6695,12 @@ Stage IV pressure ulcers extend into bone or muscle, as is seen in Figure 5
 
     <!-- HINT TEXT -->
     <div xID="CPHintText" style="display:None;">
+<p>Quarantine
+<ul>
+    <li>Symptomatic 20days from positive
+    <li>Asymptomatic: 10days from positive
+</ul>
+
 <p>Discharge to Rehab or LTAC:
 <ul>
     <li>Two negative results of COVID-19 PCR, collected 24hrs apart
