@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2013-2020 Dawson Dean
+// Copyright (c) 2013-2023 Dawson Dean
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the "Software"),
@@ -24,7 +24,7 @@
 //
 // To Add A Control Panel:
 // =======================
-// 1. noteBuilder.html - Add the HTML <div> in the "CONTROL PANEL CATALOG" section
+// 1. medNoteMaker.html - Add the HTML <div> in the "CONTROL PANEL CATALOG" section
 //       I use the original procedure from noteBuilderPlans.cpp as a template
 // 2. noteBuilderTables.cpp - Add the div ID to the "controlPanelID" in the appropriate entry in g_AllPlansDeclaration.
 // 3. noteBuilderTables.cpp - Add all option entries from the control panel html to g_AllOptionsDeclaration[]
@@ -56,6 +56,7 @@ var g_AllPlansDeclaration = {
     "OncologyPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "OncologyPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "ONCOLOGY_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
     "HepatitisPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "HepatitisPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "HEPATITIS_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
     "PancPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "PancPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "PANCREATITIS_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
+    "GISymptomsPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "GISymptomsPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "GISymptoms_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
     "PneumoniaPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "PneumoniaPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "PneumoniaControlPanel", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
     "CADPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "CADPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "CADControls", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
     "CHFPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "CHFPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "CHFControls", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
@@ -63,15 +64,11 @@ var g_AllPlansDeclaration = {
     "AFibPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "AFibPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "AFib_CONTROL_PANEL_ID", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
     "PreopPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "PreopPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "PREOP_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
 
-
     ///////////////////////////////////////////////////////////
     // Complex Comorbidity OR Chief Complaint Plans
     "CirrhosisPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "CirrhosisPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "CirrhosisControls", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
     "HemoDialysisPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "HemoDialysisPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "ESRDControls", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
-    "CVVHPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "CVVHPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "CVVHCP", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
     "RenalTransplantPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "RenalTransplantPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "RenalTransplantControlPanel", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
-    // "CVVHDPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "CVVHDPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "CVVHDCP", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null}, 
-
     
     ///////////////////////////////////////////////////////////
     // Renal Plans
@@ -79,8 +76,6 @@ var g_AllPlansDeclaration = {
     "CKDPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "CKDPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "CKD_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
     "NephroticPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "NephroticPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "NephroticControlPanel", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
     "IVContrastPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "IVContrastPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "IV_CONTRAST_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
-    "VolumePlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "VolumePlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "VolumeCP", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
-    "FreeWaterPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "FreeWaterPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "FreeWaterCP", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
     "MBDPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "MBDPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "MBD_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
     "HTNPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "HTNPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "HypertensionControlPanel", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
     "AcidBasePlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "AcidBasePlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "AcidBaseControls", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
@@ -94,6 +89,8 @@ var g_AllPlansDeclaration = {
     "HypERCalcemiaPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "HypERCalcemiaPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "HIGH_CALCIUM_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
     "ParathyroidectomyPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "ParathyroidectomyPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "ParathyroidectomyCP", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
     "VitDPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "VitDPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "LOW_VITD_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
+    "NephrolithiasisPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "NephrolithiasisPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "NephrolithiasisControlPanel", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
+
 
     ///////////////////////////////////////////////////////////
     // Non-Complex Comorbidities
@@ -116,30 +113,24 @@ var g_AllPlansDeclaration = {
     "IllicitDrugsPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "IllicitDrugsPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "ILLICITS_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
     "PalliativePlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "PalliativePlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "PALLIATIVE_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
     "LegFracturePlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "LegFracturePlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "LEG_FRACTURE_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
-    "NephrolithiasisPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "NephrolithiasisPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "NephrolithiasisControlPanel", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
+    "MigrainesPlan" : { "isSelected" : 0, "planSelectStatusHTMLElementID" : "MigrainesPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "MIGRAINES_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
 
 
     ///////////////////////////////////////////////////////////
     // SINGLE_LINE PLANS
-    "DepressionPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "DepressionPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "MOOD_DISORDER_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
-    "TobaccoPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "TobaccoPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "TOBACCO_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
-    "GERDPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "GERDPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "GERD_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
-    "ObesityPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "ObesityPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "OBESITY_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
+    "DepressionPlan" : { "isSelected" : 0, "planSelectStatusHTMLElementID" : "DepressionPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "MOOD_DISORDER_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
+    "TobaccoPlan" : { "isSelected" : 0, "planSelectStatusHTMLElementID" : "TobaccoPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "TOBACCO_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
+    "GERDPlan" : { "isSelected" : 0, "planSelectStatusHTMLElementID" : "GERDPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "GERD_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
+    "ObesityPlan" : { "isSelected" : 0, "planSelectStatusHTMLElementID" : "ObesityPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "OBESITY_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
     "MalnutritionPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "MalnutritionPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "MALNUTRITION_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
-    "WeaknessPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "WeaknessPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "WEAKNESS_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
+    "WeaknessPlan" : { "isSelected" : 0, "planSelectStatusHTMLElementID" : "WeaknessPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "WEAKNESS_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
 
 
     ///////////////////////////////////////////////////////////
     // Last Plan
     "PreventionPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "PreventionPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "PREVENTION_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
+    "BillingPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "BillingPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "BILLING_CONTROL_PANEL", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
 
-    ///////////////////////////////////////////////////////////
-    // Not used
-    "MigrainePlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "MigrainePlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "MigraineCP", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
-    "MenorrhagiaPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "MenorrhagiaPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "MenorrhagiaCP", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
-    "Polyarthropathy" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "Polyarthropathy", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "PolyarthropathyCP", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
-    "BackPainPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "BackPainPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "BackPainCP", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null},
-    "JointPainPlan" :     { "isSelected" : 0, "planSelectStatusHTMLElementID" : "JointPainPlan", "planSelectStatusHTMLElement" : null, "PrintFunction" : null, "PrintSingleLine" : 0, "controlPanelID" : "JointPainCP", "activeControlPanel" : null, "planTableRowElement" : null, "planTextHTMLElement" : null} 
 }; // g_AllPlansDeclaration
 
 
@@ -188,6 +179,9 @@ var g_AllOptionsDeclaration = {
     // Cardiovascular:
     "HROption" : { "ButtonLabelList" : ["RRR", "IrregIrreg", "Tachy"], "ValueList" : ["regular s1/s2", "irregular-irregular s1/s2", "tachycardic but regular s1/s2"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
     "MurmurOption" : { "ButtonLabelList" : ["NoMurmur", "LUSB", "RUSB"], "ValueList" : ["no murmurs", "II/VI systolic murmur loudest at LUSB", "II/VI systolic murmur loudest at RUSB"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+
+    "MurmurIncrease" : { "ButtonLabelList" : ["MurmurInc", "NoChange"], "ValueList" : ["murmur increases on inspiration", "murmur does not change on inspiration"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+
     "JVDOption" : { "ButtonLabelList" : ["NoJVD", "+JVD"], "ValueList" : ["no JVD", "+JVD"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
     "EdemaOption" : { "ButtonLabelList" : ["NoEdema", "1+Pitting", "2+pitting"], "ValueList" : ["no lower extremity edema", "1+ pitting lower extremity edema", "2+ pitting lower extremity edema"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
     "PulsesOption" : { "ButtonLabelList" : ["2+", "1+"], "ValueList" : ["2+ Pulses bilateral pedal", "1+ Pulses bilateral pedal"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
@@ -232,7 +226,7 @@ var g_AllOptionsDeclaration = {
 
     ///////////////////
     // Access:
-    "AccessTypeOption" : { "ButtonLabelList" : ["TDC", "LUE AVE", "RUE AVF", "IJ", "Fem"], "ValueList" : ["Tunnel Dialysis CatheterDC", "LUE AVE", "RUE AVF", "IJ temporary dialysis catheter", "Femoral temporary dialysis catheter"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "AccessTypeOption" : { "ButtonLabelList" : ["TDC", "LUE AVF", "RUE AVF", "IJ", "Fem"], "ValueList" : ["Tunnel Dialysis Catheter", "LUE AVF", "RUE AVF", "IJ temporary dialysis catheter", "Femoral temporary dialysis catheter"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
     "AccessBruitOption" : { "ButtonLabelList" : ["+bruit", "No bruit"], "ValueList" : ["audible bruit", "no audible bruit"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
     "AccessThrillOption" : { "ButtonLabelList" : ["+thrill", "No thrill"], "ValueList" : ["palpable thrill", "no palpable thrill"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
     "AccessAugmentationOption" : { "ButtonLabelList" : ["+augmentation", "No augmentation"], "ValueList" : ["augmentation", "no augmentation"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
@@ -275,8 +269,8 @@ var g_AllOptionsDeclaration = {
     // Respiratory
     "RosDyspneaOption" : { "ButtonLabelList" : ["No Dyspnea", "Dyspnea"], "ValueList" : ["no shortness of breath", "+ shortness of breath"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
     "RosCoughOption" : { "ButtonLabelList" : ["No Cough", "Cough"], "ValueList" : ["no cough", "+ cough"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
-    "RosDoEOption" : { "ButtonLabelList" : ["No DoE", "DoE"], "ValueList" : ["no dyspnea on exertion", "+ dyspnea on exertion"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
-    "RosSputumOption" : { "ButtonLabelList" : ["No Sputum", "Sputum Changes"], "ValueList" : ["no change in sputum production", "+change in sputum production"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "RosDoEOption" : { "ButtonLabelList" : ["No DoE", "DoE"], "ValueList" : ["no dyspnea on exertion", "+ dyspnea on exertion"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "RosSputumOption" : { "ButtonLabelList" : ["No Sputum", "Sputum Changes"], "ValueList" : ["no change in sputum production", "+change in sputum production"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
 
     ///////////////////
     // Gastrointestinal
@@ -341,6 +335,102 @@ var g_AllOptionsDeclaration = {
 
 
 
+    ///////////////////////////////////////////////////////////
+    // Past Medical History
+    ///////////////////////////////////////////////////////////
+    "PMHxHypertension" : { "ButtonLabelList" : ["HTN"], "ValueList" : ["Hypertension"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PMHxDiabetes" : { "ButtonLabelList" : ["DM2", "DM1"], "ValueList" : ["Diabetes, Type 2", "Diabetes, Type 1"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PMHxHeartFailure" : { "ButtonLabelList" : ["CHF"], "ValueList" : ["Heart Failure"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PMHxCOPD" : { "ButtonLabelList" : ["COPD"], "ValueList" : ["COPD"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PMHxCirrhosis" : { "ButtonLabelList" : ["Cirrhosis"], "ValueList" : ["Cirrhosis"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PMHxCoronaryArteryDisease" : { "ButtonLabelList" : ["CAD"], "ValueList" : ["Coronary Artery Disease"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PMHxCKD" : { "ButtonLabelList" : ["CKD"], "ValueList" : ["Stroke"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PMHxStroke" : { "ButtonLabelList" : ["CVA"], "ValueList" : ["Stroke"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PMHxHypoThyroid" : { "ButtonLabelList" : ["Hypothyroid"], "ValueList" : ["Hypothyroid"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PMHxAnxiety" : { "ButtonLabelList" : ["Anxiety"], "ValueList" : ["Anxiety"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PMHxAFib" : { "ButtonLabelList" : ["AFib"], "ValueList" : ["Atrial Fibrillation"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PMHxDepression" : { "ButtonLabelList" : ["Depression"], "ValueList" : ["Depression"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PMHxTobacco" : { "ButtonLabelList" : ["Tobacco"], "ValueList" : ["Tobacco"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PMHxEtOH" : { "ButtonLabelList" : ["EtOH"], "ValueList" : ["Alcohol Use Disorder"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+
+
+    ///////////////////////////////////////////////////////////
+    // Past Surgical History
+    ///////////////////////////////////////////////////////////
+    "PSHxCholecystectomy" : { "ButtonLabelList" : ["CCY"], "ValueList" : ["Cholecystectomy"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PSHxArthroscopy" : { "ButtonLabelList" : ["Ortho"], "ValueList" : ["Arthroscopy"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PSHxAppendectomy" : { "ButtonLabelList" : ["Appy"], "ValueList" : ["Appendectomy"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PSHxHysterectomy" : { "ButtonLabelList" : ["Hyst"], "ValueList" : ["Hysterectomy"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PSHxTonsillectomy" : { "ButtonLabelList" : ["Tonsils"], "ValueList" : ["Tonsillectomy"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PSHxCABG" : { "ButtonLabelList" : ["CABG"], "ValueList" : ["Coronary Artery Bypass Grafting"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PSHxCSection" : { "ButtonLabelList" : ["C-Section"], "ValueList" : ["C-Section"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PSHxBTL" : { "ButtonLabelList" : ["Tubal"], "ValueList" : ["Tubal Ligation"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+
+
+    ///////////////////////////////////////////////////////////
+    // Past Social History
+    ///////////////////////////////////////////////////////////
+    "PHxTobacco" : { "ButtonLabelList" : ["Past Use", "Current", "Smokeless", "Never"], "ValueList" : ["Past Use", "Currently Smokes", "Uses Smokeless Tobacco", "Never"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PHxAlcohol" : { "ButtonLabelList" : ["Light Use", "Past", "Current", "Never"], "ValueList" : ["Light Use", "Past Heavy use", "Current heavy use", "Never"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PHxDrugs" : { "ButtonLabelList" : ["None", "THC", "Cocaine", "Heroin", "Meth"], "ValueList" : ["None", "THC", "Cocaine", "Heroin", "Methamphetamine"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+
+
+    ///////////////////////////////////////////////////////////
+    // Family Medical History
+    ///////////////////////////////////////////////////////////
+    "FHxMotherDM" : { "ButtonLabelList" : ["DM"], "ValueList" : ["Diabetes"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "FHxMotherHTN" : { "ButtonLabelList" : ["HTN"], "ValueList" : ["Hypertension"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "FHxMotherCAD" : { "ButtonLabelList" : ["CAD"], "ValueList" : ["CAD"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "FHxMotherCancer" : { "ButtonLabelList" : ["Cancer"], "ValueList" : ["Cancer"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "FHxMotherCOPD" : { "ButtonLabelList" : ["COPD"], "ValueList" : ["COPD"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "FHxMotherNone" : { "ButtonLabelList" : ["None"], "ValueList" : ["No known medical issues"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+
+    "FHxFatherDM" : { "ButtonLabelList" : ["DM"], "ValueList" : ["Diabetes"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "FHxFatherHTN" : { "ButtonLabelList" : ["HTN"], "ValueList" : ["Hypertension"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "FHxFatherCAD" : { "ButtonLabelList" : ["CAD"], "ValueList" : ["CAD"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "FHxFatherCancer" : { "ButtonLabelList" : ["Cancer"], "ValueList" : ["Cancer"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "FHxFatherCOPD" : { "ButtonLabelList" : ["COPD"], "ValueList" : ["COPD"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "FHxFatherNone" : { "ButtonLabelList" : ["None"], "ValueList" : ["No known medical issues"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+
+    "FHxSiblingsDM" : { "ButtonLabelList" : ["DM"], "ValueList" : ["Diabetes"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "FHxSiblingsHTN" : { "ButtonLabelList" : ["HTN"], "ValueList" : ["Hypertension"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "FHxSiblingsCAD" : { "ButtonLabelList" : ["CAD"], "ValueList" : ["CAD"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "FHxSiblingsCancer" : { "ButtonLabelList" : ["Cancer"], "ValueList" : ["Cancer"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+
+
+    ///////////////////////////////////////////////////////////
+    // Home Medications
+    ///////////////////////////////////////////////////////////
+    "PHxMedsMetoprolol" : { "ButtonLabelList" : ["Metoprolol"], "ValueList" : ["Metoprolol"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PHxMedsLisinopril" : { "ButtonLabelList" : ["Lisinopril"], "ValueList" : ["Lisinopril"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PHxMedsLosartan" : { "ButtonLabelList" : ["Losartan"], "ValueList" : ["Losartan"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PHxMedsAmlodipine" : { "ButtonLabelList" : ["Amlodipine"], "ValueList" : ["Amlodipine"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PHxMedsHCTZ" : { "ButtonLabelList" : ["HCTZ"], "ValueList" : ["Hydrochlorothiazide"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PHxMedsPantoprazole" : { "ButtonLabelList" : ["PPI", "PPI"], "ValueList" : ["Pantoprazole", "Omeprazole"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PHxMedsOxycodone" : { "ButtonLabelList" : ["Oxy", "Hydro"], "ValueList" : ["Oxycodone", "Hydrocodone/Apap"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+
+
+    "PHxMedsCoreg" : { "ButtonLabelList" : ["Carvedilol"], "ValueList" : ["Carvedilol"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PHxMedsFurosemide" : { "ButtonLabelList" : ["Furosemide"], "ValueList" : ["Furosemide"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PHxMedsAsa" : { "ButtonLabelList" : ["Aspirin"], "ValueList" : ["Aspirin"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PHxMedsAtorvastatin" : { "ButtonLabelList" : ["Atorva"], "ValueList" : ["Atorvastatin"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PHxMedsApixaban" : { "ButtonLabelList" : ["Apixaban"], "ValueList" : ["Apixaban"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PHxMedsClopidogrel" : { "ButtonLabelList" : ["Clopidogrel"], "ValueList" : ["Clopidogrel"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PHxMedsAlbuterol" : { "ButtonLabelList" : ["Albuterol"], "ValueList" : ["Albuterol inhaler"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PHxMedsFluticSalm" : { "ButtonLabelList" : ["Flutic/Salm"], "ValueList" : ["Fluticasone/Salmoterol"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PHxMedsTiotropium" : { "ButtonLabelList" : ["Tiotropium"], "ValueList" : ["Tiotropium"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PHxMedsMontelukast" : { "ButtonLabelList" : ["Montelukast"], "ValueList" : ["Montelukast"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PHxMedsTamsulosin" : { "ButtonLabelList" : ["Tamsulosin"], "ValueList" : ["Tamsulosin"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PHxMedsMetformin" : { "ButtonLabelList" : ["Metformin"], "ValueList" : ["Metformin"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+
+
+
+
+    ///////////////////////////////////////////////////////////
+    // Allergies
+    ///////////////////////////////////////////////////////////
+    "PHxAllergyPenicillins" : { "ButtonLabelList" : ["PCN"], "ValueList" : ["Penicillins"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
+    "PHxAllergySulfa" : { "ButtonLabelList" : ["Sulfa"], "ValueList" : ["Sulfa medications"], "htmlButton" : null, "toggleBehavior" : "OK/Bad/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanHeader"},
 
 
     ///////////////////////////////////////////////////////////
@@ -364,13 +454,24 @@ var g_AllOptionsDeclaration = {
     // PT Recommendations
     "DispoPTRecsOption" : { "ButtonLabelList" : ["Acute Rehab", "Subacute", "Home-assist", "Home"], "ValueList" : ["Acute Rehab", "Subacute Rehab", "Home with assist", "Home"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
     "DispoPatientAgreeOption" : { "ButtonLabelList" : ["Agrees", "Disagrees"], "ValueList" : ["the patient agrees", "the patient declines and will go home"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
-    "DispoClinicPCPOption" : { "ButtonLabelList" : ["PCP"], "ValueList" : ["Primary Care"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
-    "DispoClinicIDOption" : { "ButtonLabelList" : ["ID"], "ValueList" : ["Infectious Disease Clinic"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
-    "DispoClinicGIOption" : { "ButtonLabelList" : ["GI"], "ValueList" : ["GI clinic"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
 
     // Discharge Equipment
     "WeaknessHospBed1Option" : { "ButtonLabelList" : ["Hosp Bed1"], "ValueList" : ["The patient has medical conditions that require positioning of the body in ways not feasible with an ordinary bed"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
     "WeaknessHospBed2Option" : { "ButtonLabelList" : ["Hosp Bed1"], "ValueList" : ["The patient needs the head of the bed to be elevated more than 30 degrees most of the time due to chromic pulmonary disease. Pillows and wedges have been attempted and ruled out"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
+    "WeaknessWheelchairOption" : { "ButtonLabelList" : ["Wheelchair"], "ValueList" : ["The patient requires a wheelchair for activities of daily living at home such as toileting, grooming, bathing and transportation to medical appointments. Patient can only ambulate short distances with a walker and so a walker cannot sufficiently resolve the mobility limitation. Use of a wheelchair will improve the patient's ability to perform mobility related activities and the patient has agreed to do so. Patient has a caregiver to assist with wheelchair or the patient can self-propel a wheelchair."], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
+
+    // Discharge Followup Appointments
+    "DispoClinicPCPOption" : { "ButtonLabelList" : ["PCP"], "ValueList" : ["Primary Care"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
+    "DischargeFollowUpGI" : { "ButtonLabelList" : ["GI"], "ValueList" : ["Gastroenterology clinic"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
+    "DischargeFollowUpID" : { "ButtonLabelList" : ["ID"], "ValueList" : ["Infectious Disease Clinic"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
+    "DischargeFollowUpEndocrine" : { "ButtonLabelList" : ["Endocrine"], "ValueList" : ["Endocrinology clinic"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
+    "DischargeFollowUpRenal" : { "ButtonLabelList" : ["Renal"], "ValueList" : ["Nephrology clinic"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
+    "DischargeFollowUpCards" : { "ButtonLabelList" : ["Cards"], "ValueList" : ["Cardiology clinic"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
+    "DischargeFollowUpOnc" : { "ButtonLabelList" : ["Onc"], "ValueList" : ["Oncology Clinic"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
+    "DischargeFollowUpNeuro" : { "ButtonLabelList" : ["Neuro"], "ValueList" : ["Neurology Clinic"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
+    "DischargeFollowUpSurgery" : { "ButtonLabelList" : ["Surgery"], "ValueList" : ["Surgery Clinic"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
+
+
 
     // Discharge Meds
     "DispoPneumovaxOption" : { "ButtonLabelList" : ["Pneumovax"], "ValueList" : ["On discharge, give Pneumovax"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
@@ -379,7 +480,7 @@ var g_AllOptionsDeclaration = {
     "DispoNarcanOption" : { "ButtonLabelList" : ["Narcan"], "ValueList" : ["On discharge, prescribe Narcan"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
 
     // Code
-    "CodeStatusOption" : { "ButtonLabelList" : ["Full Code", "DNR"], "ValueList" : ["FULL CODE", ""], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
+    "CodeStatusOption" : { "ButtonLabelList" : ["Full Code", "DNR", "DNR-OK Intub"], "ValueList" : ["FULL CODE", "DNR/DNI", "DNR, Intubation OK"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "PlanFooter"},
 
 
     ///////////////////////////////////////////////////////////
@@ -391,49 +492,57 @@ var g_AllOptionsDeclaration = {
     "CirrhosisThrombocytopeniaOption" : { "ButtonLabelList" : ["Thrombocytopenia"], "ValueList" : ["Thrombocytopenia"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
     "CirrhosisCauseOption" : { "ButtonLabelList" : ["EtOH", "NASH", "ViralHep"], "ValueList" : ["Alcoholic", "NASH", "Viral Hepatitis"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
 
+    // Labs and Inputs
+    "Cirrhosis_Ascites_Modifier" : { "ButtonLabelList" : ["None", "Slight", "Large"], "ValueList" : ["None", "Slight", "Large" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "Cirrhosis_Encephalopathy_Modifier" : { "ButtonLabelList" : ["None", "Grade 1", "Grade 2"], "ValueList" : ["None", "Grade 1", "Grade 2" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+
     ///////////////////
     // Scores
     "CirrhosisMELDOption" : { "ButtonLabelList" : ["MELD"], "ValueList" : ["MELD"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
-    "CirrhosisChildPughOption" : { "ButtonLabelList" : ["ChildPugh"], "ValueList" : ["ChildPugh"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
-    "CirrhosisElastographyOption" : { "ButtonLabelList" : ["Elastography"], "ValueList" : ["Abdominal Ultrasound with Elastography to confirm Cirrhosis"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisElastographyOption" : { "ButtonLabelList" : ["Elastography"], "ValueList" : ["Abdominal Ultrasound with Elastography for possible Cirrhosis"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisBiopsyOption" : { "ButtonLabelList" : ["Biopsy"], "ValueList" : ["Liver Biopsy to confirm Cirrhosis"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+
 
     ///////////////////
     // Etiology
-    "CirrhosisViralHepOption" : { "ButtonLabelList" : ["Hep A/B/C"], "ValueList" : ["Hep A/B/C"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
-    "CirrhosisANAOption" : { "ButtonLabelList" : ["ANA"], "ValueList" : ["ANA"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : -1, "PlanSectionID" : "CirrhosisPlan"},
-    "CirrhosisSmoothMuscleOption" : { "ButtonLabelList" : ["Mitochondrial"], "ValueList" : ["Mitochondrial"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
-    "CirrhosisMitoOption" : { "ButtonLabelList" : ["Mitochondrial"], "ValueList" : ["Mitochondrial"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisViralHepOption" : { "ButtonLabelList" : ["Hep A/B/C"], "ValueList" : ["Hepatitis A IgM, B surface antigen, B core antibody, C antibody"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+
+    "CirrhosisANAOption" : { "ButtonLabelList" : ["ANA"], "ValueList" : ["ANA"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CirrhosisPlan"},
+
+    "CirrhosisSmoothMuscleOption" : { "ButtonLabelList" : ["Smooth"], "ValueList" : ["anti-smooth muscle antibody"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisMitoOption" : { "ButtonLabelList" : ["Mitochondrial"], "ValueList" : ["anti-mitochondrial antibody"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
     "CirrhosisFerritinOption" : { "ButtonLabelList" : ["Ferritin"], "ValueList" : ["Ferritin"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
     "CirrhosisCeruloplasmOption" : { "ButtonLabelList" : ["Ceruloplasm"], "ValueList" : ["Ceruloplasm"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
-    "CirrhosisAntiTyypsinOption" : { "ButtonLabelList" : ["AntiTrypsin"], "ValueList" : ["AntiTrypsin"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisAntiTyypsinOption" : { "ButtonLabelList" : ["AntiTrypsin"], "ValueList" : ["alpha-1 antitrypsin level and phenotype"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
 
     ///////////////////
     // Varices
-    "CirrhosisEGDResultOption" : { "ButtonLabelList" : ["Latest EGD"], "ValueList" : ["Latest EGD"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
-    "CirrhosisGIBleedOption" : { "ButtonLabelList" : ["Bleed"], "ValueList" : ["See GI-Bleed"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisEGDResultOption" : { "ButtonLabelList" : ["Latest EGD"], "ValueList" : ["Latest endoscopy on xxxxx"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisGIBleedOption" : { "ButtonLabelList" : ["Bleed"], "ValueList" : ["Manage as discussed under GI bleed"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
     "CirrhosisPropranololOption" : { "ButtonLabelList" : ["Propranolol", "Nadolol", "Hold"], "ValueList" : ["Propranolol 20mg PO BID", "Nadolol 20mg PO once daily", "Hold non-selective beta blockers due to active bleed"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CirrhosisPlan"},
     "CirrhosisCeftriaxoneOption" : { "ButtonLabelList" : ["Ceftriaxone"], "ValueList" : ["Ceftriaxone 1g IV daily x7 days"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CirrhosisPlan"},
 
     ///////////////////
     // Ascites
-    "CirrhosisParaResultOption" : { "ButtonLabelList" : ["Para"], "ValueList" : ["Para"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
-    "CirrhosisDopplersOption" : { "ButtonLabelList" : ["Dopplers"], "ValueList" : ["Dopplers"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
-    "CirrhosisLasixOption" : { "ButtonLabelList" : ["Lasix"], "ValueList" : ["Lasix"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
-    "CirrhosisSpironolactoneOption" : { "ButtonLabelList" : ["Spironolactone"], "ValueList" : ["no wheezes", "expiratory wheezesSpironolactone"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisParaResultOption" : { "ButtonLabelList" : ["Para"], "ValueList" : ["Paracentesis (if any ascites) with labs on the ascitic fluid for albumin, total protein, LDH, cell count and gram-stain/culture to identify source and also rule out SBP"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisDopplersOption" : { "ButtonLabelList" : ["Dopplers"], "ValueList" : ["Abdominal Dopplers to rule out Portal Vein Thrombosis"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisLasixOption" : { "ButtonLabelList" : ["Lasix"], "ValueList" : ["Furosemide 40mg PO daily"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisSpironolactoneOption" : { "ButtonLabelList" : ["Spironolactone"], "ValueList" : ["Spironolactone 100mg PO daily"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisHoldDiureticsOption" : { "ButtonLabelList" : ["Hold Diuretics"], "ValueList" : ["Hold Diuretics"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
     "CirrhosisSBPAntibioticsOption" : { "ButtonLabelList" : ["SBP Treat", "7day SBP PPX", "Lifetime SBP PPX", "Continue Home"], "ValueList" : ["SBP treatment, Cefotaxime 2g IV Q8h. or Ceftriaxone (1g IV BID x5d)", "SBP Prophylaxis with Ceftriaxone 1g IV daily x7days", "If Cr over 1.5 and fluid Protein below 1.5, then SBP prophylaxis for life, with Fluoroquinolone", "Continue home antibiotics for lifetime SBP prophylaxis"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
-    "Cirrhosis2gNaDietOption" : { "ButtonLabelList" : ["2g Na Diet"], "ValueList" : ["2g Na Diet"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
-    "CirrhosisExplainDiureticsOption" : { "ButtonLabelList" : ["Diuretics Info"], "ValueList" : ["xxxx"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "Cirrhosis2gNaDietOption" : { "ButtonLabelList" : ["2g Na Diet"], "ValueList" : ["2g Sodium diet"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisExplainDiureticsOption" : { "ButtonLabelList" : ["Diuretics Info"], "ValueList" : ["Diuretics (doses in 100:40 ratio up to 400:160). But, do not give diuretics if there is GI bleeding or hepatic encephalopathy or renal dysfunction (avoid hepatorenal)"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
 
     ///////////////////
     // Encephalopathy
     "CirrhosisNH3ResultOption" : { "ButtonLabelList" : ["NH3", "Check NH3"], "ValueList" : ["NH3=", "Check NH3"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
     "CirrhosisHEGradeOption" : { "ButtonLabelList" : ["Stage 0", "Stage 1", "Stage 2", "Stage 3", "Stage 4"], "ValueList" : ["Stage 0 (none)", "Stage 1 (mild confusion)", "Stage 2 (lethargy)", "Stage 3 (somnolent but arousable)", "Stage 4 (no response to stimuli)"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
-    "CirrhosisLactuloseOption" : { "ButtonLabelList" : ["Lactulose"], "ValueList" : ["Lactulose"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
-    "CirrhosisRifaximinOption" : { "ButtonLabelList" : ["Rifaximin"], "ValueList" : ["Rifaximin"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisLactuloseOption" : { "ButtonLabelList" : ["Lactulose"], "ValueList" : ["Lactulose 30mL PO TID, titrate for 2-3 stools daily"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisRifaximinOption" : { "ButtonLabelList" : ["Rifaximin"], "ValueList" : ["Rifaximin 550mg PO BID"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
 
     ///////////////////
     // Coagulopathy
-    "CirrhosisNoBleedOption" : { "ButtonLabelList" : ["No Bleeding"], "ValueList" : ["No Bleeding"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisNoBleedOption" : { "ButtonLabelList" : ["No Bleeding"], "ValueList" : ["No active signs of bleeding"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
     "CirrhosisCheckINROption" : { "ButtonLabelList" : ["Check INR", "Monitor"], "ValueList" : ["Check INR", "Monitor"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
 
     ///////////////////
@@ -442,38 +551,41 @@ var g_AllOptionsDeclaration = {
 
     ///////////////////
     // HCC Screen
-    "CirrhosisShowHCCResultOption" : { "ButtonLabelList" : ["HCC Screen"], "ValueList" : ["Last US"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisShowHCCResultOption" : { "ButtonLabelList" : ["HCC Screen"], "ValueList" : ["Last abdominal US was xxx"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
     "CirrhosisHCCShowAFPOption" : { "ButtonLabelList" : ["Show AFP"], "ValueList" : ["Last AFP="], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
     "CirrhosisHCCCheckAFPOption" : { "ButtonLabelList" : ["Check AFP"], "ValueList" : ["Check AFP"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
 
-
     ///////////////////
     // NASH
-    "CirrhosisStatinOption" : { "ButtonLabelList" : ["Statin"], "ValueList" : ["Statin"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
-    "CirrhosisVitEOption" : { "ButtonLabelList" : ["Vit E"], "ValueList" : ["Vit E"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisStatinOption" : { "ButtonLabelList" : ["Statin"], "ValueList" : ["Statin - Atorvastatin 40mg"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisVitEOption" : { "ButtonLabelList" : ["Vit E"], "ValueList" : ["Vitamin E (800 IU/day) but do not give if patient is diabetic"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
 
     ///////////////////
     // Nutrition
-    "CirrhosisZincOption" : { "ButtonLabelList" : ["Zinc"], "ValueList" : ["Zinc"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisZincOption" : { "ButtonLabelList" : ["Zinc"], "ValueList" : ["Zinc sulfate 220mg BID"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
     "CirrhosisThiamineOption" : { "ButtonLabelList" : ["Thiamine"], "ValueList" : ["Thiamine"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
     "CirrhosisVitaminOption" : { "ButtonLabelList" : ["Vitamin"], "ValueList" : ["Multivitamin"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
 
-
+    ///////////////////
+    // Transplant
+    "CirrhosisStatusTransplantOption" : { "ButtonLabelList" : ["Xplant None", "Xplant In-Process", "Xplant Listed", "Xplant Unlisted", "Xplant NotListed"], "ValueList" : ["The patient is has not been evaluated for liver transplant", "The patient is currently being evaluated for liver transplant", "The patient is currently listed for liver transplant", "The patient is currently unlisted for liver transplant but will be reevaluated", "The patient has been evaluated and is not a candidate for liver transplant" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisReferToTransplantOption" : { "ButtonLabelList" : ["Refer Transplant"], "ValueList" : ["Refer to liver transplant clinic for evaluation" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
 
 
     ///////////////////////////////////////////////////////////
     // AKI
     ///////////////////////////////////////////////////////////
-
     "AKIOnCKDOption" : { "ButtonLabelList" : ["AKI", "AKI on CKD", "AKI on CKDIV", "AKI on CKDIIIb", "AKI on CKDIIIa", "AKI on CKDII"], "ValueList" : ["", " on Chronic Kidney Disease", " on Chronic Kidney Disease Stage IV", " on Chronic Kidney Disease Stage IIIb", " on Chronic Kidney Disease Stage IIIa", " on Chronic Kidney Disease Stage II"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "AKIPlan"},
     "AKIATNOption" : { "ButtonLabelList" : ["ATN"], "ValueList" : ["Acute Tubular Necrosis"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AKIPlan"},
 
+    ///////////////////
     // Labs
     "AKITrendCrOption" : { "ButtonLabelList" : ["Trend Cr"], "ValueList" : ["Recent Creatinine values: "], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "AKIPlan"},
     "AKITrendUrineOption" : { "ButtonLabelList" : ["Trend Urine"], "ValueList" : ["Recent 24hr total urine output: "], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AKIPlan"},
     "AKIBaselineCrOption" : { "ButtonLabelList" : ["Baseline Cr"], "ValueList" : ["Baseline Cr is "], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "AKIPlan"},
     "AKIBaselineGFROption" : { "ButtonLabelList" : ["Baseline Urine"], "ValueList" : ["xxxxx"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : 0, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "AKIPlan"},
     "AKIEstimateGFROption" : { "ButtonLabelList" : ["Estimate GFR"], "ValueList" : ["The current approximate eGFR (Creatinine is a lagging indicator) is: "], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "AKIPlan"},
+    "AKI_Male_Modifier" : { "ButtonLabelList" : ["Male", "Female"], "ValueList" : ["male", "female" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "AKIPlan"},
 
     ///////////////////
     // KDIGO
@@ -481,8 +593,8 @@ var g_AllOptionsDeclaration = {
 
     ///////////////////
     // Results
-    "AKIFEUreaOption" : { "ButtonLabelList" : ["FEUrea=PreRenal", "FEUrea=Intrinsic", "COMPUTE"], "ValueList" : ["The FE-Urea is less than 35 percent, consistent with a pre-renal cause (volume overload causing renal venous back pressure, hypovolemia, blood loss, sepsis)", "The FE-Urea is over 35 percent, consistent with either an intrinsic-renal or post-renal cause (toxicity, ischemia, obstruction)", "COMPUTE"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AKIPlan"},
-    "AKIFENaOption" : { "ButtonLabelList" : ["FENa=PreRenal", "FENa=Intrinsic", "COMPUTE"], "ValueList" : ["The FENa is less than 1 percent, consistent with a pre-renal cause (volume overload causing renal venous back pressure, hypovolemia, blood loss, sepsis)", "The FENa is over 1 percent, consistent with either an intrinsic-renal or post-renal cause (toxicity, ischemia, obstruction)", "COMPUTE"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AKIPlan"},
+    "AKIFEUreaOption" : { "ButtonLabelList" : ["FEUrea=PreRenal", "FEUrea=Intrinsic", "COMPUTE"], "ValueList" : ["The FE-Urea is xxxx, which is less than 35 percent, consistent with a pre-renal cause (volume overload causing renal venous back pressure, hypovolemia, blood loss, sepsis)", "The FE-Urea is xxxx, which is over 35 percent, consistent with either an intrinsic-renal or post-renal cause (toxicity, ischemia, obstruction)", "COMPUTE"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AKIPlan"},
+    "AKIFENaOption" : { "ButtonLabelList" : ["FENa=PreRenal", "FENa=Intrinsic", "COMPUTE"], "ValueList" : ["The FENa is xxxx, which is less than 1 percent, consistent with a pre-renal cause (volume overload causing renal venous back pressure, hypovolemia, blood loss, sepsis)", "The FENa is xxxx, which is over 1 percent, consistent with either an intrinsic-renal or post-renal cause (toxicity, ischemia, obstruction)", "COMPUTE"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AKIPlan"},
     "AKIUAInfectionOption" : { "ButtonLabelList" : ["UA Infection", "UA no infection"], "ValueList" : ["Urinalysis shows active infection", "Urinalysis is not consistent with infection"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AKIPlan"},
     "AKIUSHydroOption" : { "ButtonLabelList" : ["US - Hydro", "US - No Hydro"], "ValueList" : ["Renal US shows hydro, suggesting obstruction", "Renal US does not show hydro, suggesting no obstruction"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AKIPlan"},
     "AKISpunUrineOption" : { "ButtonLabelList" : ["Spun Urine"], "ValueList" : ["On personal examination of the urine sediment, there were muddy brown casts consistent with acute tubular necrosis"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AKIPlan"},
@@ -513,7 +625,6 @@ var g_AllOptionsDeclaration = {
     "AKICTContrastOption" : { "ButtonLabelList" : ["CT Contrast", "No recent IV contrast"], "ValueList" : ["recent CT with contrast", "no recent IV contrast"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AKIPlan"},
     "AKIHRS1Option" : { "ButtonLabelList" : ["HRS 1"], "ValueList" : ["Hepatorenal syndrome type 1 (acute)"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AKIPlan"},
     "AKIHRS2Option" : { "ButtonLabelList" : ["HRS 2"], "ValueList" : ["Hepatorenal syndrome type 2 (chronic)"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AKIPlan"},
-
 
     ///////////////////
     // Workup
@@ -741,8 +852,8 @@ var g_AllOptionsDeclaration = {
     ///////////////////////////////////////////////////////////
 
     ///////////////////
-    "CHFAcuteChronicOption": { "ButtonLabelList" : ["Acute&Chronic", "Chronic", "Acute"], "ValueList" : ["Acute on Chronic ", "Chronic ", "Acute "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
-    "CHFHFrEFOption": { "ButtonLabelList" : ["HFrEF", "HFpEF"], "ValueList" : ["Reduced Ejection Fraction", "Preserved Ejection Fraction"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
+    "CHFAcuteChronicOption": { "ButtonLabelList" : ["AcuteOnChronic", "Chronic", "Acute"], "ValueList" : ["Acute on Chronic ", "Chronic ", "Acute "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
+    "CHFHFrEFOption": { "ButtonLabelList" : ["HFrEF", "HFmrEF", "HFpEF"], "ValueList" : ["Reduced Ejection Fraction", "Mid-Range Ejection Fraction", "Preserved Ejection Fraction"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFIschemicOption": { "ButtonLabelList" : ["Ischemic", "NonIschemic"], "ValueList" : ["Ischemic", "Non-ischemic"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFSystolicOption": { "ButtonLabelList" : ["Systolic", "Diastolic", "SystolicDiastolic"], "ValueList" : ["Systolic", "Diastolic", "Systolic and Diastolic"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFLeftSideOption": { "ButtonLabelList" : ["Left-Sided", "Right-Sided", "Biventricular"], "ValueList" : ["Left-Sided", "Right-Sided", "Biventricular"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
@@ -790,21 +901,23 @@ var g_AllOptionsDeclaration = {
     "CHFTorsemideOption": { "ButtonLabelList" : ["Torsemide20mg", "Torsemide20mgBID", "Torsemide40mg", "Torsemide40mgBID", "Torsemide80mg", "Torsemide80mgBID"], "ValueList" : ["Torsemide 20mg PO daily at breakfast", "Torsemide 20mg PO BID", "Torsemide 40mg PO daily at breakfast", "Torsemide 40mg PO BID", "Torsemide 80mg PO daily at breakfast", "Torsemide 80mg PO BID"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFBumexOption": { "ButtonLabelList" : ["Bumetanide1", "Bumetanide1BID", "Bumetanide2", "Bumetanide2BID"], "ValueList" : ["Bumetanide 1mg PO daily at breakfast", "Bumetanide 1mg PO BID", "Bumetanide 2mg PO daily at breakfast", "Bumetanide 2mg PO BID"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFThiazideOption": { "ButtonLabelList" : ["Metolazone2.5", "Metolazone5", "Metolazone10"], "ValueList" : ["Metolazone 2.5mg PO daily at breakfast", "Metolazone 5mg PO daily at breakfast", "Metolazone 10mg PO daily at breakfast"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
+    "CHFNoDiureticOption": { "ButtonLabelList" : ["HypoVol", "Infection"], "ValueList" : ["Hold diuretics while hypovolemic", "Hold diuretics while active infection"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
 
     ///////////////////
     // Beta Blockers
-    "CHFMetoprololTarOption": { "ButtonLabelList" : ["MetopTar 12.5", "MetopTar 25", "MetopTar 50", "MetopTar 75", "MetopTar 100", "Hold"], "ValueList" : ["Metoprolol Tartrate 12.5mg PO BID", "Metoprolol Tartrate 25mg PO BID", "Metoprolol Tartrate 50mg PO BID", "Metoprolol Tartrate 75mg PO BID", "Metoprolol Tartrate 100mg PO BID", "Hold home Metoprolol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
+    "CHFMetoprololTarOption": { "ButtonLabelList" : ["MetopTar 12.5", "MetopTar 25", "MetopTar 50", "MetopTar 75", "MetopTar 100", "MetopTar 150", "Hold"], "ValueList" : ["Metoprolol Tartrate 12.5mg PO BID", "Metoprolol Tartrate 25mg PO BID", "Metoprolol Tartrate 50mg PO BID", "Metoprolol Tartrate 75mg PO BID", "Metoprolol Tartrate 100mg PO BID", "Metoprolol Tartrate 150mg PO BID", "Hold home Metoprolol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFMetoprololSuccOption": { "ButtonLabelList" : ["MetopXL 25", "MetopXL 50", "MetopXL 75", "MetopXL 100", "MetopXL 200", "Hold"], "ValueList" : ["Metoprolol Succinate 25mg PO once daily", "Metoprolol Succinate 50mg PO once daily", "Metoprolol Succinate 75mg PO once daily", "Metoprolol Succinate 100mg PO once daily", "Metoprolol Succinate 200mg PO once daily", "Hold home Metoprolol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
-    "CHFCarvedilolOption": { "ButtonLabelList" : ["Coreg 3.125", "Coreg 6.25", "Coreg 12.5", "Coreg 25", "Coreg 25BID", "Hold"], "ValueList" : ["Carvedilol 3.125mg PO daily", "Carvedilol 6.25mg PO daily", "Carvedilol 12.5mg PO daily", "Carvedilol 25mg PO daily", "Carvedilol 25mg PO BID", "Hold home Carvedilol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
+    "CHFCarvedilolOption": { "ButtonLabelList" : ["Coreg 3.125", "Coreg 6.25", "Coreg 12.5", "Coreg 25", "Hold"], "ValueList" : ["Carvedilol 3.125mg PO BID", "Carvedilol 6.25mg PO BID", "Carvedilol 12.5mg PO BID", "Carvedilol 25mg PO BID", "Hold home Carvedilol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFNSBBOption": { "ButtonLabelList" : ["See Cirrhosis"], "ValueList" : ["Non-specific Beta-Blocker as discussed for Cirrhosis"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
+    "CHFNoBetaBlockerOption": { "ButtonLabelList" : ["Brady", "Low BP"], "ValueList" : ["Hold betablockers while bradycardic", "Hold betablockers while hypotensive"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
 
     ///////////////////
     // ACE/ARB
     "CHFLisinoprilOption": { "ButtonLabelList" : ["Lisinopril2.5", "Lisinopril5", "Lisinopril10", "Lisinopril20", "Lisinopril40", "Hold"], "ValueList" : ["Lisinopril 2.5mg PO daily", "Lisinopril 5mg PO daily", "Lisinopril 10mg PO daily", "Lisinopril 20mg PO daily", "Lisinopril 40mg PO daily", "Hold home Lisinopril due to AKI"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFLosartanOption": { "ButtonLabelList" : ["Losartan25", "Losartan50", "Losartan100", "Hold"], "ValueList" : ["Losartan 25mg PO daily", "Losartan 50mg PO daily", "Losartan 100mg PO daily", "Hold home Losartan due to AKI"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
-    "CHFSpironiolactoneOption": { "ButtonLabelList" : ["Spironolactone25", "Spironolactone50", "Spironolactone100", "Hold"], "ValueList" : ["Spironolactone 25mg PO daily", "Spironolactone 50mg PO daily", "Spironolactone 100mg PO daily", "Hold home Spironolactone due to AKI"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
-    "CHFAldoBlockRestrictionsOption": { "ButtonLabelList" : ["AldoBlockerLimits"], "ValueList" : [" (NYHA II-IV, CrCl over 30, Cr below 2.5, K below 5)"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFARNIOption": { "ButtonLabelList" : ["ARNI-Low", "ARNI-High"], "ValueList" : ["valsartan/sacubitril (Entresto) 49/51 mg PO BID", "valsartan/sacubitril (Entresto) 97/103 mg PO BID"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
+    "CHFNoACEARBOption": { "ButtonLabelList" : ["AKI", "High K"], "ValueList" : ["Hold ACE/ARB due to AKI", "Hold ACE/ARB due to Hyperkalemia"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
+
 
     // Indications for SGLT2
     "CHFSGLT2IndicationsDM2Option" : { "ButtonLabelList" : ["DM2"], "ValueList" : ["Diabetes type 2"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
@@ -822,10 +935,19 @@ var g_AllOptionsDeclaration = {
     "CHFSGLT2ContraindicationsSLEOption" : { "ButtonLabelList" : ["SLE"], "ValueList" : ["Lupus"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFSGLT2ContraindicationsANCAOption" : { "ButtonLabelList" : ["ANCA"], "ValueList" : ["ANCA"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
 
+    ///////////////////
     // SGLT2
+    "CHFSGLT2DapagliflozinOption": { "ButtonLabelList" : ["Dapagliflozin"], "ValueList" : ["Dapagliflozin 10mg PO daily"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFSGLT2EmpagliflozinOption" : { "ButtonLabelList" : ["Empagliflozin"], "ValueList" : ["Empagliflozin 10mg PO daily"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFSGLT2ReduceInsulinOption" : { "ButtonLabelList" : ["Reduce Insulin"], "ValueList" : ["Reduce Insulin 20 percent if GFR is over 45"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFSGLT2ExplainGFRDropOption" : { "ButtonLabelList" : ["Explain AKI"], "ValueList" : ["Expect 10-30 percent drop in eGFR due to hemodynamic effect of reduced filtration. This is not an acute kidney injury, and past studies have shown it is reversable by stopping the SGLT2 inhibitor. Essentially, an SGLT2 inhibitos just stops the hyperfiltration associated with glucosuria and unmasks the true eGFR."], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
+    "CHFNoSGLT2Option": { "ButtonLabelList" : ["UTI", "DM-1", "CKD4", "Transplant", "DKA", "PKD", "Immuno"], "ValueList" : ["Hold SGLT2 while urinary tract infection", "No SGLT2 because patient has diabetes type-1", "No SGLT2 because patient has eGFR below 30", "No SGLT2 because patient has transplant", "No SGLT2 because patient has past DKA", "No SGLT2 because patient has PKD", "No SGLT2 because patient is Immunosuppressed"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
+
+    ///////////////////
+    // MRA
+    "CHFSpironiolactoneOption": { "ButtonLabelList" : ["Spironolactone25", "Spironolactone50", "Spironolactone100", "Hold"], "ValueList" : ["Spironolactone 25mg PO daily", "Spironolactone 50mg PO daily", "Spironolactone 100mg PO daily", "Hold home Spironolactone due to AKI"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
+    "CHFAldoBlockRestrictionsOption": { "ButtonLabelList" : ["AldoBlockerLimits"], "ValueList" : [" (NYHA II-IV, CrCl over 30, Cr below 2.5, K below 5)"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
+    "CHFNoMRAOption": { "ButtonLabelList" : ["AKI", "High K", "Postpone"], "ValueList" : ["Hold mineralocorticoid receptor antagonist due to AKI", "Hold mineralocorticoid receptor antagonist due to Hyperkalemia", "Postpone mineralocorticoid receptor antagonist until response to ACE/ARB is understood"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
 
     ///////////////////
     // ICD
@@ -896,7 +1018,7 @@ var g_AllOptionsDeclaration = {
     // Beta Blockers
     "HTNMetoprololTarOption": { "ButtonLabelList" : ["MetopTar 12.5", "MetopTar 25", "MetopTar 50", "MetopTar 75", "MetopTar 100", "Hold"], "ValueList" : ["Metoprolol Tartrate 12.5mg PO BID", "Metoprolol Tartrate 25mg PO BID", "Metoprolol Tartrate 50mg PO BID", "Metoprolol Tartrate 75mg PO BID", "Metoprolol Tartrate 100mg PO BID", "Hold home Metoprolol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HTNPlan"},
     "HTNMetoprololSuccOption": { "ButtonLabelList" : ["MetopXL 25", "MetopXL 50", "MetopXL 75", "MetopXL 100", "MetopXL 200", "Hold"], "ValueList" : ["Metoprolol Succinate 25mg PO once daily", "Metoprolol Succinate 50mg PO once daily", "Metoprolol Succinate 75mg PO once daily", "Metoprolol Succinate 100mg PO once daily", "Metoprolol Succinate 200mg PO once daily", "Hold home Metoprolol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HTNPlan"},
-    "HTNCarvedilolOption": { "ButtonLabelList" : ["Coreg 3.125", "Coreg 6.25", "Coreg 12.5", "Coreg 25", "Coreg 25BID", "Hold"], "ValueList" : ["Carvedilol 3.125mg PO daily", "Carvedilol 6.25mg PO daily", "Carvedilol 12.5mg PO daily", "Carvedilol 25mg PO daily", "Carvedilol 25mg PO BID", "Hold home Carvedilol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HTNPlan"},
+    "HTNCarvedilolOption": { "ButtonLabelList" : ["Coreg 3.125", "Coreg 6.25", "Coreg 12.5", "Coreg 25", "Hold"], "ValueList" : ["Carvedilol 3.125mg PO BID", "Carvedilol 6.25mg PO BID", "Carvedilol 12.5mg PO BID", "Carvedilol 25mg PO BID", "Hold home Carvedilol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HTNPlan"},
     "HTNNSBBOption": { "ButtonLabelList" : ["See Cirrhosis"], "ValueList" : ["Non-specific Beta-Blocker as discussed for Cirrhosis"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HTNPlan"},
 
     ///////////////////
@@ -936,13 +1058,13 @@ var g_AllOptionsDeclaration = {
     "HypONaShowSOsmOption" : { "ButtonLabelList" : ["Serum Osm"], "ValueList" : ["Serum Osm = "], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyponatremiaPlan"},
 
    // Explanation
-   "HypONaExplainOption": { "ButtonLabelList" : ["Explain"], "ValueList" : ["Hyponatremia is an excess of free water, not a deficiency of sodium - the total body sodium is likely normal, but the kidneys are retaining too much free water which dilutes the blood and lowers sodium concentration."], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyponatremiaPlan"},
+   "HypONaExplainOption": { "ButtonLabelList" : ["Explain"], "ValueList" : ["Hyponatremia is an excess of free water, not a deficiency of sodium - the total body sodium is likely normal, but the kidneys are usually retaining too much free water which dilutes the blood and lowers sodium concentration."], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyponatremiaPlan"},
 
 
     // ADH Status
    "HypONaHighADHOption": { "ButtonLabelList" : ["High ADH", "Normal ADH"], "ValueList" : ["The patient is in a high ADH state", "The patient is in a normal ADH state"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyponatremiaPlan"},
    "HypONaShowUOsmOption": { "ButtonLabelList" : ["U Osm"], "ValueList" : ["Recent Urine osmolality = "], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyponatremiaPlan"},
-   "HypONaExplainHighUOsmOption": { "ButtonLabelList" : ["Explain U Osm"], "ValueList" : ["Urine Osm is a biomarker for ADH. When urine osm is high, the kidneys are retaining free water and there is an excess of ADH. This may be appropriate (in the case of hypovolemia) or inappropriate (in the case of SIADH)"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyponatremiaPlan"},
+   "HypONaExplainHighUOsmOption": { "ButtonLabelList" : ["Explain U Osm"], "ValueList" : ["Urine Osm is a biomarker for ADH. When urine osm is high, the kidneys are usually retaining free water and there is an excess of ADH. This may be appropriate (in the case of hypovolemia) or inappropriate (in the case of SIADH). However, high urine osmolality may also be due to inappropriate solute wasting, such as hypo-aldosteronism. "], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyponatremiaPlan"},
    "HypONaShowFreeWaterClearanceOption": { "ButtonLabelList" : ["Show Clearance"], "ValueList" : ["Recent free water clearance = "], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyponatremiaPlan"},
    "HypONaExplainFreeWaterClearanceOption": { "ButtonLabelList" : ["Explain Clearance"], "ValueList" : ["Free water clearance is 24hr-Urine-Volume * (1 - ((Urine-Na + Urine-K) / (Serum-Na)). If Free water clearance is negative then the patient is retaining free water and serum Na concentration will drop, and if it is positive then the patient is wasting free water and serum Na concentration will rise."], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyponatremiaPlan"},
 
@@ -1044,6 +1166,7 @@ var g_AllOptionsDeclaration = {
     ///////////////////////////////////////////////////////////
     // Sepsis CONTROL PANEL
     ///////////////////////////////////////////////////////////
+    "SepsisShowSOFAChange" : { "ButtonLabelList" : ["Show SOFA"], "ValueList" : ["Show SOFA"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
     "SepsisSepsisModifier" : { "ButtonLabelList" : ["SIRS", "Sepsis", "Severe Sepsis"], "ValueList" : ["SIRS", "Sepsis", "Severe Sepsis"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
     "SepsisEndocarditisModifier" : { "ButtonLabelList" : ["Endocarditis"], "ValueList" : ["Infective Endocarditis"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
     "SepsisPulmEmboliModifier" : { "ButtonLabelList" : ["Pulm Emboli"], "ValueList" : ["Septic Pulmonary Emboli"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
@@ -1061,25 +1184,44 @@ var g_AllOptionsDeclaration = {
     "SepsisPneumoniaSourceOption" : { "ButtonLabelList" : ["UTI"], "ValueList" : ["Urinary Tract Infection"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
     "SepsisCellulitisSourceOption" : { "ButtonLabelList" : ["cellulitis"], "ValueList" : ["cellulitis"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
 
+    // SOFA Current
+    "SepsisSOFAOption_Current_PaO2FiO2" : { "ButtonLabelList" : ["Over 400", "300-400", "200-300", "100-200", "Below 100"], "ValueList" : ["Over 400", "300-400", "200-300", "100-200", "Below 100"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisSOFAOption_Current_Plts" : { "ButtonLabelList" : ["Over 150", "100-150", "50-100", "20-50", "Below 20"], "ValueList" : ["Over 150", "100-150", "50-100", "20-50", "Below 20"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisSOFAOption_Current_Bili" : { "ButtonLabelList" : ["Below 1.2", "1.2-1.9", "2.0-5.9", "6.0-11.9", "Over 12"], "ValueList" : ["Below 1.2", "1.2-1.9", "2.0-5.9", "6.0-11.9", "Over 12"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisSOFAOption_Current_MAP" : { "ButtonLabelList" : ["Over 70", "Below 70", "Dop below 5", "Norepi below 0.1", "Norepi above 0.1"], "ValueList" : ["Over 70", "Below 70", "Dop below 5", "Norepi below 0.1", "Norepi above 0.1"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisSOFAOption_Current_GCS" : { "ButtonLabelList" : ["15 (AOx3)", "13-14 (AOx1)", "10-12", "6-9", "Below 6"], "ValueList" : ["15 (AOx3)", "13-14 (AOx1)", "10-12", "6-9", "Below 6"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisSOFAOption_Current_Cr" : { "ButtonLabelList" : ["Below 1.2", "1.2-1.9", "2.0-3.4", "3.5-4.9", "Over 5.0"], "ValueList" : ["Below 1.2", "1.2-1.9", "2.0-3.4", "3.5-4.9", "Over 5.0"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+
+    // SOFA Baseline
+    "SepsisSOFAOption_Baseline_PaO2FiO2" : { "ButtonLabelList" : ["Over 400", "300-400", "200-300", "100-200", "Below 100"], "ValueList" : ["Over 400", "300-400", "200-300", "100-200", "Below 100"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisSOFAOption_Baseline_Plts" : { "ButtonLabelList" : ["Over 150", "100-150", "50-100", "20-50", "Below 20"], "ValueList" : ["Over 150", "100-150", "50-100", "20-50", "Below 20"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisSOFAOption_Baseline_Bili" : { "ButtonLabelList" : ["Below 1.2", "1.2-1.9", "2.0-5.9", "6.0-11.9", "Over 12"], "ValueList" : ["Below 1.2", "1.2-1.9", "2.0-5.9", "6.0-11.9", "Over 12"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisSOFAOption_Baseline_MAP" : { "ButtonLabelList" : ["Over 70", "Below 70", "Dop below 5", "Norepi below 0.1", "Norepi above 0.1"], "ValueList" : ["Over 70", "Below 70", "Dop below 5", "Norepi below 0.1", "Norepi above 0.1"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisSOFAOption_Baseline_GCS" : { "ButtonLabelList" : ["15 (AOx3)", "13-14 (AOx1)", "10-12", "6-9", "Below 6"], "ValueList" : ["15 (AOx3)", "13-14 (AOx1)", "10-12", "6-9", "Below 6"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisSOFAOption_Baseline_Cr" : { "ButtonLabelList" : ["Below 1.2", "1.2-1.9", "2.0-3.4", "3.5-4.9", "Over 5.0"], "ValueList" : ["Below 1.2", "1.2-1.9", "2.0-3.4", "3.5-4.9", "Over 5.0"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+
     // Workup
-    "SepsisWUXRayOption" : { "ButtonLabelList" : ["Chest XRay"], "ValueList" : ["Get Chest XRay"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
-    "SepsisWUBloodCultureOption" : { "ButtonLabelList" : ["Blood Cx"], "ValueList" : ["Culture blood"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
-    "SepsisWUUAOption" : { "ButtonLabelList" : ["UA"], "ValueList" : ["Get urinalysis with reflex culture"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
-    "SepsisWUSputumCultureOption" : { "ButtonLabelList" : ["Sputum Cx"], "ValueList" : ["Culture sputum"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
-    "SepsisWUProcalOption" : { "ButtonLabelList" : ["Procal"], "ValueList" : ["Check Procalcitonin"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
-    "SepsisWURVPOption" : { "ButtonLabelList" : ["RVP"], "ValueList" : ["Check Resp viral panel"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
-    "SepsisWUCRPOption" : { "ButtonLabelList" : ["CRP"], "ValueList" : ["Check C-Rreactive Protein"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
-    "SepsisWULactateOption" : { "ButtonLabelList" : ["Lactate"], "ValueList" : ["Check serum lactate"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
-    "SepsisWUStoolCultureOption" : { "ButtonLabelList" : ["Stool Cx"], "ValueList" : ["Culture stool"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
-    "SepsisWUStrepUrineAntigenOption" : { "ButtonLabelList" : ["Urine Strep"], "ValueList" : ["Check urine strep antigen"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
-    "SepsisWULegionellaUrineAntigenOption" : { "ButtonLabelList" : ["Urine Legionella"], "ValueList" : ["Check urine legionella antigen"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
-    "SepsisWUCDiffOption" : { "ButtonLabelList" : ["C diff"], "ValueList" : ["Check stool C diff by PCR"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
-    "SepsisWUBetaGlucanOption" : { "ButtonLabelList" : ["Beta Glucan"], "ValueList" : ["Check serum beta glucan"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
-    "SepsisWUGalactomannanOption" : { "ButtonLabelList" : ["Galactomannan"], "ValueList" : ["Check serum Galactomannan"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisWUBloodCultureOption" : { "ButtonLabelList" : ["Blood Cx"], "ValueList" : ["blood cultures"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisWUUAOption" : { "ButtonLabelList" : ["UA"], "ValueList" : ["urinalysis with reflex culture"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisWUNaresOption" : { "ButtonLabelList" : ["Nares"], "ValueList" : ["MRSA Nares"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisWUSputumCultureOption" : { "ButtonLabelList" : ["Sputum Cx"], "ValueList" : ["sputum cultures"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisWURVPOption" : { "ButtonLabelList" : ["RVP"], "ValueList" : ["Resp viral panel"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisWUStoolCultureOption" : { "ButtonLabelList" : ["Stool Cx"], "ValueList" : ["stool culture"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisWUStrepUrineAntigenOption" : { "ButtonLabelList" : ["Urine Strep"], "ValueList" : ["urine strep antigen"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisWULegionellaUrineAntigenOption" : { "ButtonLabelList" : ["Urine Legionella"], "ValueList" : ["urine legionella antigen"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisWUCDiffOption" : { "ButtonLabelList" : ["C diff"], "ValueList" : ["stool C diff by PCR"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisWUBetaGlucanOption" : { "ButtonLabelList" : ["Beta Glucan"], "ValueList" : ["serum beta glucan"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisWUGalactomannanOption" : { "ButtonLabelList" : ["Galactomannan"], "ValueList" : ["serum Galactomannan"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+
+    // Markers
+    "SepsisWUProcalOption" : { "ButtonLabelList" : ["Procal"], "ValueList" : ["Procalcitonin"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisWUCRPOption" : { "ButtonLabelList" : ["CRP"], "ValueList" : ["C-Reactive Protein"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisWULactateOption" : { "ButtonLabelList" : ["Lactate"], "ValueList" : ["serum lactate"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
 
     // Imaging
+    "SepsisWUXRayOption" : { "ButtonLabelList" : ["Chest XRay"], "ValueList" : ["Chest XRay"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
     "SepsisEchoOption" : { "ButtonLabelList" : ["Echo (TTE)"], "ValueList" : ["Echocardiogram (trans-thoracic)"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
-    "SepsisPanorexOption" : { "ButtonLabelList" : ["Panorex"], "ValueList" : ["Get Panorex"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
+    "SepsisPanorexOption" : { "ButtonLabelList" : ["Panorex"], "ValueList" : ["Panorex"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
     "SepsisCTAHeadOption" : { "ButtonLabelList" : ["CTA Head"], "ValueList" : ["CTA Head and Neck to screen for mycotic aneurysms"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
     "SepsisCTAAbdomenOption" : { "ButtonLabelList" : ["CT Abdomen"], "ValueList" : ["CT Abdomen"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "SepsisPlan"},
 
@@ -1106,6 +1248,10 @@ var g_AllOptionsDeclaration = {
     ///////////////////////////////////////////////////////////
     // OSA 
     ///////////////////////////////////////////////////////////
+    "ObstructiveSleepApneaPlan" : { "ButtonLabelList" : ["OSA"], "ValueList" : ["Obstructive Sleep Apnea"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "OSAPlan"},
+    "OSAObesityHypoventillationPlan" : { "ButtonLabelList" : ["Obesity"], "ValueList" : ["Obesity Hypoventillation"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "OSAPlan"},
+    "OSAHypercapneaPlan" : { "ButtonLabelList" : ["Hypercapnea"], "ValueList" : ["Chronic Hypercapnic Respiratory Failure"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "OSAPlan"},
+
     "OSAPossibleModifier" : { "ButtonLabelList" : ["Possible"], "ValueList" : ["Possible "], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "OSAPlan"},
 
     // STOP-BANG
@@ -1117,6 +1263,10 @@ var g_AllOptionsDeclaration = {
     "OSAAgeOver50yoOption" : { "ButtonLabelList" : ["Over 50yo"], "ValueList" : ["over 50yo"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "OSAPlan"},
     "OSANeckOver16inOption" : { "ButtonLabelList" : ["Neck over 16in"], "ValueList" : ["neck circumference over 16in"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "OSAPlan"},
     "OSAMaleOption" : { "ButtonLabelList" : ["Male"], "ValueList" : ["male"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "OSAPlan"},
+
+    // Past and Current Diagnosis
+    "OSAPastDiagnosisOption" : { "ButtonLabelList" : ["Diagnosed", "CPAP Broken"], "ValueList" : ["The patient has a home CPAP machine", "The patient has had a home CPAP, but it is not working"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "OSAPlan"},
+    "OSAABGResultsOption" : { "ButtonLabelList" : ["ABG Results"], "ValueList" : ["Arterial Blood Gas Results"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "OSAPlan"},
 
     // Diagnose
     "OSACheckPFTOption" : { "ButtonLabelList" : ["Check PFT"], "ValueList" : ["Check Pulmonary Function Tests"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "OSAPlan"},
@@ -1130,9 +1280,11 @@ var g_AllOptionsDeclaration = {
     "OSAGetEKGOption" : { "ButtonLabelList" : ["Check EKG"], "ValueList" : ["Get EKG to assess possible LVH"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "OSAPlan"},
 
     // Treat
-    "OSAContinueCPAPOption" : { "ButtonLabelList" : ["Home CPAP"], "ValueList" : ["Continue CPAP at night (home setting xxx cm H2O)"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "OSAPlan"},
+    "OSAContinueCPAPOption" : { "ButtonLabelList" : ["Home CPAP", "BiPAP"], "ValueList" : ["Continue CPAP at night (home setting xxx cm H2O)", "BiPAP at night"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "OSAPlan"},
+
     "OSAFlonaseOption" : { "ButtonLabelList" : ["Flonase"], "ValueList" : ["Flonase when using CPAP"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "OSAPlan"},
 
+    "OSAInsuranceOption" : { "ButtonLabelList" : ["Insurance"], "ValueList" : ["Due to the progression of Chronic Respiratory Failure due to COPD, Chronic Heart Failure, and Obesity Hypoventillation, the patient will require frequent durations of non-invasive ventillator. Bi-Level Pap at home will not be sufficient as the patients severity of condition has progressed, therefore the patient needs aggressive target volume guarantee, advanced alarms that will alert the alert if the patient is disconnected, backup battery for portability. These are required to prevent risk of harm and hospital readmissions. The patient requires non-invasive ventillation 8-9 hours a day while sleeping. Patient is at increased risk of exacerbation leading to hospital readmissions or death without such therapy."], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "OSAPlan"},
 
 
 
@@ -1175,10 +1327,10 @@ var g_AllOptionsDeclaration = {
     "IllicitsPatientReportsOption" : { "ButtonLabelList" : ["Patient Admits"], "ValueList" : ["The patient says they use the following medications without a prescription: "], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "IllicitDrugsPlan"},
 
     // Eval
-    "IllicitsCheckUDSOption" : { "ButtonLabelList" : ["UDS"], "ValueList" : ["Check Urine Drug Screen"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "IllicitDrugsPlan"},
-    "IllicitsCheckHepatitisOption" : { "ButtonLabelList" : ["Hepatitis Screen"], "ValueList" : ["Check for acute HAV, HBV, HCV"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "IllicitDrugsPlan"},
-    "IllicitsCheckHIVOption" : { "ButtonLabelList" : ["Check HIV"], "ValueList" : ["Check HIV, Syphilis"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "IllicitDrugsPlan"},
-    "IllicitsCheckHepImmpnityOption" : { "ButtonLabelList" : ["Check Hep Immun"], "ValueList" : ["Check HBV, and HAV immunity"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "IllicitDrugsPlan"},
+    "IllicitsCheckUDSOption" : { "ButtonLabelList" : ["UDS"], "ValueList" : ["Urine Drug Screen"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "IllicitDrugsPlan"},
+    "IllicitsCheckHepatitisOption" : { "ButtonLabelList" : ["Hepatitis Screen"], "ValueList" : ["HAV, HBV, HCV screens"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "IllicitDrugsPlan"},
+    "IllicitsCheckHIVOption" : { "ButtonLabelList" : ["Check HIV"], "ValueList" : ["HIV, Syphilis screen"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "IllicitDrugsPlan"},
+    "IllicitsCheckHepImmpnityOption" : { "ButtonLabelList" : ["Check Hep Immun"], "ValueList" : ["HBV, and HAV immunity"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "IllicitDrugsPlan"},
 
     // Symptoms
     "IllicitsHydroxyzineOption" : { "ButtonLabelList" : ["Hydroxyzine"], "ValueList" : ["Hydroxyzine 50-100mg PO Q6h prn anxiety/restlessness"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "IllicitDrugsPlan"},
@@ -1189,7 +1341,7 @@ var g_AllOptionsDeclaration = {
     "IllicitsAcetaminophenOption" : { "ButtonLabelList" : ["Acetaminophen"], "ValueList" : ["Acetaminophen and Ibuprofen for myalgias or headache"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "IllicitDrugsPlan"},
 
     // Consults
-    "IllicitsAddictionMedOption" : { "ButtonLabelList" : ["Addiction Med"], "ValueList" : ["Consulting Addiction Medicine"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "IllicitDrugsPlan"},
+    "IllicitsAddictionMedOption" : { "ButtonLabelList" : ["Addiction Med"], "ValueList" : ["Addiction Medicine"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "IllicitDrugsPlan"},
     "IllicitsMusicTherapyOption" : { "ButtonLabelList" : ["Music therapy"], "ValueList" : ["Music therapy"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "IllicitDrugsPlan"},
     "IllicitsNarrativeMedOption" : { "ButtonLabelList" : ["Narrative Med"], "ValueList" : ["Narrative Medicine"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "IllicitDrugsPlan"},
     "IllicitsChaplainOption" : { "ButtonLabelList" : ["Chaplain"], "ValueList" : ["Chaplain"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "IllicitDrugsPlan"},
@@ -1205,11 +1357,12 @@ var g_AllOptionsDeclaration = {
     ///////////////////////////////////////////////////////////
     // Modifiers
     "AnemiaAcuteChronicModifier" : { "ButtonLabelList" : ["Acute", "Acute on Chronic", "Chronic"], "ValueList" : ["Acute", "Acute on Chronic", "Chronic"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
+    "AnemiaChronicDiseaseModifier" : { "ButtonLabelList" : ["ChronicDisease"], "ValueList" : ["Anemia of Chronic Inflammation"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
     "AnemiaCKDModifier" : { "ButtonLabelList" : ["CKD"], "ValueList" : ["Anemia of Chronic Kidney Disease"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
     "AnemiaBloodLossModifier" : { "ButtonLabelList" : ["BloodLoss"], "ValueList" : ["Blood Loss Anemia"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
     "AnemiaMicrocyticModifier" : { "ButtonLabelList" : ["Microcytic", "Macrocytic"], "ValueList" : ["Microcytic Anemia", "Macrocytic Anemia"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
 
-    // Type
+    // Status
     "AnemiaShowHgbOption" : { "ButtonLabelList" : ["Show Hgb"], "ValueList" : ["Latest Hgb is "], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
     "AnemiaShowMCVOption" : { "ButtonLabelList" : ["Show MCV"], "ValueList" : ["MCV is "], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
     "AnemiaShowBUNOption" : { "ButtonLabelList" : ["High BUN", "Low BUN"], "ValueList" : ["BUN is high, suggesting possible Hgb digestion and an upper GI bleed", "BUN is low, not consistent with Hgb digestion so suggesting a lower GI bleed"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
@@ -1221,10 +1374,22 @@ var g_AllOptionsDeclaration = {
     "AnemiaDiffUnderproductionOption" : { "ButtonLabelList" : ["Underproduction"], "ValueList" : ["Underproduction"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
     "AnemiaDiffSequestrationOption" : { "ButtonLabelList" : ["Sequestration"], "ValueList" : ["Sequestration"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
 
+    //Status
+    "AnemiaTIBCStatusOption" : { "ButtonLabelList" : ["TIBC Low", "TIBC Normal"], "ValueList" : ["TIBC is low", "TIBC is normal"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
+    "AnemiaTransferrinStatusOption" : { "ButtonLabelList" : ["Transferrin Low", "Transferrin Normal"], "ValueList" : ["Transferrin is low", "Transferrin is normal"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
+    "AnemiaFeSatStatusOption" : { "ButtonLabelList" : ["Iron Sat Low", "Iron Sat normal"], "ValueList" : ["Iron binding saturation is low", "Iron binding saturation is normal"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
+    "AnemiaHemoccultStatusOption" : { "ButtonLabelList" : ["Hemoccult Neg", "Hemoccult Pos"], "ValueList" : ["Hemoccult is negative", "Hemoccult is positive"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
+    "AnemiaHPyloriStatusOption" : { "ButtonLabelList" : ["H pylori Neg", "H pylori Pos"], "ValueList" : ["H pylori stool antigen is negative", "H pylori stool antigen is positive"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
+    "AnemiaB12StatusOption" : { "ButtonLabelList" : ["B12 WNL", "B12 Low"], "ValueList" : ["B12 is normal", "B12 is low"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
+    "AnemiaFolateStatusOption" : { "ButtonLabelList" : ["Folate WNL", "Folate Low"], "ValueList" : ["Folate is normal", "Folate is low"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
+
+
+
     //Workup
     "AnemiaCheckINROption" : { "ButtonLabelList" : ["INR"], "ValueList" : ["INR"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
     "AnemiaCheckHemoccultOption" : { "ButtonLabelList" : ["Hemoccult"], "ValueList" : ["Hemoccult"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
     "AnemiaCheckReticulocyteCountOption" : { "ButtonLabelList" : ["Reticulocyte count"], "ValueList" : ["Reticulocyte count"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
+    "AnemiaCheckTransferrinOption" : { "ButtonLabelList" : ["Transferrin"], "ValueList" : ["Transferrin"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
     "AnemiaCheckIronBindingSaturationOption" : { "ButtonLabelList" : ["Iron sat"], "ValueList" : ["Iron binding saturation"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
     "AnemiaCheckFerritinOption" : { "ButtonLabelList" : ["Ferritin"], "ValueList" : ["Ferritin (below 15 is usually Fe deficiency, but Ferritin is also an acute phase reactant)"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
     "AnemiaCheckTIBCOption" : { "ButtonLabelList" : ["TIBC"], "ValueList" : ["TIBC"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
@@ -1239,6 +1404,7 @@ var g_AllOptionsDeclaration = {
     "AnemiaCheckEBVOption" : { "ButtonLabelList" : ["EBV"], "ValueList" : ["EBV"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
     "AnemiaCheckParvoOption" : { "ButtonLabelList" : ["Parvo"], "ValueList" : ["Parvo"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
     "AnemiaCheckPeripheralSmearOption" : { "ButtonLabelList" : ["Peripheral smear"], "ValueList" : ["Peripheral smear"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
+    "AnemiaCheckFibrinogenOption" : { "ButtonLabelList" : ["Fibrinogen"], "ValueList" : ["Fibrinogen"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
     "AnemiaCheckDirectCoombsOption" : { "ButtonLabelList" : ["Direct Coombs"], "ValueList" : ["Direct Coombs"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
     "AnemiaCheckHaptoglobinOption" : { "ButtonLabelList" : ["Haptoglobin"], "ValueList" : ["Haptoglobin"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
     "AnemiaCheckLDHOption" : { "ButtonLabelList" : ["LDH"], "ValueList" : ["LDH"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AnemiaPlan"},
@@ -1301,8 +1467,9 @@ var g_AllOptionsDeclaration = {
     ///////////////////////////////////////////////////////////
     // Diabetes
     ///////////////////////////////////////////////////////////
-    "Diabetes_Type_Modifier" : { "ButtonLabelList" : ["Type 1", "Type 2", "Type2-Insulin"], "ValueList" : [", Type 1", ", Type 2", ", Type 2 insulin requiring"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
+    "Diabetes_Type_Modifier" : { "ButtonLabelList" : ["Type 1", "Type 2", "Type2-Insulin"], "ValueList" : [", Type 1", ", Type 2", ", Type 2, insulin requiring"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
     "Diabetes_Uncontrolled_Modifier" : { "ButtonLabelList" : ["Uncontrolled"], "ValueList" : [", Uncontrolled"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
+    "DiabetesHyperglycemiaModifier" : { "ButtonLabelList" : ["Hyperglycemia"], "ValueList" : [" with hyperglycemia"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
 
     // Status
     "DiabetesStatusShowA1cOption" : { "ButtonLabelList" : ["A1c"], "ValueList" : ["Latest HgbA1c = " ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
@@ -1359,6 +1526,7 @@ var g_AllOptionsDeclaration = {
     "CKD_Stage_Modifier" : { "ButtonLabelList" : ["Stage IIIa", "Stage IIIb", "Stage IV", "Stage V"], "ValueList" : ["Stage IIIa", "Stage IIIb", "Stage IV", "Stage V"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKD_Diabetic_Modifier" : { "ButtonLabelList" : ["Diabetic"], "ValueList" : ["Diabetic Kidney Disease"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
 
+    ////////////////////
     // Cause
     "CKDCausesDiabetesOption" : { "ButtonLabelList" : ["Diabetes"], "ValueList" : ["Diabetes" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKDCausesHypertensionOption" : { "ButtonLabelList" : ["Hypertension"], "ValueList" : ["Hypertension" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
@@ -1366,31 +1534,34 @@ var g_AllOptionsDeclaration = {
     "CKDCausesMedicationsOption" : { "ButtonLabelList" : ["Medications"], "ValueList" : ["Medications"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKDCausesObstructionOption" : { "ButtonLabelList" : ["Obstruction"], "ValueList" : ["chronic obstruction"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
 
-
+    ////////////////////
     // Status
     "CKDCausesShowCrOption" : { "ButtonLabelList" : ["Show Cr"], "ValueList" : ["Serum Creatinine=" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKDCausesShowGFROption" : { "ButtonLabelList" : ["Show GFR"], "ValueList" : [", baseline GFR="], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKDCausesShowProtCrOption" : { "ButtonLabelList" : ["Show ProtCr"], "ValueList" : ["Urine Prot/Cr ratio is  suggesting approximately xxxx grams daily proteinuria"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKDCausesShowAlbCrOption" : { "ButtonLabelList" : ["Show AlbCr"], "ValueList" : ["xxxx grams of the daily proteinuria is due to Albumin, the rest is other proteins" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKD_Male_Modifier" : { "ButtonLabelList" : ["Male", "Female"], "ValueList" : ["male", "female" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
-    "CKDCausesShow2YrRiskOption" : { "ButtonLabelList" : ["Show 2YrRisk"], "ValueList" : ["The risk of ESRD within two years is "], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
+    "CKDCausesShow2YrRiskOption" : { "ButtonLabelList" : ["ESRD Risk"], "ValueList" : ["The risk of ESRD within two years is "], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKDCausesShow5YrRiskOption" : { "ButtonLabelList" : ["Show 5YrRisk"], "ValueList" : ["The risk of ESRD within five years is "], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKDCausesRiskPaperCitationOption" : { "ButtonLabelList" : ["Risk Paper"], "ValueList" : ["See Tangri N, Stevens LA, Griffith J, et al. A predictive model for progression of chronic kidney disease to kidney failure. JAMA. 2011;305(15) and Tangri N, Grams ME, Levey AS et al Multinational Assessment of Accuracy of Equations for Predicting Risk of Kidney Failure: A Meta-analysis JAMA. 2016;315(2):1-11"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
+    "CKDStatusTransplantOption" : { "ButtonLabelList" : ["Xplant None", "Xplant In-Process", "Xplant Listed", "Xplant Unlisted", "Xplant NotListed"], "ValueList" : ["The patient is has not been evaluated for renal transplant", "The patient is currently being evaluated for renal transplant", "The patient is currently listed for renal transplant", "The patient is currently unlisted for renal transplant but will be reevaluated", "The patient has been evaluated and is not a candidate for renal transplant" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKDStatusTreatHTNOption" : { "ButtonLabelList" : ["Treat HTN"], "ValueList" : ["hypertension" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKDStatusTreatDMOption" : { "ButtonLabelList" : ["Treat DM"], "ValueList" : ["diabetes" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
 
+    ////////////////////
     // Workup
     "CKDWorkupGetUrineAlbProtCrOption" : { "ButtonLabelList" : ["Get U Alb"], "ValueList" : ["Collect UrineCreatinine, UrineAlbumin and a BMP and serum Phos, Ca, and Albumin to estimate risk of CKD progressing to ESRD" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKDWorkupGetPTHOption" : { "ButtonLabelList" : ["Get PTH"], "ValueList" : ["Check PTH"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKDWorkupGetVitDOption" : { "ButtonLabelList" : ["Get VitD"], "ValueList" : ["Check Vitamin D" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
 
-
+    ////////////////////
     // Indications for SGLT2
     "CKDSGLT2IndicationsDM2Option" : { "ButtonLabelList" : ["DM2"], "ValueList" : ["Diabetes type 2"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKDSGLT2IndicationsCKDOption" : { "ButtonLabelList" : ["CKD"], "ValueList" : ["CKD with eGFR over 30"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKDSGLT2IndicationsHFrEFOption" : { "ButtonLabelList" : ["HFrEF"], "ValueList" : ["Heart failure with reduced ejection fraction"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKDSGLT2IndicationsUACROver200Option" : { "ButtonLabelList" : ["Albuminuria"], "ValueList" : ["Albuminuria with urine albumin/Cr ratio over 200ug/g"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
 
+    ////////////////////
     // Contraindications for SGLT2
     "CKDSGLT2ContraindicationsGFRBelow30Option" : { "ButtonLabelList" : ["GFR below 30"], "ValueList" : ["eGFR below 30"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKDSGLT2ContraindicationsDM1Option" : { "ButtonLabelList" : ["DM 1"], "ValueList" : ["Diabetes type 1"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
@@ -1401,31 +1572,37 @@ var g_AllOptionsDeclaration = {
     "CKDSGLT2ContraindicationsSLEOption" : { "ButtonLabelList" : ["SLE"], "ValueList" : ["Lupus"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKDSGLT2ContraindicationsANCAOption" : { "ButtonLabelList" : ["ANCA"], "ValueList" : ["ANCA"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
 
+    ////////////////////
     // SGLT2
     "CKDSGLT2EmpagliflozinOption" : { "ButtonLabelList" : ["Empagliflozin"], "ValueList" : ["Empagliflozin 10mg PO daily"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKDSGLT2ReduceInsulinOption" : { "ButtonLabelList" : ["Reduce Insulin"], "ValueList" : ["Reduce Insulin 20 percent if GFR is over 45"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKDSGLT2ExplainGFRDropOption" : { "ButtonLabelList" : ["Explain AKI"], "ValueList" : ["Expect 10-30 percent drop in eGFR due to hemodynamic effect of reduced filtration. This is not an acute kidney injury, and past studies have shown it is reversable by stopping the SGLT2 inhibitor. Essentially, an SGLT2 inhibitos just stops the hyperfiltration associated with glucosuria and unmasks the true eGFR."], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
 
+    ////////////////////
     // General
     "CKDStatusNoNSAIDsOption" : { "ButtonLabelList" : ["No NSAIDs"], "ValueList" : ["d/c NSAIDs"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKDLisinoprilOption": { "ButtonLabelList" : ["Lisinopril2.5", "Lisinopril5", "Lisinopril10", "Lisinopril20", "Lisinopril40", "Hold"], "ValueList" : ["Lisinopril 2.5mg PO daily", "Lisinopril 5mg PO daily", "Lisinopril 10mg PO daily", "Lisinopril 20mg PO daily", "Lisinopril 40mg PO daily", "Hold home Lisinopril due to AKI"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKDLosartanOption": { "ButtonLabelList" : ["Losartan25", "Losartan50", "Losartan100", "Hold"], "ValueList" : ["Losartan 25mg PO daily", "Losartan 50mg PO daily", "Losartan 100mg PO daily", "Hold home Losartan due to AKI"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
-    "CKDFollowupRenalOption" : { "ButtonLabelList" : ["Renal Clinic"], "ValueList" : ["On discharge refer to Renal CKD clinic"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
+    "CKDLowKDietOption": { "ButtonLabelList" : ["LowK Diet"], "ValueList" : ["Low Potassium Diet"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
 
+    ////////////////////
     // CKD 3b
     "CKD3bReduceMetforminOption" : { "ButtonLabelList" : ["Metformin"], "ValueList" : ["On discharge halve the dose of Metformin"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKD3bStopEmpagliflozinOption" : { "ButtonLabelList" : ["Empagliflozin"], "ValueList" : ["d/c Empagliflozin" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
 
+    ////////////////////
     // CKD 4
     "CKD4StopMetforminOption" : { "ButtonLabelList" : ["DC Metformin"], "ValueList" : ["On discharge, discontinue Metformin" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKD4StopThiazidesOption" : { "ButtonLabelList" : ["Thiazides"], "ValueList" : ["Change Thiazides to Furosemide" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKD4ReduceGabapentinOption" : { "ButtonLabelList" : ["Gabapentin"], "ValueList" : ["Renally dose Gabapentin"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
     "CKD4ReduceRanitidineOption" : { "ButtonLabelList" : ["Ranitidine"], "ValueList" : ["Renally dose Ranitidine"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
-
     "CKD4PhosBinderOption" : { "ButtonLabelList" : ["Bicarb"], "ValueList" : ["Sodium Bicarb 650mg PO TID for serum HCO3 below 20"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
-    "CKD4BicarbOption" : { "ButtonLabelList" : ["Phos Binder"], "ValueList" : ["Sevelamer 650mg PO TID with meals"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
-    "CKDFollowupTransplantOption" : { "ButtonLabelList" : ["Transplant"], "ValueList" : ["On discharge, refer to Transplant Nephrology"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
+    "CKD4BicarbOption" : { "ButtonLabelList" : ["Phos Binder"], "ValueList" : ["Sevelamer 800mg PO TID with meals"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
 
+    ////////////////////
+    // Clinics
+    "CKDFollowupRenalOption" : { "ButtonLabelList" : ["Renal Clinic"], "ValueList" : ["On discharge refer to Renal CKD clinic"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
+    "CKDFollowupTransplantOption" : { "ButtonLabelList" : ["Transplant Clinic"], "ValueList" : ["On discharge refer to Renal Transplant clinic for evaluation" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CKDPlan"},
 
 
 
@@ -1444,7 +1621,7 @@ var g_AllOptionsDeclaration = {
     // Beta Blockers
     "CADMetoprololTarOption": { "ButtonLabelList" : ["MetopTar 12.5", "MetopTar 25", "MetopTar 50", "MetopTar 75", "MetopTar 100", "Hold"], "ValueList" : ["Metoprolol Tartrate 12.5mg PO BID", "Metoprolol Tartrate 25mg PO BID", "Metoprolol Tartrate 50mg PO BID", "Metoprolol Tartrate 75mg PO BID", "Metoprolol Tartrate 100mg PO BID", "Hold home Metoprolol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CADPlan"},
     "CADMetoprololSuccOption": { "ButtonLabelList" : ["MetopXL 25", "MetopXL 50", "MetopXL 75", "MetopXL 100", "MetopXL 200", "Hold"], "ValueList" : ["Metoprolol Succinate 25mg PO once daily", "Metoprolol Succinate 50mg PO once daily", "Metoprolol Succinate 75mg PO once daily", "Metoprolol Succinate 100mg PO once daily", "Metoprolol Succinate 200mg PO once daily", "Hold home Metoprolol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CADPlan"},
-    "CADCarvedilolOption": { "ButtonLabelList" : ["Coreg 3.125", "Coreg 6.25", "Coreg 12.5", "Coreg 25", "Coreg 25BID", "Hold"], "ValueList" : ["Carvedilol 3.125mg PO daily", "Carvedilol 6.25mg PO daily", "Carvedilol 12.5mg PO daily", "Carvedilol 25mg PO daily", "Carvedilol 25mg PO BID", "Hold home Carvedilol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CADPlan"},
+    "CADCarvedilolOption": { "ButtonLabelList" : ["Coreg 3.125", "Coreg 6.25", "Coreg 12.5", "Coreg 25", "Hold"], "ValueList" : ["Carvedilol 3.125mg PO BID", "Carvedilol 6.25mg PO BID", "Carvedilol 12.5mg PO BID", "Carvedilol 25mg PO BID", "Hold home Carvedilol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CADPlan"},
     "CADNSBBOption": { "ButtonLabelList" : ["See Cirrhosis"], "ValueList" : ["Non-specific Beta-Blocker as discussed for Cirrhosis"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CADPlan"},
 
     ///////////////////
@@ -1458,6 +1635,8 @@ var g_AllOptionsDeclaration = {
     // Statin/Aspirin
     "CADAtorvaOption": { "ButtonLabelList" : ["Atorva20", "Atorva40", "Atorva80"], "ValueList" : ["Atorvastatin 20mg PO daily", "Atorvastatin 40mg PO daily", "Atorvastatin 80mg PO daily"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CADPlan"},
     "CADAsaOption": { "ButtonLabelList" : ["Asa81"], "ValueList" : ["Aspirin 81mg PO daily"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CADPlan"},
+    "CADRivaroxabanOption": { "ButtonLabelList" : ["Rivaroxaban"], "ValueList" : ["Rivaroxaban 2.5mg PO BID (COMPASS Trial protocol)"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CADPlan"},
+    "CADClopidogrelOption": { "ButtonLabelList" : ["Clopidogrel"], "ValueList" : ["Continue home Clopidogrel 75mg PO daily"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CADPlan"},
 
 
 
@@ -1468,7 +1647,8 @@ var g_AllOptionsDeclaration = {
     ///////////////////////////////////////////////////////////
 
     ///////////////////
-    "COPDExacerbationOption": { "ButtonLabelList" : ["Exacerbation"], "ValueList" : ["COPD Exacerbation"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
+    "COPDRespFailureModifier": { "ButtonLabelList" : ["RespFailure"], "ValueList" : ["Acute on chronic hypoxic respiratory failure requiring supplemental oxygen"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
+    "COPDExacerbationOption": { "ButtonLabelList" : ["Exacerbation"], "ValueList" : ["Acute COPD Exacerbation"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
     "COPDPossibleOption": { "ButtonLabelList" : ["Possible"], "ValueList" : ["Possible Chronic Obstructive Pulmonary Disease"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
 
     ///////////////////
@@ -1510,6 +1690,7 @@ var g_AllOptionsDeclaration = {
     "COPDCultureBloodOption": { "ButtonLabelList" : ["Culture Blood"], "ValueList" : ["Check blood cultures"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
     "COPDUrineAntigensOption": { "ButtonLabelList" : ["Urine Antigens"], "ValueList" : ["Check urine antigens for legionella, strep pneumo"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
     "COPDProcalOption": { "ButtonLabelList" : ["Procal"], "ValueList" : ["Check ProCalcitonin to possibly rule out bacterial infection"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
+    "COPDPFTOption": { "ButtonLabelList" : ["PFT"], "ValueList" : ["Get Pulmonary Function Tests"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
 
     ///////////////////
     // Bronchodilators
@@ -1604,7 +1785,7 @@ var g_AllOptionsDeclaration = {
 
     ///////////////////
     // Results
-    "NSTEMITropOption": { "ButtonLabelList" : ["Show Trop"], "ValueList" : ["Tronons: "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
+    "NSTEMITropOption": { "ButtonLabelList" : ["Show Trop"], "ValueList" : ["Troponins: "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
     "NSTEMITropDeltaOption": { "ButtonLabelList" : ["Trop NoDelta", "TropDelta 0-10", "TropDelta 10%", "TropDelta Over20%"], "ValueList" : ["Troponins have no delta", "Troponin delta is below 10 percent", "Troponin delta is 10-20 percent", "Troponin delta is over 10 percent"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
     "NSTEMIEKGOption": { "ButtonLabelList" : ["EKG Normal", "EKG LVH", "EKG STDepress", "EKG STDepress"], "ValueList" : ["EKG shows no ischemia", "EKG shows LV hypertrophy but no ischemia", "EKG has ST-depression"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
     "NSTEMITypeOption": { "ButtonLabelList" : ["Type 1", "Type 2", "Type 4a"], "ValueList" : ["This is likely a type 1 NSTEMI, due to plaque rupture or erosion,", "This is likely a type 2 NSTEMI, due to demand-induced ischemia", "This is likely a type 4a NSTEMI, with Troponin elevation after PCI"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
@@ -1620,7 +1801,6 @@ var g_AllOptionsDeclaration = {
     "NSTEMIRiskObesityOption": { "ButtonLabelList" : ["Obese"], "ValueList" : ["obesity (BMI over 30)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
     "NSTEMIRiskFamilyHistoryOption": { "ButtonLabelList" : ["Family Hx"], "ValueList" : ["parent or sibling with CVD before age 65"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
     "NSTEMIRiskVascularDiseaseOption": { "ButtonLabelList" : ["CAD/PAD"], "ValueList" : ["prior MI/CVA/PVD"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
-
 
     ///////////////////
     // HEART
@@ -1642,10 +1822,12 @@ var g_AllOptionsDeclaration = {
 
     ///////////////////
     // Eval
-    "NSTEMICheckEKGOption": { "ButtonLabelList" : ["Check EKG"], "ValueList" : ["Check EKG"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
-    "NSTEMICheckTroponinsOption": { "ButtonLabelList" : ["Check Troponins"], "ValueList" : ["Check Troponins"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
-    "NSTEMIAMEKGOption": { "ButtonLabelList" : ["EKG in AM"], "ValueList" : ["Check EKG in morning"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
-    "NSTEMIUDSOption": { "ButtonLabelList" : ["Check UDS"], "ValueList" : ["Check urine drugs of abuse screen"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
+    "NSTEMICheckEKGOption": { "ButtonLabelList" : ["Check EKG"], "ValueList" : ["EKG"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
+    "NSTEMICheckTroponinsOption": { "ButtonLabelList" : ["Check Troponins"], "ValueList" : ["Troponins"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
+    "NSTEMIAMEKGOption": { "ButtonLabelList" : ["EKG in AM"], "ValueList" : ["EKG in morning"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
+    "NSTEMIUDSOption": { "ButtonLabelList" : ["Check UDS"], "ValueList" : ["urine drugs of abuse screen"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
+    "NSTEMIGetLipidOption": { "ButtonLabelList" : ["Get Lipid panel"], "ValueList" : ["lipid panel"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
+    "NSTEMIGetA1cOption": { "ButtonLabelList" : ["Get HgbA1c"], "ValueList" : ["HgbA1c"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
 
     ///////////////////
     // Anti-Platelet
@@ -1653,19 +1835,17 @@ var g_AllOptionsDeclaration = {
     "NSTEMITicagrelorOption": { "ButtonLabelList" : ["Ticagrelor"], "ValueList" : ["Ticagrelor (PGY12 blockade) with loading dose 180mg PO once, then 90mg BID "], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
     "NSTEMIPlavixOption": { "ButtonLabelList" : ["Plavix"], "ValueList" : ["Clopidogrel (PGY12 blockade) with loading dose 300mg, then 150mg daily for 12 months "], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
 
-
     ///////////////////
     // Anti-Coag
     "NSTEMIHeparinDripOption": { "ButtonLabelList" : ["Heparin"], "ValueList" : ["Heparin drip if TIMI is over 5"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
     "NSTEMILovenoxOption": { "ButtonLabelList" : ["Enoxaparin"], "ValueList" : ["Enoxaparin 1mg/kg subcu BID"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
-
 
     ///////////////////
     // Management
     "NSTEMIStatinOption": { "ButtonLabelList" : ["Atorvastatin 80"], "ValueList" : ["Atorvastatin 80mg"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
     "NSTEMIMetoprololTarOption": { "ButtonLabelList" : ["MetopTar 12.5", "MetopTar 25", "MetopTar 50", "MetopTar 75", "MetopTar 100", "Hold"], "ValueList" : ["Metoprolol Tartrate 12.5mg PO BID", "Metoprolol Tartrate 25mg PO BID", "Metoprolol Tartrate 50mg PO BID", "Metoprolol Tartrate 75mg PO BID", "Metoprolol Tartrate 100mg PO BID", "Hold home Metoprolol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
     "NSTEMIMetoprololSuccOption": { "ButtonLabelList" : ["MetopXL 25", "MetopXL 50", "MetopXL 75", "MetopXL 100", "MetopXL 200", "Hold"], "ValueList" : ["Metoprolol Succinate 25mg PO once daily", "Metoprolol Succinate 50mg PO once daily", "Metoprolol Succinate 75mg PO once daily", "Metoprolol Succinate 100mg PO once daily", "Metoprolol Succinate 200mg PO once daily", "Hold home Metoprolol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
-    "NSTEMICarvedilolOption": { "ButtonLabelList" : ["Coreg 3.125", "Coreg 6.25", "Coreg 12.5", "Coreg 25", "Coreg 25BID", "Hold"], "ValueList" : ["Carvedilol 3.125mg PO daily", "Carvedilol 6.25mg PO daily", "Carvedilol 12.5mg PO daily", "Carvedilol 25mg PO daily", "Carvedilol 25mg PO BID", "Hold home Carvedilol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
+    "NSTEMICarvedilolOption": { "ButtonLabelList" : ["Coreg 3.125", "Coreg 6.25", "Coreg 12.5", "Coreg 25", "Hold"], "ValueList" : ["Carvedilol 3.125mg PO BID", "Carvedilol 6.25mg PO BID", "Carvedilol 12.5mg PO BID", "Carvedilol 25mg PO BID", "Hold home Carvedilol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
 
     ///////////////////
     // ACE/ARB
@@ -1676,8 +1856,6 @@ var g_AllOptionsDeclaration = {
 
     ///////////////////
     // Workup
-    "NSTEMIGetLipidOption": { "ButtonLabelList" : ["Get Lipid panel"], "ValueList" : ["Risk stratify and check morning lipid panel"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
-    "NSTEMIGetA1cOption": { "ButtonLabelList" : ["Get HgbA1c"], "ValueList" : ["Risk stratify and check HgbA1c"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
     "NSTEMIGetEchoOption": { "ButtonLabelList" : ["Get Echo"], "ValueList" : ["Get Echocardiogram"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
     "NSTEMIHTNControlOption": { "ButtonLabelList" : ["Treat HTN"], "ValueList" : ["Reduce afterload with hypertension management"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
     "NSTEMICheckICDOption": { "ButtonLabelList" : ["Check ICD"], "ValueList" : ["Interrogate ICD"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NSTEMIPlan"},
@@ -1766,6 +1944,7 @@ var g_AllOptionsDeclaration = {
     // Pneumonia CONTROL PANEL
     ///////////////////////////////////////////////////////////
     "PneumoniaHAPModifier" : { "ButtonLabelList" : ["CAP", "HAP", "VAP"], "ValueList" : ["Community-Acquired Pneumonia", "Healthcare-Associated Pneumonia", "Ventillator-Associated Pneumonia"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "PneumoniaPlan"},
+    "PneumoniaRespFailureModifier": { "ButtonLabelList" : ["RespFailure"], "ValueList" : ["Acute hypoxic respiratory failure requiring supplemental oxygen"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PneumoniaPlan"},
 
     // Criteria
     "PneumoniaCoughOption" : { "ButtonLabelList" : ["Cough"], "ValueList" : ["Cough"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "PneumoniaPlan"},
@@ -1788,6 +1967,7 @@ var g_AllOptionsDeclaration = {
     "PneumoniaSIRSWBCOption" : { "ButtonLabelList" : ["WBC over 12"], "ValueList" : ["WBC over 12"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "PneumoniaPlan"},
 
     // Workup
+    "PneumoniaWUNaresOption" : { "ButtonLabelList" : ["Chest XRay"], "ValueList" : ["Check MRSA Nares"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "PneumoniaPlan"},
     "PneumoniaWUXRayOption" : { "ButtonLabelList" : ["Chest XRay"], "ValueList" : ["Get Chest XRay"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "PneumoniaPlan"},
     "PneumoniaWUBloodCultureOption" : { "ButtonLabelList" : ["Blood Cx"], "ValueList" : ["Culture blood"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "PneumoniaPlan"},
     "PneumoniaWUSputumCultureOption" : { "ButtonLabelList" : ["Sputum Cx"], "ValueList" : ["Culture sputum"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "PneumoniaPlan"},
@@ -1796,7 +1976,7 @@ var g_AllOptionsDeclaration = {
     "PneumoniaWUStrepUrineAntigenOption" : { "ButtonLabelList" : ["Urine Strep"], "ValueList" : ["Check urine strep antigen"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "PneumoniaPlan"},
     "PneumoniaWULegionellaUrineAntigenOption" : { "ButtonLabelList" : ["Urine Legionella"], "ValueList" : ["Check urine legionella antigen"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "PneumoniaPlan"},
     "PneumoniaWUProcalOption" : { "ButtonLabelList" : ["Procal"], "ValueList" : ["Check Procalcitonin"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "PneumoniaPlan"},
-    "PneumoniaWUCRPOption" : { "ButtonLabelList" : ["CRP"], "ValueList" : ["Check C-Rreactive Protein"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "PneumoniaPlan"},
+    "PneumoniaWUCRPOption" : { "ButtonLabelList" : ["CRP"], "ValueList" : ["Check C-Reactive Protein"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "PneumoniaPlan"},
     "PneumoniaWULactateOption" : { "ButtonLabelList" : ["Lactate"], "ValueList" : ["Check serum lactate"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "PneumoniaPlan"},
 
     // Causes
@@ -1930,7 +2110,7 @@ var g_AllOptionsDeclaration = {
     // Rate Control
     "AFibMetoprololTarOption": { "ButtonLabelList" : ["MetopTar 12.5", "MetopTar 25", "MetopTar 50", "MetopTar 75", "MetopTar 100", "Hold"], "ValueList" : ["Metoprolol Tartrate 12.5mg PO BID", "Metoprolol Tartrate 25mg PO BID", "Metoprolol Tartrate 50mg PO BID", "Metoprolol Tartrate 75mg PO BID", "Metoprolol Tartrate 100mg PO BID", "Hold home Metoprolol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AFibPlan"},
     "AFibMetoprololSuccOption": { "ButtonLabelList" : ["MetopXL 25", "MetopXL 50", "MetopXL 75", "MetopXL 100", "MetopXL 200", "Hold"], "ValueList" : ["Metoprolol Succinate 25mg PO once daily", "Metoprolol Succinate 50mg PO once daily", "Metoprolol Succinate 75mg PO once daily", "Metoprolol Succinate 100mg PO once daily", "Metoprolol Succinate 200mg PO once daily", "Hold home Metoprolol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AFibPlan"},
-    "AFibCarvedilolOption": { "ButtonLabelList" : ["Coreg 3.125", "Coreg 6.25", "Coreg 12.5", "Coreg 25", "Coreg 25BID", "Hold"], "ValueList" : ["Carvedilol 3.125mg PO daily", "Carvedilol 6.25mg PO daily", "Carvedilol 12.5mg PO daily", "Carvedilol 25mg PO daily", "Carvedilol 25mg PO BID", "Hold home Carvedilol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AFibPlan"},
+    "AFibCarvedilolOption": { "ButtonLabelList" : ["Coreg 3.125", "Coreg 6.25", "Coreg 12.5", "Coreg 25", "Hold"], "ValueList" : ["Carvedilol 3.125mg PO BID", "Carvedilol 6.25mg PO BID", "Carvedilol 12.5mg PO BID", "Carvedilol 25mg PO BID", "Hold home Carvedilol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AFibPlan"},
     "AFibDiltiazemPOOption": { "ButtonLabelList" : ["Diltiazem 30", "Diltiazem 60", "Diltiazem 90", "Diltiazem 120"], "ValueList" : ["Diltiazem 30mg PO daily", "Diltiazem 60mg PO daily", "Diltiazem 90mg PO daily", "Diltiazem 120mg PO daily"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AFibPlan"},
 
     ///////////////////
@@ -2060,7 +2240,6 @@ var g_AllOptionsDeclaration = {
     ///////////////////////////////////////////////////////////
     // Nephrolithiasis
     ///////////////////////////////////////////////////////////
-
     // History
     "NephrolithiasisShowLatestStoneOption" : { "ButtonLabelList" : ["Latest Stone"], "ValueList" : ["Most recent stone was" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NephrolithiasisPlan"},
     "NephrolithiasisRateOption" : { "ButtonLabelList" : ["Rate Monthly", "Rate per Year", "Rate in years", "Stones per life"], "ValueList" : ["The patient has stones every month", "The patient has xxx stones per year", "The patient has one stone every xxx years", "The patient has had xxxx stones total"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NephrolithiasisPlan"},
@@ -2069,7 +2248,6 @@ var g_AllOptionsDeclaration = {
     // Urine labs
     "NephrolithiasisShowUrinepHOption" : { "ButtonLabelList" : ["Show UpH"], "ValueList" : ["Urine pH = xxxx - should be between 5.5 and 7.0" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NephrolithiasisPlan"},
     "NephrolithiasisShowUrineSedimentOption" : { "ButtonLabelList" : ["No Crystals", "Ca-Oxalate", "Ca-Phos", "Urate", "Ammonium-Phos", "Bactrim", "Acyclovir", "Methotraxate"], "ValueList" : ["On personal examination of the urine sediment, there were No crystals", "On personal examination of the urine sediment, there were Ca-Oxalate crystals (rods and envelopes)", "On personal examination of the urine sediment, there were Ca-Phos crystals (needles and stars)", "On personal examination of the urine sediment, there were Urate crystals (flattened football)", "On personal examination of the urine sediment, there were Ammonium-Phos crystals (Coffin-lid)", "On personal examination of the urine sediment, there were Bactrim crystals (star-shaped)", "On personal examination of the urine sediment, there were Acyclovir crystals (needle)", "On personal examination of the urine sediment, there were Methotraxate crystals (brown cuboid)"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NephrolithiasisPlan"},
-
 
     // 24hr Labs
     "Nephrolithiasis24hrUrineVolumeOption" : { "ButtonLabelList" : ["24hr Vol"], "ValueList" : ["volume xxx mL/day - should be MORE than 2000 mL/day" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NephrolithiasisPlan"},
@@ -2085,7 +2263,8 @@ var g_AllOptionsDeclaration = {
     // Workup
     "NephrolithiasisGetUAOption" : { "ButtonLabelList" : ["Get UA"], "ValueList" : ["Check Urinalysis" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NephrolithiasisPlan"},
     "NephrolithiasisGet24hrOption" : { "ButtonLabelList" : ["Get 24hr"], "ValueList" : ["Collect 24hour urine for Creatinine, Sodium, Calcium, Phos, Oxalate, Citrate, Chloride" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NephrolithiasisPlan"},
-
+    "NephrolithiasisGetUSOption" : { "ButtonLabelList" : ["Renal US"], "ValueList" : ["Get Renal US" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NephrolithiasisPlan"},
+    "NephrolithiasisGetCTOption" : { "ButtonLabelList" : ["Get 24hr"], "ValueList" : ["Get CT Stone Protocol" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NephrolithiasisPlan"},
     // Treat
     "NephrolithiasisLowNaDietOption" : { "ButtonLabelList" : ["Low Na diet"], "ValueList" : ["Low Na diet" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NephrolithiasisPlan"},
     "Nephrolithiasis2LPOFluidOption" : { "ButtonLabelList" : ["2L PO fluid"], "ValueList" : ["Increase PO water intake to maintain 2 liters urine daily" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NephrolithiasisPlan"},
@@ -2095,20 +2274,12 @@ var g_AllOptionsDeclaration = {
 
 
 
-
-
-
-
     ///////////////////////////////////////////////////////////
     // Nephrotic
     ///////////////////////////////////////////////////////////
     "NephroticSyndromeOption" : { "ButtonLabelList" : ["Syndrome", "Proteinuria"], "ValueList" : ["Nephrotic Syndrome", "Nephrotic Proteinuria"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NephroticPlan"},
-
-    // Labs
-    "NephroticShowUrineProtOption" : { "ButtonLabelList" : ["Show U-Prot"], "ValueList" : ["Urine Random Protein="], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NephroticPlan"},
-    "NephroticShowUrineAlbOption" : { "ButtonLabelList" : ["Show U-Alb"], "ValueList" : ["Urine Random Albumin="], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NephroticPlan"},
-    "NephroticShowUrineCrOption" : { "ButtonLabelList" : ["Show U-Cr"], "ValueList" : ["Urine Random Creatinine="], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NephroticPlan"},
-    "NephroticShow24hrUrineProtOption" : { "ButtonLabelList" : ["Show 24hr U-Prot"], "ValueList" : ["24hour Urine Protein="], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NephroticPlan"},
+    "NephroticShowUrineProtCreatRatioOption" : { "ButtonLabelList" : ["Show UPCR"], "ValueList" : ["Urine Random Protein-Creatinine ratio ="], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NephroticPlan"},
+    "NephroticShowUrineAlbCreatRatioOption" : { "ButtonLabelList" : ["Show UACR"], "ValueList" : ["Urine Random Albumin-Creatinine ratio ="], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NephroticPlan"},
     "NephroticShowSerumAlbuminOption" : { "ButtonLabelList" : ["Show S-Albumin"], "ValueList" : ["Serum Albumin="], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NephroticPlan"},
     "NephroticExplainRatioOption" : { "ButtonLabelList" : ["Explain Ratio"], "ValueList" : ["A patient typically produces around 1.0 grams of daily urine creatinine from normal muscle breakdown, so the protein/creatinine ratio is also an estimate of the daily urine proteinuria in grams. Proteinuria over 3.5 g/day is nephrotic."], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "NephroticPlan"},
 
@@ -2158,10 +2329,17 @@ var g_AllOptionsDeclaration = {
     ///////////////////////////////////////////////////////////
     // Obesity
     ///////////////////////////////////////////////////////////
-    "ObesityMorbidOption" : { "ButtonLabelList" : ["Morbid"], "ValueList" : ["Morbid "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "ObesityPlan"},
+    "ObesityClassOption" : { "ButtonLabelList" : ["Class 1", "Class 2", "Class 3"], "ValueList" : ["Obesity, class 1 (BMI 30-35)", "Obesity, class 2 (BMI 35-40)", "Obesity, class 3 (BMI over 40)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "ObesityPlan"},
+
     "ObesityShowBMIOption" : { "ButtonLabelList" : ["Show BMI"], "ValueList" : ["BMI = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "ObesityPlan"},
     "ObesityComplicatesOption" : { "ButtonLabelList" : ["Complicates"], "ValueList" : ["This complicates care"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "ObesityPlan"},
+    "ObesityNoMRIOption" : { "ButtonLabelList" : ["No MRI"], "ValueList" : ["This prevents MRI (max weight 205kg)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "ObesityPlan"},
+    "NoCTOption" : { "ButtonLabelList" : ["No CT"], "ValueList" : ["This prevents CT (max weight 300kg)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "ObesityPlan"},
+    "ObesityNoIROption" : { "ButtonLabelList" : ["No IR"], "ValueList" : ["This prevents CT (max weight 225kg)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "ObesityPlan"},
+
     "ObesityConsultNutritionOption" : { "ButtonLabelList" : ["Consult Nutrition"], "ValueList" : ["Consult Nutrition"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "ObesityPlan"},
+    "ObesityBariatricBedOption" : { "ButtonLabelList" : ["Bariatric Bed"], "ValueList" : ["Bariatric Bed"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "ObesityPlan"},
+
     "ObesityScreenLipidsOption" : { "ButtonLabelList" : ["Lipids"], "ValueList" : ["Check fasting lipid panel and LDL Direct"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "ObesityPlan"},
     "ObesityCheckA1cOption" : { "ButtonLabelList" : ["A1c"], "ValueList" : ["Check HgbA1c"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "ObesityPlan"},
 
@@ -2183,6 +2361,7 @@ var g_AllOptionsDeclaration = {
     ///////////////////////////////////////////////////////////
     // Alcohol
     ///////////////////////////////////////////////////////////
+    "EtOHWithdrawalsModifier" : { "ButtonLabelList" : ["Withdrawals"], "ValueList" : ["Alcohol Dependance with Withdrawals"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EtOHPlan"},
     "EtOHDailyUseOption" : { "ButtonLabelList" : ["Daily use", "6 beers", "12 beers", "18 beers", "24 beers", "One Pint", "Two Pint", "One Fifth"], "ValueList" : ["Drinks daily", "Drinks 6 beers daily", "Drinks 12 beers daily", "Drinks 18 beers daily", "Drinks 24 beers daily", "Drinks one pint liquor daily", "Drinks two pints liquor daily", "Drinks one Fifth liquor daily"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EtOHPlan"},
     "EtOHLastUseOption" : { "ButtonLabelList" : ["Last Drink"], "ValueList" : ["last drink was xxxxx"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EtOHPlan"},
     "EtOHPastSeizuresOption" : { "ButtonLabelList" : ["Seizures"], "ValueList" : [" with seizures"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EtOHPlan"},
@@ -2192,7 +2371,7 @@ var g_AllOptionsDeclaration = {
     "EtOHVitaminsOption" : { "ButtonLabelList" : ["Vitamin"], "ValueList" : ["Prenatal vitamin (with Folate) daily"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EtOHPlan"},
     //WriteAction("Consider Baclofen to reduce EtOH craving (5mg PO TID x3 days, then 10mg PO TID daily)");
     //Chlorthiazepoxide
-
+    "EtOHAABookOption" : { "ButtonLabelList" : ["AA Book"], "ValueList" : ["I have counselled cessation and provided the patient with the Alcoholics Anonymous book (the Big Book)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EtOHPlan"},
 
 
 
@@ -2216,18 +2395,51 @@ var g_AllOptionsDeclaration = {
     ///////////////////////////////////////////////////////////
     // Weakness
     ///////////////////////////////////////////////////////////
+   "WeaknessWeaknessOption" : { "ButtonLabelList" : ["Weakness"], "ValueList" : ["Weakness"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+   "WeaknessMyopathyOption" : { "ButtonLabelList" : ["Crit Illness"], "ValueList" : ["Critical Illness Myopathy"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
    "WeaknessFallsOption" : { "ButtonLabelList" : ["Falls"], "ValueList" : ["Gait instability with falls"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
     "WeaknessReducedMobilityOption" : { "ButtonLabelList" : ["Mobility"], "ValueList" : ["Reduced Mobility"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
     "WeaknessDebilityOption" : { "ButtonLabelList" : ["Debility"], "ValueList" : ["Debility"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
-    "WeaknessPTOption" : { "ButtonLabelList" : ["PT"], "ValueList" : ["Physical Therapy"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
-    "WeaknessPrecautionsOption" : { "ButtonLabelList" : ["Fall Precautions"], "ValueList" : ["Fall Precautions"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+
     "WeaknessCFSScoreScaleOption" : { "ButtonLabelList" : ["Very Fit", "Fit", "Managing", "Very Mild Frailty", "Mild Frailty", "Moderate Frailty", "Dependence in ADLs", "Bed-ridden", "Terminally Ill"], "ValueList" : ["Clinical Frailty Scale Level 1 - Very Fit - daily vigorous activity. This may include patients on chronic BP meds", "Clinical Frailty Scale Level 2 - Fit - less frequent or less vigorous activity", "Clinical Frailty Scale Level 3 - Managing Well. less frequent or less vigorous activity but some medical symptoms although these do not limit activity.", "Clinical Frailty Scale Level 4 – Living with Very Mild Frailty. Some symptoms with activity, such as fatigue. Incomplete symptom control. May require help with heavy housework, or difficulty climbing stairs.", "Clinical Frailty Scale Level 5 – Living with Mild Frailty. Does not attempt heavy housework or climbing stairs", "Clinical Frailty Scale Level 6 – Living with Moderate Frailty, dependence now extends past instrumental ADLs to intermediate ones, notably including dependence in bathing", "Clinical Frailty Scale Level 7 – Living with Severe Frailty. Dependence in some ADLs.", "Clinical Frailty Scale Level 8 – Living with Very Severe Frailty. Bed-ridden for periods, such as acute illness.", "Clinical Frailty Scale Level 9 – Terminally Ill. Independant of activity status"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
-    "WeaknessUpInChairOption" : { "ButtonLabelList" : ["Up In Chair"], "ValueList" : ["Up In Chair TID"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
     "WeaknessFRAILScaleFatigueOption" : { "ButtonLabelList" : ["Always Tired", "Not Tired"], "ValueList" : ["Fatigue most or all of the time", "Fatigue some or less of the time"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
     "WeaknessFRAILScaleResistanceOption" : { "ButtonLabelList" : ["10 Stairs", "Cant do stairs"], "ValueList" : ["No difficulty walking up 10 steps without resting", "Difficulty walking up 10 steps without resting"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
     "WeaknessFRAILScaleWalk100YdsOption" : { "ButtonLabelList" : ["Walk 100yds", "Cant walk 100yds"], "ValueList" : ["No difficulty walking several hundred yards", "Difficulty walking several hundred yards"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
     "WeaknessFRAILScaleChronicIllnessOption" : { "ButtonLabelList" : ["Chronic Illness", "Fewer 5 Illnesses"], "ValueList" : ["Fewer than 5 chronic illnesses", "5 or more chronic illnesses"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
     "WeaknessFRAILScaleWtLossOption" : { "ButtonLabelList" : ["Wt Loss", "No Sig Wt Loss"], "ValueList" : ["No significant weight loss in past year", "Lost more than five percent of weight in past year"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+
+    "WeaknessEtiologyOrthostatic" : { "ButtonLabelList" : ["Orthostatic"], "ValueList" : ["orthostatic hypotension"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "WeaknessEtiologyNeuropathy" : { "ButtonLabelList" : ["Neuropathy"], "ValueList" : ["diabetic neuropathy"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "WeaknessEtiologyVision" : { "ButtonLabelList" : ["Vision"], "ValueList" : ["reduced vision"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "WeaknessEtiologyAMS" : { "ButtonLabelList" : ["AMS"], "ValueList" : ["chronic encephalopathy"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "WeaknessEtiologyMeds" : { "ButtonLabelList" : ["Meds"], "ValueList" : ["medications"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+
+    "WeaknessCheckOrthostaticsOption" : { "ButtonLabelList" : ["Orthostatics"], "ValueList" : ["orthostatics"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "WeaknessCheckHeadCTOption" : { "ButtonLabelList" : ["Head CT"], "ValueList" : ["Head CT"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "WeaknessCheckCTSpineOption" : { "ButtonLabelList" : ["CT Spine"], "ValueList" : ["CT Spine"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "WeaknessCheckABIOption" : { "ButtonLabelList" : ["ABI"], "ValueList" : ["ABIs (for claudication)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "WeaknessCheckEKGOption" : { "ButtonLabelList" : ["EKG"], "ValueList" : ["EKG (for arrhythmia)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "WeaknessCheckKOption" : { "ButtonLabelList" : ["Potassium"], "ValueList" : ["Potassium"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "WeaknessCheckVitDOption" : { "ButtonLabelList" : ["VitD"], "ValueList" : ["VitD"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "WeaknessCheckB12Option" : { "ButtonLabelList" : ["B12"], "ValueList" : ["B12"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "WeaknessCheckThiamineOption" : { "ButtonLabelList" : ["Thiamine"], "ValueList" : ["Thiamine"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "WeaknessCheckCPKOption" : { "ButtonLabelList" : ["CPK"], "ValueList" : ["CPK"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "WeaknessCheckTSHOption" : { "ButtonLabelList" : ["TSH"], "ValueList" : ["TSH and free T4"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+
+    // Hold sedating meds
+    "Weakness_HOLD_OPIOIDS_OPTION" : { "ButtonLabelList" : ["Opioids"], "ValueList" : ["Opioids"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "Weakness_HOLD_BENZOS_OPTION" : { "ButtonLabelList" : ["Benzos"], "ValueList" : ["Benzodiazepines"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "Weakness_HOLD_BETA_BLOCKERS_OPTION" : { "ButtonLabelList" : ["Beta Blockers"], "ValueList" : ["Beta Blockers"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "Weakness_HOLD_ANTIHISTAMINES_OPTION" : { "ButtonLabelList" : ["Hydroxyzine"], "ValueList" : ["Hydroxyzine"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "Weakness_HOLD_PROMETHAZINE_OPTION" : { "ButtonLabelList" : ["Promethazine"], "ValueList" : ["Promethazine"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+
+    "WeaknessIVFluids" : { "ButtonLabelList" : ["IV Fluids"], "ValueList" : ["IV Fluids"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "WeaknessCholecal" : { "ButtonLabelList" : ["Cholecal"], "ValueList" : ["Cholecal 2000 IU PO daily"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "WeaknessThiamine" : { "ButtonLabelList" : ["Thiamine"], "ValueList" : ["Thiamine 100mg PO daily"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "WeaknessPTOption" : { "ButtonLabelList" : ["PT"], "ValueList" : ["Physical Therapy"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "WeaknessPrecautionsOption" : { "ButtonLabelList" : ["Fall Precautions"], "ValueList" : ["Fall Precautions"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+    "WeaknessUpInChairOption" : { "ButtonLabelList" : ["Up In Chair"], "ValueList" : ["Up In Chair TID"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "WeaknessPlan"},
+
 
 
     ///////////////////////////////////////////////////////////
@@ -2237,8 +2449,9 @@ var g_AllOptionsDeclaration = {
     "LowPotassiumShowMgOption" : { "ButtonLabelList" : ["Show Mg"], "ValueList" : ["Recent serum Magnesium = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypokalemiaPlan"},
     "LowPotassiumShowUrClOption" : { "ButtonLabelList" : ["Show Ur-Cl"], "ValueList" : ["Recent urine Chloride = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypokalemiaPlan"},
     "LowPotassiumShowTTKGOption" : { "ButtonLabelList" : ["Show TTKG"], "ValueList" : ["Urine Trans-tubular Potassium Gradient is "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypokalemiaPlan"},
-    "LowPotassiumTTKGFormulaOption" : { "ButtonLabelList" : ["TTKG Formula"], "ValueList" : ["Urine Trans-tubular Potassium Gradient is (urine-K / Serum-K) / (urine-Osm / serum-Osm)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypokalemiaPlan"},
     "LowPotassiumExplainLowTTKGOption" : { "ButtonLabelList" : ["ExplainLowTTKG", "ExplainHighTTKG"], "ValueList" : ["TTKG is below 3, so the kidneys are compensating and this is less likely nephrogenic", "TTKG is above 3, then the kidneys are not compensating and are wasting K, so this may be nephrogenic"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypokalemiaPlan"},
+    "LowPotassiumShowFEKOption" : { "ButtonLabelList" : ["Show FEK"], "ValueList" : ["Fractional Excretion Potassium = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypokalemiaPlan"},
+    "LowPotassiumExplainFEKGOption" : { "ButtonLabelList" : ["Explain FEK"], "ValueList" : ["Fractional Excretion of Potassium over 10 percent in hypokalemic patients suggests renal etiology (such as hyperAldo)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypokalemiaPlan"},
     "LowPotassiumInterpretUrClOption" : { "ButtonLabelList" : ["Ur-Cl is Low", "Ur-Cl is high"], "ValueList" : ["Urine chloride is below 25 in an alkalotic patient, so the kidneys are retaining volume, and so Aldo is high", "Urine chloride is above 25, so the kidneys are not retaining volume, and Aldo is unlikely high"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypokalemiaPlan"},
     "LowPotassiumExplainUrClOption" : { "ButtonLabelList" : ["Explain Ur-Cl"], "ValueList" : ["We look at Urine chloride because if a patient is alkalotic, then the kidneys will waste bicarb, as HCO3-, but this is an anion so to keep urine electrically neutral it wastes a cation, sodium, or NaHCO3. So, Na will be high in an alkalotic patient, so to assess volume status look at urine Cl. If the kidneys hold onto Na for retaining volume in response to high Aldo, then they also retain an anion Cl-. So urine Cl- tells us how much Na is being wasted for volume management independant of how much Na is being wasted for acid/base management"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypokalemiaPlan"},
     "LowPotassiumCausesDiarrheaOption" : { "ButtonLabelList" : ["Diarrhea"], "ValueList" : ["diarrhea"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypokalemiaPlan"},
@@ -2264,26 +2477,23 @@ var g_AllOptionsDeclaration = {
     "HighPotassiumShowKOption" : { "ButtonLabelList" : ["Show K"], "ValueList" : ["Recent serum potassium = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
     "HighPotassiumShowEKGOption" : { "ButtonLabelList" : ["EKG Normal", "EKG Peaked"], "ValueList" : ["The EKG does not show signs of hyperkalemia", "The EKG shows peaked T-waves"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
     "HighPotassiumShowTTKGOption" : { "ButtonLabelList" : ["Show TTKG"], "ValueList" : ["Urine Trans-tubular Potassium Gradient is "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
-    "HighPotassiumTTKGFormulaOption" : { "ButtonLabelList" : ["TTKG Formula"], "ValueList" : ["Urine Trans-tubular Potassium Gradient is (urine-K / Serum-K) / (urine-Osm / serum-Osm)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
     "HighPotassiumExplainLowTTKGOption" : { "ButtonLabelList" : ["ExplainLowTTKG", "ExplainHighTTKG"], "ValueList" : ["TTKG is below 10, so the kidneys are not compensating and this may be nephrogenic", "TTKG is above 10, then the kidneys are compensating and this is less likely nephrogenic"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
+    "HighPotassiumShowFEKOption" : { "ButtonLabelList" : ["Show FEK"], "ValueList" : ["Fractional Excretion Potassium = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
+    "HighPotassiumExplainFEKGOption" : { "ButtonLabelList" : ["Explain FEK"], "ValueList" : ["Fractional Excretion of Potassium below 6 percent in hyperkalemic patients suggests renal etiology (such as hypoAldo)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
 
     "HighPotassiumEtiologyRTA4Option" : { "ButtonLabelList" : ["RTA 4"], "ValueList" : ["RTA type 4 (hypo-Aldo)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
     "HighPotassiumEtiologySeizuresOption" : { "ButtonLabelList" : ["Seizures"], "ValueList" : ["seizures"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
     "HighPotassiumEtiologyTumorLysisOption" : { "ButtonLabelList" : ["Tumor Lysis"], "ValueList" : ["Tumor Lysis"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
     "HighPotassiumEtiologySaltSubstituteOption" : { "ButtonLabelList" : ["Salt-substitute"], "ValueList" : ["Salt-substitute (this is often Potassium Chloride)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
     "HighPotassiumEtiologyDigoxinOption" : { "ButtonLabelList" : ["Digoxin"], "ValueList" : ["Digoxin (inhibits Na/K-ATPase so leaves K outside the cell)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
-
     "HighPotassiumCheckEKGOption" : { "ButtonLabelList" : ["Check EKG"], "ValueList" : ["Check EKG"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
     "HighPotassiumCheckULytesOption" : { "ButtonLabelList" : ["Check ULytes"], "ValueList" : ["Check urine K and Osm and serum Osm to compute KKTG"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
-
     "HighPotassiumCaIVOption" : { "ButtonLabelList" : ["Ca IV"], "ValueList" : ["Calcium Gluconate 2g once"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
-    "HighPotassiumBinderResinOption" : { "ButtonLabelList" : ["Zirconium", "Kayexalate", "Patiromer"], "ValueList" : ["Zirconium cyclosilicate (Lokelma) 100g PO BID. This removes potassium from the body, and takes effect in 1-6 hrs", "Sodium polystyrene sulfonate (Kayexalate). This removes potassium from the body, but is slow to take effect", "Patiromer (Veltassa) 16.8 g/day. This removes potassium from the body"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
+    "HighPotassiumBinderResinOption" : { "ButtonLabelList" : ["Zirconium", "Kayexalate", "Patiromer"], "ValueList" : ["Zirconium cyclosilicate (Lokelma) 10g PO BID. This removes potassium from the body, and takes effect in 1-6 hrs", "Sodium polystyrene sulfonate (Kayexalate). This removes potassium from the body, but is slow to take effect", "Patiromer (Veltassa) 16.8 g/day. This removes potassium from the body"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
     "HighPotassiumInsulinD50WOption" : { "ButtonLabelList" : ["Insulin/D50W", "Insulin/D10W"], "ValueList" : ["50mL D50W with 10u Regular Insulin, then follow with D10W at 70 mL/hr for the next several hours. This will only shift potassium intracellularly", "50mL D10W 250mL bolus, with 10u Regular Insulin, then follow with D10W 50mL/hr for 4 hours for the next several hours. This will only shift potassium intracellularly"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
     "HighPotassiumFurosemideOption" : { "ButtonLabelList" : ["Furosemide"], "ValueList" : ["Furosemide 40mg IV once"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
     "HighPotassiumBicarbonateOption" : { "ButtonLabelList" : ["Bicarbonate IV", "Bicarbonate PO"], "ValueList" : ["Sodium Bicarbonate IV at 100mL/hr- shift potassium into cells", "Sodium Bicarbonate 650mg PO TID - shift potassium into cells"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
     "HighPotassiumAlbuterolOption" : { "ButtonLabelList" : ["Albuterol"], "ValueList" : ["Albuterol - shift potassium into cells but at a very high dose. 10-20mg in 4mL solution (a typical asthma dose is 2.5mg)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HyperkalemiaPlan"},
-
-
 
 
     ///////////////////////////////////////////////////////////
@@ -2291,11 +2501,9 @@ var g_AllOptionsDeclaration = {
     ///////////////////////////////////////////////////////////
     "HighNaExplainOption" : { "ButtonLabelList" : ["Explain"], "ValueList" : ["Hypernatremia is a deficiency of free water, not an excess of sodium, so the serum is over-concentrated"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERnatremiaPlan"},
     "HighNaShowNaOption" : { "ButtonLabelList" : ["Show Na"], "ValueList" : ["Current sodium = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERnatremiaPlan"},
-    "HighNaShowUOsmOption" : { "ButtonLabelList" : ["Show UOsm"], "ValueList" : ["Urine osmolality=xxx"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERnatremiaPlan"},
-    "HighNaExplainUOsmOption" : { "ButtonLabelList" : ["Explain Low UOsm", "Explain High UOsm"], "ValueList" : ["Urine Osm is a biomarker for ADH. If urine Osm is below 800, then this is inappropriately low, and loss of free water is due to renal wasting (DI or Osmotic diuresis)", "Urine Osm is a biomarker for ADH. If urine Osm is above 800, then this is appropriate, so loss of free water is extra-renal (diarrhea or water deprivation)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERnatremiaPlan"},
-    "HighNaFreeWaterDeficitOption" : { "ButtonLabelList" : ["Water Deficit"], "ValueList" : ["Free Water Deficit is TBW * ((Serum-Na / 140) - 1),   where TBW is 0.5-0.6 x standing weight"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERnatremiaPlan"},
-    "HighNaFreewaterClearanceOption" : { "ButtonLabelList" : ["Water Clearance"], "ValueList" : ["Free water clearance is 24hr-Urine-Volume * (1 - ((Urine-Na + Urine-K) / (Serum-Na))"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERnatremiaPlan"},
-    "HighNaExplainWaterClearanceOption" : { "ButtonLabelList" : ["Explain Clearance"], "ValueList" : ["If Free water clearance is negative then the patient is retaining free water and Na will drop, and if it is positive then the patient is wasting free water and Na will rise."], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERnatremiaPlan"},
+    "HighNaFreeWaterDeficitOption" : { "ButtonLabelList" : ["Water Deficit"], "ValueList" : ["Free Water Deficit is "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERnatremiaPlan"},
+    "HighNaShowUrineOsmOption" : { "ButtonLabelList" : ["Show U-Osm"], "ValueList" : ["Current urine Osm = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERnatremiaPlan"},
+    "HighNaShowUrineNaOption" : { "ButtonLabelList" : ["Show U-Na"], "ValueList" : ["Current urine sodium = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERnatremiaPlan"},
     "HighNaCausesDiarreaOption" : { "ButtonLabelList" : ["Diarrea"], "ValueList" : ["Osmotic diarrea (loses free water)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERnatremiaPlan"},
     "HighNaCausesTPNOption" : { "ButtonLabelList" : ["TPN"], "ValueList" : ["Osmotic diuresis (TPN)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERnatremiaPlan"},
     "HighNaCausesBurnsOption" : { "ButtonLabelList" : ["Burns"], "ValueList" : ["Water loss (burns)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERnatremiaPlan"},
@@ -2306,6 +2514,7 @@ var g_AllOptionsDeclaration = {
     "HighNaGetUOsmOption" : { "ButtonLabelList" : ["Get UOsm"], "ValueList" : ["Measure Urine osmolality"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERnatremiaPlan"},
     "HighNaGetULytesOption" : { "ButtonLabelList" : ["Get ULytes"], "ValueList" : ["Measure Urine Na and K"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERnatremiaPlan"},
     "HighNaGiveD5WOption" : { "ButtonLabelList" : ["Give D5W"], "ValueList" : ["IV Free Water - D5W at 75 mL/hr for a total of xxx mL"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERnatremiaPlan"},
+    "HighNaTubeFeedFreeWaterOption" : { "ButtonLabelList" : ["TF Water"], "ValueList" : ["Increase Free Water with tube feeds to xxxx mL every xxx hours"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERnatremiaPlan"},
     "HighNaDDAVPOption" : { "ButtonLabelList" : ["DDAVP"], "ValueList" : ["If this is due to DI (serum Na is high with Polyuria) then consider DDAVP 0.5mcg (Desmopressin, an ADH/Vasopressin analog)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERnatremiaPlan"},
 
 
@@ -2319,16 +2528,20 @@ var g_AllOptionsDeclaration = {
     "LowMgRepleteOption" : { "ButtonLabelList" : ["Replete"], "ValueList" : ["Monitor and replete"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypomagnesemiaPlan"},
 
 
-
     ///////////////////////////////////////////////////////////
     // Low Phos
     ///////////////////////////////////////////////////////////
     "LowPhosShowPhosOption" : { "ButtonLabelList" : ["Show Phos"], "ValueList" : ["Phos = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoPhosPlan"},
     "LowPhosShowCalciumOption" : { "ButtonLabelList" : ["Show Ca"], "ValueList" : ["Ca = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoPhosPlan"},
-    "LowPhosCheckUrineOption" : { "ButtonLabelList" : ["Check Urine"], "ValueList" : ["Check urine Cr and Calcium"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoPhosPlan"},
+    "LowPhosShowPTHOption" : { "ButtonLabelList" : ["Show PTH"], "ValueList" : ["PTH = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoPhosPlan"},
+    "LowPhosCheckUrineOption" : { "ButtonLabelList" : ["Check Urine"], "ValueList" : ["Check urine Phos and Cr"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoPhosPlan"},
+    "LowPhosCheckPTHOption" : { "ButtonLabelList" : ["Check PTH"], "ValueList" : ["Check PTH"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoPhosPlan"},
+    "LowPhosShowFEPhosOption" : { "ButtonLabelList" : ["Show FE-Phos"], "ValueList" : ["Fractional Excretion Phosphorus = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoPhosPlan"},
+    "LowPhosExplainFEPhosOption" : { "ButtonLabelList" : ["Explain FE-Phos"], "ValueList" : ["Fractional Excretion of Phosphorus over 20 percent in hypophosphatemic patients suggests renal etiology"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoPhosPlan"},
+    "LowPhosTreatIVOption" : { "ButtonLabelList" : ["IV Phos"], "ValueList" : ["NaPhos 12mmol x2 doses"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoPhosPlan"},
+    "LowPhosTreatPOOption" : { "ButtonLabelList" : ["PO Phos"], "ValueList" : ["PhosNak 1 tab PO BID"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoPhosPlan"},
     "LowPhosRepleteOption" : { "ButtonLabelList" : ["Replete"], "ValueList" : ["Monitor and replete"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoPhosPlan"},
     "LowPhosFixCalOption" : { "ButtonLabelList" : ["Fix Ca"], "ValueList" : ["Treat elevated Calcium. Do not replete Phos because Phos is low due to chelation with Calcium"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoPhosPlan"},
-
 
 
     ///////////////////////////////////////////////////////////
@@ -2336,11 +2549,16 @@ var g_AllOptionsDeclaration = {
     ///////////////////////////////////////////////////////////
     "LowCalciumShowCaOption" : { "ButtonLabelList" : ["Show Ca"], "ValueList" : ["Ca = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoCalcemiaPlan"},
     "LowCalciumShowiCalOption" : { "ButtonLabelList" : ["Show iCal"], "ValueList" : ["ionized Ca = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoCalcemiaPlan"},
+    "LowCalciumShowVitDOption" : { "ButtonLabelList" : ["Show VitD"], "ValueList" : ["VitD = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoCalcemiaPlan"},
+    "LowCalciumShowFECaOption" : { "ButtonLabelList" : ["Show FE-Ca"], "ValueList" : ["Fractional Excretion Calcium = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoCalcemiaPlan"},
+    "LowCalciumExplainFECaOption" : { "ButtonLabelList" : ["Explain FE-Ca"], "ValueList" : ["Fractional Excretion of Calcium over 1 percent in hypocalcemic patients suggests renal etiology (such as Familial Hypocalciuric Hypercalcaemia)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoCalcemiaPlan"},
+
     "LowCalciumCheckiCalOption" : { "ButtonLabelList" : ["Check iCal"], "ValueList" : ["Check ionized Calcium"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoCalcemiaPlan"},
     "LowCalciumCheckVitaminOption" : { "ButtonLabelList" : ["Check VitD"], "ValueList" : ["Check Vitamin D Level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoCalcemiaPlan"},
     "LowCalciumCheckPTHOption" : { "ButtonLabelList" : ["Check PTH"], "ValueList" : ["Check PTH"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoCalcemiaPlan"},
     "LowCalciumCheckUrineOption" : { "ButtonLabelList" : ["Check Urine"], "ValueList" : ["Check urine Cr and Calcium"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoCalcemiaPlan"},
-    "LowCalciumRepleteOption" : { "ButtonLabelList" : ["Replete"], "ValueList" : ["Monitor and replete"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoCalcemiaPlan"},
+    "LowCalciumReplaceCaOption" : { "ButtonLabelList" : ["Give Ca", "Give Ca"], "ValueList" : ["IV Calcium Gluconate", "PO Calcium"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoCalcemiaPlan"},
+    "LowCalciumGiveVitDOption" : { "ButtonLabelList" : ["Give VitD"], "ValueList" : ["Cholecalciferol 2000 IU PO daily"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypoCalcemiaPlan"},
 
 
 
@@ -2350,9 +2568,13 @@ var g_AllOptionsDeclaration = {
     ///////////////////////////////////////////////////////////
     "HighCalciumShowCaOption" : { "ButtonLabelList" : ["Show Ca"], "ValueList" : ["Ca = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERCalcemiaPlan"},
     "HighCalciumShowiCalOption" : { "ButtonLabelList" : ["Show iCal"], "ValueList" : ["ionized Ca = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERCalcemiaPlan"},
-    "HighCalciumShowPTHOption" : { "ButtonLabelList" : ["Show PTH"], "ValueList" : ["PTH = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERCalcemiaPlan"},
+    "HighCalciumShowVitDOption" : { "ButtonLabelList" : ["Show VitD"], "ValueList" : ["VitD = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERCalcemiaPlan"},
+    "HighCalciumShow125VitDOption" : { "ButtonLabelList" : ["Show 1,25VitD"], "ValueList" : ["1,25 VitD = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERCalcemiaPlan"},
+    "HighCalciumShowFECaOption" : { "ButtonLabelList" : ["Show FE-Ca"], "ValueList" : ["Fractional Excretion Calcium = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERCalcemiaPlan"},
+    "HighCalciumExplainFECaOption" : { "ButtonLabelList" : ["Explain FE-Ca"], "ValueList" : ["Fractional Excretion of Calcium under 1 percent in hypercalcemic patients suggests renal etiology"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERCalcemiaPlan"},
     "HighCalciumCheckiCalOption" : { "ButtonLabelList" : ["Check iCal"], "ValueList" : ["Check ionized Calcium"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERCalcemiaPlan"},
     "HighCalciumCheckVitaminOption" : { "ButtonLabelList" : ["Check VitD"], "ValueList" : ["Check Vitamin D Level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERCalcemiaPlan"},
+    "HighCalciumCheck125VitaminOption" : { "ButtonLabelList" : ["Check 1,25 VitD"], "ValueList" : ["Check 1,25 Vitamin D Level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERCalcemiaPlan"},
     "HighCalciumCheckPTHrPOption" : { "ButtonLabelList" : ["Check PTHrP"], "ValueList" : ["Check PTHrP"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERCalcemiaPlan"},
     "HighCalciumCheckPTHOption" : { "ButtonLabelList" : ["Check PTH"], "ValueList" : ["Check PTH"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERCalcemiaPlan"},
     "HighCalciumIVFluidsOption" : { "ButtonLabelList" : ["IV Fluids"], "ValueList" : ["IV Fluids - NS @200mL/hr"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HypERCalcemiaPlan"},
@@ -2594,35 +2816,63 @@ var g_AllOptionsDeclaration = {
 
 
     // EncephalopathyPlan
-    "AMS_ACUTE_MODIFIER" : { "ButtonLabelList" : ["Acute&Chronic", "Acute", "Chronic"], "ValueList" : ["Acute on Chronic ", "Acute ", "Chronic "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_ACUTE_MODIFIER" : { "ButtonLabelList" : ["AcuteOnChronic", "Acute", "Chronic"], "ValueList" : ["Acute on Chronic ", "Acute ", "Chronic "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+
     "AMS_CHECK_HEAD_CT_OPTION" : { "ButtonLabelList" : ["Head CT"], "ValueList" : ["Head CT"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_CHECK_EEG_OPTION" : { "ButtonLabelList" : ["EEG"], "ValueList" : ["Get EEG to rule out seizures"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_CHECK_Prolactin_OPTION" : { "ButtonLabelList" : ["Prolactin"], "ValueList" : ["Check Prolactin to rule out seizures"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_INTOXICATION_CHECK_EtOH_OPTION" : { "ButtonLabelList" : ["EtOH"], "ValueList" : ["Check serum EtOH and serum volatile screen"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_INTOXICATION_CHECK_UDS_OPTION" : { "ButtonLabelList" : ["UDS"], "ValueList" : ["Check urine drug screen"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_INTOXICATION_CHECK_Salicylate_OPTION" : { "ButtonLabelList" : ["Asa"], "ValueList" : ["Check salicylate level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_INTOXICATION_CHECK_acetaminophen_OPTION" : { "ButtonLabelList" : ["Apap"], "ValueList" : ["Check acetaminophen level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_INTOXICATION_CHECK_Serum_OSM_OPTION" : { "ButtonLabelList" : ["S-Osm"], "ValueList" : ["Check serum Osmolality"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_INTOXICATION_CHECK_Acidosis_OPTION" : { "ButtonLabelList" : ["Acidosis"], "ValueList" : ["Check CMP, as many intoxications may cause an acidosis"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_CHECK_Blood_CX_OPTION" : { "ButtonLabelList" : ["Blood Cx"], "ValueList" : ["Culture blood"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_CHECK_Urine_CX_OPTION" : { "ButtonLabelList" : ["Urine Cx"], "ValueList" : ["Culture urine"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_CHECK_EEG_OPTION" : { "ButtonLabelList" : ["EEG"], "ValueList" : ["EEG"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_CHECK_Prolactin_OPTION" : { "ButtonLabelList" : ["Prolactin"], "ValueList" : ["Prolactin (rule out seizures)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+
+    "AMS_INTOXICATION_CHECK_EtOH_OPTION" : { "ButtonLabelList" : ["EtOH"], "ValueList" : ["serum EtOH and serum volatile screen"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_INTOXICATION_CHECK_UDS_OPTION" : { "ButtonLabelList" : ["UDS"], "ValueList" : ["urine drug screen"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_INTOXICATION_CHECK_Serum_OSM_OPTION" : { "ButtonLabelList" : ["S-Osm"], "ValueList" : ["serum Osmolality"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_INTOXICATION_CHECK_acetaminophen_OPTION" : { "ButtonLabelList" : ["Apap"], "ValueList" : ["acetaminophen level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_INTOXICATION_CHECK_LEAD" : { "ButtonLabelList" : ["Lead"], "ValueList" : ["serum lead level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_INTOXICATION_CHECK_HEAVY_METALS" : { "ButtonLabelList" : ["Heavy Metals"], "ValueList" : ["serum Heavy Metals level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_INTOXICATION_CHECK_Salicylate_OPTION" : { "ButtonLabelList" : ["Asa"], "ValueList" : ["salicylate level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_CHECK_VMG_OPTION" : { "ButtonLabelList" : ["VBG"], "ValueList" : ["VBG"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_CHECK_CO_OPTION" : { "ButtonLabelList" : ["CO"], "ValueList" : ["Carboxyhemoglobin level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+
+
+    "AMS_CHECK_Blood_CX_OPTION" : { "ButtonLabelList" : ["Blood Cx"], "ValueList" : ["blood cultures"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_CHECK_Urine_CX_OPTION" : { "ButtonLabelList" : ["Urine Cx"], "ValueList" : ["Urinalysis and Urine Culture"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
     "AMS_CHECK_CXR_OPTION" : { "ButtonLabelList" : ["CXR"], "ValueList" : ["Chest XRay"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_CHECK_Glucose_OPTION" : { "ButtonLabelList" : ["Glucose"], "ValueList" : ["Check Glucose"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_CHECK_A1c_OPTION" : { "ButtonLabelList" : ["A1c"], "ValueList" : ["Check A1c, a low A1c may suggest past hypoglycemia"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_CHECK_CMP_OPTION" : { "ButtonLabelList" : ["CMP"], "ValueList" : ["Check serum Osmolality"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_CHECK_SERUM_OSM_OPTION" : { "ButtonLabelList" : ["Serum Osm"], "ValueList" : ["Check CMP"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_CHECK_NH3_OPTION" : { "ButtonLabelList" : ["NH3"], "ValueList" : ["Check NH3 level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_CHECK_CPK_OPTION" : { "ButtonLabelList" : ["CPK"], "ValueList" : ["Check CPK, as encephalopathic patients are at risk for rhabdomyolysis"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_CHECK_VMG_OPTION" : { "ButtonLabelList" : ["VBG"], "ValueList" : ["Check VBG"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_CHECK_CO_OPTION" : { "ButtonLabelList" : ["CO"], "ValueList" : ["Check Carboxyhemoglobin level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_CHECK_TSH_OPTION" : { "ButtonLabelList" : ["TSH"], "ValueList" : ["Check TSH"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_CHECK_Gabapentin_OPTION" : { "ButtonLabelList" : ["Gabapentin"], "ValueList" : ["Check serum Gabapentin level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_CHECK_Lithium_OPTION" : { "ButtonLabelList" : ["Lithium"], "ValueList" : ["Check Lithium level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_CHECK_Digoxin_OPTION" : { "ButtonLabelList" : ["Digoxin"], "ValueList" : ["Check Digoxin level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_CHECK_Amitriptylene_OPTION" : { "ButtonLabelList" : ["Amitriptylene"], "ValueList" : ["Check Amitriptylene level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_CHECK_Thiamine_OPTION" : { "ButtonLabelList" : ["Thiamine"], "ValueList" : ["Thiamine 100mg once now stat and daily"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_CHECK_Lorazepam_OPTION" : { "ButtonLabelList" : ["Lorazepam"], "ValueList" : ["Lorazepam 1mg IV PRN agitation"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
-    "AMS_CHECK_Haloperidol_OPTION" : { "ButtonLabelList" : ["Haloperidol"], "ValueList" : ["Haloperidol 4mg IV PRN agitation"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_CHECK_RPR_OPTION" : { "ButtonLabelList" : ["RPR"], "ValueList" : ["Syphilis screen"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+
+
+    "AMS_CHECK_Glucose_OPTION" : { "ButtonLabelList" : ["Glucose"], "ValueList" : ["Glucose"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_CHECK_A1c_OPTION" : { "ButtonLabelList" : ["A1c"], "ValueList" : ["A1c"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_METABOLIC_CHECK_B12" : { "ButtonLabelList" : ["B12"], "ValueList" : ["B12 level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_METABOLIC_CHECK_Thiamine" : { "ButtonLabelList" : ["Thiamine"], "ValueList" : ["Thiamine level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_CHECK_CPK_OPTION" : { "ButtonLabelList" : ["CPK"], "ValueList" : ["CPK"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+
+
+    "AMS_CHECK_TSH_OPTION" : { "ButtonLabelList" : ["TSH"], "ValueList" : ["TSH"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+
+    "AMS_CHECK_Gabapentin_OPTION" : { "ButtonLabelList" : ["Gabapentin"], "ValueList" : ["Gabapentin level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_CHECK_Lithium_OPTION" : { "ButtonLabelList" : ["Lithium"], "ValueList" : ["Lithium level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_CHECK_Digoxin_OPTION" : { "ButtonLabelList" : ["Digoxin"], "ValueList" : ["Digoxin level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_CHECK_Amitriptylene_OPTION" : { "ButtonLabelList" : ["Amitriptylene"], "ValueList" : ["Amitriptylene level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+
+    // Hold sedating meds
+    "AMS_HOLD_OPIOIDS_OPTION" : { "ButtonLabelList" : ["Opioids"], "ValueList" : ["Opioids"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_HOLD_BENZOS_OPTION" : { "ButtonLabelList" : ["Benzos"], "ValueList" : ["Benzodiazepines"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_HOLD_MUSCLE_RELAXANTS_OPTION" : { "ButtonLabelList" : ["Muscle Relaxers"], "ValueList" : ["Muscle Relaxers"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_HOLD_ANTIHISTAMINES_OPTION" : { "ButtonLabelList" : ["Hydroxyzine"], "ValueList" : ["Hydroxyzine"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_HOLD_PROMETHAZINE_OPTION" : { "ButtonLabelList" : ["Promethazine"], "ValueList" : ["Promethazine"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_HOLD_GABAPENTIN_OPTION" : { "ButtonLabelList" : ["Gabapentin"], "ValueList" : ["Gabapentin"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+
+    "AMS_CHECK_SWALLOW_STUDY_OPTION" : { "ButtonLabelList" : ["Swallow"], "ValueList" : ["Consult Speech therapy for Swallow eval"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_Treat_Thiamine_OPTION" : { "ButtonLabelList" : ["Thiamine"], "ValueList" : ["Thiamine 100mg once now stat and daily"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_Treat_Memantine_OPTION" : { "ButtonLabelList" : ["Memantine"], "ValueList" : ["Memantine 5mg daily"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_Treat_Donepezil_OPTION" : { "ButtonLabelList" : ["Donepezil"], "ValueList" : ["Donepezil 5mg QHS"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_Treat_Lorazepam_OPTION" : { "ButtonLabelList" : ["Lorazepam"], "ValueList" : ["Lorazepam 1mg IV PRN agitation"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+    "AMS_Treat_Haloperidol_OPTION" : { "ButtonLabelList" : ["Haloperidol"], "ValueList" : ["Haloperidol 4mg IV PRN agitation"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+
+
+    "AMS_SLEEP_MED_OPTION" : { "ButtonLabelList" : ["Trazodone"], "ValueList" : ["Trazodone 50mg PO QHS"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "EncephalopathyPlan"},
+
+
+
 
 
     // DysphagiaPlan
@@ -2632,15 +2882,20 @@ var g_AllOptionsDeclaration = {
     "DYSPHAGIA_Tube_Feeds_OPTION" : { "ButtonLabelList" : ["Tube Feeds"], "ValueList" : ["Continue tube feeds"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "DysphagiaPlan"},
 
 
-    // GERDPlan
+    ///////////////////////////////////////////////////////////
+    // GERD
+    ///////////////////////////////////////////////////////////
     "OPTION_HOME_PPI_NAME" : { "ButtonLabelList" : ["Home PPI"], "ValueList" : ["Continue home PPI"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GERDPlan"},
 
 
-    // MBDPlan
-    "MBD_OPTION_SHOW_Ca" : { "ButtonLabelList" : ["Ca"], "ValueList" : ["Ca = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MBDPlan"},
-    "MBD_OPTION_SHOW_Phos" : { "ButtonLabelList" : ["Phos"], "ValueList" : ["Phos = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MBDPlan"},
-    "MBD_OPTION_SHOW_PTH" : { "ButtonLabelList" : ["PTH"], "ValueList" : ["PTH = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MBDPlan"},
-    "MBD_OPTION_SHOW_Mod_Ca" : { "ButtonLabelList" : ["Mod-Ca"], "ValueList" : ["adjusted Ca = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MBDPlan"},
+    ///////////////////////////////////////////////////////////
+    // MBD
+    ///////////////////////////////////////////////////////////
+    "MBDHyperphosModifier" : { "ButtonLabelList" : ["HyperPhos"], "ValueList" : ["Hyperphosphatemia due to Kidney Disease"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MBDPlan"},
+    "MBD_OPTION_SHOW_Ca" : { "ButtonLabelList" : ["Show Ca"], "ValueList" : ["Ca = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MBDPlan"},
+    "MBD_OPTION_SHOW_Phos" : { "ButtonLabelList" : ["Show Phos"], "ValueList" : ["Phos = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MBDPlan"},
+    "MBD_OPTION_SHOW_PTH" : { "ButtonLabelList" : ["Show PTH"], "ValueList" : ["PTH = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MBDPlan"},
+    "MBD_OPTION_SHOW_ICal" : { "ButtonLabelList" : ["Show iCa"], "ValueList" : ["adjusted Ca = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MBDPlan"},
     "MBD_OPTION_TEAT_BINDER" : { "ButtonLabelList" : ["Sevelamer 800", "Sevelamer 1600", "Sevelamer 2400"], "ValueList" : ["Sevelamer 800mg PO TID with meals", "Sevelamer 1600mg PO TID with meals", "Sevelamer 2400mg PO TID with meals"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MBDPlan"},
     "MBD_OPTION_TEAT_CALCITRIOL" : { "ButtonLabelList" : ["Calcitiol 0.25", "Calcitiol 0.5", "Calcitiol 0.75", "Calcitiol 1.0" ], "ValueList" : ["Calcitiol 0.25mg PO daily", "Calcitiol 0.5mg PO daily", "Calcitiol 0.75mg PO daily", "Calcitiol 1.0mg PO daily" ], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MBDPlan"},
 
@@ -2653,13 +2908,14 @@ var g_AllOptionsDeclaration = {
     "CONTRAST_PPX_NAC_OPTION" : { "ButtonLabelList" : ["NAC"], "ValueList" : ["N-acetylcysteine 600mg PO Q12hrs for 4 doses, first dose before surgery"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "IVContrastPlan"},
 
     // HEPATITIS
-    "HepatitisAcuteChronicOption" : { "ButtonLabelList" : ["Acute&Chronic", "Acute", "Chronic"], "ValueList" : ["Acute on Chronic", "Acute", "Chronic"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HepatitisPlan"},
+    "HepatitisAcuteChronicOption" : { "ButtonLabelList" : ["AcuteOnChronic", "Acute", "Chronic"], "ValueList" : ["Acute on Chronic", "Acute", "Chronic"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HepatitisPlan"},
     "HepatitisViralOption" : { "ButtonLabelList" : ["Viral"], "ValueList" : ["Viral"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HepatitisPlan"},
     "HepatitisAlcoholOption" : { "ButtonLabelList" : ["Alcohol"], "ValueList" : ["Alcohol"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HepatitisPlan"},
     // Status
-    "HEPATITIS_ALTAST_OPTION" : { "ButtonLabelList" : ["Show ALT/AST"], "ValueList" : ["AST/ALT ratio is xxx"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HepatitisPlan"},
+    "HEPATITIS_ALTAST_OPTION" : { "ButtonLabelList" : ["Show ALT/AST"], "ValueList" : ["AST/ALT ratio is "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HepatitisPlan"},
     "HEPATITIS_Trend_OPTION" : { "ButtonLabelList" : ["Trend ALT"], "ValueList" : ["ALT = xxxxx"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HepatitisPlan"},
-    "HEPATITIS_Maddrey_OPTION" : { "ButtonLabelList" : ["Maddrey"], "ValueList" : ["Maddrey Score = xxx"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HepatitisPlan"},
+    "HEPATITIS_Maddrey_OPTION" : { "ButtonLabelList" : ["Show Maddrey"], "ValueList" : ["Maddrey Score = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HepatitisPlan"},
+    "HEPATITIS_Lille_OPTION" : { "ButtonLabelList" : ["Show Lille"], "ValueList" : ["Lille Score = "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HepatitisPlan"},
     // Diff
     "HEPATITIS_Diff_Viral_OPTION" : { "ButtonLabelList" : ["Viral"], "ValueList" : ["Viral"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HepatitisPlan"},
     "HEPATITIS_Dif_Toxicity_OPTION" : { "ButtonLabelList" : ["Tox"], "ValueList" : ["Drug-induced"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HepatitisPlan"},
@@ -2680,8 +2936,10 @@ var g_AllOptionsDeclaration = {
 
 
 
+    ///////////////////////////////////////////////////////////
     // PANCREATITIS
-    "PancreatitisAcuteChronicOption" : { "ButtonLabelList" : ["Acute&Chronic", "Acute", "Chronic"], "ValueList" : ["Acute on Chronic", "Acute", "Chronic"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PancPlan"},
+    ///////////////////////////////////////////////////////////
+    "PancreatitisAcuteChronicOption" : { "ButtonLabelList" : ["AcuteOnChronic", "Acute", "Chronic"], "ValueList" : ["Acute on Chronic", "Acute", "Chronic"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PancPlan"},
     // Criteria
     "PANCREATITIS_Pain_OPTION" : { "ButtonLabelList" : ["Pain"], "ValueList" : ["abdominal pain"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PancPlan"},
     "PANCREATITIS_Imaging_OPTION" : { "ButtonLabelList" : ["Imaging"], "ValueList" : ["pancreatic inflammation on imaging"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PancPlan"},
@@ -2704,7 +2962,87 @@ var g_AllOptionsDeclaration = {
     "PANCREATITIS_Diet_OPTION" : { "ButtonLabelList" : ["NPO", "Clears"], "ValueList" : ["NPO", "Clear liquid diet"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PancPlan"},
     "PANCREATITIS_Pancrealipase_OPTION" : { "ButtonLabelList" : ["Pancrealipase"], "ValueList" : ["Pancrealipase with all meals when eating"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PancPlan"},
 
+
+
+
+    ///////////////////////////////////////////////////////////
+    // GI SYMPTOMS
+    ///////////////////////////////////////////////////////////
+    // Problem Labels
+    "GISymptomTypeOption" : { "ButtonLabelList" : ["Nausea", "Diarrhea", "Abdominal Pain"], "ValueList" : ["Nausea and Vomiting", "Diarrhea", "Abdominal Pain"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+
+    // History and Description
+    "GISymptoms_EmesisBilious_OPTION" : { "ButtonLabelList" : ["NonBilious", "Bilious"], "ValueList" : ["non-bilious", "bilious"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_EmesisBloodyOption" : { "ButtonLabelList" : ["NonBloody", "Bloody", "PureBlood"], "ValueList" : ["non-bloody", "bloody", "pure blood"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_DiarrheaBloodyOption" : { "ButtonLabelList" : ["NonBloody", "Bloody", "PureBlood"], "ValueList" : ["non-bloody", "bloody", "pure blood"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_Melena_OPTION" : { "ButtonLabelList" : ["No Melena", "Melena"], "ValueList" : ["non-melanic", "melanic"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+
+
+    "GISymptoms_StartTimeOption" : { "ButtonLabelList" : ["Started"], "ValueList" : ["Symptoms started xxxx"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_SxLocation_OPTION" : { "ButtonLabelList" : ["Location", "RUQ", "LUQ", "Epigastric", "ALL QUads"], "ValueList" : ["in all quadrants", "located in right upper quadrant", "located in left upper quadrant", "Epigastric", "in all quadrants"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_SxQuality_OPTION" : { "ButtonLabelList" : ["Sharp", "Dull"], "ValueList" : ["sharp", "dull"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_SxRadiate_OPTION" : { "ButtonLabelList" : ["RadiateBack", "RadiateGroin", "NonRadiate"], "ValueList" : ["radiating to back", "radiating to groin", "non-radiating"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_SxSevere_OPTION" : { "ButtonLabelList" : ["Severe"], "ValueList" : ["severe"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_SxConstant_OPTION" : { "ButtonLabelList" : ["Constant", "Periodic"], "ValueList" : ["constant", "periodic"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_SxUnique_OPTION" : { "ButtonLabelList" : ["Unique", "NonUnique"], "ValueList" : ["unique", "similar to past episodes"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_SxWithFood_OPTION" : { "ButtonLabelList" : ["WorseWithFood", "OKWithFood"], "ValueList" : ["worse with food", "not affected by eating"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_SxWithStool_OPTION" : { "ButtonLabelList" : ["BetterWithStool", "NoStoolEffect"], "ValueList" : ["better after stooling", "not affected by stooling"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+
+    // Workup
+    "GISymptoms_CheckLactate_Option" : { "ButtonLabelList" : ["Lactate"], "ValueList" : ["Lactate"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_CheckLipase_Option" : { "ButtonLabelList" : ["Lipase"], "ValueList" : ["Lipase"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_CheckCRP_Option" : { "ButtonLabelList" : ["CRP"], "ValueList" : ["CRP"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_CheckA1c_Option" : { "ButtonLabelList" : ["A1c"], "ValueList" : ["Hemoglobin A1c"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_CheckAcuteHep_Option" : { "ButtonLabelList" : ["Hepatitis"], "ValueList" : ["acute Hepatitis panel"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_CheckApap_Option" : { "ButtonLabelList" : ["Apap"], "ValueList" : ["acetaminophen level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_CheckAsa_Option" : { "ButtonLabelList" : ["Salicylate"], "ValueList" : ["salicylate level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_CheckHCG_Option" : { "ButtonLabelList" : ["BetaHCG"], "ValueList" : ["Beta-HCG"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_CheckCMV_Option" : { "ButtonLabelList" : ["CMV"], "ValueList" : ["serum CMV"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_CheckCA125_Option" : { "ButtonLabelList" : ["CA125"], "ValueList" : ["CA-125"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_CheckCEA_Option" : { "ButtonLabelList" : ["CEA"], "ValueList" : ["CEA"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_CheckCA19_Option" : { "ButtonLabelList" : ["CA19-9"], "ValueList" : ["CA19-9"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_CheckTTG_Option" : { "ButtonLabelList" : ["TTG"], "ValueList" : ["TTG"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_CheckUDS_Option" : { "ButtonLabelList" : ["UDS"], "ValueList" : ["Check urine drug screen (to rule out THC)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+
+    // Stool Workup
+    "GISymptoms_CheckGIPanel_Option" : { "ButtonLabelList" : ["GI Panel"], "ValueList" : ["GI Panel"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_CheckLactoferrin_Option" : { "ButtonLabelList" : ["Lactoferrin"], "ValueList" : ["Lactoferrin"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_CheckHPylori_Option" : { "ButtonLabelList" : ["H Pylori"], "ValueList" : ["H Pylori"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_CheckStoolCMV_Option" : { "ButtonLabelList" : ["Stool CMV"], "ValueList" : ["Stool CMV"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+
+    // Imaging
+    "GISymptoms_CheckCT_Option" : { "ButtonLabelList" : ["CT Abd/Pelvis"], "ValueList" : ["CT Abd/Pelvis with contrast"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_CheckCTAMesenteric_Option" : { "ButtonLabelList" : ["CTA Mesenteric"], "ValueList" : ["CTA Mesenteric arteries"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_CheckDopplerMesenteric_Option" : { "ButtonLabelList" : ["Doppler Mesenteric"], "ValueList" : ["Doppler Mesenteric"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+
+    // Antibiotics
+    "GISymptoms_PipTazoOption" : { "ButtonLabelList" : ["Pip/Tazo"], "ValueList" : ["Pip/Tazo 3.375g IV Q6h"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_CeftriaxoneOption" : { "ButtonLabelList" : ["Ceftriaxone"], "ValueList" : ["Ceftriaxone 2g IV daily"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_FlagylOption" : { "ButtonLabelList" : ["Metronidazole"], "ValueList" : ["Metronidazole 500mg q6h"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+
+    // Fluids
+    "GISymptoms_FluidBolusOption" : { "ButtonLabelList" : ["Bolus LR"], "ValueList" : ["Bolus 1L LR"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_MaintFluidOption" : { "ButtonLabelList" : ["IV Drip LR"], "ValueList" : ["IV LR at 125 mL/hr"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+
+    // Pain
+    "GISymptoms_MORPHINE_IR_OPTION" : { "ButtonLabelList" : ["PRN Morphine"], "ValueList" : ["Morphine IR 25mg PO Q4h PRN"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_Oxycodone_OPTION" : { "ButtonLabelList" : ["Oxycodone 5", "Oxycodone 10", "Oxycodone 15"], "ValueList" : ["Oxycodone 5mg PO Q4h PRN", "Oxycodone 10mg PO Q4h PRN", "Oxycodone 15mg PO Q4h PRN"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_Dilaudid_PO_OPTION" : { "ButtonLabelList" : ["Dilaudid 2 PO", "Dilaudid 4 PO"], "ValueList" : ["Hydromorphone 2mg PO Q2h PRN", "Hydromorphone 4mg PO Q2h PRN"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_Dilaudid_IV_OPTION" : { "ButtonLabelList" : ["Dilaudid 0.25", "Dilaudid 0.5", "Dilaudid 1.0", "Dilaudid 2.0"], "ValueList" : ["Hydromorphone 0.25mg IV PRN Q2h", "Hydromorphone 0.5mg IV PRN Q2h", "Hydromorphone 1mg IV PRN Q2h", "Hydromorphone 2mg IV PRN Q2h"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_PCA_OPTION" : { "ButtonLabelList" : ["PCA"], "ValueList" : ["Continue Hydromorphone PCA"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+
+    // Nausea
+    "GISymptoms_ONDANSETRON_PRN_OPTION" : { "ButtonLabelList" : ["PRN Zofran"], "ValueList" : ["Ondansetron 4mg IV Q4h PRN"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_ONDANSETRON_SCHEDULED_OPTION" : { "ButtonLabelList" : ["Sched Zofran"], "ValueList" : ["Ondansetron 8mg PO Q8h scheduled"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_Prochlorperazine_OPTION" : { "ButtonLabelList" : ["PRN Compazine"], "ValueList" : ["Prochlorperazine 5mg IV PRN"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_Phenergan_OPTION" : { "ButtonLabelList" : ["PRN Phenergan"], "ValueList" : ["Promethazine 25 mg PO PRN"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_Cyproheptadine_OPTION" : { "ButtonLabelList" : ["Cyproheptadine"], "ValueList" : ["Cyproheptadine 2mg Q6h"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+    "GISymptoms_Amitriptylene_OPTION" : { "ButtonLabelList" : ["Amitriptylene"], "ValueList" : ["Amitriptylene 25mg PO"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GISymptomsPlan"},
+
+
+    ///////////////////////////////////////////////////////////
     // MOOD DISORDER
+    ///////////////////////////////////////////////////////////
     "Mood_Disorder_DepressionOption" : { "ButtonLabelList" : ["Depression"], "ValueList" : ["Depression"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "DepressionPlan"},
     "Mood_Disorder_AnxietyOption" : { "ButtonLabelList" : ["Anxiety"], "ValueList" : ["Anxiety"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "DepressionPlan"},
     // DHM
@@ -2737,8 +3075,10 @@ var g_AllOptionsDeclaration = {
     "MOOD_DISORDER_START_SSRI_OPTION" : { "ButtonLabelList" : ["Start SSRI"], "ValueList" : ["Start Sertraline"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "DepressionPlan"},
     "MOOD_DISORDER_HOME_MEDS_OPTION" : { "ButtonLabelList" : ["Home Meds"], "ValueList" : ["Continue home medications"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "DepressionPlan"},
 
+    ///////////////////////////////////////////////////////////
     // GOUT
-    "GoutAcuteChronicOption" : { "ButtonLabelList" : ["Acute&Chronic", "Acute", "Chronic"], "ValueList" : ["Acute on Chronic", "Acute", "Chronic"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GoutPlan"},
+    ///////////////////////////////////////////////////////////
+    "GoutAcuteChronicOption" : { "ButtonLabelList" : ["AcuteOnChronic", "Acute", "Chronic"], "ValueList" : ["Acute on Chronic", "Acute", "Chronic"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GoutPlan"},
     // Status
     "GOUT_FLARING_OPTION" : { "ButtonLabelList" : ["Flaring"], "ValueList" : ["This is an acute flare"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GoutPlan"},
     "GOUT_LAST_FLARE_OPTION" : { "ButtonLabelList" : ["Last Flare"], "ValueList" : ["Last Gout flare was xxxxx"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GoutPlan"},
@@ -2752,7 +3092,10 @@ var g_AllOptionsDeclaration = {
     "GOUT_Febuxostat_OPTION" : { "ButtonLabelList" : ["Febuxostat"], "ValueList" : ["Consider Febuxostat if the patient cannot tolerate Allopurinol or Pegloticase if the patient has flares resistant to purine lowering"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GoutPlan"},
     "GOUT_SLOW_DIURETICS_OPTION" : { "ButtonLabelList" : ["Slow Diuretics"], "ValueList" : ["Decrease Diuretics"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "GoutPlan"},
 
+
+    ///////////////////////////////////////////////////////////
     // SYNCOPE
+    ///////////////////////////////////////////////////////////
     // Cardiogenic
     "SYNCOPE_Orthostatic_OPTION" : { "ButtonLabelList" : ["Orthostatic"], "ValueList" : ["Orthostatic BP was xxxxx supine and xxx standing"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
     "SYNCOPE_SHOW_EKG_OPTION" : { "ButtonLabelList" : ["EKG Normal"], "ValueList" : ["EKG shows no arrhythmias"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
@@ -2763,24 +3106,29 @@ var g_AllOptionsDeclaration = {
     "SYNCOPE_DIFFERENTIAL_Hematologic_OPTION" : { "ButtonLabelList" : ["Heme"], "ValueList" : ["hematologic"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
     "SYNCOPE_DIFFERENTIAL_Infectious_OPTION" : { "ButtonLabelList" : ["Infectious"], "ValueList" : ["infectious"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
     // Workup
-    "SYNCOPE_GET_EKG_OPTION" : { "ButtonLabelList" : ["Check EKG"], "ValueList" : ["Check EKG"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
-    "SYNCOPE_UDS_OPTION" : { "ButtonLabelList" : ["Get UDS"], "ValueList" : ["Get Urine Drug Screen"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
-    "SYNCOPE_Interrogate_ICD_OPTION" : { "ButtonLabelList" : ["Check ICD"], "ValueList" : ["Interrogate_ICD"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
+    "SYNCOPE_GET_EKG_OPTION" : { "ButtonLabelList" : ["Check EKG"], "ValueList" : ["EKG"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
+    "SYNCOPE_UDS_OPTION" : { "ButtonLabelList" : ["Get UDS"], "ValueList" : ["Urine Drug Screen"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
+    "SYNCOPE_Interrogate_ICD_OPTION" : { "ButtonLabelList" : ["Check ICD"], "ValueList" : ["Interrogate ICD"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
     "SYNCOPE_Telemetry_OPTION" : { "ButtonLabelList" : ["Tele"], "ValueList" : ["Monitor on telemetry"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
-    "SYNCOPE_EEG_OPTION" : { "ButtonLabelList" : ["EEG"], "ValueList" : ["Check EEG"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
-    "SYNCOPE_CT_HEAD_OPTION" : { "ButtonLabelList" : ["CT Head"], "ValueList" : ["Check CT Head"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
-    "SYNCOPE_BLOOD_CULTURES_OPTION" : { "ButtonLabelList" : ["Blood Cx"], "ValueList" : ["Culture blood"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
-    "SYNCOPE_PROCAL_OPTION" : { "ButtonLabelList" : ["Procal"], "ValueList" : ["Check Procalcitonin"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
+    "SYNCOPE_EEG_OPTION" : { "ButtonLabelList" : ["EEG"], "ValueList" : ["EEG"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
+    "SYNCOPE_CT_HEAD_OPTION" : { "ButtonLabelList" : ["CT Head"], "ValueList" : ["CT Head"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
+    "SYNCOPE_BLOOD_CULTURES_OPTION" : { "ButtonLabelList" : ["Blood Cx"], "ValueList" : ["blood cultures"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
+    "SYNCOPE_PROCAL_OPTION" : { "ButtonLabelList" : ["Procal"], "ValueList" : ["Procalcitonin"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
     // Treat
     "SYNCOPE_IV_FLUIDS_OPTION" : { "ButtonLabelList" : ["IV Drip NS"], "ValueList" : ["Continuous IV fluids, NS at 150mL/hr"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
     "SYNCOPE_HOLTER_OPTION" : { "ButtonLabelList" : ["Holter Monitor"], "ValueList" : ["Holter Monitor on discharge"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "SyncopePlan"},
 
+
+    ///////////////////////////////////////////////////////////
     // PRESSURE ULCER
+    ///////////////////////////////////////////////////////////
     "PressureUlcer_StageOption" : { "ButtonLabelList" : ["Stage I", "Stage II", "Stage III", "Stage IV"], "ValueList" : ["Stage I", "Stage II", "Stage III", "Stage IV"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PressureUlcersPlan"},
     // Treat
     "PRESSURE_ULCER_WOUND_CARE_OPTION" : { "ButtonLabelList" : ["Wound Care"], "ValueList" : ["Wound Care"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PressureUlcersPlan"},
 
+    ///////////////////////////////////////////////////////////
     // LEG FRACTURE
+    ///////////////////////////////////////////////////////////
     "LegFracture_SideMODIFIER" : { "ButtonLabelList" : ["Left", "Right"], "ValueList" : ["Left", "Right"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "LegFracturePlan"},
     "LegFracture_JointMODIFIER" : { "ButtonLabelList" : ["Hip", "Femur", "Tibia", "Humerus", "Radius"], "ValueList" : ["Hip", "Femur", "Tibia", "Humerus", "Radius"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "LegFracturePlan"},
     // Pain
@@ -2803,7 +3151,7 @@ var g_AllOptionsDeclaration = {
     "DIC_Diagnose_ISTH_PLTS_Option" : { "ButtonLabelList" : ["Plt over 100", "Plt 50-100", "Plt below 50"], "ValueList" : ["Plt over 100", "Plt 50-100", "Plt below 50"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "DICPlan"},
     "DIC_Diagnose_ISTH_PT_Option" : { "ButtonLabelList" : ["INR Below 3", "INR 3 - 6", "INR Above 6"], "ValueList" : ["INR Below 3", "INR 3 - 6", "INR Above 6"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "DICPlan"},
     "DIC_Diagnose_ISTH_Fibrinogen_Option" : { "ButtonLabelList" : ["Fbogen over 1", "Fbogen below 1"], "ValueList" : ["Fibrinogen over 1 g/L", "Fibrinogen below 1 g/L" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "DICPlan"},
-    "DIC_Diagnose_ISTH_D_DIMER_Option" : { "ButtonLabelList" : ["DDimer High", "DDimer Slight", "DDimer Normal"], "ValueList" : ["DDimer strongly elevated", "DDimer slightly elevaled", "DDimer Normal" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "DICPlan"},
+    "DIC_Diagnose_ISTH_D_DIMER_Option" : { "ButtonLabelList" : ["DDimer Normal", "DDimer Slight", "DDimer High"], "ValueList" : ["DDimer Normal", "DDimer slightly elevaled", "DDimer strongly elevated" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "DICPlan"},
 
     // Status
     "DICHgbTrendOption" : { "ButtonLabelList" : ["Hgb Trend"], "ValueList" : ["Recent Hgb trend: "], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "DICPlan"},
@@ -2834,25 +3182,70 @@ var g_AllOptionsDeclaration = {
     ///////////////////////////////////////////////////////////
     "CovidPossibleModifier" : { "ButtonLabelList" : ["Possible"], "ValueList" : ["Possible "], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
 
-    // Criteria
-    "CovidFeversOption" : { "ButtonLabelList" : ["Fever"], "ValueList" : ["fever"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
-    "CovidCoughOption" : { "ButtonLabelList" : ["Cough"], "ValueList" : ["dry cough"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
-    "CovidDyspneaOption" : { "ButtonLabelList" : ["Dyspnea"], "ValueList" : ["dyspnea"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
-    "CovidDiarrheaOption" : { "ButtonLabelList" : ["Diarrhea"], "ValueList" : ["diarrhea"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
-    "CovidMyalgiaOption" : { "ButtonLabelList" : ["Myalgia"], "ValueList" : ["myalgias"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    // SOFA Current
+    "COVIDSOFAOption_Current_PaO2FiO2" : { "ButtonLabelList" : ["Over 400", "300-400", "200-300", "100-200", "Below 100"], "ValueList" : ["Over 400", "300-400", "200-300", "100-200", "Below 100"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "COVIDSOFAOption_Current_Plts" : { "ButtonLabelList" : ["Over 150", "100-150", "50-100", "20-50", "Below 20"], "ValueList" : ["Over 150", "100-150", "50-100", "20-50", "Below 20"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "COVIDSOFAOption_Current_Bili" : { "ButtonLabelList" : ["Below 1.2", "1.2-1.9", "2.0-5.9", "6.0-11.9", "Over 12"], "ValueList" : ["Below 1.2", "1.2-1.9", "2.0-5.9", "6.0-11.9", "Over 12"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "COVIDSOFAOption_Current_MAP" : { "ButtonLabelList" : ["Over 70", "Below 70", "Dop below 5", "Norepi below 0.1", "Norepi above 0.1"], "ValueList" : ["Over 70", "Below 70", "Dop below 5", "Norepi below 0.1", "Norepi above 0.1"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "COVIDSOFAOption_Current_GCS" : { "ButtonLabelList" : ["15 (AOx3)", "13-14 (AOx1)", "10-12", "6-9", "Below 6"], "ValueList" : ["15 (AOx3)", "13-14 (AOx1)", "10-12", "6-9", "Below 6"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "COVIDSOFAOption_Current_Cr" : { "ButtonLabelList" : ["Below 1.2", "1.2-1.9", "2.0-3.4", "3.5-4.9", "Over 5.0"], "ValueList" : ["Below 1.2", "1.2-1.9", "2.0-3.4", "3.5-4.9", "Over 5.0"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+
+    // SOFA Baseline
+    "COVIDSOFAOption_Baseline_PaO2FiO2" : { "ButtonLabelList" : ["Over 400", "300-400", "200-300", "100-200", "Below 100"], "ValueList" : ["Over 400", "300-400", "200-300", "100-200", "Below 100"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "COVIDSOFAOption_Baseline_Plts" : { "ButtonLabelList" : ["Over 150", "100-150", "50-100", "20-50", "Below 20"], "ValueList" : ["Over 150", "100-150", "50-100", "20-50", "Below 20"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "COVIDSOFAOption_Baseline_Bili" : { "ButtonLabelList" : ["Below 1.2", "1.2-1.9", "2.0-5.9", "6.0-11.9", "Over 12"], "ValueList" : ["Below 1.2", "1.2-1.9", "2.0-5.9", "6.0-11.9", "Over 12"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "COVIDSOFAOption_Baseline_MAP" : { "ButtonLabelList" : ["Over 70", "Below 70", "Dop below 5", "Norepi below 0.1", "Norepi above 0.1"], "ValueList" : ["Over 70", "Below 70", "Dop below 5", "Norepi below 0.1", "Norepi above 0.1"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "COVIDSOFAOption_Baseline_GCS" : { "ButtonLabelList" : ["15 (AOx3)", "13-14 (AOx1)", "10-12", "6-9", "Below 6"], "ValueList" : ["15 (AOx3)", "13-14 (AOx1)", "10-12", "6-9", "Below 6"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "COVIDSOFAOption_Baseline_Cr" : { "ButtonLabelList" : ["Below 1.2", "1.2-1.9", "2.0-3.4", "3.5-4.9", "Over 5.0"], "ValueList" : ["Below 1.2", "1.2-1.9", "2.0-3.4", "3.5-4.9", "Over 5.0"], "IntValueList" : [0, 1, 2, 3, 4], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
 
     // History
     "CovidSxStartedOption" : { "ButtonLabelList" : ["Sx Started"], "ValueList" : ["Symptoms began xxxx"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
     "CovidTestPositiveOption" : { "ButtonLabelList" : ["Test+"], "ValueList" : ["PCR Test positive on xxxx"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidAsymptomaticOption" : { "ButtonLabelList" : ["Asymptomatic"], "ValueList" : ["Patient is asymptomatic and on room air. No indication for steroids or remdesivir."], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
 
     // Status
     "CovidSpO2TrendOption" : { "ButtonLabelList" : ["SpO2 Trend"], "ValueList" : ["Recent SpO2 trend: xxxx"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
     "CovidCRPTrendOption" : { "ButtonLabelList" : ["CRP Trend"], "ValueList" : ["Recent CRP trend: xxxxx"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
     "CovidPMNToLymphTrendOption" : { "ButtonLabelList" : ["PMN/Lymph Trend"], "ValueList" : ["Recent Neutrophil/Lymphocyte trend: xxxxx"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
-    "CovidLDHTrendOption" : { "ButtonLabelList" : ["LDH Trend"], "ValueList" : ["Recent LDH trend: xxxxx"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
     "CovidProcalTrendOption" : { "ButtonLabelList" : ["Procal Trend"], "ValueList" : ["Recent Procalcitonin trend: xxxxx"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
     "CovidFibrinogenTrendOption" : { "ButtonLabelList" : ["Fibrinogen Trend"], "ValueList" : ["Recent Fibrinogen trend: xxxxx"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
-    "CovidDDimerTrendOption" : { "ButtonLabelList" : ["D-Dimer Trend"], "ValueList" : ["Recent D-Dimer trend: xxxxx"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidPltsTrendOption" : { "ButtonLabelList" : ["Plts Trend"], "ValueList" : ["Recent Platelets trend: xxxxx"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+
+
+
+
+    // Risks
+    "CovidRiskCRPOver100Option": { "ButtonLabelList" : ["CRP >= 100"], "ValueList" : ["CRP over 100"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidRiskDDimerOver1000Option": { "ButtonLabelList" : ["DDimer>1000"], "ValueList" : ["DDimer over 1000"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidRiskLymphsUnder800Option": { "ButtonLabelList" : ["Lymphs < 800"], "ValueList" : ["Abs Lymphs under 800"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidRiskLDHOver245Option": { "ButtonLabelList" : ["LDH >= 245"], "ValueList" : ["LDH over 245"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidRiskFerritinOver500Option": { "ButtonLabelList" : ["Ferritin >= 500"], "ValueList" : ["Ferritin over 500"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+
+    "CovidRiskAgeOver65Option": { "ButtonLabelList" : ["Over 65yo"], "ValueList" : ["Over 65yo"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidRiskDM2Option": { "ButtonLabelList" : ["DM-2"], "ValueList" : ["Diabetes type 2"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidRiskAsthmaOption": { "ButtonLabelList" : ["Asthma"], "ValueList" : ["Asthma"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidRiskCOPDOption": { "ButtonLabelList" : ["COPD"], "ValueList" : ["COPD"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidRiskTobaccoOption": { "ButtonLabelList" : ["Tobacco"], "ValueList" : ["Tobacco use"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+
+    "CovidRiskObeseOption": { "ButtonLabelList" : ["BMI 30+"], "ValueList" : ["BMI over 30"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidRiskCADOption": { "ButtonLabelList" : ["CAD"], "ValueList" : ["CAD"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidRiskCHFOption": { "ButtonLabelList" : ["CHF"], "ValueList" : ["Heart Failure"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidRiskCVAOption": { "ButtonLabelList" : ["CVA"], "ValueList" : ["Chronic Stroke"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidRiskLungDiseaseOption": { "ButtonLabelList" : ["Lung Dx"], "ValueList" : ["Chronic Lung Disease"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+
+    "CovidRiskCirrhosisOption": { "ButtonLabelList" : ["Cirrhosis"], "ValueList" : ["Cirrhosis"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidRiskImmuneSuppressionOption": { "ButtonLabelList" : ["LowImmune"], "ValueList" : ["Immune suppressed"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidRiskCFOption": { "ButtonLabelList" : ["CF"], "ValueList" : ["Cystic Fibrosis"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidRiskSickleCellOption": { "ButtonLabelList" : ["Sickle Cell"], "ValueList" : ["Sickle Cell"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidRiskCancerOption": { "ButtonLabelList" : ["Cancer"], "ValueList" : ["Malignancy"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+
+
+
+    // Care Plan
+    "CovidNoTreatOption": { "ButtonLabelList" : ["Monitor"], "ValueList" : ["The patient does not have hypoxia and no clinical or laboratory risk factors, so will monitor but not start steroids or Remdesivir"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidRemdesivirOnlyOption": { "ButtonLabelList" : ["Only Remdesivir"], "ValueList" : ["The patient does not have hypoxia but does have clinical or laboratory risk factors, so will treat with Remdesivir but not start steroids"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidNirmatrelvirOnlyOption": { "ButtonLabelList" : ["Nirmatrelvir"], "ValueList" : ["The patient does not have hypoxia but does have clinical or laboratory risk factors, so will treat with Nirmatrelvir-Ritonivir but not start steroids"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+
 
     // Workup
     "CovidWUPCROption" : { "ButtonLabelList" : ["Covid PCR"], "ValueList" : ["Check COVID PCR"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
@@ -2860,9 +3253,7 @@ var g_AllOptionsDeclaration = {
     "CovidWUProcalOption" : { "ButtonLabelList" : ["Procal"], "ValueList" : ["Check Procalcitonin"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
     "CovidWURVPOption" : { "ButtonLabelList" : ["RVP"], "ValueList" : ["Check Resp viral panel"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
     "CovidWUABGOption" : { "ButtonLabelList" : ["ABG"], "ValueList" : ["Arterial blood gas"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
-    "CovidWUBloodCultureOption" : { "ButtonLabelList" : ["Blood Cx"], "ValueList" : ["Culture blood"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
-    "CovidWUSputumCultureOption" : { "ButtonLabelList" : ["Sputum Cx"], "ValueList" : ["Culture sputum"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
-    "CovidWUG6PDOption" : { "ButtonLabelList" : ["G6PD"], "ValueList" : ["Check G6PD"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidCTPEOption" : { "ButtonLabelList" : ["CT PE"], "ValueList" : ["CT Chest with Pulmonary Embolism protocol"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
 
     // Monitor
     "CovidCRPDailyOption" : { "ButtonLabelList" : ["CRP"], "ValueList" : ["CRP"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
@@ -2875,27 +3266,30 @@ var g_AllOptionsDeclaration = {
     "CovidWULactateOption" : { "ButtonLabelList" : ["Lactate"], "ValueList" : ["lactate"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
 
     // Treat
-    "CovidDexamethasoneOption" : { "ButtonLabelList" : ["Dexamethasone"], "ValueList" : ["Dexamethasone 6mg PO daily x10days"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
-    "CovidMethylpredOption" : { "ButtonLabelList" : ["Methylpred Q12", "Methylpred Q8"], "ValueList" : ["Methylprednisolone 40 IV Q12h", "Methylprednisolone 40 IV Q8h"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidDexamethasoneOption" : { "ButtonLabelList" : ["Dex (low)", "Dex (high)"], "ValueList" : ["Dexamethasone 6mg PO daily x10days (RECOVERY Trial protocol)", "Dexamethasone 20mg IV x5 days (start ) then Dexamethasone 10mg IV x5 days (start ) (CoDEX and Dexa-ARDS Trials protocol)"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
     "CovidRemdesivirOption" : { "ButtonLabelList" : ["Remdesivir", "Remdesivir"], "ValueList" : ["Remdesivir 200mg on day 1, then 100mg daily for 4 days", "Remdesivir 200mg on day 1, then 100mg daily for 9 days"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidBaricitinibOption" : { "ButtonLabelList" : ["Baricitinib"], "ValueList" : ["Baricitinib 4mg PO daily"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidNirmatrelvirOption": { "ButtonLabelList" : ["Nirmatrelvir"], "ValueList" : ["Nirmatrelvir-Ritonivir"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
     "CovidDiureticsOption": { "ButtonLabelList" : ["Lasix 20IV", "Lasix 20IVBID", "Lasix 40IV", "Lasix 40IVBID", "Lasix 80IV", "Lasix 80IVBID", "Lasix 100IV", "Lasix 100IVBID"], "ValueList" : ["Furosemide 20mg IV daily at breakfast", "Furosemide 20mg IV BID", "Furosemide 40mg IV daily at breakfast", "Furosemide 40mg IV BID", "Furosemide 80mg IV daily at breakfast", "Furosemide 80mg IV BID", "Furosemide 100mg IV daily at breakfast", "Furosemide 100mg IV BID"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CovidPlan"},
-    "CovidAntibioticsOption" : { "ButtonLabelList" : ["Ceftriaxone"], "ValueList" : ["Ceftriaxone 2g IV Q24h and Azithromycin 500mg PO daily"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
 
     // Other
     "CovidApapOption" : { "ButtonLabelList" : ["Apap"], "ValueList" : ["Acetaminophen 650mg PO Q6h PRN for fever"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
     "CovidGuaifenesinOption" : { "ButtonLabelList" : ["Guaifenesin"], "ValueList" : ["Guaifenesin"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
     "CovidPPIOption" : { "ButtonLabelList" : ["PPI"], "ValueList" : ["Pantoprazole while on steroids"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidInsulinOption" : { "ButtonLabelList" : ["Insulin"], "ValueList" : ["Sliding scale insulin while on steroids"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
+    "CovidAntibioticsOption" : { "ButtonLabelList" : ["Ceftriaxone"], "ValueList" : ["Ceftriaxone 2g IV Q24h and Azithromycin 500mg PO daily"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
 
     // Other treat
     "CovidO2Option" : { "ButtonLabelList" : ["O2"], "ValueList" : ["Continue Oxygen per nasal canula. Titrate O2 for 92-96%"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
     "CovidPrecautionsOption" : { "ButtonLabelList" : ["Precautions"], "ValueList" : ["Airborne precautions, including use of N95 masks, face-shields, gown, gloves"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
     "CovidNoSteroidsOption" : { "ButtonLabelList" : ["No steroids"], "ValueList" : ["Avoid steroids as this may prolong viral shedding, as per CDC and WHO Guidelines"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
-    "CovidNoNebsOption" : { "ButtonLabelList" : ["No Nebs"], "ValueList" : ["Patient is not in a negative pressure room, so avoid nebulizers, CPAP, and BiPAP as these may aerosolize virus"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
     "CovidProneOption" : { "ButtonLabelList" : ["Prone"], "ValueList" : ["Ask the patient to lay in prone position for up to 16hrs per day"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CovidPlan"},
     "CovidAlbuterolOption": { "ButtonLabelList" : ["Albuterol"], "ValueList" : ["Albuterol HFA inhaler Q4h PRN"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CovidPlan"},
 
 
+    ///////////////////////////////////////////////////////////
     //PE/DVT
+    ///////////////////////////////////////////////////////////
     "PEDVTAcuteChronicOption": { "ButtonLabelList" : ["Acute", "Chronic"], "ValueList" : ["Acute ", "Chronic "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PEDVTPlan"},
     "PEDVTMassiveOption": { "ButtonLabelList" : ["Massive", "Submassive"], "ValueList" : ["Massive ", "Submassive "], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PEDVTPlan"},
     "PEDVTPEvsDVTOption": { "ButtonLabelList" : ["PE", "DVT"], "ValueList" : ["Pulmonary Embolism", "Deep Venous Thrombosis"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PEDVTPlan"},
@@ -2923,8 +3317,9 @@ var g_AllOptionsDeclaration = {
 
 
 
-    ////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////
     // Prevention
+    ///////////////////////////////////////////////////////////
 
     // Status
     "Prevention_Colonoscopy_Status_Option": { "ButtonLabelList" : ["Never Colonoscopy", "Last 5 years", "Last 10 years"], "ValueList" : ["No previous Colonoscopy", "Colonoscopy in the past 5 years", "Colonoscopy in the past 10 years"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
@@ -2961,8 +3356,62 @@ var g_AllOptionsDeclaration = {
     "Prevention_Pap_Option": { "ButtonLabelList" : ["Pap Smear"], "ValueList" : ["Check Pap Smear as outpatient"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
 
 
-    //<><> INSERT HERE
 
+
+    ///////////////////////////////////////////////////////////
+    // Migraines
+    ///////////////////////////////////////////////////////////
+    "MigraineAuraModifier": { "ButtonLabelList" : ["Aura"], "ValueList" : [" with aura"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MigrainesPlan"},
+    "MigraineNumMonthOption": { "ButtonLabelList" : ["Less 1/month", "1/month", "2-5/month", "5-10/month", "Over 10/month"], "ValueList" : ["Averages less than one headache per month", "Averages one headache per month", "Averages  2-5 headaches per month", "Averages 5-10 headaches per month", "Averages  over 10 headaches permonth"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MigrainesPlan"},
+    "MigraineDurationOption": { "ButtonLabelList" : ["Last 1hr", "Last hours", "Last 1day", "Last days"], "ValueList" : ["Headaches typically last one hour", "Headaches typically last several hours", "Headaches typically last one day", "Headaches typically last days"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MigrainesPlan"},
+    "MigraineUnilateralOption": { "ButtonLabelList" : ["Unilateral", "Bilateral"], "ValueList" : ["Unilateral", "Bilateral"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MigrainesPlan"},
+    "MigrainePulsatileOption": { "ButtonLabelList" : ["Pulsatile", "Constant"], "ValueList" : ["throbbing", "constant"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MigrainesPlan"},
+    "MigraineNauseaOption": { "ButtonLabelList" : ["Nausea"], "ValueList" : ["nausea"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MigrainesPlan"},
+    "MigrainePhotophobiaOption": { "ButtonLabelList" : ["Photophobia"], "ValueList" : ["photophobia"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MigrainesPlan"},
+    "MigraineHomeRegimenOption": { "ButtonLabelList" : ["Home-NSAIDs", "Home-Aimovig", "Home-Ajovy", "Home-Triptan", "Home-Ubrelvy", "Home-Nurtec"], "ValueList" : ["NSAIDs", "Aimovig (erenumab)", "Ajovy (fremanezumab)", "Sumatriptan", "Ubrelvy (ubrogepant)", "Nurtec (ubrogepant)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MigrainesPlan"},
+
+    "MigraineBenadrylCompazineOption": { "ButtonLabelList" : ["Benadryl/Compazine"], "ValueList" : ["PRN Benadryl 25mg IV and Prochlorperazine 10mg IV Q12h"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MigrainesPlan"},
+    "MigraineSumatriptanOption": { "ButtonLabelList" : ["Sumatriptan"], "ValueList" : ["PRN Sumatriptan 25mg PO"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MigrainesPlan"},
+    "MigraineFiorocetOption": { "ButtonLabelList" : ["Fiorocet"], "ValueList" : ["PRN Fiorocet"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MigrainesPlan"},
+
+    "MigrainePropranololOption": { "ButtonLabelList" : ["Propranolol"], "ValueList" : ["Propranolol 10mg PO daily for prevention"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MigrainesPlan"},
+    "MigraineMagnesiumOption": { "ButtonLabelList" : ["Magnesium"], "ValueList" : ["Magnesium 400mg PO daily for prevention"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MigrainesPlan"},
+
+    "MigraineDiaryOption": { "ButtonLabelList" : ["Diary"], "ValueList" : ["Counseled to keep a headache diary to identify frequency and possible triggers"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MigrainesPlan"},
+    "MigraineEtOHOption": { "ButtonLabelList" : ["EtOH"], "ValueList" : ["alcohol"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MigrainesPlan"},
+    "MigraineNicotineOption": { "ButtonLabelList" : ["Nicotine"], "ValueList" : ["nicotine"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MigrainesPlan"},
+    "MigraineCaffeineOption": { "ButtonLabelList" : ["Caffeine"], "ValueList" : ["caffeine"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "MigrainesPlan"},
+
+
+
+    // BILLING
+    "BILLING_COMPLEXITY_EXACERBATION": { "ButtonLabelList" : ["Exacerbation"], "ValueList" : ["a severe exacerbation or progression of 1 or more chronic illnesses or with side effects of treatment"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "BillingPlan"},
+    "BILLING_COMPLEXITY_PROGRESSION": { "ButtonLabelList" : ["Progression"], "ValueList" : ["acute illness or progression of a chronic illness that poses a threat to life or bodily function"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "BillingPlan"},
+
+    "BILLING_DATA_INFLAMM_LABS": { "ButtonLabelList" : ["Labs-Inflamm"], "ValueList" : ["inflammatory markers (WBC, CRP, Procal)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "BillingPlan"},
+    "BILLING_DATA_RENAL_LABS": { "ButtonLabelList" : ["Labs-Renal"], "ValueList" : ["renal function markers (Creatinine, BUN, potassium)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "BillingPlan"},
+    "BILLING_DATA_LYTES_LABS": { "ButtonLabelList" : ["Labs-Lytes"], "ValueList" : ["electrolyte levels (Potassium, Magnesium, Phos, Calcium)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "BillingPlan"},
+
+    "BILLING_DATA_FAMILY": { "ButtonLabelList" : ["Ind History"], "ValueList" : ["independent historian"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "BillingPlan"},
+
+
+
+    "BILLING_DATA_PERSONAL_EKG": { "ButtonLabelList" : ["EKG"], "ValueList" : ["EKG"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "BillingPlan"},
+    "BILLING_DATA_PERSONAL_CXR": { "ButtonLabelList" : ["CXR"], "ValueList" : ["XRays"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "BillingPlan"},
+    "BILLING_DATA_PERSONAL_CT": { "ButtonLabelList" : ["CT"], "ValueList" : ["CT Scans"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "BillingPlan"},
+
+    "BILLING_DATA_DISCUSS": { "ButtonLabelList" : ["Consultant"], "ValueList" : ["Discussion of management with other physicians"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "BillingPlan"},
+
+    "BILLING_RISK_OPIOIDS": { "ButtonLabelList" : ["IV Opioids"], "ValueList" : ["Parenteral controlled substances"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "BillingPlan"},
+    "BILLING_RISK_TOXICITY": { "ButtonLabelList" : ["Toxicity"], "ValueList" : ["Drug therapy requiring intensive monitoring for toxicity"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "BillingPlan"},
+    "BILLING_RISK_ESCALATION": { "ButtonLabelList" : ["Escalation"], "ValueList" : ["Decision regarding escalation of hospital care"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "BillingPlan"},
+    "BILLING_RISK_DNR": { "ButtonLabelList" : ["DNR"], "ValueList" : ["Decision to not resuscitate because of poor prognosis"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "BillingPlan"},
+
+    "BILLING_REFERENCES_AMA": { "ButtonLabelList" : ["AMA Ref"], "ValueList" : ["Ref: CPT Evaluation and Management, https://www.ama-assn.org/system/files/2023-e-m-descriptors-guidelines.pdf"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "BillingPlan"},
+
+
+
+    //<><> INSERT HERE
 
 }; // g_AllOptionsDeclaration
 
@@ -2979,6 +3428,7 @@ var g_FormatStringsDeclaration = {
     "CKDCausesShowAlbCrOption" : { FormatType: "Ratio", "FormatString" : "and {RATIO} grams of the total daily proteinuria is albumin, the rest is all other proteins", "CPInputValueName" : "CKD_INPUT_URINE_ALBUMIN", "CPInputRatioDenominatorValueName" : "CKD_INPUT_URINE_Cr"},
     "DiabetesStatusShowA1cOption" : { FormatType: "Simple", "FormatString" : "Latest HgbA1c={VAL}", "CPInputValueName" : "Diabetes_A1c_CP_Input", "CPInputRatioDenominatorValueName" : ""},
 }; // g_FormatStringsDeclaration
+
 
 
 

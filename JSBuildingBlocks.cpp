@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2014-2020 Dawson Dean
+// Copyright (c) 2014-2021 Dawson Dean
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the "Software"),
@@ -71,10 +71,6 @@ var DD_DEBUG = true;
 function 
 LogEvent(str) {
     var divElement;
-
-    if (!DD_DEBUG) {
-        return;
-    }
 
     // If the Logging HTML element is not present, then do no logging.
     divElement = document.getElementById("EventLog");
@@ -655,7 +651,6 @@ Util_NodeHasChildNodes(parentNode) {
 function 
 Util_SetChildNodeText(parentNode, childName, textStr) {
     var childElement;
-    var textElement;
     //LogEvent("Util_SetChildNodeText. childName=" + childName + ", textStr=" + textStr);
 
     if ((!parentNode) || (!childName)) {
@@ -729,6 +724,28 @@ Util_GetChildNodeText(parentNode, childName) {
 
 
 
+////////////////////////////////////////////////////////////////////////////////
+//
+// [Util_GetChildNodeTextEx]
+//
+////////////////////////////////////////////////////////////////////////////////
+function 
+Util_GetChildNodeTextEx(parentNode, childName, defaultVal) {
+    var valStr = null;
+
+    valStr = Util_GetChildNodeText(parentNode, childName);
+    if (null == valStr) {
+        return(defaultVal);
+    } 
+
+    return(valStr);
+} // Util_GetChildNodeTextEx
+
+
+
+
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -775,6 +792,28 @@ Util_GetNodeText(parentNode) {
 
 
 
+////////////////////////////////////////////////////////////////////////////////
+//
+// [Util_SetNodeText]
+//
+////////////////////////////////////////////////////////////////////////////////
+function 
+Util_SetNodeText(elementNode, textStr) {
+    //LogEvent("Util_SetNodeText. elementNode=" + elementNode + ", textStr=" + textStr);
+    if (elementNode) {
+        Util_RemoveAllChildNodes(elementNode);
+        var textNode = document.createTextNode(textStr);
+        elementNode.appendChild(textNode);
+    } else {
+        Main_InternalError("Util_SetNodeText: Null elementNode");
+    }
+} // Util_SetNodeText
+
+
+
+
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -796,6 +835,9 @@ Util_GetInputNumber(elementName, defaultValue) {
     if (inputText == "") {
         return(defaultValue);
     } 
+    // Remove commas. These separate mantissa from fraction in some scripts, which
+    // is confusing to people using the US style.
+    inputText = inputText.replaceAll(',', '');
 
     return(parseFloat(inputText));
 } // Util_GetInputNumber
@@ -1235,6 +1277,7 @@ Util_GetDescendantNodeByXID(parentNode, targetID) {
 
     return(null);
 } // Util_GetDescendantNodeByXID
+
 
 
 

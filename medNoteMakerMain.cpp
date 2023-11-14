@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2013-2020 Dawson Dean
+// Copyright (c) 2013-2023 Dawson Dean
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the "Software"),
@@ -29,35 +29,6 @@
 //
 /////////////////////////////////////////////////////////////////////////////
 //
-// StartMedNoteMaker()
-// OnPlanButton(button) 
-// ResetNotebuilderState() 
-// OnPlanTypeButton(button)
-// WritePlanHeader() 
-// WritePlanFooter()
-// WritePlanBody()
-// MedNote_StartNewPlanSection(problemName, controlPanelID)
-// MedNote_AddRelatedProblem(problemName)
-// MedNode_WritePlanSubPlan(sectionName, subSectionName, subPlanActionList)
-// WriteTextLine(str)
-// WriteComment(str) 
-// WriteAction(str)
-// MedNote_ImportLabs(sourceEMRName) 
-// OnShowWindowButton(button)
-// MedNote_OnCloseChildWindow(button)
-// OnOptionButton(button)
-// ClearInferredPlanItems()
-// SetInferredPlanState(planNameStr) 
-// InitPlanState(planNameStr, printFunctionArg)
-//
-// MedNoteCP_ToggleButton(buttonNode, stateName, statusHTMLElementID)
-// MedNote_GetCPOptionValue
-// MedNote_GetCPOptionValueWithComma
-// MedNote_GetCPOptionBool(htmlElementID)
-// MedNote_OnCPOptionButton
-// MedNote_RedrawPlanEntry(planSectionEntry)
-// MedNote_OnCPGroupButton(button)
-// MedNote_CPReload(button, planSectionName)
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -101,10 +72,8 @@ var CONTROL_PANEL_BACKGROUND_STYLE = "background-color:#F0F0F0; border:4px outse
 
 ////////////////////////////////////
 // User Options
-var g_InPatient = true;
 var g_OptionsInferProblems = true;
-var g_OptionsShowBillingInfo = false;
-var g_IsPrimary = false;
+var g_IsPrimary = true;
 var g_EmitBoilerplate = true;
 var g_CollectedSystemInfo = false;
 
@@ -147,10 +116,6 @@ StartMedNoteMaker() {
     var newImportCatalog = document.getElementById("NewControlPanelCatalog");
     var importedBody = Util_GetChildNode(g_ImportCatalog, "body");
     var newCtlPanel = Util_GetDescendantNodeByID(g_ImportCatalog, "NewControlPanelCatalog");
-    //LogEvent("g_ImportCatalog = " + g_ImportCatalog);
-    //LogEvent("newImportCatalog = " + newImportCatalog);
-    //LogEvent("importedBody = " + importedBody);
-    //LogEvent("newCtlPanel = " + newCtlPanel);
 
     // These are the main windows that we show/hide to expose different subgroups of funtions and outputs.
     g_PlanDivElement = document.getElementById("NotePlanWindow");
@@ -165,9 +130,6 @@ StartMedNoteMaker() {
     g_InpatientTableElement = document.getElementById("InPatientTable");
     g_ToolBarElement = document.getElementById("ToolBar");
     //LogEvent("StartMedNoteMaker. Got html elements");
-
-    g_InPatient = true;
-    g_IsPrimary = true;
 
     if (g_InpatientTableElement) {
         g_InpatientTableElement.style.display = "inline";
@@ -191,11 +153,9 @@ StartMedNoteMaker() {
     ////////////////////////////////////
     // Chief Complaints
     //LogEvent("StartMedNoteMaker. Initialized Plan states 4%");
-    InitPlanState("DyspneaPlan", WriteDyspneaPlan);
     InitPlanState("NSTEMIPlan", WriteChestPainPlan);
     InitPlanState("DKAPlan", WriteDKAPlan);
     InitPlanState("GIBleedPlan", WriteGIBleedPlan);
-    //LogEvent("StartMedNoteMaker. Initialized Plan states 5%");
     InitPlanState("SepsisPlan", WriteSepsisPlan);
     InitPlanState("StrokePlan", WriteStrokePlan);  
     InitPlanState("DICPlan", WriteDICPlan);
@@ -206,7 +166,7 @@ StartMedNoteMaker() {
     InitPlanState("OncologyPlan", WriteOncologyPlan);
     InitPlanState("HepatitisPlan", WriteHepatitisPlan);
     InitPlanState("PancPlan", WritePancreatitisPlan);
-    //LogEvent("StartMedNoteMaker. Initialized Plan states 12%");  
+    InitPlanState("GISymptomsPlan", WriteGISymptomsPlan);
     InitPlanState("PneumoniaPlan", WritePneumoniaPlan);
     InitPlanState("CADPlan", WriteCADPlan);
     InitPlanState("CHFPlan", WriteCHFPlan);
@@ -215,10 +175,8 @@ StartMedNoteMaker() {
     
     ////////////////////////////////////
     // Complex Comorbidities 
-    //LogEvent("StartMedNoteMaker. Initialized Plan states 25%");
     InitPlanState("CirrhosisPlan", WriteCirrhosisPlan);
     InitPlanState("HemoDialysisPlan", WriteHemodialysisPlan);
-    InitPlanState("CVVHPlan", WriteCVVHPlan);
     InitPlanState("RenalTransplantPlan", WriteRenalTransplantPlan);
         
     ////////////////////////////////////
@@ -227,8 +185,6 @@ StartMedNoteMaker() {
     InitPlanState("CKDPlan", PrintCKDPlan);
     InitPlanState("NephroticPlan", WriteNephroticPlan);
     InitPlanState("IVContrastPlan", WriteIVContrastPlan);
-    InitPlanState("VolumePlan", WriteVolumePlan);
-    InitPlanState("FreeWaterPlan", WriteFreeWaterPlan);
     InitPlanState("DysphagiaPlan", WriteDysphagiaPlan);
     InitPlanState("MBDPlan", WriteMBDPlan);
     InitPlanState("HTNPlan", WriteHTNPlan);    
@@ -248,7 +204,6 @@ StartMedNoteMaker() {
     InitPlanState("HepCPlan", WriteHepatitisCPlan);
     InitPlanState("LegFracturePlan", WriteLegFracturePlan);
     InitPlanState("NephrolithiasisPlan", WriteNephrolithiasisPlan);
-    InitPlanState("PreventionPlan", WritePreventionPlan);
     
     ////////////////////////////////////
     // Single-Line Capable Plans
@@ -276,24 +231,17 @@ StartMedNoteMaker() {
     InitPlanState("ObesityPlan", WriteObesityPlan);
     InitPlanState("WeaknessPlan", WriteWeaknessPlan);
     InitPlanState("TobaccoPlan", WriteTobaccoPlan);
+    InitPlanState("MigrainesPlan", WriteMigrainePlan);
 
     ////////////////////////////////////
-    // Not Used
-    InitPlanState("MigrainePlan", WriteMigrainePlan);
-    InitPlanState("Polyarthropathy", WritePolyarthropathyPlan);
-    InitPlanState("JointPainPlan", WriteJointPainPlan);
-    InitPlanState("BackPainPlan", WriteBackPainPlan);
-    InitPlanState("MenorrhagiaPlan", WriteMenorrhagiaPlan);
-    //InitPlanState("KneePainPlan", WriteKneePainPlan);
-    //InitPlanState("ShoulderPainPlan", WriteShoulderPainPlan);
-    //InitPlanState("ElbowPainPlan", WriteElbowPainPlan);
-    
+    // Footer Plans
+    InitPlanState("PreventionPlan", WritePreventionPlan);
+    InitPlanState("BillingPlan", WriteBillingPlan);
+   
     MedNote_OnCloseChildWindow(null);
 
     //LogEvent("StartMedNoteMaker. Initialized plan states");
     WritePlanBody();
-
-    //LogEvent("StartMedNoteMaker. Done");
 } // StartMedNoteMaker
 
 
@@ -342,6 +290,8 @@ OnPlanButton(button) {
     }
     
     WritePlanBody();
+
+    //LogEvent("OnPlanButton done");
 } // OnPlanButton
 
 
@@ -406,17 +356,6 @@ OnPlanTypeButton(button) {
             button.value="Full-->Plan Only";
             g_EmitBoilerplate = true;
         }        
-    ////////////////////////////////////
-    } else if (button.id == "RoleOption") {
-        if  (button.value == "Consultant") {
-            button.className="OptionBtnStyle";
-            button.value="Primary";
-            g_IsPrimary = true;
-        } else {
-            button.className="optionOnStyle";
-            button.value="Consultant";
-            g_IsPrimary = false;
-        }
     }
 
     WritePlanBody();
@@ -460,7 +399,7 @@ WritePlanHeader() {
     //    
     //A problem pertinent ROS inquires about the system directly related to the problem(s) identified in the HPI.
     //An extended ROS requires two to nine systems should be documented.
-    //A complete ROS inquires about At least ten organ systems must be reviewed.
+    //A complete ROS inquires about at least ten organ systems must be reviewed.
     if (MedNote_GetCPOptionBool("RoSCannotAssessOption")) {
         str = "Review of Systems: " + MedNote_GetCPOptionValue("RoSCannotAssessOption");
         WriteTextLine(str);
@@ -517,23 +456,52 @@ WritePlanHeader() {
 
     //////////////////////////
     // HISTORIES:
-    WriteTextLine("Medical History:");
+    // Past Medical History
+    optionNameList = ["PMHxHypertension", "PMHxDiabetes", "PMHxHeartFailure", "PMHxCOPD", "PMHxCirrhosis",
+                        "PMHxCoronaryArteryDisease", "PMHxCKD", "PMHxStroke", "PMHxHypoThyroid", "PMHxAnxiety",
+                        "PMHxAFib", "PMHxDepression", "PMHxTobacco", "PMHxEtOH"];
+    WriteListOfSelectedMedHistoryItems(activeControlPanel, "Medical History:", optionNameList);
     WriteTextLine("");
-    WriteTextLine("Surgical History:");
+
+    // Past Surgical History
+    optionNameList = ["PSHxCholecystectomy", "PSHxArthroscopy", "PSHxAppendectomy", "PSHxHysterectomy", 
+                        "PSHxTonsillectomy", "PSHxCABG", "PSHxCSection", "PSHxBTL"];
+    WriteListOfSelectedMedHistoryItems(activeControlPanel, "Surgical History:", optionNameList);
     WriteTextLine("");
+
+    // Past Social History
     WriteTextLine("Social History:");
-    WriteTextLine("Tobacco: ");
-    WriteTextLine("EtOH: ");
-    WriteTextLine("Illicits: None");
+    optionNameList = ["PHxTobacco"];
+    WriteHistoryItem(activeControlPanel, "Tobacco: ", optionNameList, "None");
+    optionNameList = ["PHxAlcohol"];
+    WriteHistoryItem(activeControlPanel, "Alcohol: ", optionNameList, "None");
+    optionNameList = ["PHxDrugs"];
+    WriteHistoryItem(activeControlPanel, "Illicits: ", optionNameList, "None");
     WriteTextLine("");
+
+    // Family Medical History
     WriteTextLine("Family History:");
     WriteTextLine("Reviewed and non-contributory");
-    WriteTextLine("Mother:");
-    WriteTextLine("Father:");
+    optionNameList = ["FHxMotherDM", "FHxMotherHTN", "FHxMotherCAD", "FHxMotherCancer", "FHxMotherCOPD", "FHxMotherNone"];
+    WriteHistoryItem(activeControlPanel, "Mother: ", optionNameList, "");
+    optionNameList = ["FHxFatherDM", "FHxFatherHTN", "FHxFatherCAD", "FHxFatherCancer", "FHxFatherCOPD", "FHxFatherNone"];
+    WriteHistoryItem(activeControlPanel, "Father: ", optionNameList, "");
+    optionNameList = ["FHxSiblingsDM", "FHxSiblingsHTN", "FHxSiblingsCAD", "FHxSiblingsCancer"];
+    WriteHistoryItem(activeControlPanel, "Siblings: ", optionNameList, "");
     WriteTextLine("");
-    WriteTextLine("Home Medications:");
+
+    // Home Medications
+    optionNameList = ["PHxMedsMetoprolol", "PHxMedsLisinopril", "PHxMedsLosartan", "PHxMedsAmlodipine", "PHxMedsHCTZ", 
+                        "PHxMedsPantoprazole", "PHxMedsOxycodone", "PHxMedsCoreg", "PHxMedsFurosemide", "PHxMedsAsa", 
+                        "PHxMedsAtorvastatin", "PHxMedsApixaban", "PHxMedsClopidogrel", "PHxMedsAlbuterol", 
+                        "PHxMedsFluticSalm", "PHxMedsTiotropium", "PHxMedsMontelukast", "PHxMedsTamsulosin", 
+                        "PHxMedsMetformin"];
+    WriteListOfSelectedMedHistoryItems(activeControlPanel, "Home Medications:", optionNameList);
     WriteTextLine("");
-    WriteTextLine("Allergies: NKDA");
+
+    // Allergies
+    optionNameList = ["PHxAllergyPenicillins", "PHxAllergySulfa"];
+    WriteHistoryItem(activeControlPanel, "Allergies: ", optionNameList, "No Known Drug Allergies");
     WriteTextLine("");
 
     ////////////////////////
@@ -550,7 +518,7 @@ WritePlanHeader() {
     optionNameList = [ "SuppleOption", "ThyromegalyOption", "TrachOption"];
     WriteListOfSelectedValues(activeControlPanel, "Neck: ", false, "", optionNameList, "")
 
-    optionNameList = [ "HROption", "MurmurOption", "JVDOption", "EdemaOption", "PulsesOption"];
+    optionNameList = [ "HROption", "MurmurOption", "MurmurIncrease", "JVDOption", "EdemaOption", "PulsesOption"];
     WriteListOfSelectedValues(activeControlPanel, "Cardiovascular: ", false, "", optionNameList, "")
 
     optionNameList = [ "CBTAOption", "RalesOption", "WheezesOption", "LaboredOption"];
@@ -634,8 +602,6 @@ WritePlanFooter() {
     }
 
 
-
-
     if (g_IsPrimary) {
         str = MedNote_GetCPOptionValue("DietOption");
         if ("" != str) {
@@ -712,13 +678,17 @@ WritePlanFooter() {
 
             /////////////////////////
             // Followup appointments
-            var actionNameList = [ "DispoClinicPCPOption", "DispoClinicIDOption", "DispoClinicGIOption"];
-            WriteListOfSubActions(activeControlPanel, "Followup appointments after discharge:", actionNameList);
+            var actionNameList = [ "DispoClinicPCPOption", "DischargeFollowUpID", "DischargeFollowUpGI",
+                                    "DischargeFollowUpRenal", "DischargeFollowUpCards", "DischargeFollowUpOnc",
+                                    "DischargeFollowUpNeuro", "DischargeFollowUpSurgery",
+                                    "DischargeFollowUpEndocrine"];
+            WriteListOfSubActions("Followup appointments after discharge:", actionNameList);
 
             /////////////////////////
             // Equipment
             WriteCommentIfSelected(activeControlPanel, 'WeaknessHospBed1Option');
             WriteCommentIfSelected(activeControlPanel, 'WeaknessHospBed2Option');
+            WriteCommentIfSelected(activeControlPanel, 'WeaknessWheelchairOption');
     
             /////////////////////////
             // Discharge Meds
@@ -738,25 +708,6 @@ WritePlanFooter() {
             WriteTextLine(str);
         }
     } // if (g_IsPrimary)
-
-    if (!g_IsPrimary) {
-        WriteTextLine(" ");
-        WriteTextLine(" ");
-        WriteTextLine(" ");
-        WriteTextLine("RECOMMENDATIONS:");
-        if (g_RecommendationsDivElement) {
-            var childElement = g_RecommendationsDivElement.firstChild;
-            while (childElement) {
-                var nextChildElement = childElement.nextSibling;
-                g_RecommendationsDivElement.removeChild(childElement);
-                g_CurrentPlanSectionTextElement.appendChild(childElement);
-
-                childElement = nextChildElement;
-            } // while (childElement) 
-            
-            g_RecommendationsDivElement = null;
-        }
-    } // if (!g_IsPrimary) {
 
     WriteTextLine("");
 } // WritePlanFooter
@@ -794,7 +745,7 @@ WritePlanBody() {
     g_WritingPlanSection = true;
     for (var planName in g_AllPlansDeclaration) {
         var valueEntry = g_AllPlansDeclaration[planName];
-        if ((valueEntry.isSelected) && (valueEntry.PrintFunction)) {
+        if ((valueEntry.isSelected) && (valueEntry.PrintFunction) && (planName != "BillingPlan")) {
             //LogEvent("Body write plan: " + planName);
             if (valueEntry.PrintSingleLine >= 1) {
                 // If this is a tiny plan, then the control panel should show up in place, but
@@ -811,16 +762,17 @@ WritePlanBody() {
     }
     g_WritingPlanSection = false;
 
-    // For now, we always include prevention in outpatient plans.
-    if (!g_InPatient) {
-        WritePreventionPlan();
-    }
-    
     //if (g_EmitBoilerplate) {
     WritePlanFooter();
     WriteTextLine(" ");
     WriteTextLine(" ");
         
+    var valueEntry = g_AllPlansDeclaration["BillingPlan"];
+    if ((valueEntry.isSelected) && (valueEntry.PrintFunction)) {
+        valueEntry.SingleLinePlans = [];
+        valueEntry.PrintFunction();
+    }
+
     ClearInferredPlanItems();    
     //LogEvent("FINISH WritePlanBody");
 } // WritePlanBody
@@ -1001,6 +953,7 @@ MedNote_AddRelatedProblemIfSelected(activeControlPanel, optionName) {
     var problemName;
 
     problemName = MedNote_GetCPOptionValue(optionName);
+    //LogEvent("MedNote_AddRelatedProblemIfSelected. problemName=" + problemName);
     if ((problemName != null) && (problemName != "")) {
         var brNode = document.createElement("br");
         g_CurrentPlanSectionTextElement.appendChild(brNode); 
@@ -1014,17 +967,34 @@ MedNote_AddRelatedProblemIfSelected(activeControlPanel, optionName) {
 
 
     
-
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ////////////////////////////////////////////////////////////////////////////////
 //
-// [MedNode_WritePlanSubPlan]
+// [MedNode_WriteSubPlan]
+//
+// This creates a section of a plan, with one or more actions below it.
+// For example:
+//
+// /Ascites:
+//     Last LVP was 1/1/1900
+//     - Furosemide
+//     - Spironolactone
+//     - Ciprofloxacin
 //
 ////////////////////////////////////////////////////////////////////////////////
 function 
-MedNode_WritePlanSubPlan(sectionName, subSectionName, subPlanActionList) { 
-    //LogEvent("MedNode_WritePlanSubPlan. sectionName=" + sectionName);
+MedNode_WriteSubPlan(subSectionName, actionNameList) { 
     var qualifiedName;
     var index;
+
+    subPlanActionList = [];
+    for (index = 0; index < actionNameList.length; index++) {
+        currentActionName = actionNameList[index];
+        planStr = MedNote_GetCPOptionValue(currentActionName);
+        if ((planStr != null) && (planStr != "")) {
+            subPlanActionList.push(planStr);
+        }
+    } // for (index = 0; index < optionNameList.length; index++)
 
     if (subPlanActionList.length <= 0) {
         return;
@@ -1038,9 +1008,64 @@ MedNode_WritePlanSubPlan(sectionName, subSectionName, subPlanActionList) {
 
     for (index = 0; index < subPlanActionList.length; index++) {
         var actionStr = subPlanActionList[index];
-            WriteAction(actionStr);
+        WriteAction(actionStr);
     } // for (index = 0; index < subPlanActionList.length; index++)
-} // MedNode_WritePlanSubPlan
+} // MedNode_WriteSubPlan
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// [WriteListOfSubActions]
+//
+// This is slightly different than a subplan. Instead, it is a single action,
+// that may have one or more instances.
+//
+// - Insulin
+//    Glargine xxx units QHS
+//    Lispro xxx units TID with meals
+//    Sliding scale Insulin
+//
+// You call it like this:
+// var optionNameList = [ 'p0', 'p1', 'p2' ]; 
+// WriteListOfSubActions("Preface", optionNameList)
+////////////////////////////////////////////////////////////////////////////////
+function 
+WriteListOfSubActions(prefaceStr, actionNameList) {
+    var planStr;
+    var currentActionName;
+    var currentActionValue;
+    var index = 0;
+    var indentNum;
+    var writeAtLeastOneAction = false;
+
+    for (index = 0; index < actionNameList.length; index++) {
+        currentActionName = actionNameList[index];
+        if (MedNote_GetCPOptionBool(currentActionName)) {
+            writeAtLeastOneAction = true;
+            break;
+        }
+    } // for (index = 0; index < optionNameList.length; index++)
+
+    if (!writeAtLeastOneAction) {
+        return;
+    }
+
+    WriteAction(prefaceStr);
+    for (index = 0; index < actionNameList.length; index++) {
+        currentActionName = actionNameList[index];
+        if (MedNote_GetCPOptionBool(currentActionName)) {
+            planStr = MedNote_GetCPOptionValue(currentActionName);
+            WriteIndentedTextLine(planStr);
+        }
+    } // for (index = 0; index < optionNameList.length; index++)
+} // WriteListOfSubActions
+
+
+
+
+
 
 
 
@@ -1119,7 +1144,6 @@ WriteIndentedTextLine(str) {
 
 
 
-
 ////////////////////////////////////////////////////////////////////////////////
 //
 // [WriteComment]
@@ -1189,22 +1213,6 @@ WriteAction(str) {
 
     str = PLAN_ACTION_TEXT_LINE_PREFIX + str
     WriteTextLine(str);
-
-    if ((!g_IsPrimary) && (str)) {
-        var brNode;
-        var textNode;
-        
-        if (!g_RecommendationsDivElement) {
-            g_RecommendationsDivElement = document.createElement("div");
-            //g_RecommendationsDivElement = document.createDocumentFragment();
-        }
-
-        brNode = document.createElement("br");
-        g_RecommendationsDivElement.appendChild(brNode);
-    
-        textNode = document.createTextNode(str);
-        g_RecommendationsDivElement.appendChild(textNode);
-    }
 } // WriteAction
 
 
@@ -1313,8 +1321,6 @@ ShowSubWindow(windowName, statusTextStr, showHelpClose) {
 
 
 
-
-
 ////////////////////////////////////////////////////////////////////////////////
 //
 // [MedNote_OnCloseChildWindow]
@@ -1346,82 +1352,6 @@ MedNote_OnCloseChildWindow(button) {
         g_ImportWindowDivElement.style.display = "None";
     }
 } // MedNote_OnCloseChildWindow
-
-
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-//
-// [InferPlanItemsBasedOnLabs]
-//
-////////////////////////////////////////////////////////////////////////////////
-function 
-InferPlanItemsBasedOnLabs() {
-    //////////////////////////////
-    if ((GetLabValue("SystolicBP") > 155) || (GetLabValue("DiastolicBP") > 100)) {
-        SetInferredPlanState("HTNPlan");
-    }
-    
-    //////////////////////////////
-    var sodium = GetLabValue("Sodium");
-    if ((sodium > 1) && (sodium < 133)) {
-        SetInferredPlanState("HyponatremiaPlan");
-        SetInferredPlanState("FreeWaterPlan");
-    }
-    if ((sodium > 1) && (sodium > 147)) {
-        SetInferredPlanState("HypERnatremiaPlan");        
-    }
-
-
-    //////////////////////////////
-    var potassium = GetLabValue("Potassium");
-    if ((potassium > 1) && (potassium < 3.3)) {
-        SetInferredPlanState("HypokalemiaPlan");
-    }
-    if ((potassium > 1) && (potassium > 4.8)) {
-        SetInferredPlanState("HyperkalemiaPlan");
-    }
-    
-    //////////////////////////////
-    if (((GetLabValue("HCO3") > 1) && (GetLabValue("HCO3") < 21)) 
-            || ((GetLabValue('pH') > 1) && (GetLabValue('pH') < 7.28))
-            || ((GetLabValue('PaCO2') > 1) && (GetLabValue('PaCO2') < 33))) {
-        SetInferredPlanState("AcidBasePlan");
-    }
-    
-    //////////////////////////////
-    if (GetLabValue("Creatinine") > 1.5) {
-        // Cannot tell the difference between AKI and CKD.
-    }
-
-    //////////////////////////////
-    if (((GetLabValue("PTH") > 1) && (GetLabValue("PTH") > 200)) 
-            || ((GetLabValue("Phos") > 1) && (GetLabValue("Phos") > 7))
-            || ((GetLabValue("Calcium") > 1) && (GetLabValue("Calcium") < 7.5))) {
-        SetInferredPlanState("MBDPlan");
-    }
-    if ((GetLabValue("VitD") > 1) && (GetLabValue("VitD") < 20)) {
-        SetInferredPlanState("VitDPlan");
-    }
-        
-    //////////////////////////////
-    if ((GetLabValue('HgbA1c') > 1) && (GetLabValue('HgbA1c') > 7.2)) {
-        SetInferredPlanState("DiabetesPlan");
-    }
-        
-    //////////////////////////////
-    if ((GetLabValue("WeightInKg") > 1) && (GetLabValue("WeightInKg") > 150)) {
-        SetInferredPlanState("ObesityPlan");
-    }
-    
-    //////////////////////////////
-    if ((GetLabValue('CBCHgb') > 1) && (GetLabValue('CBCHgb') <= 10)) {
-        SetInferredPlanState("AnemiaPlan");
-    }
-} // InferPlanItemsBasedOnLabs
 
 
 
@@ -1472,12 +1402,14 @@ SetInferredPlanState(planNameStr) {
 ////////////////////////////////////////////////////////////////////////////////
 function 
 InitPlanState(planNameStr, printFunctionArg) {
+    //LogEvent("InitPlanState. planNameStr= " + planNameStr); 
     var valueEntry = g_AllPlansDeclaration[planNameStr];
     
     valueEntry.isSelected = 0;
     valueEntry.PrintFunction = printFunctionArg;
     valueEntry.planSelectStatusHTMLElement = document.getElementById(valueEntry.planSelectStatusHTMLElementID);   
     //LogEvent("InitPlanState. valueEntry.planSelectStatusHTMLElement= " + valueEntry.planSelectStatusHTMLElement); 
+
     if (valueEntry.planSelectStatusHTMLElement) {
         valueEntry.planSelectStatusHTMLElement.className = "planOffStyle";
     } // if (valueEntry.planSelectStatusHTMLElement)
@@ -1505,10 +1437,11 @@ MedNote_OnCPOptionButton(button) {
     var trNode;
     var tdNode;
     var groupButton;
+    //LogEvent("MedNote_OnCPOptionButton");
 
     optionEntry = g_AllOptionsDeclaration[button.id];
     if (!optionEntry) {
-        LogEvent("MedNote_OnCPOptionButton. null optionEntry. ButtonID=" + button.id);
+        LogEvent("MedNote_OnCPOptionButton. null optionEntry. ButtonID=[" + button.id + "]");
         return;
     }
 
@@ -1644,7 +1577,6 @@ MedNote_GetCPOptionToggleState(optionName) {
 //
 // [MedNote_GetCPOptionValue]
 //
-// button.id is the name of the option state.
 ////////////////////////////////////////////////////////////////////////////////
 function 
 MedNote_GetCPOptionValue(optionName) {
@@ -1662,7 +1594,6 @@ MedNote_GetCPOptionValue(optionName) {
     }
 
     value = optionEntry.ValueList[optionEntry.toggleState];
-    //LogEvent("MedNote_GetCPOptionValue. Value=" + value);
     return(value);
 } // MedNote_GetCPOptionValue
 
@@ -1730,24 +1661,15 @@ function
 MedNote_OnCPGroupButton(button) {
     var planSectionEntry;
     var groupEnabledState;
-    var debug = false;
     var tdNode;
     var trNode;
     var nextTRNode = null;
-
-    if ("xxxxxx" == button.id) {
-        debug = true;
-        LogEvent("MedNote_OnCPGroupButton. button.id=" + button.id);
-    }
 
     // Get the old state of the button, before we change it.
     if (button.className == "CPGroupOnStyle") {
         groupEnabledState = 1;
     } else {
         groupEnabledState = 0;
-    }
-    if (debug) {
-        LogEvent("MedNote_OnCPGroupButton. groupEnabledState=" + groupEnabledState);
     }
 
     // Now, toggle the state of the button.
@@ -1778,11 +1700,6 @@ MedNote_OnCPGroupButton(button) {
 
     // If there is a next row, check to see if it is a continuation of this row.
     while (nextTRNode) {
-        if (debug) {
-            LogEvent("MedNote_OnCPGroupButton. nextTRNode.nodeType=" + nextTRNode.nodeType);
-            LogEvent("MedNote_OnCPGroupButton. nextTRNode.nodeName=" + nextTRNode.nodeName);
-        }
-
         tdNode = Util_GetChildNode(nextTRNode, "TD");
         if (tdNode) {
             var hasChildNodes = Util_NodeHasChildNodes(tdNode);
@@ -1895,7 +1812,7 @@ MedNote_CPReload(button, planSectionName) {
 //
 ////////////////////////////////////////////////////////////////////////////////
 function 
-GetIntInputForControlPanel(activeControlPanel, inputName, globalInputInfoName) {
+GetIntInputForControlPanel(activeControlPanel, inputName) {
     var inputHTMLElement = null;
     var resultInt = -1;
 
@@ -1920,7 +1837,7 @@ GetIntInputForControlPanel(activeControlPanel, inputName, globalInputInfoName) {
 //
 ////////////////////////////////////////////////////////////////////////////////
 function 
-GetFloatInputForControlPanel(activeControlPanel, inputName, globalInputInfoName) {
+GetFloatInputForControlPanel(activeControlPanel, inputName) {
     var inputHTMLElement = null;
     var resultFloat = -1;
 
@@ -1938,6 +1855,25 @@ GetFloatInputForControlPanel(activeControlPanel, inputName, globalInputInfoName)
 
 
 
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// [GetBoolInputForControlPanel]
+//
+////////////////////////////////////////////////////////////////////////////////
+function 
+GetBoolInputForControlPanel(activeControlPanel, inputName) {
+    var resultBool = false;
+
+    var inputHTMLElement = Util_GetDescendantNodeByID(activeControlPanel, inputName);
+    if (inputHTMLElement) {
+        if (inputHTMLElement.className == "CPOptionOnStyle") {
+            resultBool = true;
+        }
+    }
+
+    return(resultBool);
+} // GetBoolInputForControlPanel
 
 
 
@@ -2213,15 +2149,16 @@ WriteListOfSelectedValues(activeControlPanel, prefaceStr, printCount, countSuffi
 
 
 
+
 ////////////////////////////////////////////////////////////////////////////////
 //
 // [WriteListOfSelectedActions]
 //
 // var optionNameList = [ 'p0', 'p1', 'p2' ]; 
-// WriteListOfSelectedActions(activeControlPanel, "Preface", false, "", optionNameList, "Suffix")
+// WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
 ////////////////////////////////////////////////////////////////////////////////
 function 
-WriteListOfSelectedActions(activeControlPanel, prefaceStr, printCount, countSuffixStr, optionNameList, suffixStr) {
+WriteListOfSelectedActions(activeControlPanel, prefaceStr, optionNameList) {
     //LogEvent("WriteListOfSelectedActions. prefaceStr=" + prefaceStr);
     var planStr;
     var currentOptionName;
@@ -2243,16 +2180,111 @@ WriteListOfSelectedActions(activeControlPanel, prefaceStr, printCount, countSuff
     if (count > 0) {
         // Remove the last ", "
         wordListStr = wordListStr.substring(0, wordListStr.length - 2);
-
-        planStr = prefaceStr;
-        if (printCount) {
-            planStr = planStr + count + countSuffixStr;
-        }
-        planStr = planStr + wordListStr + suffixStr;
-
-        WriteAction(planStr);
+        WriteAction(prefaceStr + wordListStr);
     }
 } // WriteListOfSelectedActions
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// [WriteListOfSelectedValuesWithDescriptions]
+//
+////////////////////////////////////////////////////////////////////////////////
+function 
+WriteListOfSelectedValuesWithDescriptions(activeControlPanel, optionNameList, valueList, valueNameList) {
+    var planStr = "";
+
+    for (index = 0; index < optionNameList.length; index++) {
+        var currentOptionName = optionNameList[index];
+        //LogEvent("currentOptionName = " + currentOptionName);
+
+        var currentOptionStr = MedNote_GetCPOptionValue(currentOptionName);
+        if ((currentOptionStr != null) && (currentOptionStr != "")) {
+            planStr = planStr + currentOptionStr;
+
+            var currentValue = valueList[index];
+            var currentValueName = valueNameList[index];
+            //LogEvent("currentValue = " + currentValue + "currentValueName = " + currentValueName);
+            if (currentValue != "") {
+                planStr = planStr + currentValue;
+            } else if (currentValueName != "") {
+                currentValue = GetStrInputForControlPanel(activeControlPanel, currentValueName);
+                if ((currentValue != null) && (currentValue != "")) {
+                    planStr = planStr + currentValue;
+                }
+            }
+            planStr = planStr + ", ";
+        }
+    } // for (index = 0; index < optionNameList.length; index++)
+
+    if (planStr != "") {
+        // Remove the last ", "
+        planStr = planStr.substring(0, planStr.length - 2);
+        WriteComment(planStr);
+    }
+} // WriteListOfSelectedValuesWithDescriptions
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// [WriteListOfSelectedMedHistoryItem
+//
+////////////////////////////////////////////////////////////////////////////////
+function 
+WriteListOfSelectedMedHistoryItems(activeControlPanel, prefaceStr, optionNameList) {
+    //LogEvent("WriteListOfSelectedMedHistoryItems. prefaceStr=" + prefaceStr);
+    var currentOptionValue;
+    var index;
+
+    WriteTextLine(prefaceStr);
+    //LogEvent("WriteListOfSelectedMedHistoryItems. optionNameList.length=" + optionNameList.length);
+    for (index = 0; index < optionNameList.length; index++) {
+        currentOptionValue = MedNote_GetCPOptionValue(optionNameList[index]);
+        if (currentOptionValue) {
+            WriteTextLine("- " + currentOptionValue);
+        }
+    } // for (index = 0; index < optionNameList.length; index++)
+} // WriteListOfSelectedMedHistoryItems
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// [WriteHistoryItem]
+//
+////////////////////////////////////////////////////////////////////////////////
+function 
+WriteHistoryItem(activeControlPanel, prefaceStr, optionNameList, defaultStr) {
+    var planStr;
+    var currentOptionValue;
+    var count = 0;
+    var wordListStr = "";
+
+    for (index = 0; index < optionNameList.length; index++) {
+        currentOptionValue = MedNote_GetCPOptionValue(optionNameList[index]);
+        if (currentOptionValue) {
+            wordListStr = wordListStr + currentOptionValue + ", ";
+            count += 1;
+        }
+    } // for (index = 0; index < optionNameList.length; index++)
+
+    if (count <= 0) {
+        wordListStr = defaultStr;
+    } else {
+        wordListStr = wordListStr.substring(0, wordListStr.length - 2);
+    }
+
+    planStr = prefaceStr + wordListStr;
+    WriteTextLine(planStr);
+} // WriteHistoryItem
+
 
 
 
@@ -2262,8 +2294,6 @@ WriteListOfSelectedActions(activeControlPanel, prefaceStr, printCount, countSuff
 //
 // [CountSelectedValues]
 //
-// var optionNameList = [ 'p0', 'p1', 'p2' ]; 
-// CountSelectedValues(activeControlPanel, optionNameList)
 ////////////////////////////////////////////////////////////////////////////////
 function 
 CountSelectedValues(activeControlPanel, optionNameList) {
@@ -2285,52 +2315,6 @@ CountSelectedValues(activeControlPanel, optionNameList) {
 
     return(count);
 } // CountSelectedValues
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-//
-// [WriteListOfSubActions]
-//
-// var optionNameList = [ 'p0', 'p1', 'p2' ]; 
-// WriteListOfSubActions(activeControlPanel, "Preface", optionNameList)
-////////////////////////////////////////////////////////////////////////////////
-function 
-WriteListOfSubActions(activeControlPanel, prefaceStr, actionNameList) {
-    //LogEvent("WriteListOfSubActions");
-    var planStr;
-    var currentActionName;
-    var currentActionValue;
-    var index = 0;
-    var indentNum;
-    var writeAtLeastOneAction = false;
-
-    for (index = 0; index < actionNameList.length; index++) {
-        currentActionName = actionNameList[index];
-        if (MedNote_GetCPOptionBool(currentActionName)) {
-            writeAtLeastOneAction = true;
-            break;
-        }
-    } // for (index = 0; index < optionNameList.length; index++)
-
-    if (!writeAtLeastOneAction) {
-        return;
-    }
-
-    WriteAction(prefaceStr);
-    for (index = 0; index < actionNameList.length; index++) {
-        currentActionName = actionNameList[index];
-
-        if (MedNote_GetCPOptionBool(currentActionName)) {
-            planStr = MedNote_GetCPOptionValue(currentActionName);
-            WriteIndentedTextLine(planStr);
-        }
-    } // for (index = 0; index < optionNameList.length; index++)
-} // WriteListOfSubActions
-
-
 
 
 
@@ -2384,34 +2368,27 @@ WriteListOfSelectedFormatStrings(activeControlPanel, optionNameList) {
                     formatStr = formattingOptionEntry.FormatString;
                     intValueName = formattingOptionEntry.CPInputValueName;
                     if ((intValueName != null) && (intValueName != "")) {
-                        strValue = GetStrInputForControlPanel(activeControlPanel, intValueName, null);
+                        strValue = GetStrInputForControlPanel(activeControlPanel, intValueName);
                         formatStr = formatStr.replace(/{VAL}/gi, strValue);
                     } // if ((intValueName != null) && (intValueName != "")) {
                 ///////////////////////////
                 } else if ((formatType != null) && (formatType == "Ratio")) {
                     formatStr = formattingOptionEntry.FormatString;
                     numeratorValueName = formattingOptionEntry.CPInputValueName;
-                    //LogEvent("WriteListOfSelectedFormatStrings. numeratorValueName=" + numeratorValueName);
                     denominatorValueName = formattingOptionEntry.CPInputRatioDenominatorValueName;
-                    //LogEvent("WriteListOfSelectedFormatStrings. denominatorValueName=" + denominatorValueName);
+
                     if ((numeratorValueName != null) && (numeratorValueName != "") 
                             && (denominatorValueName != null) && (denominatorValueName != "")) {
-                        numeratorValue = GetIntInputForControlPanel(activeControlPanel, numeratorValueName, null);
-                        //LogEvent("WriteListOfSelectedFormatStrings. numeratorValue=" + numeratorValue);
-                        denominatorValue = GetIntInputForControlPanel(activeControlPanel, denominatorValueName, null);
-                        //LogEvent("WriteListOfSelectedFormatStrings. denominatorValue=" + denominatorValue);
+                        numeratorValue = GetIntInputForControlPanel(activeControlPanel, numeratorValueName);
+                        denominatorValue = GetIntInputForControlPanel(activeControlPanel, denominatorValueName);
                         ratioValue = numeratorValue / denominatorValue;
-                        //LogEvent("WriteListOfSelectedFormatStrings. ratioValue=" + ratioValue);
                         ratioValue = Math.round( ratioValue * 100 ) / 100;
-                        //LogEvent("WriteListOfSelectedFormatStrings. ratioValue=" + ratioValue);
 
                         formatStr = formatStr.replace(/{RATIO}/gi, ratioValue.toString());
                     } // if ((numeratorValueName != null) && (numeratorValueName != "") && ...
                 }
 
-                //LogEvent("WriteListOfSelectedFormatStrings. planStr=" + planStr);
-                //LogEvent("WriteListOfSelectedFormatStrings. formatStr=" + formatStr);
-                planStr = planStr + formatStr;
+                planStr += formatStr;
                 count += 1;
             } // if (formattingOptionEntry)
         } // if (MedNote_GetCPOptionBool(currentActionName))
@@ -2509,6 +2486,9 @@ NB_OnProblemSectionLabelSelect(menuControl) {
     //LogEvent("selectedItem=" + selectedItem);
     if (selectedItem == "MEDNOTEMAKER_PROBLEM_SECTIONS_LABEL_SLASH_COLON") {
         SUBSECTION_SUBHEADER_OPEN_PREFIX = "/";
+        SUBSECTION_SUBHEADER_CLOSE_SUFFIX = ":";
+    } else if (selectedItem == "MEDNOTEMAKER_PROBLEM_SECTIONS_LABEL_DOUBLESLASH_COLON") {
+        SUBSECTION_SUBHEADER_OPEN_PREFIX = "//";
         SUBSECTION_SUBHEADER_CLOSE_SUFFIX = ":";
     } else if (selectedItem == "MEDNOTEMAKER_PROBLEM_SECTIONS_LABEL_COLON") {
         SUBSECTION_SUBHEADER_OPEN_PREFIX = "";
@@ -2664,18 +2644,5 @@ AddSingleLinePlanAtEnd(planSectionName, planTitleStr, planActionStr) {
     textStr = PROBLEM_SECTION_HEADER_PREFIX + planTitleStr + PROBLEM_SECTION_HEADER_SUFFIX + " - " + planActionStr;
     planSectionEntry.SingleLinePlans.push(textStr)
 } // AddSingleLinePlanAtEnd
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
