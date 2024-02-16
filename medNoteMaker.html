@@ -22,7 +22,6 @@
 
     <!-- type="application/javascript" will not work in some IE versions -->
     <script src="./JSBuildingBlocks.cpp" type="text/javascript"></script>
-    <!-- <script src="./medNoteMakerData.cpp" type="text/javascript"></script> -->
     <script src="./medNoteMakerPlans.cpp" type="text/javascript"></script>
     <script src="./medNoteMakerTables.cpp" type="text/javascript"></script>
     <script src="./medNoteMakerMain.cpp" type="text/javascript"></script>
@@ -41,10 +40,10 @@
     <div id="navBar">
     <ul>
     <li class="navBarTab"><a href="./index.html" title="Main">Main</a></li>
-    <li class="navBarTab"><a href="./medicalAI.html" title="Medical AI">Medical AI</a></li>
+    <!-- <li class="navBarTab"><a href="./medicalAI.html" title="Medical AI">Medical AI</a></li> -->
     <li class="navBarActiveTab"><a href="./medNoteMaker.html" title="MedNote">MedNote</a></li>    
     <li class="navBarTab"><a href="./medicine.html" title="Medicine">Medicine</a></li>    
-    <li class="navBarTab"><a href="./software.html" title="Source Code">Source Code</a></li>
+    <li class="navBarTab"><a href="./sourceCode.html" title="Source Code">Source Code</a></li>
     <li class="navBarTab"><a href="./siliconValley.html" title="Silicon Valley">Silicon Valley</a></li>
     <li class="navBarTab"><a href="./tipsAndTricks.html" title="Tips">Tips</a></li>
     <li class="navBarTab"><a href="./furniture.html" title="Woodworking">Woodworking</a></li>
@@ -236,9 +235,7 @@
 <tr>
     <td><b>Billing</b></td> 
     <td><input type="button" id="BillingPlan" value="Billing" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <!-- 
-        <td><input type="button" id="PreventionPlan" value="Prevention" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    -->
+    <td><input type="button" id="PreventionPlan" value="Prevention" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
 </tr>
 
 </table>
@@ -274,8 +271,7 @@
 <center>
 <h2>Medical Note Maker</h2>
 <br>Written by Dawson Dean
-<br>Last updated: 2021-1-18
-<br>For comments and questions, email mednotemaker@gmail.com
+<br>For comments and questions, email dfdean3@gmail.com
 <br>Code is available at <a href="https://github.com/dfdean/MedNoteMaker" target="_blank">https://github.com/dfdean/MedNoteMaker</a>
 <br><br><br><br>
 <input type="button" id="CloseHelpButtonID" value="Close" class="OptionBtnStyle" onclick="MedNote_OnCloseChildWindow(this)" >
@@ -1195,7 +1191,7 @@ to insert the appropriate elements into the control panel. -->
     <table border="0" style="border-spacing:0.1em;">
         <tr>
         <td><b><u>Cirrhosis</u></b></td>
-        <td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="CirrhosisCompensatedOption" value="Decompensated" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="CirrhosisPossibleOption" value="Possible" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="CirrhosisCauseOption" value="EtOH" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" value="Reload" class="CPGroupOnStyle" onclick="MedNote_CPReload(this, 'CirrhosisPlan')" ></td>
         <td><input type="button" value="Show Hints" class="CPGroupOnStyle" onclick="MedNote_CPToggleHints(this)" ></td>
@@ -1206,6 +1202,8 @@ to insert the appropriate elements into the control panel. -->
         <td>&nbsp;</td>
         <td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="CirrhosisCoagulopathyOption" value="Coagulopathy" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="CirrhosisThrombocytopeniaOption" value="Thrombocytopenia" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="CirrhosisBiopsyRecordOption" value="No Biopsy" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
@@ -1401,6 +1399,7 @@ to insert the appropriate elements into the control panel. -->
         <td><b><u>Acute Kidney Injury</u></b></td>
         <td><input type="button" id="AKIOnCKDOption" value="AKI" class="CPOptionOnStyle" toggleState="0" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AKIATNOption" value="ATN" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="AKICardiorenalOption" value="Cardiorenal" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" value="Reload" class="CPGroupOnStyle" onclick="MedNote_CPReload(this, 'AKIPlan')" ></td>
         <td><input type="button" value="Hide" class="CPGroupOnStyle" onclick="MedNote_CPToggleControls(this)" ></td>
         </tr>
@@ -1443,6 +1442,7 @@ to insert the appropriate elements into the control panel. -->
         <td><input type="button" value="Labs" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
         <td><input type="button" id="AKITrendCrOption" value="Trend Cr" class="CPOptionOnStyle" toggleState="0" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AKIBaselineCrOption" value="Baseline Cr" class="CPOptionOnStyle" toggleState="0" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="AKICystatinCTrendOption" value="Trend CysC" class="CPOptionDisabledStyle" toggleState="0" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AKITrendUrineOption" value="Trend Urine" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AKIEstimateGFROption" value="Estimate GFR" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <!--<td><input type="button" id="AKIBaselineGFROption" value="Baseline Urine" class="CPOptionOnStyle" toggleState="0" onclick="MedNote_OnCPOptionButton(this)" ></td>-->
@@ -1477,6 +1477,13 @@ to insert the appropriate elements into the control panel. -->
     </tr>
 
     <tr>
+        <td><input type="button" value="Cardiorenal Signs" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" id="AKIOverloadedOption" value="Euvolemic" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="AKICXRResultsOption" value="CXR Clear" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="AKIBNPLowOption" value="BNP Low" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
+    <tr>
         <td><input type="button" value="Etiology" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
         <td><input type="button" id="AKIStartedOption" value="AKI Start Date" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AKISepsisption" value="Sepsis" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
@@ -1507,6 +1514,8 @@ to insert the appropriate elements into the control panel. -->
         <td><input type="button" value="Workup" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
         <td><input type="button" id="AKIUrinalysisOption" value="Urinalysis" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AKILytesOption" value="Urine Lytes" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="AKIBNPOption" value="BNP" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="AKICXROption" value="CXR" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AKICPKOption" value="CPK" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
@@ -1522,16 +1531,21 @@ to insert the appropriate elements into the control panel. -->
         <td><input type="button" id="AKIFluidBolusOption" value="Bolus LR" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AKIMaintFluidOption" value="IV Drip LR" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AKIDiureseOption" value="Diurese" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="AKITreatUTIOption" value="Treat UTI" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
     <tr>
         <td></td>
-        <td><input type="button" id="AKITreatBladderScanOption" value="Bladder Scan" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="AKIHoldDiureticsOption" value="Hold Diuretics" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="AKIHoldNSAIDsOption" value="Hold NSAIDs" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="AKIHoldACEARBOption" value="Hold Lisinopril" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
+    <tr>
+        <td></td>
+        <td><input type="button" id="AKITreatUTIOption" value="Treat UTI" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AKITreatFoleyOption" value="Foley" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AKITreatTamsulosinOption" value="Tamsulosin" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="AKIHoldACEARBOption" value="Hold Lisinopril" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="AKIHoldDiureticsOption" value="Hold Diuretics" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="AKITreatBladderScanOption" value="Bladder Scan" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
     <tr>
@@ -3851,7 +3865,6 @@ SGLT2 Criteria
     <tr>
         <td><input type="button" value="Workup" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
         <td><input type="button" id="PneumoniaWUXRayOption" value="Chest XRay" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="PneumoniaWUNaresOption" value="MRSA Nares" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="PneumoniaWUSputumCultureOption" value="Sputum Cx" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="PneumoniaWURVPOption" value="RVP" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="PneumoniaWUBloodCultureOption" value="Blood Cx" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
@@ -4647,8 +4660,6 @@ This is Severe Persistent (throughout the day)
 
 
 
-
-
 <!-------------------------------------------------------->
 <!-- OBESITY_CONTROL_PANEL -->
 <!-------------------------------------------------------->
@@ -4661,7 +4672,7 @@ This is Severe Persistent (throughout the day)
         <td><input type="button" id="ObesityClassOption" value="Class 1" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" value="Tiny Plan" class="CPOptionDisabledStyle" onclick="MedNote_ToggleTinyPlan(this, 'ObesityPlan')" ></td>
         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-        <td><input type="button" value="Show Hints" class="CPGroupOnStyle" onclick="MedNote_CPToggleHints(this)" ></td>
+        <!-- <td><input type="button" value="Show Hints" class="CPGroupOnStyle" onclick="MedNote_CPToggleHints(this)" ></td> -->
         <td><input type="button" value="Reload" class="CPGroupOnStyle" onclick="MedNote_CPReload(this, 'ObesityPlan')" ></td>
         </tr>
     </table>
@@ -6557,6 +6568,12 @@ Pre-operative colonization with Staphylococcus aureus increases SSI risk. Screen
     </tr>
 
     <tr>
+        <td><input type="button" value="Workup" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" id="MBD_OPTION_CHECK_PTH" value="Check PTH" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="MBD_OPTION_CHECK_VITD" value="Check VitD" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
+    <tr>
         <td><input type="button" value="Treat" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
         <td><input type="button" id="MBD_OPTION_TEAT_BINDER" value="Sevelamer 800" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="MBD_OPTION_TEAT_CALCITRIOL" value="Calcitiol 0.25" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
@@ -6698,6 +6715,8 @@ Pre-operative colonization with Staphylococcus aureus increases SSI risk. Screen
 
     <tr>
         <td></td>
+        <td><input type="button" id="HEPATITIS_CheckCMV_OPTION" value="CMV" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="HEPATITIS_CheckEBV_OPTION" value="EBV" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="HEPATITIS_CheckCeruloplasm_OPTION" value="Ceruloplasm" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="HEPATITIS_CheckApap_OPTION" value="Apap" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
@@ -6864,7 +6883,13 @@ Pre-operative colonization with Staphylococcus aureus increases SSI risk. Screen
     <tr>
         <td></td>
         <td><input type="button" id="GISymptoms_CheckTTG_Option" value="TTG" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="GISymptoms_CheckGliadin_Option" value="Gliadin" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="GISymptoms_CheckEndomysial_Option" value="Endomysial" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="GISymptoms_CheckUDS_Option" value="UDS" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
+    <tr>
+        <td></td>
         <td><input type="button" id="GISymptoms_CheckCA125_Option" value="CA125" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="GISymptoms_CheckCA19_Option" value="CA19-9" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="GISymptoms_CheckCEA_Option" value="CEA" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
@@ -6873,10 +6898,12 @@ Pre-operative colonization with Staphylococcus aureus increases SSI risk. Screen
 
     <tr>
         <td><input type="button" value="Stool Workup" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" id="GISymptoms_CheckCDiff_Option" value="C diff" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="GISymptoms_CheckGIPanel_Option" value="GI Panel" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="GISymptoms_CheckLactoferrin_Option" value="Lactoferrin" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="GISymptoms_CheckHPylori_Option" value="H Pylori" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="GISymptoms_CheckStoolCMV_Option" value="Stool CMV" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="GISymptoms_CheckStoolCalprotectin_Option" value="Calprotectin" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
 
@@ -7696,8 +7723,10 @@ Stage IV pressure ulcers extend into bone or muscle, as is seen in Figure 5
         <td><b><u>Billing</u></b></td>
         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
         <td><input type="button" value="Show Hints" class="CPGroupOnStyle" onclick="MedNote_CPToggleHints(this)" ></td>
+<!--
         <td><input type="button" value="Reload" class="CPGroupOnStyle" onclick="MedNote_CPReload(this, 'XXXXXXXXX')" ></td>
         <td><input type="button" value="Hide" class="CPGroupOnStyle" onclick="MedNote_CPToggleControls(this)" ></td>
+-->
         </tr>
     </table>
 </div> <!-- xID="CPHeader" -->
@@ -7708,6 +7737,7 @@ Stage IV pressure ulcers extend into bone or muscle, as is seen in Figure 5
     <td id="ResultBillingLevel_CP"> </td>    
     </tr>
 </table>
+<br>
 Level 3 note requires:
 <br>HPI: ROS: 10 systems, Physical: 2-3 items in 8+ systems
 <br>F/U: ROS: 2 or more, Physical: 2 items in 8+ systems
@@ -7726,9 +7756,6 @@ Level 3 note requires:
         <td><input type="button" id="BILLING_COMPLEXITY_EXACERBATION" value="Exacerbation" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="BILLING_COMPLEXITY_PROGRESSION" value="Progression" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
-
-
-
 
     <tr>
         <td><input type="button" value="2a-Data: Labs" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
@@ -7753,12 +7780,17 @@ Level 3 note requires:
     <tr>
         <td><input type="button" value="3-Risk" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
         <td><input type="button" id="BILLING_RISK_TOXICITY" value="Toxicity" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="BILLING_RISK_AKI" value="AKI" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="BILLING_RISK_BLEEDING" value="Bleeding" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="BILLING_RISK_IMMUNOSUPPRESSED" value="Infection" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
+    <tr>
+        <td></td>
         <td><input type="button" id="BILLING_RISK_OPIOIDS" value="IV Opioids" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="BILLING_RISK_ESCALATION" value="Escalation" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="BILLING_RISK_DNR" value="DNR" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
-
-
 
     <tr>
         <td><input type="button" value="References" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
@@ -7766,8 +7798,61 @@ Level 3 note requires:
 
     </table>
 
+
+
+
+<hr><b>Critical Care:</b>
+    <table border="0" style="border-spacing:0.1em; padding:10px;">
+
+    <tr>
+        <td><input type="button" value="Header" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" id="BILLING_COMPLEXITY_CRITCARE_GENERAL" value="Critical Care" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
+
+    <tr>
+        <td><input type="button" value="Actions" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+
+        <td><input type="button" id="BILLING_COMPLEXITY_CRITCARE_HISTORY" value="History" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="BILLING_COMPLEXITY_CRITCARE_EXAM" value="Examine" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="BILLING_COMPLEXITY_CRITCARE_PLAN" value="Plan" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="BILLING_COMPLEXITY_CRITCARE_CONSULTANTS" value="Consultants" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="BILLING_COMPLEXITY_CRITCARE_RESPONSE" value="Response" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
+
+    <tr>
+        <td> </td>
+        <td><input type="button" id="BILLING_COMPLEXITY_CRITCARE_ORDERS" value="Orders" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="BILLING_COMPLEXITY_CRITCARE_ORDER_LABS" value="Labs" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="BILLING_COMPLEXITY_CRITCARE_CT" value="CT" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="BILLING_COMPLEXITY_CRITCARE_CXR" value="CXR" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="BILLING_COMPLEXITY_CRITCARE_PULSEOX" value="PulseOx" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
+
+    <tr>
+        <td> </td>
+        <td><input type="button" id="BILLING_COMPLEXITY_CRITCARE_ABG" value="ABG" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="BILLING_COMPLEXITY_CRITCARE_IV" value="IV" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
+
+    <tr>
+        <td><input type="button" value="Time" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" id="BILLING_COMPLEXITY_CRITCARE_TIME_SPENT" value="30 min" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+    </table>
+
+
+
+
+
     <!-- HINT TEXT -->
     <div xID="CPHintText" style="display:None;">
+In the AMA guidelines, "The risk of patient management criteria applies to the patient management decisions made by
+the reporting physician or other qualified health care professional as part of the reported encounter".
+So, if an admission includes high risk procedures that require the internist to monitor for adverse effects, then it has high complexity risk.
     </div> <!-- xID="CPHintText" -->
 
 </div> <!-- xID="CPBody" -->

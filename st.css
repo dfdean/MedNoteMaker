@@ -9,7 +9,6 @@ values are unique, so there can only be 1 mainContent.
 The "." character means this is any element with a specific value of the class attribute.
 Class attribute values are NOT unique, so it can apply to many elements in one document.
 */
-
 body { background: #ffffff font-family: Verdana, Arial, Helvetica, sans-serif; margin: 0; padding: 0;}
 
 a:link, a:visited {color: #0677D7; text-decoration: none; }
@@ -27,6 +26,7 @@ p, li {font: 90% Arial, Verdana, sans-serif; letter-spacing: 0;}
 
 /* //////////////////////////////////////////////// */
 /* Header */
+/* //////////////////////////////////////////////// */
 #header {background: #CEF6F5 repeat-x; margin: 0; padding: 0;}
 #header a {color: #000; text-decoration: none; }
 #header h1 {margin: 0 0 0 20px;}
@@ -38,8 +38,8 @@ p, li {font: 90% Arial, Verdana, sans-serif; letter-spacing: 0;}
 
 /* //////////////////////////////////////////////// */
 /* Articles */
+/* //////////////////////////////////////////////// */
 .article img.left {clear:left; float:left; margin:0pt 1.1538em 0pt 0pt; }
-
 
 /* articleContent. Each articleContent contains a series of paragraphs. */
 .articleContent {font-size:14px;}
@@ -48,6 +48,7 @@ p, li {font: 90% Arial, Verdana, sans-serif; letter-spacing: 0;}
 
 /* //////////////////////////////////////////////// */
 /* Navigation Bar */
+/* //////////////////////////////////////////////// */
 #navBar{width: 90%; overflow: hidden; margin-left: 22px; margin-top:10px;}
 #navBar ul{margin: 0; padding: 0; }
 #navBar ul li{float: left; display: inline; margin: 0; padding: 0; }

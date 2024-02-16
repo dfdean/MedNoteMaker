@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2013-2023 Dawson Dean
+// Copyright (c) 2013-2024 Dawson Dean
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the "Software"),
@@ -26,9 +26,6 @@
 // the layout of HTML elements in the UI. This layout is done initially when the 
 // UI opens, but also may change the UI elements dynamically in response to user 
 // actions.
-//
-/////////////////////////////////////////////////////////////////////////////
-//
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -72,7 +69,6 @@ var CONTROL_PANEL_BACKGROUND_STYLE = "background-color:#F0F0F0; border:4px outse
 
 ////////////////////////////////////
 // User Options
-var g_OptionsInferProblems = true;
 var g_IsPrimary = true;
 var g_EmitBoilerplate = true;
 var g_CollectedSystemInfo = false;
@@ -255,6 +251,7 @@ StartMedNoteMaker() {
 //
 // [OnPlanButton]
 //
+// This is called when the user clicks a button in the GUI.
 // button.id is the name of the plan state.
 ////////////////////////////////////////////////////////////////////////////////
 function 
@@ -271,10 +268,7 @@ OnPlanButton(button) {
         LogEvent("OnPlanButton. null valueEntry.planSelectStatusHTMLElement");
         return;
     }
-    //LogEvent("OnPlanButton. valueEntry.planSelectStatusHTMLElement=" + valueEntry.planSelectStatusHTMLElement);
-    //LogEvent("OnPlanButton. valueEntry.planSelectStatusHTMLElement.className=" + valueEntry.planSelectStatusHTMLElement.className);
-    //LogEvent("OnPlanButton. valueEntry.planSelectStatusHTMLElement.className=" + valueEntry.planSelectStatusHTMLElement.className.toUpperCase());
-    
+
     // The HTML state is visible, so that is considered the final "truth".
     // There are cases where the runtime isSelectedFlag and the html can get out of sync, which are bugs and will be fixed.
     if (valueEntry.planSelectStatusHTMLElement.className.toUpperCase() == "PLANOFFSTYLE") {
@@ -290,7 +284,6 @@ OnPlanButton(button) {
     }
     
     WritePlanBody();
-
     //LogEvent("OnPlanButton done");
 } // OnPlanButton
 
@@ -306,7 +299,6 @@ OnPlanButton(button) {
 ////////////////////////////////////////////////////////////////////////////////
 function 
 ResetNotebuilderState() {
-    //LogEvent("ResetNotebuilderState");
     var index;
 
     for (var planName in g_AllPlansDeclaration) {
@@ -342,8 +334,7 @@ ResetNotebuilderState() {
 ////////////////////////////////////////////////////////////////////////////////
 function 
 OnPlanTypeButton(button) {
-    //LogEvent("OnPlanTypeButton");
-    //LogEvent("button.id = " + button.id);
+    //LogEvent("OnPlanTypeButton. button.id = " + button.id);
     
     ////////////////////////////////////
     if (button.id == "FullPlanOption") {
@@ -539,11 +530,8 @@ WritePlanHeader() {
     optionNameList = [ "AccessTypeOption", "AccessBruitOption", "AccessThrillOption", "AccessAugmentationOption"];
     WriteListOfSelectedValues(activeControlPanel, "Access: ", false, "", optionNameList, "")
 
-    //WriteTextLine("");
-    //WriteTextLine("IMAGING:");
     WriteTextLine("");
     WriteTextLine("ASSESSMENT/PLAN");
-
     //LogEvent("FINISH WritePlanHeader");
 } // WritePlanHeader
 
@@ -559,7 +547,6 @@ WritePlanHeader() {
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WritePlanFooter() {
-    //LogEvent("WritePlanFooter");
     var str;
     var modifierStr;
     var activeControlPanel = null;
@@ -773,8 +760,12 @@ WritePlanBody() {
         valueEntry.PrintFunction();
     }
 
-    ClearInferredPlanItems();    
-    //LogEvent("FINISH WritePlanBody");
+    for (var planName in g_AllPlansDeclaration) {
+        var valueEntry = g_AllPlansDeclaration[planName];
+        if ((valueEntry) && (valueEntry.isSelected == 2)) {
+            valueEntry.isSelected = 0;
+        }
+    }
 } // WritePlanBody
 
 
@@ -967,7 +958,6 @@ MedNote_AddRelatedProblemIfSelected(activeControlPanel, optionName) {
 
 
     
-//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ////////////////////////////////////////////////////////////////////////////////
 //
 // [MedNode_WriteSubPlan]
@@ -1066,6 +1056,42 @@ WriteListOfSubActions(prefaceStr, actionNameList) {
 
 
 
+////////////////////////////////////////////////////////////////////////////////
+//
+// [WriteListOfSelectedActions]
+//
+// This writes a list of actions:
+// - Check lab1, lab2, lab3
+//
+// You call it like this:
+// var optionNameList = [ 'p0', 'p1', 'p2' ]; 
+// WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
+////////////////////////////////////////////////////////////////////////////////
+function 
+WriteListOfSelectedActions(activeControlPanel, prefaceStr, optionNameList) {
+    var planStr;
+    var currentOptionName;
+    var currentOptionValue;
+    var count = 0;
+    var wordListStr = "";
+
+    for (index = 0; index < optionNameList.length; index++) {
+        currentOptionName = optionNameList[index];
+        currentOptionValue = MedNote_GetCPOptionValue(currentOptionName);
+        if (currentOptionValue) {
+            //LogEvent("WriteListOfSelectedValues. currentOptionValue=" + currentOptionValue);
+            wordListStr = wordListStr + currentOptionValue + ", ";
+            count += 1;
+        }
+    } // for (index = 0; index < optionNameList.length; index++)
+
+    if (count > 0) {
+        // Remove the last ", "
+        wordListStr = wordListStr.substring(0, wordListStr.length - 2);
+        WriteAction(prefaceStr + wordListStr);
+    }
+} // WriteListOfSelectedActions
+
 
 
 
@@ -1101,8 +1127,6 @@ AddTextToHTML(parentNode, str) {
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteTextLine(str) {
-    //LogEvent("WriteTextLine. str=" + str);
-    //LogEvent("WriteTextLine. g_CurrentPlanSectionTextElement=" + g_CurrentPlanSectionTextElement);
     var brNode;
     var textNode;   
 
@@ -1151,8 +1175,6 @@ WriteIndentedTextLine(str) {
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteComment(str) {
-    //LogEvent("WriteComment. str=" + str);
-    //LogEvent("WriteComment. g_CurrentPlanSectionTextElement=" + g_CurrentPlanSectionTextElement);
     var brNode;
     var textNode;   
     var IncludeAssessmentSubsection = 0;
@@ -1243,11 +1265,8 @@ OnShowWindowButton(button) {
 ////////////////////////////////////////////////////////////////////////////////
 function
 ShowSubWindow(windowName, statusTextStr, showHelpClose) {
-    //LogEvent("ShowSubWindow");
-    //LogEvent("windowName = " + windowName);
-
     ////////////////////////////////////
-    // First, turn everythng off.
+    // First, turn everything off.
     // We will selectively turn fields on depending on what was selected.    
     if (g_ToolBarElement) {
         g_ToolBarElement.style.display = "None";
@@ -1357,39 +1376,6 @@ MedNote_OnCloseChildWindow(button) {
 
 
 
-////////////////////////////////////////////////////////////////////////////////
-//
-// [ClearInferredPlanItems]
-//
-////////////////////////////////////////////////////////////////////////////////
-function 
-ClearInferredPlanItems() {
-    //LogEvent("ClearInferredPlanItems");
-    for (var planName in g_AllPlansDeclaration) {
-        var valueEntry = g_AllPlansDeclaration[planName];
-        if ((valueEntry) && (valueEntry.isSelected == 2)) {
-            valueEntry.isSelected = 0;
-        }
-    }
-} // ClearInferredPlanItems
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-//
-// [SetInferredPlanState]
-//
-////////////////////////////////////////////////////////////////////////////////
-function 
-SetInferredPlanState(planNameStr) {
-    //LogEvent("SetInferredPlanState. planNameStr=" + planNameStr);
-    var valueEntry = g_AllPlansDeclaration[planNameStr];    
-    if (!valueEntry.isSelected) {
-        valueEntry.isSelected = 2;
-    }
-} // SetInferredPlanState
 
 
 
@@ -1930,22 +1916,18 @@ SetStrOutputForControlPanel(activeControlPanel, outputName, globalInputInfoName,
 ////////////////////////////////////////////////////////////////////////////////
 function 
 MedNote_CPToggleControls(button) { 
-    //LogEvent("MedNote_CPToggleControls");
     var cpHeader;
     var cpBody;
     
     if (!button) {
-        //LogEvent("MedNote_CPToggleControls. NULL button");
         return;
     }
     cpHeader = Util_GetAncestorNodeByxID(button, "CPHeader");
     if (!cpHeader) {
-        //LogEvent("MedNote_CPToggleControls. NULL cpHeader");
         return;
     }
     cpBody = Util_GetPeerNodeByxID(cpHeader, "CPBody");
     if (!cpBody) {
-        //LogEvent("MedNote_CPToggleControls. NULL Body");
         return;
     }
 
@@ -1972,7 +1954,6 @@ MedNote_CPToggleControls(button) {
 ////////////////////////////////////////////////////////////////////////////////
 function 
 MedNote_CPToggleHints(button) { 
-    //LogEvent("MedNote_CPToggleHints");
     var cpBody;
     var cpHeader;
     var hintsDiv;
@@ -1987,10 +1968,8 @@ MedNote_CPToggleHints(button) {
     if (!cpBody) {
         // If it is not inside the body, then it may be inside the header,
         // which is a peer of the body.
-        //LogEvent("MedNote_CPToggleHints. Go through the header");
         cpHeader = Util_GetAncestorNodeByxID(button, "CPHeader");
         if (cpHeader) {
-            //LogEvent("MedNote_CPToggleHints. cpHeader=" + cpHeader);
             cpBody = Util_GetPeerNodeByxID(cpHeader, "CPBody");
         }
     }
@@ -2000,7 +1979,6 @@ MedNote_CPToggleHints(button) {
         LogEvent("MedNote_CPToggleHints. null cpBody");
         return;
     }
-    //LogEvent("MedNote_CPToggleHints. button.value=" + button.value);
 
     hintsDiv = Util_GetDescendantNodeByXID(cpBody, "CPHintText");
     if (!hintsDiv) {
@@ -2050,7 +2028,6 @@ WriteActionIfSelected(activeControlPanel, optionName) {
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteCommentIfSelected(activeControlPanel, optionName) {
-    //LogEvent("WriteCommentIfSelected. optionName=" + optionName);
     var planStr;
 
     planStr = MedNote_GetCPOptionValue(optionName);
@@ -2146,43 +2123,6 @@ WriteListOfSelectedValues(activeControlPanel, prefaceStr, printCount, countSuffi
     }
 } // WriteListOfSelectedValues
 
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-//
-// [WriteListOfSelectedActions]
-//
-// var optionNameList = [ 'p0', 'p1', 'p2' ]; 
-// WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
-////////////////////////////////////////////////////////////////////////////////
-function 
-WriteListOfSelectedActions(activeControlPanel, prefaceStr, optionNameList) {
-    //LogEvent("WriteListOfSelectedActions. prefaceStr=" + prefaceStr);
-    var planStr;
-    var currentOptionName;
-    var currentOptionValue;
-    var count = 0;
-    var wordListStr = "";
-
-    //LogEvent("WriteListOfSelectedValues. optionNameList.length=" + optionNameList.length);
-    for (index = 0; index < optionNameList.length; index++) {
-        currentOptionName = optionNameList[index];
-        currentOptionValue = MedNote_GetCPOptionValue(currentOptionName);
-        if (currentOptionValue) {
-            //LogEvent("WriteListOfSelectedValues. currentOptionValue=" + currentOptionValue);
-            wordListStr = wordListStr + currentOptionValue + ", ";
-            count += 1;
-        }
-    } // for (index = 0; index < optionNameList.length; index++)
-
-    if (count > 0) {
-        // Remove the last ", "
-        wordListStr = wordListStr.substring(0, wordListStr.length - 2);
-        WriteAction(prefaceStr + wordListStr);
-    }
-} // WriteListOfSelectedActions
 
 
 
@@ -2409,15 +2349,11 @@ WriteListOfSelectedFormatStrings(activeControlPanel, optionNameList) {
 //
 // [NB_ProblemMarkerSelect]
 //
+// This is called when the user selects a different prefix for problems.
 ////////////////////////////////////////////////////////////////////////////////
 function 
 NB_OnProblemMarkerSelect(menuControl) {
-    //LogEvent("Called NB_ProblemMarkerSelect");
-    //LogEvent("menu=" + menuControl);
-
     var selectedItem = menuControl.options[menuControl.selectedIndex].value;
-    //LogEvent("selectedItem=" + selectedItem);
-
     if (selectedItem == "MEDNOTEMAKER_PROBLEM_MARKER_POUND_PAREN") {
         PROBLEM_SECTION_HEADER_PREFIX = "#) ";
         PROBLEM_SECTION_HEADER_SUFFIX = " ";
@@ -2447,12 +2383,10 @@ NB_OnProblemMarkerSelect(menuControl) {
 //
 // [NB_OnProblemSectionSelect]
 //
+// This is called when the user selects a different prefix for major plan sections.
 ////////////////////////////////////////////////////////////////////////////////
 function 
 NB_OnProblemSectionSelect(menuControl) {
-    //LogEvent("Called NB_ProblemMarkerSelect");
-    //LogEvent("menu=" + menuControl);
-
     var selectedItem = menuControl.options[menuControl.selectedIndex].value;
     //LogEvent("selectedItem=" + selectedItem);
     if (selectedItem == "MEDNOTEMAKER_PROBLEM_SECTIONS_ASSESSMENT_PLAN") {
@@ -2475,15 +2409,12 @@ NB_OnProblemSectionSelect(menuControl) {
 //
 // [NB_OnProblemSectionLabelSelect]
 //
+// This is called when the user selects a different prefix for labels.
 // Options tried:  foo:   [foo]  {foo}   //foo    /foo    [foo]  =Foo=
 ////////////////////////////////////////////////////////////////////////////////
 function 
 NB_OnProblemSectionLabelSelect(menuControl) {
-    //LogEvent("Called NB_ProblemMarkerSelect");
-    //LogEvent("menu=" + menuControl);
-
     var selectedItem = menuControl.options[menuControl.selectedIndex].value;
-    //LogEvent("selectedItem=" + selectedItem);
     if (selectedItem == "MEDNOTEMAKER_PROBLEM_SECTIONS_LABEL_SLASH_COLON") {
         SUBSECTION_SUBHEADER_OPEN_PREFIX = "/";
         SUBSECTION_SUBHEADER_CLOSE_SUFFIX = ":";
@@ -2509,14 +2440,11 @@ NB_OnProblemSectionLabelSelect(menuControl) {
 //
 // [NB_OnActionPrefixSelect]
 //
+// This is called when the user selects a different prefix for actions.
 ////////////////////////////////////////////////////////////////////////////////
 function 
 NB_OnActionPrefixSelect(menuControl) {
-    //LogEvent("Called NB_OnActionPrefixSelect");
-    //LogEvent("menu=" + menuControl);
-
     var selectedItem = menuControl.options[menuControl.selectedIndex].value;
-    //LogEvent("selectedItem=" + selectedItem);
     if (selectedItem == "MEDNOTEMAKER_ACTION_PREFIX_DASH_SPACE") {
         PLAN_ACTION_TEXT_LINE_PREFIX = "- ";
     } else if (selectedItem == "MEDNOTEMAKER_ACTION_PREFIX_DASH") {
@@ -2535,14 +2463,11 @@ NB_OnActionPrefixSelect(menuControl) {
 //
 // [NB_OnCommentPrefixSelect]
 //
+// This is called when the user selects a different prefix for comments.
 ////////////////////////////////////////////////////////////////////////////////
 function 
 NB_OnCommentPrefixSelect(menuControl) {
-    //LogEvent("Called NB_OnCommentPrefixSelect");
-    //LogEvent("menu=" + menuControl);
-
     var selectedItem = menuControl.options[menuControl.selectedIndex].value;
-    //LogEvent("selectedItem=" + selectedItem);
     if (selectedItem == "MEDNOTEMAKER_ACTION_PREFIX_DASH_SPACE") {
         PLAN_COMMENT_TEXT_LINE_PREFIX = "- ";
     } else if (selectedItem == "MEDNOTEMAKER_ACTION_PREFIX_DASH") {

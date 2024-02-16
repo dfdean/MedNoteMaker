@@ -1,6 +1,6 @@
-////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2013-2023 Dawson Dean
+// Copyright (c) 2013-2024 Dawson Dean
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the "Software"),
@@ -20,7 +20,7 @@
 // TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 //
 // This file generates the plan for each medical problem.
 /////////////////////////////////////////////////////////////////////////////
@@ -81,16 +81,16 @@ WriteCirrhosisPlan() {
     var planNameStr = "Cirrhosis";
     var planConfigState = null;
     var activeControlPanel = null;
-    var causeStr = "";
     var planStr = "";
     var subPlanActionList = [];
     var subsectionName = "";
 
     // <> May use "Hepatic Steatosis with Hepatic Fibrosis"
-    causeStr = MedNote_GetCPOptionValue("CirrhosisCompensatedOption");
-    if ((causeStr != null) && (causeStr != "")) {
-        planNameStr = planNameStr + " (" + causeStr + ")";
+    var modifierStr = MedNote_GetCPOptionValue("CirrhosisPossibleOption");
+    if ((modifierStr != null) && (modifierStr != "")) {
+        planNameStr = modifierStr + " " + planNameStr;
     }
+
     MedNote_StartNewPlanSection(planNameStr, "CirrhosisPlan");
     planConfigState = g_AllPlansDeclaration['CirrhosisPlan'];
     if (!planConfigState) {
@@ -108,10 +108,8 @@ WriteCirrhosisPlan() {
         MedNote_AddRelatedProblem("Thrombocytopenia - Due to liver disease");
     }
 
-    var causeStr = MedNote_GetCPOptionValue("CirrhosisCauseOption");
-    if (causeStr != "") {
-        WriteComment("The suspected cause is " + causeStr);
-    }
+    WriteCommentIfSelected(activeControlPanel, "CirrhosisBiopsyRecordOption");
+    WriteCommentIfSelected(activeControlPanel, "CirrhosisCauseOption");
 
     //////////////////////////////////////////////
     // Read user input values and calculate scores
@@ -306,6 +304,7 @@ WriteParathyroidectomyPlan() {
 //
 // Updated 2020-4-17
 // Updated 2022-11-2
+// 2023-11-14 - Combined workup labs into a single task
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteAcidBasePlan() { 
@@ -413,7 +412,7 @@ WriteAcidBasePlan() {
             } else {
                 str = str + "xxx";
             }
-            str = str + " when adjusted for albimin";
+            str = str + " when adjusted for albumin";
             if (currentAlbumin > 0) {
                 str = str + " of " + currentAlbumin;
             }
@@ -657,8 +656,10 @@ WriteAcidBasePlan() {
 
     ////////////////////////////////
     // Gap Acidosis Diff
-    var optionNameList = [ "AcidBaseDiffIschemiaOption", "AcidBaseDiffUremiaOption", "AcidBaseDiffDKAOption", "AcidBaseDiffEtOHOption", "AcidBaseDiffStarvationOption", "AcidBaseDiffPropofolOption", 
-                            "AcidBaseDiffLinezolidOption", "AcidBaseDiffAtivanDripOption", "AcidBaseDiffMetforminOption", "AcidBaseDiffTenofovirOption", "AcidBaseDiffSalicylateOption", 
+    var optionNameList = [ "AcidBaseDiffIschemiaOption", "AcidBaseDiffUremiaOption", "AcidBaseDiffDKAOption", "AcidBaseDiffEtOHOption", 
+                            "AcidBaseDiffStarvationOption", "AcidBaseDiffPropofolOption", 
+                            "AcidBaseDiffLinezolidOption", "AcidBaseDiffAtivanDripOption", "AcidBaseDiffMetforminOption", 
+                            "AcidBaseDiffTenofovirOption", "AcidBaseDiffSalicylateOption", 
                             "AcidBaseDiffAcetaminophenOption", "AcidBaseDiffRhabdoOption", "AcidBaseDiffEthyleneGlycolOption", "AcidBaseDiffMethylAlcoholOption", "AcidBaseDiffDLactateOption", 
                             "AcidBaseDiffIsoniazidOption", "AcidBaseDiffMyelomaOption", "AcidBaseDiffIronOption"];
     WriteListOfSelectedValues(activeControlPanel, "Possible causes of the Anion Gap metabolic acidosis include: ", false, "", optionNameList, "")
@@ -686,14 +687,16 @@ WriteAcidBasePlan() {
     ////////////////////////////////
     // RTA IV Diff
     optionNameList = [ "AcidBaseRTAIVDiffDiabetesOption", "AcidBaseRTAIVDiffSpironolactoneOption", "AcidBaseRTAIVDiffACEInhibitorsOption", 
-                        "AcidBaseRTAIVDiffTrimethoprimOption", "AcidBaseRTAIVDiffNSAIDsOption", "AcidBaseRTAIVDiffAddisonOption", "AcidBaseRTAIVDiffsickleCellOption", 
+                        "AcidBaseRTAIVDiffTrimethoprimOption", "AcidBaseRTAIVDiffNSAIDsOption", "AcidBaseRTAIVDiffAddisonOption", 
+                        "AcidBaseRTAIVDiffsickleCellOption", 
                         "AcidBaseRTAIVDiffLupusOption", "AcidBaseRTAIVDiffAmyloidosisOption", "AcidBaseRTAIVDiffPentamidineOption" ];
     WriteListOfSelectedValues(activeControlPanel, "Possible causes of the Renal Tubular Acidosis type IV include: ", false, "", optionNameList, "")
 
     ////////////////////////////////
     // Metabolic Alkalosis Diff
     optionNameList = [ "AcidBaseDiffDiureticsOption", "AcidBaseDiffVolumeLossOption", "AcidBaseDiffPoorPOOption", "AcidBaseDiffHypercalcemiaOption",
-                        "AcidBaseDiffHypokalemiaOption", "AcidBaseDiffHypercapnicCompensationOption", "AcidBaseDiffHyperAldoOption", "AcidBaseDiffCushingsOption",
+                        "AcidBaseDiffHypokalemiaOption", "AcidBaseDiffHypercapnicCompensationOption", "AcidBaseDiffHyperAldoOption", 
+                        "AcidBaseDiffCushingsOption",
                         "AcidBaseDiffLiddleOption", "AcidBaseDiffGlucocorticoidRemedialHyperaldoOption"];
     WriteListOfSelectedValues(activeControlPanel, "Possible causes of the metabolic alkalosis include: ", false, "", optionNameList, "")
 
@@ -709,30 +712,20 @@ WriteAcidBasePlan() {
 
 
 
-
-
     ////////////////////////////////
     // General Workup
-    WriteActionIfSelected(activeControlPanel, "AcidBaseCheckVBGOption");
-    WriteActionIfSelected(activeControlPanel, "AcidBaseUrinepHOption");
+    var optionNameList = [ 'AcidBaseCheckVBGOption', 'AcidBaseUrinepHOption', 'AcidBaseCheckLactateOption',
+                            'AcidBaseCheckCKOption',  'AcidBaseCheckUrineLytesOption', 'AcidBaseCheckAldoReninOption',
+                            'AcidBaseCheckUClOption']; 
+    WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
+
 
     ////////////////////////////////
     // Gap Acidosis Workup
-    WriteActionIfSelected(activeControlPanel, "AcidBaseCheckLactateOption");
-    WriteActionIfSelected(activeControlPanel, "AcidBaseCheckCKOption");
     if (MedNote_GetCPOptionBool("AcidBaseCheckOsmGapOption")) {
         WriteAction("Check volatile alcohol screen (MeOH, Isopropyl, EtOH)");
         WriteAction("Check Osmolar gap: serum Osm to rule out alcohol intoxication");
     }
-
-    ////////////////////////////////
-    // Non-Gap Acidosis Workup
-    WriteActionIfSelected(activeControlPanel, "AcidBaseCheckUrineLytesOption");
-    WriteActionIfSelected(activeControlPanel, "AcidBaseCheckAldoReninOption");
-
-    ////////////////////////////////
-    // Metabolic Alkalosis Workup
-    WriteActionIfSelected(activeControlPanel, "AcidBaseCheckUClOption");
 
     ////////////////////////////////
     // Treat
@@ -1410,6 +1403,7 @@ WriteIllicitDrugsPlan() {
 //
 // [WriteGIBleedPlan]
 //
+// 2023-11-14 - Combined workup labs into a single task
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteGIBleedPlan() {
@@ -1447,10 +1441,8 @@ WriteGIBleedPlan() {
     WriteActionIfSelected(activeControlPanel, "GIBleedTransfuseLevelOption");
 
     // Workup
-    WriteActionIfSelected(activeControlPanel, "GIBleedINROption");
-    WriteActionIfSelected(activeControlPanel, "GIBleedBUNOption");
-    WriteActionIfSelected(activeControlPanel, "GIBleedHemoccultOption");
-    WriteActionIfSelected(activeControlPanel, "GIBleedHPyloriOption");
+    var optionNameList = [ 'GIBleedINROption', 'GIBleedBUNOption', 'GIBleedHemoccultOption', 'GIBleedHPyloriOption' ]; 
+    WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
 
     // Imaging
     WriteActionIfSelected(activeControlPanel, "GIBleedCTAngiographyOption");
@@ -1553,9 +1545,10 @@ PrintDiabetesPlan() {
 //
 // [PrintCKDPlan]
 //
-// Updated 2021-4-24 - Get all new user input values.
-// Updated 2022-1-18 - Added Transplant
-// Updated 2022-11-3
+// 2021-4-24 - Get all new user input values.
+// 2022-1-18 - Added Transplant
+// 2022-11-3 - Updated
+// 2023-11-14 - Combined workup labs into a single task
 ////////////////////////////////////////////////////////////////////////////////
 function 
 PrintCKDPlan() { 
@@ -1611,7 +1604,7 @@ PrintCKDPlan() {
         WriteComment("Current Cr: " + currentCr); 
     }
     if (MedNote_GetCPOptionBool("CKDCausesShowGFROption")) {
-        if ((g_GFR_MDRD > 0) || (g_GFR_CockroftGault > 0) || (g_GFR_CKDEPI > 0) 
+        if ((g_GFR_CKDEPI > 0) // || (g_GFR_MDRD > 0) || (g_GFR_CockroftGault > 0)
                 || (g_GFR_CKDEPI_CystatinC > 0) || (g_GFR_CKDEPI_Creatinine_CystatinC > 0)) {
             headerLine = "Current eGFR (";
             if (currentCr > 0) {
@@ -1631,12 +1624,12 @@ PrintCKDPlan() {
             }
             headerLine = headerLine + ")";
             WriteComment(headerLine);
-            if (g_GFR_MDRD > 0) {
-                WriteIndentedTextLine(g_GFR_MDRD + " (MDRD)");
-            }
-            if (g_GFR_CockroftGault > 0) {
-                WriteIndentedTextLine(g_GFR_CockroftGault + " (Cockcroft-Gault)");
-            }
+            //if (g_GFR_MDRD > 0) {
+            //    WriteIndentedTextLine(g_GFR_MDRD + " (MDRD)");
+            //}
+            //if (g_GFR_CockroftGault > 0) {
+            //    WriteIndentedTextLine(g_GFR_CockroftGault + " (Cockcroft-Gault)");
+            //}
             if (g_GFR_CKDEPI > 0) {
                 WriteIndentedTextLine(g_GFR_CKDEPI + " (CKD EPI 2021)");
             }
@@ -1659,9 +1652,9 @@ PrintCKDPlan() {
             gfrForESRDRisk = g_GFR_CKDEPI_Creatinine_CystatinC;
         } else if (g_GFR_CKDEPI > 0) {
             gfrForESRDRisk = g_GFR_CKDEPI;
-        } else if (g_GFR_CockroftGault > 0) {
-            gfrForESRDRisk = g_GFR_CockroftGault;
-        }
+        } //else if (g_GFR_CockroftGault > 0) {
+            //gfrForESRDRisk = g_GFR_CockroftGault;
+        //}
         LogEvent("gfrForESRDRisk = " + gfrForESRDRisk)
 
         // This writes the results in global variables g_2YearESRDRisk and g_5YearESRDRisk
@@ -1717,9 +1710,8 @@ PrintCKDPlan() {
 
     ///////////////////////////////
     // Workup
-    WriteActionIfSelected(activeControlPanel, "CKDWorkupGetUrineAlbProtCrOption");
-    WriteActionIfSelected(activeControlPanel, "CKDWorkupGetPTHOption");
-    WriteActionIfSelected(activeControlPanel, "CKDWorkupGetVitDOption");
+    var optionNameList = [ 'CKDWorkupGetUrineAlbProtCrOption', 'CKDWorkupGetPTHOption', 'CKDWorkupGetVitDOption' ]; 
+    WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
 
     ///////////////////////////////
     // General
@@ -1747,8 +1739,8 @@ PrintCKDPlan() {
     WriteActionIfSelected(activeControlPanel, "CKD4BicarbOption");
 
     // Clinics
-    WriteActionIfSelected(activeControlPanel, "CKDFollowupRenalOption");
-    WriteActionIfSelected(activeControlPanel, "CKDFollowupTransplantOption");
+    var optionNameList = [ 'CKDFollowupRenalOption', 'CKDFollowupTransplantOption' ]; 
+    WriteListOfSelectedActions(activeControlPanel, "On discharge refer to ", optionNameList)
 
     ////////////////////
     //WriteAction("ACE inhibitor if microalbumin/Cr over 30 mcg/mg");
@@ -1818,6 +1810,7 @@ WriteCADPlan() {
 // Updated 2021-2-15
 // Updated 2022-10-30
 // Updated 2022-11-3
+// 2023-11-14 - Combined workup labs into a single task
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteCOPDPlan() {
@@ -1843,7 +1836,6 @@ WriteCOPDPlan() {
     var optionNameList = [ "COPDTriggerDyspneaOption", "COPDTriggerMoreSputumOption", "COPDTriggerPurulentOption"];
     WriteListOfSelectedValues(activeControlPanel, "This is an acute exacerbation with: ", false, "", optionNameList, "")
     //<> WriteComment("The exacerbation is mild(1 criteria) moderate(2 criteria) severe(3 criteria)");
-
 
     // Triggers
     var optionNameList = [ "COPDTriggerInfectionOption", "COPDTriggerSmokingOption", "COPDTriggerComplianceOption", "COPDTriggerMedChangesOption"];
@@ -1873,12 +1865,9 @@ WriteCOPDPlan() {
 
     // Workup
     WriteActionIfSelected(activeControlPanel, "COPDXrayOption");
-    WriteActionIfSelected(activeControlPanel, "COPDGetVBGOption");
-    WriteActionIfSelected(activeControlPanel, "COPDGetRVPOption");
-    WriteActionIfSelected(activeControlPanel, "COPDCultureSputOption");
-    WriteActionIfSelected(activeControlPanel, "COPDCultureBloodOption");
-    WriteActionIfSelected(activeControlPanel, "COPDUrineAntigensOption");
-    WriteActionIfSelected(activeControlPanel, "COPDProcalOption");
+    var optionNameList = [ 'COPDGetVBGOption', 'COPDGetRVPOption', 'COPDCultureSputOption', 'COPDCultureBloodOption',
+                            'COPDUrineAntigensOption', 'COPDProcalOption']; 
+    WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
     WriteActionIfSelected(activeControlPanel, "COPDPFTOption");
 
     // Bronchodilators
@@ -1910,7 +1899,7 @@ WriteCOPDPlan() {
 //
 // [WriteHemodialysisPlan]
 //
-// Updated 2020-4-3 - combined PD and HD
+// 2020-4-3 - combined PD and HD
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteHemodialysisPlan() {
@@ -2108,6 +2097,7 @@ WriteDKAPlan() {
 // 
 // Updated 2020-6-24
 // Updated 2021-2-15
+// 2023-11-14 - Combined workup labs into a single task
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WritePneumoniaPlan() {
@@ -2141,23 +2131,19 @@ WritePneumoniaPlan() {
     WriteListOfSelectedValues(activeControlPanel, "SIRS = ", false, "", optionNameList, "");
 
     WriteActionIfSelected(activeControlPanel, "PneumoniaWUXRayOption");
-    WriteActionIfSelected(activeControlPanel, "PneumoniaWUNaresOption");
-    WriteActionIfSelected(activeControlPanel, "PneumoniaWUBloodCultureOption");
-    WriteActionIfSelected(activeControlPanel, "PneumoniaWUSputumCultureOption");
-    WriteActionIfSelected(activeControlPanel, "PneumoniaWURVPOption");
+    var optionNameList = [ 'PneumoniaWUBloodCultureOption', 'PneumoniaWUSputumCultureOption', 'PneumoniaWURVPOption']; 
+    WriteListOfSelectedActions(activeControlPanel, "Culture ", optionNameList)
 
-    WriteActionIfSelected(activeControlPanel, "PneumoniaWUMRSANaresOption");
-    WriteActionIfSelected(activeControlPanel, "PneumoniaWUStrepUrineAntigenOption");
-    WriteActionIfSelected(activeControlPanel, "PneumoniaWULegionellaUrineAntigenOption");
-    WriteActionIfSelected(activeControlPanel, "PneumoniaWUProcalOption");
-    WriteActionIfSelected(activeControlPanel, "PneumoniaWUCRPOption");
-    WriteActionIfSelected(activeControlPanel, "PneumoniaWULactateOption");
+    var optionNameList = [ 'PneumoniaWUMRSANaresOption', 'PneumoniaWUStrepUrineAntigenOption', 'PneumoniaWULegionellaUrineAntigenOption', 
+                            'PneumoniaWUProcalOption', 'PneumoniaWUCRPOption', 'PneumoniaWULactateOption']; 
+    WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
 
     WriteActionIfSelected(activeControlPanel, "PneumoniaSwallowStudyOption");
     WriteActionIfSelected(activeControlPanel, "PneumoniaPanorexOption");
 
     // Antibiotics
-    var actionNameList = [ "PneumoniaVancOption", "PneumoniaPipTazoOption", "PneumoniaCefepimeOption", "PneumoniaMetronidazoleOption", "PneumoniaCeftriaxoneOption", "PneumoniaAzithromycinOption"];
+    var actionNameList = [ "PneumoniaVancOption", "PneumoniaPipTazoOption", "PneumoniaCefepimeOption", 
+                            "PneumoniaMetronidazoleOption", "PneumoniaCeftriaxoneOption", "PneumoniaAzithromycinOption"];
     WriteListOfSubActions("Antibiotics", actionNameList);
 
     // Misc
@@ -2186,6 +2172,7 @@ WritePneumoniaPlan() {
 //
 // [WriteStrokePlan]
 //
+// 2023-11-14 - Combined workup labs into a single task
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteStrokePlan() {
@@ -2215,12 +2202,9 @@ WriteStrokePlan() {
     WriteActionIfSelected(activeControlPanel, "StrokeImagingCarotidOption");
     WriteActionIfSelected(activeControlPanel, "StrokeImagingEchoOption");
 
-    WriteActionIfSelected(activeControlPanel, "StrokeGetA1cOption");
-    WriteActionIfSelected(activeControlPanel, "StrokeGetLDLOption");
-    WriteActionIfSelected(activeControlPanel, "StrokeGetINROption");
-    WriteActionIfSelected(activeControlPanel, "StrokeGetSMEAROption");
-    WriteActionIfSelected(activeControlPanel, "StrokeGetHaptoglobinsOption");
-    WriteActionIfSelected(activeControlPanel, "StrokeGetLDHOption");
+    var optionNameList = [ 'StrokeGetA1cOption', 'StrokeGetLDLOption', 'StrokeGetINROption', 'StrokeGetSMEAROption',
+                            'StrokeGetHaptoglobinsOption',  'StrokeGetLDHOption']; 
+    WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
 
     // Anticoag
     WriteActionIfSelected(activeControlPanel, "StrokeHoldDay1Option");
@@ -2347,6 +2331,7 @@ WriteAFibPlan() {
 //
 // [WriteAsthmaPlan]
 //
+// 2023-11-14 - Combined workup labs into a single task
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteAsthmaPlan() {
@@ -2387,12 +2372,9 @@ WriteAsthmaPlan() {
     // Workup
     WriteActionIfSelected(activeControlPanel, "AsthmaXrayOption"); 
     WriteActionIfSelected(activeControlPanel, "AsthmaGetABGOption"); 
-    WriteActionIfSelected(activeControlPanel, "AsthmaGetCBCOption"); 
-    WriteActionIfSelected(activeControlPanel, "AsthmaGetRVPOption"); 
-    WriteActionIfSelected(activeControlPanel, "AsthmaProcalOption"); 
-    WriteActionIfSelected(activeControlPanel, "AsthmaCultureSputOption"); 
-    WriteActionIfSelected(activeControlPanel, "AsthmaCultureBloodOption"); 
-    WriteActionIfSelected(activeControlPanel, "AsthmaUrineAntigensOption"); 
+    var optionNameList = [ 'AsthmaGetCBCOption', 'AsthmaGetRVPOption', 'AsthmaProcalOption',
+                            'AsthmaCultureSputOption',  'AsthmaCultureBloodOption', 'AsthmaUrineAntigensOption']; 
+    WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
  
     // Bronchodilators
     WriteActionIfSelected(activeControlPanel, "AsthmaNebsOption"); 
@@ -2539,6 +2521,7 @@ WriteNephrolithiasisPlan() {
 // [WriteNephroticPlan]
 //
 // Updated 2022-10-30
+// 2023-11-14 - Combined workup labs into a single task
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteNephroticPlan() {
@@ -2599,19 +2582,15 @@ WriteNephroticPlan() {
 
 
     // Workup
-    WriteActionIfSelected(activeControlPanel, "NephroticWorkupA1cOption");
-    WriteActionIfSelected(activeControlPanel, "NephroticWorkupLightChainsOption");
-    WriteActionIfSelected(activeControlPanel, "NephroticWorkupSPEPOption");
-    WriteActionIfSelected(activeControlPanel, "NephroticWorkupRheumatoidFactorOption");
-    WriteActionIfSelected(activeControlPanel, "NephroticWorkupCryoglobulinsOption");
-    WriteActionIfSelected(activeControlPanel, "NephroticWorkupANAOption");
-    WriteActionIfSelected(activeControlPanel, "NephroticWorkupC3C4Option");
-    WriteActionIfSelected(activeControlPanel, "NephroticWorkupAntiGBMOption");
-    WriteActionIfSelected(activeControlPanel, "NephroticWorkupPLA2ROption");
-    WriteActionIfSelected(activeControlPanel, "NephroticWorkupHIVOption");
-    WriteActionIfSelected(activeControlPanel, "NephroticWorkupHepBOption");
-    WriteActionIfSelected(activeControlPanel, "NephroticWorkupHepCOption");
-    WriteActionIfSelected(activeControlPanel, "NephroticWorkupSyphilisOption");
+    var optionNameList = [ 'NephroticWorkupA1cOption', 'NephroticWorkupLightChainsOption', 'NephroticWorkupSPEPOption', 
+                            'NephroticWorkupRheumatoidFactorOption', 'NephroticWorkupCryoglobulinsOption',
+                            'NephroticWorkupANAOption', 'NephroticWorkupC3C4Option', 'NephroticWorkupAntiGBMOption',
+                            'NephroticWorkupPLA2ROption', 'NephroticWorkupHIVOption', 'NephroticWorkupHepBOption',
+                            'NephroticWorkupHepCOption', 'NephroticWorkupSyphilisOption']; 
+    WriteListOfSelectedActions(activeControlPanel, "Check for causes: ", optionNameList)
+
+    var optionNameList = [ 'NephroticTreatCancerScreenOption', 'NephroticTreatCheckTSHOption', 'NephroticTreatCheckLDLOption']; 
+    WriteListOfSelectedActions(activeControlPanel, "Check for effects of nephrotic: ", optionNameList)
 
     // Treat
     WriteActionIfSelected(activeControlPanel, "NephroticTreatLasixPOOption");
@@ -2619,10 +2598,6 @@ WriteNephroticPlan() {
     WriteCommentIfSelected(activeControlPanel, "NephroticTreatExplainACEOption");
     WriteActionIfSelected(activeControlPanel, "NephroticTreatAnticoagulationOption");
     WriteCommentIfSelected(activeControlPanel, "NephroticTreatCriteriaAnticoagulationOption");
-
-    WriteActionIfSelected(activeControlPanel, "NephroticTreatCancerScreenOption");
-    WriteActionIfSelected(activeControlPanel, "NephroticTreatCheckTSHOption");
-    WriteActionIfSelected(activeControlPanel, "NephroticTreatCheckLDLOption");
 } // WriteNephroticPlan
 
 
@@ -2708,6 +2683,7 @@ WriteEtOHPlan() {
 // [WriteHypokalemiaPlan]
 //
 // Updated 2022-10-31
+// 2023-11-14 - Combined workup labs into a single task
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteHypokalemiaPlan() {    
@@ -2776,9 +2752,9 @@ WriteHypokalemiaPlan() {
     var optionNameList = [ "LowPotassiumCausesDiarrheaOption", "LowPotassiumCausesRenalOption", "LowPotassiumCausesDiureticsOption", "LowPotassiumCausesLowMgOption", "LowPotassiumCausesHighAldoOption", "LowPotassiumCausesHyperAaldoOption", "LowPotassiumCausesRASOption", "LowPotassiumCausesMalnutritionOption", "LowPotassiumCausesTubeFeedsOption" ];
     WriteListOfSelectedValues(activeControlPanel, "Possible causes include: ", false, "", optionNameList, "");
 
-    WriteActionIfSelected(activeControlPanel, "LowPotassiumCheckMgOption");
-    WriteActionIfSelected(activeControlPanel, "LowPotassiumCheckUrChlorideOption");
-    WriteActionIfSelected(activeControlPanel, "LowPotassiumCheckULytesOption");
+    var optionNameList = [ 'LowPotassiumCheckMgOption', 'LowPotassiumCheckUrChlorideOption', 'LowPotassiumCheckULytesOption']; 
+    WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
+
     WriteActionIfSelected(activeControlPanel, "LowPotassiumRepleteKOption");
     WriteActionIfSelected(activeControlPanel, "LowPotassiumRepleteMgOption");
 } // WriteHypokalemiaPlan
@@ -3058,7 +3034,8 @@ WriteHypoPhosPlan() {
 //
 // [WriteHypoCalcemiaPlan]
 //
-// Updated 2022-11-2
+// 2022-11-2 - Updated
+// 2023-21-14 - Combined workup labs into a single task
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteHypoCalcemiaPlan() { 
@@ -3115,10 +3092,10 @@ WriteHypoCalcemiaPlan() {
     }
     WriteCommentIfSelected(activeControlPanel, 'LowCalciumExplainFECaOption');
 
-    WriteActionIfSelected(activeControlPanel, "LowCalciumCheckiCalOption");
-    WriteActionIfSelected(activeControlPanel, "LowCalciumCheckVitaminOption");
-    WriteActionIfSelected(activeControlPanel, "LowCalciumCheckPTHOption");
-    WriteActionIfSelected(activeControlPanel, "LowCalciumCheckUrineOption");
+    // Workup
+    var optionNameList = [ 'LowCalciumCheckiCalOption', 'LowCalciumCheckVitaminOption', 'LowCalciumCheckPTHOption',
+                            'LowCalciumCheckUrineOption']; 
+    WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
 
     WriteActionIfSelected(activeControlPanel, "LowCalciumReplaceCaOption");
     WriteActionIfSelected(activeControlPanel, "LowCalciumGiveVitDOption");
@@ -3134,6 +3111,7 @@ WriteHypoCalcemiaPlan() {
 // [WriteHypERCalcemiaPlan]
 //
 // Updated 2022-11-2
+// 2023-11-15 - Combined workup labs into a single task
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteHypERCalcemiaPlan() { 
@@ -3181,11 +3159,10 @@ WriteHypERCalcemiaPlan() {
     }
     WriteCommentIfSelected(activeControlPanel, 'HighCalciumExplainFECaOption');
 
-    WriteActionIfSelected(activeControlPanel, "HighCalciumCheckiCalOption");
-    WriteActionIfSelected(activeControlPanel, "HighCalciumCheckVitaminOption");
-    WriteActionIfSelected(activeControlPanel, "HighCalciumCheck125VitaminOption");
-    WriteActionIfSelected(activeControlPanel, "HighCalciumCheckPTHOption");
-    WriteActionIfSelected(activeControlPanel, "HighCalciumCheckPTHrPOption");
+    var optionNameList = [ 'HighCalciumCheckiCalOption', 'HighCalciumCheckPTHOption', 'HighCalciumCheckVitaminOption',
+                            'HighCalciumCheck125VitaminOption',
+                            'HighCalciumCheckPTHrPOption']; 
+    WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
 
     WriteActionIfSelected(activeControlPanel, "HighCalciumIVFluidsOption");
     WriteActionIfSelected(activeControlPanel, "HighCalciumPamidronateOption");
@@ -3665,6 +3642,7 @@ WriteHypothyroidPlan() {
 //
 // [WriteHepatitisCPlan]
 //
+// 2023-11-15 - Combined workup labs into a single task
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteHepatitisCPlan() {
@@ -3693,11 +3671,9 @@ WriteHepatitisCPlan() {
     WriteCommentIfSelected(activeControlPanel, "HEPC_STATUS_HBV_OPTION");
     WriteCommentIfSelected(activeControlPanel, "HEPC_STATUS_HIV_OPTION");
 
-    WriteActionIfSelected(activeControlPanel, "HEPC_CHECK_VIRAL_LOAD_OPTION");
-    WriteActionIfSelected(activeControlPanel, "HEPC_CHECK_GENOTYPE_OPTION");
-    WriteActionIfSelected(activeControlPanel, "HEPC_CHECK_HIV_OPTION");
-    WriteActionIfSelected(activeControlPanel, "HEPC_CHECK_HAV_OPTION");
-    WriteActionIfSelected(activeControlPanel, "HEPC_CHECK_HBV_OPTION");
+    var optionNameList = [ 'HEPC_CHECK_VIRAL_LOAD_OPTION', 'HEPC_CHECK_GENOTYPE_OPTION', 'HEPC_CHECK_HIV_OPTION',
+                            'HEPC_CHECK_HAV_OPTION', 'HEPC_CHECK_HBV_OPTION']; 
+    WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
 
     WriteActionIfSelected(activeControlPanel, "HEPC_TREAT_HAV_VACCINE_OPTION");
     WriteActionIfSelected(activeControlPanel, "HEPC_TREAT_HBV_VACCINE_OPTION");
@@ -3785,9 +3761,10 @@ WriteEncephalopathyPlan() {
 //
 // [WriteMBDPlan]
 //
-// Updated 2021-2-15
-// Updated 2022-10-30
-// Updated 2022-11-2
+// 2021-2-15 - Updated
+// 2022-10-30 - Updated
+// 2022-11-2 - Updated
+// 2024-1-8 - Add workup
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteMBDPlan() {
@@ -3812,6 +3789,9 @@ WriteMBDPlan() {
     var valueList = [ "", "", "", ""];
     var valueNameList = [ "INPUT_SERUM_Ca_CP", "INPUT_SERUM_Phos_CP", "INPUT_SERUM_PTH_CP", "INPUT_SERUM_iCal_CP"];
     WriteListOfSelectedValuesWithDescriptions(activeControlPanel, optionNameList, valueList, valueNameList)
+
+    var optionNameList = [ "MBD_OPTION_CHECK_PTH", "MBD_OPTION_CHECK_VITD"];
+    WriteListOfSelectedActions(activeControlPanel, "Check: ", optionNameList)
 
     WriteActionIfSelected(activeControlPanel, "MBD_OPTION_TEAT_BINDER");
     WriteActionIfSelected(activeControlPanel, "MBD_OPTION_TEAT_CALCITRIOL");
@@ -3885,9 +3865,10 @@ WriteIVContrastPlan() {
 //
 // [WriteHepatitisPlan]
 //
-// Updated 2020-4-19
-// Updated 2021-4-24 - Get all new user input values.
-// Updated 2022-10-30
+// 2020-4-19 - Updated
+// 2021-4-24 - Get all new user input values.
+// 2022-10-30 - Updated
+// 2023-11-14 - Combined workup labs into a single task
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteHepatitisPlan() {
@@ -4010,16 +3991,12 @@ WriteHepatitisPlan() {
     var optionNameList = [ "HEPATITIS_Diff_Viral_OPTION", "HEPATITIS_Alcohol_OPTION", "HEPATITIS_Dif_Toxicity_OPTION", "HEPATITIS_Autoimmune_OPTION"];
     WriteListOfSelectedValues(activeControlPanel, "Possible causes include: ", false, "", optionNameList, "")
 
-    ///////////////////
     // Workup
-    WriteActionIfSelected(activeControlPanel, "HEPATITIS_CheckHepAIgG_OPTION");
-    WriteActionIfSelected(activeControlPanel, "HEPATITIS_CheckHepAIgM_OPTION");
-    WriteActionIfSelected(activeControlPanel, "HEPATITIS_CheckHepBIgAg_OPTION");
-    WriteActionIfSelected(activeControlPanel, "HEPATITIS_CheckHepBPCR_OPTION");
-    WriteActionIfSelected(activeControlPanel, "HEPATITIS_CheckHepDIgG_OPTION");
-    WriteActionIfSelected(activeControlPanel, "HEPATITIS_CheckHepEIgG_OPTION");
-    WriteActionIfSelected(activeControlPanel, "HEPATITIS_CheckCeruloplasm_OPTION");
-    WriteActionIfSelected(activeControlPanel, "HEPATITIS_CheckApap_OPTION");
+    var optionNameList = [ 'HEPATITIS_CheckHepAIgG_OPTION', 'HEPATITIS_CheckHepAIgM_OPTION', 'HEPATITIS_CheckHepBIgAg_OPTION',
+                            'HEPATITIS_CheckHepBPCR_OPTION',  'HEPATITIS_CheckHepDIgG_OPTION', 'HEPATITIS_CheckHepEIgG_OPTION',
+                            'HEPATITIS_CheckCMV_OPTION', 'HEPATITIS_CheckEBV_OPTION', 'HEPATITIS_CheckCeruloplasm_OPTION', 'HEPATITIS_CheckApap_OPTION']; 
+    WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
+
     // Treat
     WriteActionIfSelected(activeControlPanel, "HEPATITIS_POSteroids_OPTION");
     WriteActionIfSelected(activeControlPanel, "HEPATITIS_Pentoxifylline_OPTION");
@@ -4127,13 +4104,17 @@ WriteGISymptomsPlan() {
     var optionNameList = [ "GISymptoms_CheckLactate_Option", "GISymptoms_CheckLipase_Option", "GISymptoms_CheckCRP_Option", 
                             "GISymptoms_CheckA1c_Option", "GISymptoms_CheckAcuteHep_Option", "GISymptoms_CheckApap_Option", 
                             "GISymptoms_CheckAsa_Option", "GISymptoms_CheckHCG_Option", "GISymptoms_CheckCMV_Option", 
-                            "GISymptoms_CheckCA125_Option", "GISymptoms_CheckCEA_Option", "GISymptoms_CheckCA19_Option", 
-                            "GISymptoms_CheckTTG_Option", "GISymptoms_CheckUDS_Option"];
+                            "GISymptoms_CheckTTG_Option", "GISymptoms_CheckGliadin_Option", "GISymptoms_CheckEndomysial_Option",
+                            "GISymptoms_CheckCA125_Option", "GISymptoms_CheckCEA_Option", "GISymptoms_CheckCA19_Option"];
     WriteListOfSelectedActions(activeControlPanel, "Check serum labs: ", optionNameList)
 
-    var optionNameList = [ "GISymptoms_CheckGIPanel_Option", "GISymptoms_CheckLactoferrin_Option", "GISymptoms_CheckHPylori_Option", 
-                            "GISymptoms_CheckStoolCMV_Option"];
+    var optionNameList = [ "GISymptoms_CheckCDiff_Option", "GISymptoms_CheckGIPanel_Option", 
+            "GISymptoms_CheckLactoferrin_Option", "GISymptoms_CheckHPylori_Option",  "GISymptoms_CheckStoolCMV_Option",
+            "GISymptoms_CheckStoolCalprotectin_Option"];
     WriteListOfSelectedActions(activeControlPanel, "Check stool labs: ", optionNameList)
+
+    var optionNameList = [ "GISymptoms_CheckUDS_Option"];
+    WriteListOfSelectedActions(activeControlPanel, "Check urine labs: ", optionNameList)
 
     WriteActionIfSelected(activeControlPanel, "GISymptoms_CheckCT_Option");
     WriteActionIfSelected(activeControlPanel, "GISymptoms_CheckCTAMesenteric_Option");
@@ -4227,7 +4208,7 @@ WriteGoutPlan() {
 //
 // [WriteSyncopePlan]
 //
-// Updated 2023-9-25 - Merged plan items into 1 line
+// 2023-9-25 - Merged plan items into 1 line
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteSyncopePlan() {
@@ -4258,8 +4239,6 @@ WriteSyncopePlan() {
 
     var optionNameList = [ "SYNCOPE_PROCAL_OPTION", "SYNCOPE_BLOOD_CULTURES_OPTION"];
     WriteListOfSelectedActions(activeControlPanel, "Check infectious causes: ", optionNameList)
-
-
 
     // Treat
     WriteActionIfSelected(activeControlPanel, "SYNCOPE_IV_FLUIDS_OPTION");
@@ -4351,6 +4330,7 @@ WriteLegFracturePlan() {
 // [WriteDICPlan]
 //
 // Updated 2020-4-19
+// 2023-11-14 - Combined workup labs into a single task
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteDICPlan() {
@@ -4382,10 +4362,8 @@ WriteDICPlan() {
     WriteCommentIfSelected(activeControlPanel, "DICDDimerTrendOption");
 
     // Monitor
-    WriteActionIfSelected(activeControlPanel, "DIC_Check_CBC_Option");
-    WriteActionIfSelected(activeControlPanel, "DIC_Check_Fibrinogen_Option");
-    WriteActionIfSelected(activeControlPanel, "DIC_Check_INR_Option");
-    WriteActionIfSelected(activeControlPanel, "DIC_Check_DDimer_Option");
+    var optionNameList = [ 'DIC_Check_CBC_Option', 'DIC_Check_Fibrinogen_Option', 'DIC_Check_INR_Option', 'DIC_Check_DDimer_Option']; 
+    WriteListOfSelectedActions(activeControlPanel, "Check daily ", optionNameList)
 
     // Transfuse
     WriteActionIfSelected(activeControlPanel, "DIC_Treat_PRN_PRBC_Option");
@@ -4414,6 +4392,7 @@ WriteDICPlan() {
 // Updated 2021-1-15
 // Updated 2022-2-14
 // Updated 2022-7-18
+// 2023-11-14 - Combined workup labs into a single task
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteCovidPlan() {
@@ -4431,7 +4410,6 @@ WriteCovidPlan() {
     }
     MedNote_StartNewPlanSection(planStr, "CovidPlan");
     MedNote_AddRelatedProblem("Acute hypoxic respiratory failure requiring supplemental oxygen secondary to COVID 19");
-
 
     // Get the control panel. 
     // This was set up by the call to MedNote_StartNewPlanSection.
@@ -4453,10 +4431,14 @@ WriteCovidPlan() {
     WriteCommentIfSelected(activeControlPanel, "CovidPMNToLymphTrendOption");
     WriteCommentIfSelected(activeControlPanel, "CovidPltsTrendOption");
 
-    var optionNameList = [ "CovidRiskCRPOver100Option", "CovidRiskDDimerOver1000Option", "CovidRiskLymphsUnder800Option", "CovidRiskLDHOver245Option", "CovidRiskFerritinOver500Option"];
+    var optionNameList = [ "CovidRiskCRPOver100Option", "CovidRiskDDimerOver1000Option", "CovidRiskLymphsUnder800Option", 
+                            "CovidRiskLDHOver245Option", "CovidRiskFerritinOver500Option"];
     WriteListOfSelectedValues(activeControlPanel, "The patient has the following lab risk factors: ", false, "", optionNameList, "")
 
-    var optionNameList = [ "CovidRiskAgeOver65Option", "CovidRiskDM2Option", "CovidRiskAsthmaOption", "CovidRiskCOPDOption", "CovidRiskTobaccoOption", "CovidRiskObeseOption", "CovidRiskCADOption", "CovidRiskCHFOption", "CovidRiskCVAOption", "CovidRiskLungDiseaseOption", "CovidRiskCirrhosisOption", "CovidRiskImmuneSuppressionOption", "CovidRiskCFOption", "CovidRiskSickleCellOption", "CovidRiskCancerOption"]
+    var optionNameList = [ "CovidRiskAgeOver65Option", "CovidRiskDM2Option", "CovidRiskAsthmaOption", "CovidRiskCOPDOption", 
+                           "CovidRiskTobaccoOption", "CovidRiskObeseOption", "CovidRiskCADOption", "CovidRiskCHFOption", 
+                           "CovidRiskCVAOption", "CovidRiskLungDiseaseOption", "CovidRiskCirrhosisOption", 
+                           "CovidRiskImmuneSuppressionOption", "CovidRiskCFOption", "CovidRiskSickleCellOption", "CovidRiskCancerOption"]
     WriteListOfSelectedValues(activeControlPanel, "The patient has the following clinical risk factors: ", false, "", optionNameList, "")
 
     // Care Plan
@@ -4465,14 +4447,11 @@ WriteCovidPlan() {
     WriteCommentIfSelected(activeControlPanel, "CovidNirmatrelvirOnlyOption");
 
     // Workup
-    WriteActionIfSelected(activeControlPanel, "CovidWUPCROption");
-    WriteActionIfSelected(activeControlPanel, "CovidWUXRayOption");
-    WriteActionIfSelected(activeControlPanel, "CovidWUProcalOption");
-    WriteActionIfSelected(activeControlPanel, "CovidWURVPOption");
-    WriteActionIfSelected(activeControlPanel, "CovidCTPEOption");
+    var optionNameList = [ 'CovidWUPCROption', 'CovidWUXRayOption', 'CovidWUProcalOption', 'CovidWURVPOption',
+                            'CovidCTPEOption']; 
+    WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
 
     // Monitor
-    // "CovidWUDDimerOption", "CovidLDHDailyOption",  "CovidFibrinogenDailyOption", "CovidWUFerritinOption", 
     var optionNameList = [ "CovidCRPDailyOption", "CovidCBCDiffPDailyOption",
                            "CovidVBGDailyOption", "CovidDDimerDailyOption"];
     WriteListOfSelectedActions(activeControlPanel, "Check daily labs: ", optionNameList)
@@ -5038,12 +5017,13 @@ AddItemToCauseList(activeControlPanel, itemControlID, currentList) {
 //
 // [PrintAKIPlan]
 //
-// Updated 7/22-25/2020
-// Updated 4/24/2021 - Get all new user input values.
+// 2020-7-22-25 - Updated
+// 2021-4-24 - Get all new user input values.
+// 2023-11-14 - Combined workup labs into a single task
+// 2024-1-3 - Add Cardiorenal
 ////////////////////////////////////////////////////////////////////////////////
 function 
 PrintAKIPlan() {
-    //LogEvent("PrintAKIPlan");
     var activeControlPanel = null;
     var planStr;
     var modifierStr;
@@ -5062,9 +5042,14 @@ PrintAKIPlan() {
     if ((modifierStr != null) && (modifierStr != "")) {
         planStr += modifierStr;
     }
+
     activeControlPanel = MedNote_StartNewPlanSection(planStr, "AKIPlan");
     if (!activeControlPanel) {
         return;
+    }
+    planStr = MedNote_GetCPOptionValue("AKICardiorenalOption");
+    if ((planStr != null) && (planStr != "")) {
+        MedNote_AddRelatedProblem(planStr);
     }
     planStr = MedNote_GetCPOptionValue("AKIATNOption");
     if ((planStr != null) && (planStr != "")) {
@@ -5135,6 +5120,14 @@ PrintAKIPlan() {
         if (baselineGFRStr) {
             planStr += ", Baseline GFR=" + baselineGFRStr;
         }
+        WriteComment(planStr);
+    }
+    if (MedNote_GetCPOptionBool("AKICystatinCTrendOption")) {
+        planStr = "Recent Cystatin C trend: ";
+        if (currentCystatinC > 0) {
+            planStr += currentCystatinC;
+        }
+        planStr += "        ";
         WriteComment(planStr);
     }
     WriteCommentIfSelected(activeControlPanel, "AKIEstimateGFROption");
@@ -5244,6 +5237,34 @@ PrintAKIPlan() {
     }
 
 
+    ////////////////////////////////////////////////////////////
+    // Cardionrenal
+    possibleCardionrenal = "";
+    excludedCardionrenal = "";
+    toggleState = MedNote_GetCPOptionToggleState("AKIOverloadedOption");
+    if (toggleState == 0) {
+        excludedCardionrenal = AddItemToCauseList(activeControlPanel, "AKIOverloadedOption", excludedCardionrenal);
+    } else if (toggleState > 0) {
+        possibleCardionrenal = AddItemToCauseList(activeControlPanel, "AKIOverloadedOption", possibleCardionrenal);
+    }
+    toggleState = MedNote_GetCPOptionToggleState("AKICXRResultsOption");
+    if (toggleState == 0) {
+        excludedCardionrenal = AddItemToCauseList(activeControlPanel, "AKICXRResultsOption", excludedCardionrenal);
+    } else if (toggleState > 0) {
+        possibleCardionrenal = AddItemToCauseList(activeControlPanel, "AKICXRResultsOption", possibleCardionrenal);
+    }
+    toggleState = MedNote_GetCPOptionToggleState("AKIBNPLowOption");
+    if (toggleState == 0) {
+        excludedCardionrenal = AddItemToCauseList(activeControlPanel, "AKIBNPLowOption", excludedCardionrenal);
+    } else if (toggleState > 0) {
+        possibleCardionrenal = AddItemToCauseList(activeControlPanel, "AKIBNPLowOption", possibleCardionrenal);
+    }
+    if (excludedCardionrenal != "") {
+        WriteComment("Findings that are inconsistent with Cardionrenal include: " + excludedCardionrenal);
+    }
+    if (possibleCardionrenal != "") {
+        WriteComment("Findings consistent with possible Cardionrenal include: " + possibleCardionrenal);
+    }
 
 
     ////////////////////////////////////////////////////////////
@@ -5336,7 +5357,6 @@ PrintAKIPlan() {
     } else if (toggleState > 0) {
         excludedCauses = AddItemToCauseList(activeControlPanel, "AKIHRS2Option", excludedCauses);
     }
-
     if (excludedCauses != "") {
         WriteComment("Excluded causes include: " + excludedCauses);
     }
@@ -5345,15 +5365,21 @@ PrintAKIPlan() {
     }
 
 
-
     //////////////////////////////////
     // Workup
-    WriteActionIfSelected(activeControlPanel, 'AKIUrinalysisOption');
-    WriteActionIfSelected(activeControlPanel, 'AKILytesOption');
-    WriteActionIfSelected(activeControlPanel, 'AKICPKOption');
+    var optionNameList = [ 'AKICPKOption'];
+    WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
+
+    var optionNameList = [ 'AKIUrinalysisOption', 'AKILytesOption'];
+    WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
+
+    var optionNameList = [ 'AKIBNPOption', 'AKICXROption'];
+    WriteListOfSelectedActions(activeControlPanel, "Workup Cardiorenal and check ", optionNameList)
+
     WriteActionIfSelected(activeControlPanel, 'AKIBladderPressureOption');
     WriteActionIfSelected(activeControlPanel, 'AKIRenalUltrasoundOption');
     WriteActionIfSelected(activeControlPanel, 'AKIDopplersOption');
+
 
     //////////////////////////////////
     // Treat
@@ -5372,6 +5398,7 @@ PrintAKIPlan() {
     WriteActionIfSelected(activeControlPanel, 'AKITreatTamsulosinOption');
     WriteActionIfSelected(activeControlPanel, 'AKIHoldDiureticsOption');
     WriteActionIfSelected(activeControlPanel, 'AKIHoldACEARBOption');
+    WriteActionIfSelected(activeControlPanel, 'AKIHoldNSAIDsOption');
     var actionNameList = [ "AKITitratePipTazoOption", "AKIConvertOpioidsOption", 
                             "AKITitrateGabapentinOption", "AKITitrateColchicineOption"];
     WriteListOfSubActions("Titrate Medications for current estimated eGFR", actionNameList);
@@ -5518,6 +5545,7 @@ WriteChestPainPlan() {
 //
 // Updated 2020-7-30
 // Updated 2022-10-30
+// 2023-11-14 - Combined workup labs into a single task
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteHyponatremiaPlan() {
@@ -5701,14 +5729,10 @@ WriteHyponatremiaPlan() {
     ///////////////////
     // Workup
     WriteActionIfSelected(activeControlPanel, 'HypONaCheckNaQ6hOption');
-    WriteActionIfSelected(activeControlPanel, 'HypONaCheckUOsmOption');
-    WriteActionIfSelected(activeControlPanel, 'HypONaCheckULytesOption');
-
-    WriteActionIfSelected(activeControlPanel, 'HypONaCheckTSHOption');
-    WriteActionIfSelected(activeControlPanel, "HypONaCheckSOsmOption");
-    WriteActionIfSelected(activeControlPanel, 'HypONaCheckUrateOption');
-    WriteActionIfSelected(activeControlPanel, 'HypONaCheckLipidsOption');
-    WriteActionIfSelected(activeControlPanel, 'HypONaAMcortisolOption');
+    var optionNameList = [ 'HypONaCheckUOsmOption', 'HypONaCheckULytesOption', 'HypONaCheckTSHOption',
+                            'HypONaCheckSOsmOption',  'HypONaCheckUrateOption', 'HypONaCheckLipidsOption',
+                            'HypONaAMcortisolOption']; 
+    WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
 
     ///////////////////
     // Treat
@@ -6940,6 +6964,31 @@ WriteBillingPlan() {
         riskStr += currentStr;
         numRisk = 1;
     }
+    currentStr = MedNote_GetCPOptionValue("BILLING_RISK_AKI");
+    if ((currentStr != null) && (currentStr != "")) {
+        if ((riskStr != null) && (riskStr != "")) {
+            riskStr += ", ";
+        }
+        riskStr += currentStr;
+        numRisk = 1;
+    }
+    currentStr = MedNote_GetCPOptionValue("BILLING_RISK_BLEEDING");
+    if ((currentStr != null) && (currentStr != "")) {
+        if ((riskStr != null) && (riskStr != "")) {
+            riskStr += ", ";
+        }
+        riskStr += currentStr;
+        numRisk = 1;
+    }
+    currentStr = MedNote_GetCPOptionValue("BILLING_RISK_IMMUNOSUPPRESSED");
+    if ((currentStr != null) && (currentStr != "")) {
+        if ((riskStr != null) && (riskStr != "")) {
+            riskStr += ", ";
+        }
+        riskStr += currentStr;
+        numRisk = 1;
+    }
+
     currentStr = MedNote_GetCPOptionValue("BILLING_RISK_OPIOIDS");
     if ((currentStr != null) && (currentStr != "")) {
         if ((riskStr != null) && (riskStr != "")) {
@@ -7011,6 +7060,28 @@ WriteBillingPlan() {
     }
 
     WriteCommentIfSelected(activeControlPanel, "BILLING_REFERENCES_AMA");
+
+
+
+    //////////////////////////////////////////////////////////////
+    // Critical Care
+    var critCareStr = MedNote_GetCPOptionValue("BILLING_COMPLEXITY_CRITCARE_GENERAL");
+    if ((null != critCareStr) && ("" != critCareStr)) {
+        WriteComment("  ");
+        WriteComment("Critical Care:");
+        WriteComment(critCareStr);
+    }
+
+    var optionNameList = [ "BILLING_COMPLEXITY_CRITCARE_HISTORY", "BILLING_COMPLEXITY_CRITCARE_EXAM", "BILLING_COMPLEXITY_CRITCARE_PLAN", "BILLING_COMPLEXITY_CRITCARE_CONSULTANTS", "BILLING_COMPLEXITY_CRITCARE_RESPONSE", "BILLING_COMPLEXITY_CRITCARE_ORDERS", "BILLING_COMPLEXITY_CRITCARE_ORDER_LABS", "BILLING_COMPLEXITY_CRITCARE_CT", "BILLING_COMPLEXITY_CRITCARE_CXR", "BILLING_COMPLEXITY_CRITCARE_PULSEOX", "BILLING_COMPLEXITY_CRITCARE_ABG", "BILLING_COMPLEXITY_CRITCARE_IV" ];
+        WriteComment("  ");
+    WriteListOfSelectedValues(activeControlPanel, "Critical care was time spent personally by me on the following activities: ", false, "", optionNameList, ")")
+
+    timeStr = MedNote_GetCPOptionValue("BILLING_COMPLEXITY_CRITCARE_TIME_SPENT");
+    if ((null != timeStr) && ("" != timeStr)) {
+        timeStr = "Total time spent by the provider providing critical care services was " + timeStr;
+        WriteComment("  ");
+        WriteComment(timeStr);
+    }
 } // WriteBillingPlan
 
 
