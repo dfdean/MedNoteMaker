@@ -1807,10 +1807,11 @@ WriteCADPlan() {
 //
 // [WriteCOPDPlan]
 //
-// Updated 2021-2-15
-// Updated 2022-10-30
-// Updated 2022-11-3
+// 2021-2-15 - Updated
+// 2022-10-30 - Updated
+// 2022-11-3 - Updated
 // 2023-11-14 - Combined workup labs into a single task
+// 2024-3-5 - Revised Staging, added Roflumilast, BiPAP, A1AT, IV Mag, and more
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteCOPDPlan() {
@@ -1841,52 +1842,77 @@ WriteCOPDPlan() {
     var optionNameList = [ "COPDTriggerInfectionOption", "COPDTriggerSmokingOption", "COPDTriggerComplianceOption", "COPDTriggerMedChangesOption"];
     WriteListOfSelectedValues(activeControlPanel, "The possible triggers of this exacerbation include: ", false, "", optionNameList, "")
 
+    //////////////////////////////////////////////
     // Staging
-    var optionNameList = [ "COPDHomeO2Option", "COPDHomeBiPAPOption", "COPDGOLDGroup", "COPDGOLDClass"];
-    WriteListOfSelectedValues(activeControlPanel, "At baseline: ", false, "", optionNameList, "")
-    WriteCommentIfSelected(activeControlPanel, "COPDShowEOS");
-    var inputFEV1 = GetFloatInputForControlPanel(activeControlPanel, 'InputFEV1_CP');
-    var inputFVC = GetFloatInputForControlPanel(activeControlPanel, 'InputFVC_CP');
+    stagingStr = "";
+    optionStr = MedNote_GetCPOptionValue("COPDGOLDGroupNumber");
+    if ((optionStr != null) && (optionStr != "")) {
+        stagingStr = optionStr;
+    }
     optionStr = MedNote_GetCPOptionValue("COPDShowFEV1FVC");
     if ((optionStr != null) && (optionStr != "")) {
+        var inputFEV1 = GetFloatInputForControlPanel(activeControlPanel, 'InputFEV1_CP');
+        var inputFVC = GetFloatInputForControlPanel(activeControlPanel, 'InputFVC_CP');
         fev1FVCRatio = inputFEV1 / inputFVC
         fev1FVCRatio = Math.round((fev1FVCRatio + 0.00001) * 100) / 100;
-        WriteComment("FEV1/FVC = " + fev1FVCRatio);
+        if (stagingStr != "") {
+            stagingStr += ", ";
+        }
+        stagingStr += "FEV1/FVC=" + fev1FVCRatio;
     }
     optionStr = MedNote_GetCPOptionValue("COPDShowFEV1");
     if ((optionStr != null) && (optionStr != "")) {
-        WriteComment("FEV1 = " + inputFEV1);
+        var inputFEV1 = GetFloatInputForControlPanel(activeControlPanel, 'InputFEV1_CP');
+        if (stagingStr != "") {
+            stagingStr += ", ";
+        }
+        stagingStr += "FEV1=" + inputFEV1;
     }
-    //<>WriteComment("BODE Index = (BMI, Obstruction, Dyspnea, Exercise)");
+    optionStr = MedNote_GetCPOptionValue("COPDShowEOS");
+    if ((optionStr != null) && (optionStr != "")) {
+        if (stagingStr != "") {
+            stagingStr += ", ";
+        }
+        stagingStr += optionStr;
+    }
+    if ((stagingStr != null) && (stagingStr != "")) {
+        WriteComment("At baseline " + stagingStr);
+    }
+    var optionNameList = [ "COPDHomeO2Option", "COPDHomeBiPAPOption"];
+    WriteListOfSelectedValues(activeControlPanel, "At baseline: ", false, "", optionNameList, "")
+
 
     // Vitals
-    var optionNameList = [ "COPDCurrentO2SatsOption", "COPDCurrentO2Option", "COPDCurrentCPAPOption", "COPDO2VBGOption"];
+    var optionNameList = [ "COPDCurrentO2SatsOption", "COPDCurrentO2Option", "COPDCurrentCPAPOption", 
+                            "COPDO2VBGOption"];
     WriteListOfSelectedValues(activeControlPanel, "Currently: ", false, "", optionNameList, "")
 
     // Workup
-    WriteActionIfSelected(activeControlPanel, "COPDXrayOption");
-    var optionNameList = [ 'COPDGetVBGOption', 'COPDGetRVPOption', 'COPDCultureSputOption', 'COPDCultureBloodOption',
-                            'COPDUrineAntigensOption', 'COPDProcalOption']; 
+    var optionNameList = [ 'COPDXrayOption', 'COPDGetVBGOption', 'COPDCheckEosOption', 
+                            'COPDPFTOption', 'COPDCheckA1ATOption']; 
     WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
-    WriteActionIfSelected(activeControlPanel, "COPDPFTOption");
+    WriteActionIfSelected(activeControlPanel, "COPDGetABGOption");
+    var optionNameList = [ 'COPDGetRVPOption', 'COPDProcalOption', 'COPDCultureSputOption', 
+                            'COPDCultureBloodOption', 'COPDUrineAntigensOption']; 
+    WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
 
     // Bronchodilators
     WriteActionIfSelected(activeControlPanel, "COPDAlbuterolOption");
     WriteActionIfSelected(activeControlPanel, "COPDAlbuterolIpratropiumOption");
     WriteActionIfSelected(activeControlPanel, "COPDLAMAOOption");
     WriteActionIfSelected(activeControlPanel, "COPDLABAOption");
+    WriteActionIfSelected(activeControlPanel, "COPDRoflumilastOption");
 
     // AntiInflammatory
     WriteActionIfSelected(activeControlPanel, "COPDPrednisoneOption");
-    WriteActionIfSelected(activeControlPanel, "COPDPPIOption");
     WriteActionIfSelected(activeControlPanel, "COPDAzithroOption");
+    WriteActionIfSelected(activeControlPanel, "COPDMagnesiumOption");
+    WriteActionIfSelected(activeControlPanel, "COPDPPIOption");
 
     // Oxygen
+    WriteActionIfSelected(activeControlPanel, "COPDBiPAPO2Option");
     WriteActionIfSelected(activeControlPanel, "COPDGiveO2Option");
     WriteActionIfSelected(activeControlPanel, "COPDGuaifenesinOption");
-
-//"COPDHomeMedsOption" value="HomeMeds" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" /></td>
-//    WriteActionIfSelected(activeControlPanel, "COPDHomeMedsOption": { "ButtonLabelList" : ["HomeMeds"], "ValueList" : ["Home medications: "], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
 } // WriteCOPDPlan
 
 
@@ -2332,6 +2358,7 @@ WriteAFibPlan() {
 // [WriteAsthmaPlan]
 //
 // 2023-11-14 - Combined workup labs into a single task
+// 2024-3-6 - Added LAMA, CPAP
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteAsthmaPlan() {
@@ -2350,7 +2377,7 @@ WriteAsthmaPlan() {
 
     activeControlPanel = MedNote_StartNewPlanSection(planStr, "AsthmaPlan");
     if (!activeControlPanel) {
-        LogEvent("xxxxx. activeControlPanel is null");
+        LogEvent("WriteAsthmaPlan. activeControlPanel is null");
         return;
     }
 
@@ -2361,7 +2388,8 @@ WriteAsthmaPlan() {
     WriteCommentIfSelected(activeControlPanel, "AsthmaTypeOption"); 
  
     // Triggers
-    var optionNameList = [ "AsthmaTriggerInfectionOption", "AsthmaTriggerSmokingOption", "AsthmaTriggerComplianceOption", "AsthmaTriggerMedChangesOption"];
+    var optionNameList = [ "AsthmaTriggerInfectionOption", "AsthmaTriggerSmokingOption", "AsthmaTriggerComplianceOption", 
+                            "AsthmaTriggerMedChangesOption"];
     WriteListOfSelectedValues(activeControlPanel, "Possible triggers for this exacerbation include: ", false, "", optionNameList, "");
 
     // Vitals
@@ -2373,22 +2401,24 @@ WriteAsthmaPlan() {
     WriteActionIfSelected(activeControlPanel, "AsthmaXrayOption"); 
     WriteActionIfSelected(activeControlPanel, "AsthmaGetABGOption"); 
     var optionNameList = [ 'AsthmaGetCBCOption', 'AsthmaGetRVPOption', 'AsthmaProcalOption',
-                            'AsthmaCultureSputOption',  'AsthmaCultureBloodOption', 'AsthmaUrineAntigensOption']; 
+                            'AsthmaCultureSputOption', 'AsthmaCultureBloodOption', 'AsthmaUrineAntigensOption']; 
     WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
  
     // Bronchodilators
     WriteActionIfSelected(activeControlPanel, "AsthmaNebsOption"); 
     WriteActionIfSelected(activeControlPanel, "AsthmaHFAOption"); 
     WriteActionIfSelected(activeControlPanel, "AsthmaLABAOption"); 
-    // WriteAction("Mg 2g IV once");
+    WriteActionIfSelected(activeControlPanel, "AsthmaLAMAOOption"); 
  
     // AntiInflammatory
-    WriteActionIfSelected(activeControlPanel, "AsthmaPrednisoneOption"); 
+    WriteActionIfSelected(activeControlPanel, "AsthmaPrednisoneOption");
+    WriteActionIfSelected(activeControlPanel, "AsthmaMagnesiumOption"); 
     WriteActionIfSelected(activeControlPanel, "AsthmaPPIOption"); 
     WriteActionIfSelected(activeControlPanel, "AsthmaH1BlockerOption"); 
     WriteActionIfSelected(activeControlPanel, "AsthmaH2BlockerOption"); 
  
     // Oxygen
+    WriteActionIfSelected(activeControlPanel, "AsthmaCPAPOption"); 
     WriteActionIfSelected(activeControlPanel, "AsthmaGiveO2Option"); 
     WriteActionIfSelected(activeControlPanel, "AsthmaGuaifenesinOption"); 
     WriteActionIfSelected(activeControlPanel, "AsthmaPneumovaxOption"); 
@@ -5883,6 +5913,11 @@ WritePreventionPlan() {
         return;
     }
 
+    var optionNameList = [ "Prevention_Flu_Status_Option", "Prevention_Covid_Status_Option", "Prevention_Pneumovax_Status_Option",
+                    "Prevention_Zoster_Option", "Prevention_HepA_Vax_Status_Option", "Prevention_HepB_Vax_Status_Option", 
+                    "Prevention_HPV_Status_Option"];
+    WriteListOfSelectedValues(activeControlPanel, "Vaccination status: ", false, "", optionNameList, "")
+
     WriteCommentIfSelected(activeControlPanel, "Prevention_Colonoscopy_Status_Option");
     WriteCommentIfSelected(activeControlPanel, "Prevention_Mammogram_Status_Option");
     WriteCommentIfSelected(activeControlPanel, "Prevention_ChestCT_Status_Option");
@@ -5897,6 +5932,15 @@ WritePreventionPlan() {
 
     var optionNameList = [ "Prevention_BreastRisks_Age_Option", "Prevention_BreastRisks_Family_Option" ];
     WriteListOfSelectedValues(activeControlPanel, "Risks for breast cancer include: ", false, "", optionNameList, "")
+
+    // Vaccinations
+    WriteActionIfSelected(activeControlPanel, "Prevention_Give_Flu_Option");
+    WriteActionIfSelected(activeControlPanel, "Prevention_Give_Covid_Option");
+    WriteActionIfSelected(activeControlPanel, "Prevention_Give_Pneumovax_Option");
+    WriteActionIfSelected(activeControlPanel, "Prevention_Give_Zostervax_Option");
+    WriteActionIfSelected(activeControlPanel, "Prevention_Give_HepA_Vax_Option");
+    WriteActionIfSelected(activeControlPanel, "Prevention_Give_HepB_Vax_Option");
+    WriteActionIfSelected(activeControlPanel, "Prevention_Give_HPV_Option");
 
     // Lipids
     WriteActionIfSelected(activeControlPanel, "Prevention_Check_Lipids_Option");

@@ -1670,6 +1670,7 @@ var g_AllOptionsDeclaration = {
     "COPDShowFEV1FVC": { "ButtonLabelList" : ["Show FEV1/FVC"], "ValueList" : ["FEV1/FVC="], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
     "COPDShowFEV1": { "ButtonLabelList" : ["Show FEV1"], "ValueList" : ["FEV1="], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
     "COPDShowEOS": { "ButtonLabelList" : ["Eos below 300", "Eos over 300"], "ValueList" : ["Serum Eosinophils below 300, suggesting limited response to steroids", "Serum Eosinophils over 300, suggesting good response to steroids"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
+    "COPDGOLDGroupNumber": { "ButtonLabelList" : ["GOLD 1", "GOLD 2", "GOLD 3", "GOLD 4"], "ValueList" : ["GOLD 1 (mild disease, FEV1 over 80 percent predicted)", "GOLD 2 (moderate disease, FEV1 between 50 and 80 percent predicted)", "GOLD 3 (severe disease, FEV1 between 30 and 50 percent predicted)", "GOLD 4 (very severe disease, FEV1 <30 percent predicted)"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
     "COPDGOLDGroup": { "ButtonLabelList" : ["Group A", "Group B", "Group C", "Group D"], "ValueList" : ["Group A", "Group B", "Group C", "Group D"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
     "COPDGOLDClass": { "ButtonLabelList" : ["Class I", "Class II", "Class III", "Class IV"], "ValueList" : ["Class I", "Class II", "Class III", "Class IV"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
 
@@ -1682,7 +1683,7 @@ var g_AllOptionsDeclaration = {
     ///////////////////
     // Triggers
     "COPDTriggerInfectionOption": { "ButtonLabelList" : ["Infection"], "ValueList" : ["infection"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
-    "COPDTriggerSmokingOption": { "ButtonLabelList" : ["Smoking"], "ValueList" : ["smoking"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
+    "COPDTriggerSmokingOption": { "ButtonLabelList" : ["Smoking"], "ValueList" : ["Smoking"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
     "COPDTriggerComplianceOption": { "ButtonLabelList" : ["Compliance"], "ValueList" : ["medication non-compliance"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
     "COPDTriggerMedChangesOption": { "ButtonLabelList" : ["Med-Changes"], "ValueList" : ["medication changes"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
 
@@ -1703,6 +1704,9 @@ var g_AllOptionsDeclaration = {
     "COPDUrineAntigensOption": { "ButtonLabelList" : ["Urine Antigens"], "ValueList" : ["urine antigens for legionella, strep pneumo"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
     "COPDProcalOption": { "ButtonLabelList" : ["Procal"], "ValueList" : ["ProCalcitonin to possibly rule out bacterial infection"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
     "COPDPFTOption": { "ButtonLabelList" : ["PFT"], "ValueList" : ["Get Pulmonary Function Tests"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
+    "COPDCheckEosOption": { "ButtonLabelList" : ["Eos"], "ValueList" : ["CBC with diff including Eos"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
+    "COPDCheckA1ATOption": { "ButtonLabelList" : ["A1AT"], "ValueList" : ["alpha-1 antitrypsin level and phenotype"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
+    "COPDGetABGOption": { "ButtonLabelList" : ["ABG Q4h"], "ValueList" : ["Q4h VBG for any BiPAP during day"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
 
     ///////////////////
     // Bronchodilators
@@ -1710,6 +1714,8 @@ var g_AllOptionsDeclaration = {
     "COPDAlbuterolIpratropiumOption": { "ButtonLabelList" : ["PRN Alb/Ipra Neb", "Sched Alb/Ipra Neb"], "ValueList" : ["Rapid-Acting Bronchodilators: Albuterol/Ipratropium nebs Q4h PRN", "Rapid-Acting Bronchodilators: scheduled Albuterol/Ipratropium nebs Q4h"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
     "COPDLAMAOOption": { "ButtonLabelList" : ["LAMA"], "ValueList" : ["Long-Acting Anti-muscarinic: Tiotropium daily"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
     "COPDLABAOption": { "ButtonLabelList" : ["LABA"], "ValueList" : ["Long-Acting Bronchodilators: Mometasone/Formoterol BID"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
+    "COPDRoflumilastOption": { "ButtonLabelList" : ["Roflumilast"], "ValueList" : ["Roflumilast (selective PDE-4 inhibitor) 250 mcg PO daily"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
+    "COPDMagnesiumOption": { "ButtonLabelList" : ["Magnesium"], "ValueList" : ["Magnesium 2g IV"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
 
     ///////////////////
     // AntiInflammatory
@@ -1720,6 +1726,7 @@ var g_AllOptionsDeclaration = {
     ///////////////////
     // Oxygen
     "COPDGiveO2Option": { "ButtonLabelList" : ["Oxygen"], "ValueList" : ["Supplemental oxygen. Titrate O2 for SpO2 between 89 and 92%"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
+    "COPDBiPAPO2Option": { "ButtonLabelList" : ["BiPAP", "BiPAP Night"], "ValueList" : ["BiPAP for 4hrs then reassess", "BiPAP at night"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
     "COPDGuaifenesinOption": { "ButtonLabelList" : ["Guaifenesin"], "ValueList" : ["Guaifenesin"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "COPDPlan"},
 
 
@@ -2190,17 +2197,22 @@ var g_AllOptionsDeclaration = {
     // Bronchodilators
     "AsthmaNebsOption": { "ButtonLabelList" : ["Nebs"], "ValueList" : ["Rapid-Acting Bronchodilators: Albuterol nebs PRN Q2h"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AsthmaPlan"},
     "AsthmaHFAOption": { "ButtonLabelList" : ["HFA"], "ValueList" : ["Rapid-Acting Bronchodilators: Albuterol HFA inhaler Q4h"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AsthmaPlan"},
-    "AsthmaLABAOption": { "ButtonLabelList" : ["LABA"], "ValueList" : ["Long-Acting Bronchodilators: Mometasone/Formoterol BID"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AsthmaPlan"},
+    "AsthmaLABAOption": { "ButtonLabelList" : ["LABA PRN", "LABA Sched"], "ValueList" : ["Long-Acting Bronchodilators: Mometasone/Formoterol PRN", "Long-Acting Bronchodilators: Mometasone/Formoterol Scheduled"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AsthmaPlan"},
+    "AsthmaLAMAOOption": { "ButtonLabelList" : ["LAMA"], "ValueList" : ["Long-Acting Anti-muscarinic: Tiotropium daily"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AsthmaPlan"},
+
 
     ///////////////////
     // AntiInflammatory
-    "AsthmaPrednisoneOption": { "ButtonLabelList" : ["Prednisone"], "ValueList" : ["Systemic Steroids: Methylprednisolone 80mg IV Q12h x4 doses of Prednisone 40mg PO x5 days"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AsthmaPlan"},
+    "AsthmaPrednisoneOption": { "ButtonLabelList" : ["Prednisone", "Methylpred"], "ValueList" : ["Systemic Steroids: Prednisone 40mg PO x5 days", "Systemic Steroids: Methylprednisolone 80mg IV Q12h"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AsthmaPlan"},
     "AsthmaPPIOption": { "ButtonLabelList" : ["PPI"], "ValueList" : ["Pantoprazole while on steroids"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AsthmaPlan"},
     "AsthmaH1BlockerOption": { "ButtonLabelList" : ["Cetirizine", "Loratadine", "Fexofenadine"], "ValueList" : ["H1 blocker: Cetirizine (Zyrtec)", "H1 blocker: Loratadine (Claritin)", "H1 blocker: Fexofenadine (Allegra)"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AsthmaPlan"},
     "AsthmaH2BlockerOption": { "ButtonLabelList" : ["Famotidine", "Ranitidine"], "ValueList" : ["H2 blocker: Famotidine (Pepcid)", "H2 blocker: Ranitidine (Zantac)"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AsthmaPlan"},
+    "AsthmaMagnesiumOption": { "ButtonLabelList" : ["Magnesium"], "ValueList" : ["Magnesium 2g IV"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AsthmaPlan"},
+
 
     ///////////////////
     // Oxygen
+    "AsthmaCPAPOption": { "ButtonLabelList" : ["CPAP", "CPAP Night"], "ValueList" : ["CPAP for 4hrs then reassess", "CPAP at night"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AsthmaPlan"},
     "AsthmaGiveO2Option": { "ButtonLabelList" : ["Oxygen"], "ValueList" : ["Supplemental oxygen. Titrate O2 for SpO2 between 89 and 92%"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AsthmaPlan"},
     "AsthmaGuaifenesinOption": { "ButtonLabelList" : ["Guaifenesin"], "ValueList" : ["Guaifenesin"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AsthmaPlan"},
     "AsthmaPneumovaxOption": { "ButtonLabelList" : ["Pneumovax"], "ValueList" : ["If this is an exacerbation, then give a Pneumonia vaccine before discharge"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "AsthmaPlan"},
@@ -3347,12 +3359,30 @@ var g_AllOptionsDeclaration = {
     // Prevention
     ///////////////////////////////////////////////////////////
 
-    // Status
+    // Screening Status
     "Prevention_Colonoscopy_Status_Option": { "ButtonLabelList" : ["Never Colonoscopy", "Last 5 years", "Last 10 years"], "ValueList" : ["No previous Colonoscopy", "Colonoscopy in the past 5 years", "Colonoscopy in the past 10 years"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
     "Prevention_Mammogram_Status_Option": { "ButtonLabelList" : ["Never Mammogram", "Last year", "Last 2 year", "Over 2 yrs"], "ValueList" : ["No previous Mammogram", "Mammogram in the past year", "Mammogram in the past 2 years", "Mammogram over 2 years ago"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
     "Prevention_ChestCT_Status_Option": { "ButtonLabelList" : ["Never Chest CT", "Last year", "Over 1 year"], "ValueList" : ["No previous Chest CT for lung cancer screening", "Chest CT for lung cancer screening in the past year", "Chest CT for lung cancer screening over 1 year ago"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
     "Prevention_LDL_Status_Option": { "ButtonLabelList" : ["No LDL", "Last year", "Over 1yr ago"], "ValueList" : ["No LDL on record", "LDL in the past year", "LDL checked over 1 year ago"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
     "Prevention_Pap_Status_Option": { "ButtonLabelList" : ["No Pap", "Last 2 years", "Over 3 years"], "ValueList" : ["No previous Pap Smear", "Pap Smear in the past 2 years", "Pap Smear over years ago"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
+
+    // Vaccination Status
+    "Prevention_Flu_Status_Option": { "ButtonLabelList" : ["No Flu Vax", "Flu Vax"], "ValueList" : ["no Flu vaccine in the past year", "received Flu vaccine in past year"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
+    "Prevention_Covid_Status_Option": { "ButtonLabelList" : ["No Covid Vax", "Covid Vax"], "ValueList" : ["no Covid vaccine in the past year", "received Covid vaccine in past year"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
+    "Prevention_Pneumovax_Status_Option": { "ButtonLabelList" : ["No Pneumovax", "1x Pneumovax", "2x Pneumovax"], "ValueList" : ["no Pneumovax", "received one Pneumovax", "received Pneumovax and Booster"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
+    "Prevention_Zoster_Option": { "ButtonLabelList" : ["No Zoster", "1x Zoster", "2x Zoster"], "ValueList" : ["no Zoster vaccination", "received single Zoster vaccination", "received Zoster vaccine and booster"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
+    "Prevention_HepA_Vax_Status_Option": { "ButtonLabelList" : ["No Hep A Vax", "Hep A Immune"], "ValueList" : ["no previous Hep A Vaccine", "Hep A immune"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
+    "Prevention_HepB_Vax_Status_Option": { "ButtonLabelList" : ["No Hep B Vax", "Hep B Immune"], "ValueList" : ["no previous Hep B Vaccination", "Hep B immune"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
+    "Prevention_HPV_Status_Option": { "ButtonLabelList" : ["No HPV Vax", "HPV Vax"], "ValueList" : ["no HPV vaccination", "received HPV vaccine"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
+
+    // Vaccination Plans
+    "Prevention_Give_Flu_Option": { "ButtonLabelList" : ["Flu Vax"], "ValueList" : ["Influenza vaccination"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
+    "Prevention_Give_Covid_Option": { "ButtonLabelList" : ["Covid Vax"], "ValueList" : ["Covid vaccination"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
+    "Prevention_Give_Pneumovax_Option": { "ButtonLabelList" : ["Pneumovax Vax"], "ValueList" : ["Pneumovax"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
+    "Prevention_Give_Zostervax_Option": { "ButtonLabelList" : ["Zoster Vax"], "ValueList" : ["Zoster vaccination"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
+    "Prevention_Give_HepA_Vax_Option": { "ButtonLabelList" : ["Hep A Vax"], "ValueList" : ["Hep A vaccination"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
+    "Prevention_Give_HepB_Vax_Option": { "ButtonLabelList" : ["Hep B Vax"], "ValueList" : ["Hep B vaccination"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
+    "Prevention_Give_HPV_Option": { "ButtonLabelList" : ["HPV Vax"], "ValueList" : ["HPV vaccination"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},
 
     // Risks
     "Prevention_ColonRisks_Age_Option": { "ButtonLabelList" : ["50-75yo"], "ValueList" : ["age 50-75"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "PreventionPlan"},

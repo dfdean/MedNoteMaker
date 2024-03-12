@@ -3484,9 +3484,9 @@ SGLT2 Criteria
     <table border="0" style="border-spacing:0.1em;">
         <tr>
         <td>&nbsp;</td>
-        <td><input type="button" id="COPDRespFailureModifier" value="RespFailure" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="COPDExacerbationOption" value="Exacerbation" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="COPDPossibleOption" value="Possible" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="COPDRespFailureModifier" value="RespFailure" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td class="CPLabInCellStyle">FEV1:&nbsp;<input type="text" class="smallTextBox" id="InputFEV1_CP"></td>  
         <td class="CPLabInCellStyle">FVC:&nbsp;<input type="text" class="smallTextBox" id="InputFVC_CP"></td>  
         </tr>
@@ -3502,15 +3502,14 @@ SGLT2 Criteria
     <tr>
         <td><input type="button" value="Triggers" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
         <td><input type="button" id="COPDTriggerInfectionOption" value="Infection" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="COPDTriggerSmokingOption" value="smoking" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="COPDTriggerSmokingOption" value="Smoking" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="COPDTriggerComplianceOption" value="Compliance" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="COPDTriggerMedChangesOption" value="Med-Changes" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
     <tr>
         <td><input type="button" value="Staging" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
-        <td><input type="button" id="COPDHomeO2Option" value="1L home O2" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="COPDHomeBiPAPOption" value="CPAP night" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="COPDGOLDGroupNumber" value="GOLD 1" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="COPDShowFEV1FVC" value="Show FEV1/FVC" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="COPDShowFEV1" value="Show FEV1" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="COPDShowEOS" value="Eos below 300" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
@@ -3518,8 +3517,12 @@ SGLT2 Criteria
 
     <tr>
         <td> &nbsp; </td>
+        <td><input type="button" id="COPDHomeO2Option" value="1L home O2" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="COPDHomeBiPAPOption" value="CPAP night" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <!--
         <td><input type="button" id="COPDGOLDGroup" value="Group A" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="COPDGOLDClass" value="Class I" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        -->
     </tr>
 
     <tr>
@@ -3534,16 +3537,23 @@ SGLT2 Criteria
         <td><input type="button" value="Workup" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
         <td><input type="button" id="COPDXrayOption" value="Get Xray" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="COPDGetVBGOption" value="Get VBG" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="COPDGetRVPOption" value="Get RVP" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="COPDProcalOption" value="Procal" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="COPDCheckEosOption" value="Eos" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="COPDPFTOption" value="PFT" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="COPDCheckA1ATOption" value="A1AT" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
     <tr>
         <td> &nbsp; </td>
+        <td><input type="button" id="COPDGetABGOption" value="ABG Q4h" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
+    <tr>
+        <td> &nbsp; </td>
+        <td><input type="button" id="COPDGetRVPOption" value="Get RVP" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="COPDProcalOption" value="Procal" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="COPDCultureSputOption" value="Culture Sput" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="COPDCultureBloodOption" value="Culture Blood" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="COPDUrineAntigensOption" value="Urine Antigens" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="COPDPFTOption" value="PFT" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
     <tr>
@@ -3552,17 +3562,20 @@ SGLT2 Criteria
         <td><input type="button" id="COPDAlbuterolIpratropiumOption" value="Alb/Ipra Neb" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="COPDLAMAOOption" value="LAMA" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="COPDLABAOption" value="LABA" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="COPDRoflumilastOption" value="Roflumilast" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
     <tr>
         <td><input type="button" value="AntiInflammatory" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
         <td><input type="button" id="COPDPrednisoneOption" value="Prednisone" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="COPDPPIOption" value="PPI" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="COPDAzithroOption" value="Azithro" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="COPDMagnesiumOption" value="Magnesium" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="COPDPPIOption" value="PPI" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
     <tr>
         <td><input type="button" value="Oxygen" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" id="COPDBiPAPO2Option" value="BiPAP" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="COPDGiveO2Option" value="Oxygen" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="COPDGuaifenesinOption" value="Guaifenesin" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
@@ -3571,12 +3584,37 @@ SGLT2 Criteria
 </table>
 
 <div xID="CPHintText" style="display:None;">
+<p>
+<a href="https://goldcopd.org/wp-content/uploads/2023/03/GOLD-2023-ver-1.3-17Feb2023_WMV.pdf">GOLD 2023 Guidelines</a>
+
+<p>GOLD classification systems
 <ul>
-    <li><b>Stage 1</b> FEV1 greater than 80%
-    <li><b>Stage 2</b> FEV1 50-80%
-    <li><b>Stage 3</b> FEV1 30-50%
-    <li><b>Stage 4</b> FEV1 less than 30%
+    <li>GOLD 1 (mild disease): FEV1 over 80 percent predicted
+    <li>GOLD 2 (moderate disease): FEV1 between 50 and 80 percent predicted
+    <li>GOLD 3 (severe disease): FEV1 between 30 and 50 percent predicted
+    <li>GOLD 4 (very severe disease): FEV1 <30 percent predicted
 </ul>
+
+<p>PFT Results:
+<ul>
+    <li>Obstructive Disease ha FEV1/FVC below 70 percent. Air trapping will cause TLC over Upper limit normal.
+    <li>Restrictive Disease has FEV1/FVC is normal or high, and TLC below 80 percent predicted
+</ul>
+
+<p>DLCO measures alveolar surface area, and it distinguishes between disease within alveolar tissue and disease outside the lung.
+<ul>
+    <li>For Obstructive:
+        <ul>
+        Asthma - Normal DLCO
+        COPD - Low DLCO
+        </ul>
+    <li>For Restrictive:
+        <ul>
+        <li>Neuromuscular disorder - Normal DLCO
+        <li>Interstitial Lung Disease - Low DLCO
+        </ul>
+</ul>
+Lung disease with normal DLCO is like a crumpled up paper sac. The surface area is still there, but it cannot expand.
 
 </div> <!-- xID="CPHintText" -->
 </div> <!-- xID="CPBody" -->
@@ -4321,12 +4359,12 @@ SGLT2 Criteria
         <td><input type="button" id="AsthmaXrayOption" value="Get Xray" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AsthmaGetABGOption" value="Get ABG" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AsthmaGetCBCOption" value="Get CBC" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="AsthmaGetRVPOption" value="Get RVP" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="AsthmaProcalOption" value="Procal" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
     <tr>
         <td> &nbsp; </td>
+        <td><input type="button" id="AsthmaGetRVPOption" value="Get RVP" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="AsthmaProcalOption" value="Procal" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AsthmaCultureSputOption" value="Culture Sput" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AsthmaCultureBloodOption" value="Culture Blood" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AsthmaUrineAntigensOption" value="Urine Antigens" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
@@ -4336,7 +4374,8 @@ SGLT2 Criteria
         <td><input type="button" value="Bronchodilators" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
         <td><input type="button" id="AsthmaNebsOption" value="Nebs" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AsthmaHFAOption" value="HFA" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="AsthmaLABAOption" value="LABA" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="AsthmaLABAOption" value="LABA PRN" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="AsthmaLAMAOOption" value="LAMA" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
     <tr>
@@ -4345,10 +4384,12 @@ SGLT2 Criteria
         <td><input type="button" id="AsthmaPPIOption" value="PPI" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AsthmaH1BlockerOption" value="Cetirizine" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AsthmaH2BlockerOption" value="Famotidine" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="AsthmaMagnesiumOption" value="Magnesium" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
     <tr>
         <td><input type="button" value="Oxygen" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" id="AsthmaCPAPOption" value="CPAP" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AsthmaGiveO2Option" value="Oxygen" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AsthmaGuaifenesinOption" value="Guaifenesin" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AsthmaPneumovaxOption" value="Pneumovax" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
@@ -4357,18 +4398,27 @@ SGLT2 Criteria
 </table>
 
 <div xID="CPHintText" style="display:None;">
-Exacerbation
+
+<p><a href="https://ginasthma.org/wp-content/uploads/2023/07/GINA-2023-Full-report-23_07_06-WMS.pdf">GINA Guidelines</a>
+
+<p>Exacerbation of Asthma
+    <ul>
+    <li>Mild (dyspnea with activity)
+    <li>Moderate (Dyspnea limits usual activity)
+    <li>Severe (Dyspnea at rest, interferes with speaking)
+    </ul>
+
+<p>Chronic Asthma:
 <ul>
-<li>Mild (dyspnea with activity)
-<li>Moderate (Dyspnea limits usual activity)
-<li>Severe (Dyspnea at rest, interferes with speaking)
+<li>Intermittent (Step 1 - Symptoms less than 2 times/week)
+    <br>PRN Low Dose Formoterol-ICS
+<li>Mild persistent (Step 2 - Symptoms 2 or more times/week, but not daily) 
+    <br>PRN Low Dose Formoterol-ICS
+<li>Moderate persistent (Step 3 - symptoms most days, nocturnal awakening due to asthma monthly) 
+    <br>Daily Low Dose Formoterol-ICS
+<li>Severe persistent (Step 4 - Severely uncontrolled: Daytime asthma symptoms at least twice weekly or Nocturnal awakening due to asthma or Reliever needed for symptoms at least twice weekly or Activity limitation due to asthma)
+    <br>Daily Medium-dose Formoterol + ICS
 </ul>
-
-
-This is Intermittent asthma (use PRN albuterol less than 2x per week, less than 2 per nocturnal attacks per month)
-This is Mild Persistent asthma (use PRN albuterol not daily, nocturnal attacks less frequently than weekly)
-This is Moderate Persistent asthma (daily)
-This is Severe Persistent (throughout the day)
 
 </div> <!-- xID="CPHintText" -->
 
@@ -7563,6 +7613,21 @@ Stage IV pressure ulcers extend into bone or muscle, as is seen in Figure 5
     </tr>
 
     <tr>
+        <td></td>
+        <td><input type="button" id="Prevention_Flu_Status_Option" value="No Flu Vax" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="Prevention_Covid_Status_Option" value="No Covid Vax" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="Prevention_Pneumovax_Status_Option" value="No Pneumovax" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="Prevention_Zoster_Option" value="No Zoster" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
+    <tr>
+        <td></td>
+        <td><input type="button" id="Prevention_HepA_Vax_Status_Option" value="No Hep A Vax" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="Prevention_HepB_Vax_Status_Option" value="No Hep B Vax" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="Prevention_HPV_Status_Option" value="No HPV Vax" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
+    <tr>
         <td><input type="button" value="Colon Risks" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
         <td><input type="button" id="Prevention_ColonRisks_Age_Option" value="50-75yo" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="Prevention_ColonRisks_Family_History_Option" value="Family Hx" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
@@ -7609,30 +7674,69 @@ Stage IV pressure ulcers extend into bone or muscle, as is seen in Figure 5
         <td><input type="button" id="Prevention_Pap_Option" value="Pap Smear" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
+    <tr>
+        <td><input type="button" value="Vaccinations" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" id="Prevention_Give_Flu_Option" value="Flu Vax" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="Prevention_Give_Covid_Option" value="Covid Vax" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="Prevention_Give_Pneumovax_Option" value="Pneumovax" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="Prevention_Give_Zostervax_Option" value="Zoster Vax" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
+    <tr>
+        <td></td>
+        <td><input type="button" id="Prevention_Give_HepA_Vax_Option" value="Hep A Vax" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="Prevention_Give_HepB_Vax_Option" value="Hep B Vax" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="Prevention_Give_HPV_Option" value="HPV Vax" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
     </table>
 
     <!-- HINT TEXT -->
     <div xID="CPHintText" style="display:None;">
-<p><b><u>Breast Cancer</u></b>
+
+<p><b><u>Vaccinations</u></b>
 <ul>
-    <li>USPSTF B: Mammography every 2 years for women aged 50 to 74
-    <li>BRCA. USPSTF B (2013, 2019 draft) recommendation in high risk women (≥ 10% probability of carrying mutation).
+    <li>Flu annually. If 65yo or older, then prefer quadrivalent formula
+
+    <li>Covid (19yo or older) 2023-24 formula, 1 dose if previously vaccinated with 1 or more doses of older Covid).
+       If immunocompromised and unvaccinated, then do a 3-dose series.
+
+    <li>Zoster - 2 doses if born 1980 or later or Zoster-Recombinant
+        <brdults aged 50 years or older should receive the recombinant (inactivated) herpes zoster vaccine to reduce the incidence of zoster and postherpetic neuralgia. The recombinant vaccine is administered intramuscularly in two doses, with an interval of 2 to 6 months between doses. This patient's previous episode of herpes zoster does not provide immunity against future episodes and should not preclude additional zoster vaccination. In addition, persons who received the live attenuated herpes zoster vaccine, such as this patient, should be offered the recombinant herpes zoster vaccine given its incr eased efficacy
+
+    <li>HPV 27yo-45yo
+
+    <li>Pneumococcal - 65yo or older
+    <br>pneumococcal vaccination at the age of 65 in the absence of underlying medical conditions that increase the risk of pneumococcal infection (Option C). This 64-year-old patient who is a nonsmoker with no significant medical history does not need to receive the vaccine early. Once this patient turns 65 years of age, vaccination with either the 20-valent pneumococcal conjugate vaccine alone or the 15-valent pneumococcal conjugate vaccine followed by the 23-valent pneumococcal polysaccharide vaccine at least 1 year later is indicated.
+
+    <li>Meningococcal
+    <br>The quadrivalent meningococcal conjugate vaccine (Option A) is recommended to be given at age 11 to 12 years, with a booster dose at age 16 years. Adults who are at increased risk for meningococcal disease should undergo primary vaccination if they never received age-appropriate vaccination. Increased risk is defined as persistent complement component deficiencies or patients taking eculizumab; functional or anatomic asplenia (including sickle cell disease); HIV infection
+
+    <li>Hep A
+    <li>Hep B 2,3,4 doses
+    <li>RSV - Over 60yo
+    <li>Tdap then Td or Tdap booster every 10 yrs
+    <li>MMR 1-2 doses
+</ul>
+
+
+
+<p><b><u>Screening</u></b>
+<ul>
+    <li>Breast Cancer
+    <br>USPSTF B: Mammography every 2 years for women aged 50 to 74
+    <br>BRCA. USPSTF B (2013, 2019 draft) recommendation in high risk women (≥ 10% probability of carrying mutation).
         If family hx or ethnicity/ancestry associated with increased BRCA risk, use a standardized risk assessment tool
         http://www.breastcancergenescreen.org/
-</ul>
 
-<p><b><u>Colon Cancer</u></b>
-<ul>
-    <li>USPSTF A (2016) Do something to screen for colorectal cancer in adults age 50-75
-    <li>USPSTF C: 75-85 y/o
-    <li>FOBT, FIT, FIT-DNA, sigmoidoscopy, CT colography, colonoscopy all acceptable
-    <li>Favor colonoscopy for higher risk patients: Family history, History of adenoma
-</ul>
+    <li>Colon Cancer
+        <br>USPSTF A (2016) Do something to screen for colorectal cancer in adults age 45-75
+        <br>USPSTF C: 75-85 y/o
+        <br>FOBT, FIT, FIT-DNA, sigmoidoscopy, CT colography, colonoscopy all acceptable
+        <br>Favor colonoscopy for higher risk patients: Family history, History of adenoma
 
-<p><b><u>Lung Cancer</u></b>
-<ul>
-    <li>USPSTF B (2013)
-    <li>Annual screening of adults 55-80 years who have a 30 pack-year smoking history and have smoked within the past 15 years
+    <li>Lung Cancer
+    <br>USPSTF B (2013). Annual screening of adults 55-80 years who have a 30 pack-year smoking history and have smoked within the past 15 years
 </ul>
 
     </div> <!-- xID="CPHintText" -->
