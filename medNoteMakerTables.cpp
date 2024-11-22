@@ -508,14 +508,15 @@ var g_AllOptionsDeclaration = {
     ///////////////////
     // Etiology
     "CirrhosisViralHepOption" : { "ButtonLabelList" : ["Hep A/B/C"], "ValueList" : ["Hepatitis A IgM, B surface antigen, B core antibody, C antibody"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
-
     "CirrhosisANAOption" : { "ButtonLabelList" : ["ANA"], "ValueList" : ["ANA"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : -1, "PlanSectionID" : "CirrhosisPlan"},
-
     "CirrhosisSmoothMuscleOption" : { "ButtonLabelList" : ["Smooth"], "ValueList" : ["anti-smooth muscle antibody"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
     "CirrhosisMitoOption" : { "ButtonLabelList" : ["Mitochondrial"], "ValueList" : ["anti-mitochondrial antibody"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
     "CirrhosisFerritinOption" : { "ButtonLabelList" : ["Ferritin"], "ValueList" : ["Ferritin"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
     "CirrhosisCeruloplasmOption" : { "ButtonLabelList" : ["Ceruloplasm"], "ValueList" : ["Ceruloplasm"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
     "CirrhosisAntiTyypsinOption" : { "ButtonLabelList" : ["AntiTrypsin"], "ValueList" : ["alpha-1 antitrypsin level and phenotype"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisAntiLiverKidneyOption" : { "ButtonLabelList" : ["anti-liver-kidney"], "ValueList" : ["anti-liver-kidney microsome antibody"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+    "CirrhosisAntiLiverOption" : { "ButtonLabelList" : ["anti-liver"], "ValueList" : ["anti-liver soluble antigen"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CirrhosisPlan"},
+
 
     ///////////////////
     // Varices
@@ -902,6 +903,10 @@ var g_AllOptionsDeclaration = {
     "CHFTriggerFluidsOption": { "ButtonLabelList" : ["Fluids"], "ValueList" : ["increased fluid intake"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
 
     ///////////////////
+    // Comments
+    "CHFIncreaseDiuresisForCKD": { "ButtonLabelList" : ["Renal Dose Diuretics"], "ValueList" : ["The patient has a low eGFR and so any diuretic dose must be aggressively elevated to have a comparable effect. Diuretics only affect transporters from the tubule lumen, so they must first be filtered by the nephron, and lower eGFR means lower filtration."], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
+
+    ///////////////////
     // Workup
     "CHFXrayOption": { "ButtonLabelList" : ["Get Xray"], "ValueList" : ["Get Chest XRay"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFGetBNPOption": { "ButtonLabelList" : ["Get BNP"], "ValueList" : ["Check serum BNP"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
@@ -922,30 +927,14 @@ var g_AllOptionsDeclaration = {
     "CHFMetoprololSuccOption": { "ButtonLabelList" : ["MetopXL 25", "MetopXL 50", "MetopXL 75", "MetopXL 100", "MetopXL 200", "Hold"], "ValueList" : ["Metoprolol Succinate 25mg PO once daily", "Metoprolol Succinate 50mg PO once daily", "Metoprolol Succinate 75mg PO once daily", "Metoprolol Succinate 100mg PO once daily", "Metoprolol Succinate 200mg PO once daily", "Hold home Metoprolol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFCarvedilolOption": { "ButtonLabelList" : ["Coreg 3.125", "Coreg 6.25", "Coreg 12.5", "Coreg 25", "Hold"], "ValueList" : ["Carvedilol 3.125mg PO BID", "Carvedilol 6.25mg PO BID", "Carvedilol 12.5mg PO BID", "Carvedilol 25mg PO BID", "Hold home Carvedilol due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFNSBBOption": { "ButtonLabelList" : ["See Cirrhosis"], "ValueList" : ["Non-specific Beta-Blocker as discussed for Cirrhosis"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
-    "CHFNoBetaBlockerOption": { "ButtonLabelList" : ["Brady", "Low BP"], "ValueList" : ["Hold betablockers while bradycardic", "Hold betablockers while hypotensive"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
+    "CHFNoBetaBlockerOption": { "ButtonLabelList" : ["Brady", "Low BP"], "ValueList" : ["Hold Beta-Blocker due to bradycardia", "Hold Beta-Blocker due to hypotension"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
 
     ///////////////////
     // ACE/ARB
     "CHFLisinoprilOption": { "ButtonLabelList" : ["Lisinopril2.5", "Lisinopril5", "Lisinopril10", "Lisinopril20", "Lisinopril40", "Hold"], "ValueList" : ["Lisinopril 2.5mg PO daily", "Lisinopril 5mg PO daily", "Lisinopril 10mg PO daily", "Lisinopril 20mg PO daily", "Lisinopril 40mg PO daily", "Hold home Lisinopril due to AKI"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFLosartanOption": { "ButtonLabelList" : ["Losartan25", "Losartan50", "Losartan100", "Hold"], "ValueList" : ["Losartan 25mg PO daily", "Losartan 50mg PO daily", "Losartan 100mg PO daily", "Hold home Losartan due to AKI"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFARNIOption": { "ButtonLabelList" : ["ARNI-Low", "ARNI-High"], "ValueList" : ["valsartan/sacubitril (Entresto) 49/51 mg PO BID", "valsartan/sacubitril (Entresto) 97/103 mg PO BID"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
-    "CHFNoACEARBOption": { "ButtonLabelList" : ["AKI", "Allergy", "Low BP", "High K"], "ValueList" : ["Hold ACE/ARB due to AKI", "Hold ACE/ARB due to allergy to ACE", "Hold ACE/ARB due to low blood pressure", "Hold ACE/ARB due to Hyperkalemia"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
-
-    // Indications for SGLT2
-    "CHFSGLT2IndicationsDM2Option" : { "ButtonLabelList" : ["DM2"], "ValueList" : ["Diabetes type 2"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
-    "CHFSGLT2IndicationsCKDOption" : { "ButtonLabelList" : ["CKD"], "ValueList" : ["CKD with eGFR over 30"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
-    "CHFSGLT2IndicationsHFrEFOption" : { "ButtonLabelList" : ["HFrEF"], "ValueList" : ["Heart failure with reduced ejection fraction"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
-    "CHFSGLT2IndicationsUACROver200Option" : { "ButtonLabelList" : ["Albuminuria"], "ValueList" : ["Albuminuria with urine albumin/Cr ratio over 200ug/g"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
-
-    // Contraindications for SGLT2
-    "CHFSGLT2ContraindicationsGFRBelow30Option" : { "ButtonLabelList" : ["GFR below 30"], "ValueList" : ["eGFR below 30"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
-    "CHFSGLT2ContraindicationsDM1Option" : { "ButtonLabelList" : ["DM 1"], "ValueList" : ["Diabetes type 1"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
-    "CHFSGLT2ContraindicationsTransplantOption" : { "ButtonLabelList" : ["Transplant"], "ValueList" : ["renal transplant"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
-    "CHFSGLT2ContraindicationsDKAOption" : { "ButtonLabelList" : ["Past DKA"], "ValueList" : ["history of DKA"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
-    "CHFSGLT2ContraindicationsImunosuppressedOption" : { "ButtonLabelList" : ["imunosuppressed"], "ValueList" : ["imunosuppressed"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
-    "CHFSGLT2ContraindicationsPKDOption" : { "ButtonLabelList" : ["PKD"], "ValueList" : ["PKD"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
-    "CHFSGLT2ContraindicationsSLEOption" : { "ButtonLabelList" : ["SLE"], "ValueList" : ["Lupus"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
-    "CHFSGLT2ContraindicationsANCAOption" : { "ButtonLabelList" : ["ANCA"], "ValueList" : ["ANCA"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
+    "CHFNoACEARBOption": { "ButtonLabelList" : ["AKI", "CKD", "Allergy", "Low BP", "High K"], "ValueList" : ["Hold ACE/ARB due to AKI", "Hold ACE/ARB due to advanced CKD (may resume after ESRD)", "Hold ACE/ARB due to allergy to ACE", "Hold ACE/ARB due to concern for low blood pressure", "Hold ACE/ARB due to Hyperkalemia"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
 
     ///////////////////
     // SGLT2
@@ -959,7 +948,13 @@ var g_AllOptionsDeclaration = {
     // MRA
     "CHFSpironiolactoneOption": { "ButtonLabelList" : ["Spironolactone25", "Spironolactone50", "Spironolactone100", "Hold"], "ValueList" : ["Spironolactone 25mg PO daily", "Spironolactone 50mg PO daily", "Spironolactone 100mg PO daily", "Hold home Spironolactone due to AKI"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFAldoBlockRestrictionsOption": { "ButtonLabelList" : ["AldoBlockerLimits"], "ValueList" : [" (NYHA II-IV, CrCl over 30, Cr below 2.5, K below 5)"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
-    "CHFNoMRAOption": { "ButtonLabelList" : ["AKI", "Low BP", "High K", "Postpone"], "ValueList" : ["Hold mineralocorticoid receptor antagonist due to AKI", "Hold mineralocorticoid receptor antagonist due to low blood pressure", "Hold mineralocorticoid receptor antagonist due to Hyperkalemia", "Postpone mineralocorticoid receptor antagonist until response to ACE/ARB is understood"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
+    "CHFNoMRAOption": { "ButtonLabelList" : ["AKI", "Low BP", "High K", "Postpone", "CKD"], "ValueList" : ["Hold mineralocorticoid receptor antagonist due to AKI", "Hold mineralocorticoid receptor antagonist due to concern for low blood pressure", "Hold mineralocorticoid receptor antagonist due to Hyperkalemia", "Hold mineralocorticoid receptor antagonist when starting ACE and concern for RTA-IV with posssible Hyperkalemia", "Hold mineralocorticoid receptor antagonist due to advanced CKD (may resume after ESRD)"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
+
+
+    ///////////////////
+    // Oxygen
+    "CHFCPAPOption": { "ButtonLabelList" : ["CPAP", "CPAP Night", "O2 NC"], "ValueList" : ["CPAP for 4hrs once now", "CPAP at night", "O2 via Nasal Cannula"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
+
 
     ///////////////////
     // ICD
@@ -968,7 +963,7 @@ var g_AllOptionsDeclaration = {
 
     ///////////////////
     // Diet
-    "CHF2gNaDietOption": { "ButtonLabelList" : ["2g Na Diet"], "ValueList" : ["2g Na diet"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
+    "CHF2gNaDietOption": { "ButtonLabelList" : ["2g Na Diet"], "ValueList" : ["Sodium restricted diet - 2g total daily intake"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFFluidRestrictOption": { "ButtonLabelList" : ["2L Fluids"], "ValueList" : ["2000mL daily fluid restriction"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFDietEdOption": { "ButtonLabelList" : ["Education"], "ValueList" : ["Nutrition consult for diet education"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
     "CHFCompressionStockingsOption": { "ButtonLabelList" : ["Stockings"], "ValueList" : ["Compression stockings (20-40mm Hg) on discharge"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "CHFPlan"},
@@ -1487,44 +1482,57 @@ var g_AllOptionsDeclaration = {
     "DiabetesStatusShowA1cOption" : { "ButtonLabelList" : ["A1c"], "ValueList" : ["Latest HgbA1c = " ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
     "DiabetesStatusShowWhenDiagnosedOption" : { "ButtonLabelList" : ["When Diag"], "ValueList" : ["Diagnosed approximately xxx, if type 2 anticipate nephropathy, retinopathy, and gradual beta cell dysfunction over time" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
     "DiabetesStatusShowHomeRegimenOption" : { "ButtonLabelList" : ["Home Regimen"], "ValueList" : ["Home Regimen is" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
-    "DiabetesStatusShowDailyStatusOption" : { "ButtonLabelList" : ["Daily Status"], "ValueList" : ["On Accucheck Glucose values= . Total daily insulin correction factor= " ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
+    "DMShowDailyStatusOption" : { "ButtonLabelList" : ["Daily Status"], "ValueList" : ["Glucose Trend: xxxx:  AM: xxx   POC: xxx   SlidingScale: None given" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
+    "DMGoalGlcOption" : { "ButtonLabelList" : ["Glc Goal"], "ValueList" : ["Inpatient goal of glucose is 140-180 mg/dL" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
 
     // Workup
     "DiabetesWorkupGetA1cOption" : { "ButtonLabelList" : ["Get A1c"], "ValueList" : ["Check Hgb A1c"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
     "DiabetesWorkupGetUrineAlbProtCrOption" : { "ButtonLabelList" : ["Get U Alb"], "ValueList" : ["Check Urine microalbumin/Cr ratio to screen for Diabetic Nephropathy"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
 
-    // Insulin
-    "DiabetesInsulinHoldPOOption" : { "ButtonLabelList" : ["Hold PO Meds"], "ValueList" : ["Hold home PO Medications while inpatient"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
-    "DiabetesDMEducationOption" : { "ButtonLabelList" : ["DM Ed"], "ValueList" : ["Diabetes Education" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
-    "DiabetesNutritionEducationOption" : { "ButtonLabelList" : ["Nutrition Ed"], "ValueList" : ["Consult Nutrition for patient education on diet"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
 
-    // Insulin
+
+    /////////////////////////
+    // 1. Orals
+    "DiabetesInsulinHoldPOOption" : { "ButtonLabelList" : ["Hold PO Meds"], "ValueList" : ["Hold home PO Medications while inpatient"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
+    "DMInpatientOralsOption" : { "ButtonLabelList" : ["Orals Inpatient"], "ValueList" : ["Give PO Medications while inpatient so we can titrate discharge Insulin dose with oral antihyperglycemics"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
+    "DMMetforminOption" : { "ButtonLabelList" : ["Metformin Daily", "Metformin BID", "Metformin BID"], "ValueList" : ["Metformin 500mg PO Daily", "Metformin 500mg PO BID", "Metformin 1000mg PO BID"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
+
+    /////////////////////////
+    // 2. Insulin
     "DiabetesInsulinReducedHomeRegimenOption" : { "ButtonLabelList" : ["Halve home dose"], "ValueList" : ["We will dose 60% of home regimen while the patient is in the hospital, and is acutely ill and on a different diet"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
     "DiabetesInsulinGlargineOption" : { "ButtonLabelList" : ["Glargine"], "ValueList" : ["Glargine xxx units QHS"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
     "DiabetesInsulinLisproOption" : { "ButtonLabelList" : ["Lispro"], "ValueList" : ["Lispro xxx units TID with meals"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
     "DiabetesInsulinSlidingScaleOption" : { "ButtonLabelList" : ["SSI"], "ValueList" : ["Sliding scale Insulin" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
 
-    // Indications for SGLT2
-    "DMSGLT2IndicationsDM2Option" : { "ButtonLabelList" : ["DM2"], "ValueList" : ["Diabetes type 2"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
-    "DMSGLT2IndicationsCKDOption" : { "ButtonLabelList" : ["CKD"], "ValueList" : ["CKD with eGFR over 30"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
-    "DMSGLT2IndicationsHFrEFOption" : { "ButtonLabelList" : ["HFrEF"], "ValueList" : ["Heart failure with reduced ejection fraction"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
-    "DMSGLT2IndicationsUACROver200Option" : { "ButtonLabelList" : ["Albuminuria"], "ValueList" : ["Albuminuria with urine albumin/Cr ratio over 200ug/g"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
-
-    // Contraindications for SGLT2
-    "DMSGLT2ContraindicationsGFRBelow30Option" : { "ButtonLabelList" : ["GFR below 30"], "ValueList" : ["eGFR below 30"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
-    "DMSGLT2ContraindicationsDM1Option" : { "ButtonLabelList" : ["DM 1"], "ValueList" : ["Diabetes type 1"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
-    "DMSGLT2ContraindicationsTransplantOption" : { "ButtonLabelList" : ["Transplant"], "ValueList" : ["renal transplant"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
-    "DMSGLT2ContraindicationsDKAOption" : { "ButtonLabelList" : ["Past DKA"], "ValueList" : ["history of DKA"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
-    "DMSGLT2ContraindicationsImunosuppressedOption" : { "ButtonLabelList" : ["imunosuppressed"], "ValueList" : ["imunosuppressed"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
-    "DMSGLT2ContraindicationsPKDOption" : { "ButtonLabelList" : ["PKD"], "ValueList" : ["PKD"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
-    "DMSGLT2ContraindicationsSLEOption" : { "ButtonLabelList" : ["SLE"], "ValueList" : ["Lupus"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
-    "DMSGLT2ContraindicationsANCAOption" : { "ButtonLabelList" : ["ANCA"], "ValueList" : ["ANCA"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
-
-    // SGLT2
+    ///////////////////
+    // 3. SGLT2
+    "DMSGLT2DapagliflozinOption": { "ButtonLabelList" : ["Dapagliflozin"], "ValueList" : ["Dapagliflozin 10mg PO daily"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
     "DMSGLT2EmpagliflozinOption" : { "ButtonLabelList" : ["Empagliflozin"], "ValueList" : ["Empagliflozin 10mg PO daily"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
     "DMSGLT2ReduceInsulinOption" : { "ButtonLabelList" : ["Reduce Insulin"], "ValueList" : ["Reduce Insulin 20 percent if GFR is over 45"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
     "DMSGLT2ExplainGFRDropOption" : { "ButtonLabelList" : ["Explain AKI"], "ValueList" : ["Expect 10-30 percent drop in eGFR due to hemodynamic effect of reduced filtration. This is not an acute kidney injury, and past studies have shown it is reversable by stopping the SGLT2 inhibitor. Essentially, an SGLT2 inhibitos just stops the hyperfiltration associated with glucosuria and unmasks the true eGFR."], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
+    "DMNoSGLT2Option": { "ButtonLabelList" : ["UTI", "DM-1", "CKD4", "Transplant", "DKA", "PKD", "Immuno"], "ValueList" : ["Hold SGLT2 while urinary tract infection", "No SGLT2 because patient has diabetes type-1", "No SGLT2 because patient has eGFR below 30", "No SGLT2 because patient has transplant", "No SGLT2 because patient has past DKA", "No SGLT2 because patient has PKD", "No SGLT2 because patient is Immunosuppressed"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
 
+    ///////////////////
+    // ACE/ARB
+    "DMLisinoprilOption": { "ButtonLabelList" : ["Lisinopril2.5", "Lisinopril5", "Lisinopril10", "Lisinopril20", "Lisinopril40", "Hold"], "ValueList" : ["Lisinopril 2.5mg PO daily", "Lisinopril 5mg PO daily", "Lisinopril 10mg PO daily", "Lisinopril 20mg PO daily", "Lisinopril 40mg PO daily", "Hold home Lisinopril due to AKI"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
+    "DMLosartanOption": { "ButtonLabelList" : ["Losartan25", "Losartan50", "Losartan100", "Hold"], "ValueList" : ["Losartan 25mg PO daily", "Losartan 50mg PO daily", "Losartan 100mg PO daily", "Hold home Losartan due to AKI"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
+    "DMARNIOption": { "ButtonLabelList" : ["ARNI-Low", "ARNI-High"], "ValueList" : ["valsartan/sacubitril (Entresto) 49/51 mg PO BID", "valsartan/sacubitril (Entresto) 97/103 mg PO BID"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
+    "DMNoACEARBOption": { "ButtonLabelList" : ["AKI", "CKD", "Allergy", "Low BP", "High K"], "ValueList" : ["Hold ACE/ARB due to AKI", "Hold ACE/ARB due to advanced CKD (may resume after ESRD)", "Hold ACE/ARB due to allergy to ACE", "Hold ACE/ARB due to concern for low blood pressure", "Hold ACE/ARB due to Hyperkalemia"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
+
+    ///////////////////
+    // Statin/Aspirin
+    "DMAtorvaOption": { "ButtonLabelList" : ["Atorva20", "Atorva40", "Atorva80"], "ValueList" : ["Atorvastatin 20mg PO daily", "Atorvastatin 40mg PO daily", "Atorvastatin 80mg PO daily"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
+
+    ///////////////////
+    // Neuropathy
+    "DMGabapentinOption": { "ButtonLabelList" : ["Gaba100", "Gaba200", "Gaba300", "Gaba400", "Gaba600"], "ValueList" : ["Gabapentin 100mg PO BID", "Gabapentin 200mg PO BID", "Gabapentin 300mg PO TID", "Gabapentin 400mg PO TID", "Gabapentin 600mg PO TID"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
+
+    ///////////////////
+    // Education
+    "DiabetesDMEducationOption" : { "ButtonLabelList" : ["DM Ed"], "ValueList" : ["Diabetes Education" ], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
+    "DiabetesNutritionEducationOption" : { "ButtonLabelList" : ["Nutrition Ed"], "ValueList" : ["Consult Nutrition for patient education on diet"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
+
+    ///////////////////
     // Followup
     "DiabetesFollowupOphthoOption" : { "ButtonLabelList" : ["Ophtho"], "ValueList" : ["Outpatient followup with Ophthomology"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
     "DiabetesFollowupPodiatryOption" : { "ButtonLabelList" : ["Podiatry"], "ValueList" : ["Outpatient followup with Podiatry"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : 0, "savedToggleState" : 0, "PlanSectionID" : "DiabetesPlan"},
@@ -2963,6 +2971,8 @@ var g_AllOptionsDeclaration = {
     "HEPATITIS_CheckEBV_OPTION" : { "ButtonLabelList" : ["EBV"], "ValueList" : ["EBV viral load"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HepatitisPlan"},
     "HEPATITIS_CheckCeruloplasm_OPTION" : { "ButtonLabelList" : ["Ceruloplasm"], "ValueList" : ["Ceruloplasm"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HepatitisPlan"},
     "HEPATITIS_CheckApap_OPTION" : { "ButtonLabelList" : ["Apap"], "ValueList" : ["Acetaminophen level"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HepatitisPlan"},
+    "Hepatitis_AntiLiverKidneyOption" : { "ButtonLabelList" : ["anti-liver-kidney"], "ValueList" : ["anti-liver-kidney microsome antibody"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HepatitisPlan"},
+    "Hepatitis_AntiLiverOption" : { "ButtonLabelList" : ["anti-liver"], "ValueList" : ["anti-liver soluble antigen"], "htmlButton" : null, "toggleBehavior" : "OK/Other/NA", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HepatitisPlan"},
 
     // Treat
     "HEPATITIS_POSteroids_OPTION" : { "ButtonLabelList" : ["Steroids"], "ValueList" : ["Prednisolone 40mg/day x4 weeks"], "htmlButton" : null, "toggleBehavior" : "On/Disabled", "toggleState" : -1, "InitialToggleState" : -1, "savedToggleState" : 0, "PlanSectionID" : "HepatitisPlan"},

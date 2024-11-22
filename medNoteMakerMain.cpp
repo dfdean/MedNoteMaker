@@ -105,13 +105,8 @@ var g_ImportCatalog;
 ////////////////////////////////////////////////////////////////////////////////
 function 
 StartMedNoteMaker() {
-    //LogEvent("StartMedNoteMaker");
-
     // Load the catalog
     g_ImportCatalog = document.getElementById("ImportControlPanelCatalog");
-    var newImportCatalog = document.getElementById("NewControlPanelCatalog");
-    var importedBody = Util_GetChildNode(g_ImportCatalog, "body");
-    var newCtlPanel = Util_GetDescendantNodeByID(g_ImportCatalog, "NewControlPanelCatalog");
 
     // These are the main windows that we show/hide to expose different subgroups of funtions and outputs.
     g_PlanDivElement = document.getElementById("NotePlanWindow");
@@ -1321,7 +1316,6 @@ ShowSubWindow(windowName, statusTextStr, showHelpClose) {
         } else {
             closeButton.style.display = "None";
         }
-
         g_HelpDivElement.style.display = "inline";
 
     ////////////////////////////////////
