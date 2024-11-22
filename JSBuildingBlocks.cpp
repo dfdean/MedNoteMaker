@@ -200,7 +200,7 @@ Util_GetChildNode(parentNode, childName) {
     //LogEvent("Util_GetChildNode. childName=" + childName);
 
     if ((null == parentNode) || (null == childName)) {
-        LogEvent("Util_GetChildNode. null params");
+        LogEvent("Util_GetChildNode. null params. childName=" + childName);
         return(null);
     }
 
@@ -1208,10 +1208,9 @@ function
 Util_GetDescendantNodeByID(parentNode, targetID) {
     var childElement;
     var recursiveResult;
-    //LogEvent("Util_GetChildNode. childName=" + childName);
 
     if ((null == parentNode) || (null == targetID)) {
-        LogEvent("Util_GetDescendantNodeByID. null params");
+        LogEvent("Util_GetDescendantNodeByID. null params. targetID=" + targetID);
         return(null);
     }
 

@@ -270,14 +270,20 @@
 <div ID="HelpWindow" style="display:inline;">
 <center>
 <h2>Medical Note Maker</h2>
-<br>Written by Dawson Dean
+<br>Written by Dr. Dawson Dean
 <br>For comments and questions, email dfdean3@gmail.com
 <br>Code is available at <a href="https://github.com/dfdean/MedNoteMaker" target="_blank">https://github.com/dfdean/MedNoteMaker</a>
-<br><br><br><br>
+<br><br><br>
 <input type="button" id="CloseHelpButtonID" value="Close" class="OptionBtnStyle" onclick="MedNote_OnCloseChildWindow(this)" >
 <div id="HelpStatusTextID">
 </div>
 </center>
+
+
+<br><br>
+<h3><u>Grateful Thanks To...</u></h3>
+Dr Gareth Gilkey - He taught me through his example what it means to be a doctor.
+<br>Dr. Joseph Maakaron - The first adopter, software evangalist, and source of valuable corrections.
 
 
 <br><br><br>
@@ -376,11 +382,7 @@
 
 </ul>
 
-<br><br><br>
-<h2><u>Grateful thanks to...</u></h2>
-Dr. Joseph Maakaron (the first adopter, software evangalist, and source of valuable corrections)
-<br><br><br><br>
-    
+ 
 
 <input type="button" id="CloseHelpButtonID" value="Close" class="OptionBtnStyle" onclick="MedNote_OnCloseChildWindow(this)" >
 </div>
@@ -1258,13 +1260,15 @@ to insert the appropriate elements into the control panel. -->
     <tr>
         <td><input type="button" value="Etiology" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
         <td><input type="button" id="CirrhosisViralHepOption" value="Hep A/B/C" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="CirrhosisANAOption" value="ANA" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="CirrhosisSmoothMuscleOption" value="Smooth Muscle" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="CirrhosisMitoOption" value="Mitochondrial" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="CirrhosisAntiLiverKidneyOption" value="anti-liver-kidney" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="CirrhosisAntiLiverOption" value="anti-liver" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
     <tr>
         <td>&nbsp;</td>
+        <td><input type="button" id="CirrhosisANAOption" value="ANA" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="CirrhosisFerritinOption" value="Ferritin" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="CirrhosisCeruloplasmOption" value="Ceruloplasm" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="CirrhosisAntiTyypsinOption" value="AntiTrypsin" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
@@ -1958,12 +1962,18 @@ Renal Tubular Acidosis:
     </tr>
 
     <tr>
+        <td><input type="button" value="Comments" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" id="CHFIncreaseDiuresisForCKD" value="Renal Dose Diuretics" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
+    <tr>
         <td><input type="button" value="Workup" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
         <td><input type="button" id="CHFXrayOption" value="Get Xray" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="CHFGetBNPOption" value="Get BNP" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="CHFGetEchoOption" value="Get Echo" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
     </table>
+
 
     <!-- ============================================ -->
     <!-- Treatment -->
@@ -2013,8 +2023,8 @@ Renal Tubular Acidosis:
 
     <tr>
         <td><input type="button" value="3. SGLT2" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
-        <td><input type="button" id="CHFSGLT2EmpagliflozinOption" value="Empagliflozin" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="CHFSGLT2DapagliflozinOption" value="Dapagliflozin" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="CHFSGLT2EmpagliflozinOption" value="Empagliflozin" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="CHFSGLT2ReduceInsulinOption" value="Reduce Insulin" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="CHFSGLT2ExplainGFRDropOption" value="Explain AKI" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="CHFNoSGLT2Option" value="UTI" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
@@ -2043,9 +2053,8 @@ Renal Tubular Acidosis:
     <!-- Others -->
     <table border="0" style="border-spacing:0.1em; padding:10px;">
     <tr>
-        <td><input type="button" value="ICD" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
-        <td><input type="button" id="CHFICDOption" value="ICD" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="CHFICDIndicationsOption" value="Indications" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" value="Oxygen" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" id="CHFCPAPOption" value="CPAP" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
     <tr>
@@ -2060,6 +2069,12 @@ Renal Tubular Acidosis:
         <td><input type="button" value="Monitor" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
         <td><input type="button" id="CHFIOOption" value="Strict In/Out" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="CHFDailyWeightOption" value="Daily Weight" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
+    <tr>
+        <td><input type="button" value="ICD" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" id="CHFICDOption" value="ICD" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="CHFICDIndicationsOption" value="Indications" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
 </table>
@@ -3133,14 +3148,18 @@ Hemorrhage Class
     </tr>
     </table>
 
-    <!-- Main Commands -->
+
+
+
+    <!-- Status and Workup -->
     <table border="0" style="border-spacing:0.1em; padding:10px;">
     <tr>
         <td><input type="button" value="Status" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
         <td><input type="button" id="DiabetesStatusShowA1cOption" value="A1c" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="DiabetesStatusShowWhenDiagnosedOption" value="When Diag" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="DiabetesStatusShowHomeRegimenOption" value="Home Regimen" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="DiabetesStatusShowDailyStatusOption" value="Daily Status" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="DMShowDailyStatusOption" value="Daily Status" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="DMGoalGlcOption" value="Glc Goal" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
     <tr>
@@ -3148,16 +3167,20 @@ Hemorrhage Class
         <td><input type="button" id="DiabetesWorkupGetA1cOption" value="Get A1c" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="DiabetesWorkupGetUrineAlbProtCrOption" value="Get U Alb" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
+    </table>
 
+
+    <!-- Treatment -->
+    <table border="0" style="border-spacing:0.1em; padding:10px;">
     <tr>
-        <td><input type="button" value="General" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" value="1. Orals" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
         <td><input type="button" id="DiabetesInsulinHoldPOOption" value="Hold PO Meds" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="DiabetesDMEducationOption" value="DM Ed" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="DiabetesNutritionEducationOption" value="Nutrition Ed" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="DMInpatientOralsOption" value="Orals Inpatient" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="DMMetforminOption" value="Metformin Daily" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
     <tr>
-        <td><input type="button" value="Insulin" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" value="2. Insulin" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
         <td><input type="button" id="DiabetesInsulinReducedHomeRegimenOption" value="Halve home dose" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="DiabetesInsulinGlargineOption" value="Glargine" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="DiabetesInsulinLisproOption" value="Lispro" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
@@ -3165,34 +3188,40 @@ Hemorrhage Class
     </tr>
 
     <tr>
-        <td><input type="button" value="SGLT2 Indications" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
-        <td><input type="button" id="DMSGLT2IndicationsDM2Option" value="DM2" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="DMSGLT2IndicationsCKDOption" value="CKD" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="DMSGLT2IndicationsHFrEFOption" value="HFrEF" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="DMSGLT2IndicationsUACROver200Option" value="Albuminuria" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-    </tr>
-
-    <tr>
-        <td><input type="button" value="SGLT2 Contraindications" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
-        <td><input type="button" id="DMSGLT2ContraindicationsGFRBelow30Option" value="GFR below 30" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="DMSGLT2ContraindicationsDM1Option" value="DM 1" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="DMSGLT2ContraindicationsTransplantOption" value="Transplant" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="DMSGLT2ContraindicationsDKAOption" value="Past DKA" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-    </tr>
-
-    <tr>
-        <td></td>
-        <td><input type="button" id="DMSGLT2ContraindicationsImunosuppressedOption" value="imunosuppressed" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="DMSGLT2ContraindicationsPKDOption" value="PKD" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="DMSGLT2ContraindicationsSLEOption" value="SLE" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-        <td><input type="button" id="DMSGLT2ContraindicationsANCAOption" value="ANCA" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
-    </tr>
-
-    <tr>
-        <td><input type="button" value="SGLT2" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" value="3. SGLT2" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" id="DMSGLT2DapagliflozinOption" value="Dapagliflozin" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="DMSGLT2EmpagliflozinOption" value="Empagliflozin" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="DMSGLT2ReduceInsulinOption" value="Reduce Insulin" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="DMSGLT2ExplainGFRDropOption" value="Explain AKI" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="DMNoSGLT2Option" value="UTI" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
+    <tr>
+        <td><input type="button" value="4. ACE/ARB" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" id="DMLisinoprilOption" value="Lisinopril2.5" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="DMLosartanOption" value="Losartan25" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="DMARNIOption" value="ARNI-Low" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="DMNoACEARBOption" value="AKI" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
+    <tr>
+        <td><input type="button" value="5. Statin" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" id="DMAtorvaOption" value="Atorva20" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
+    <tr>
+        <td><input type="button" value="6. Neuropathy" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" id="DMGabapentinOption" value="Gaba100" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+    </table>
+
+
+
+    <table border="0" style="border-spacing:0.1em; padding:10px;">
+    <tr>
+        <td><input type="button" value="Exucation" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" id="DiabetesDMEducationOption" value="DM Ed" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="DiabetesNutritionEducationOption" value="Nutrition Ed" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
     <tr>
@@ -4296,10 +4325,6 @@ Lung disease with normal DLCO is like a crumpled up paper sac. The surface area 
 
 </div> <!-- xID="CPBody" -->
 </div> <!-- AFibControls Control Panel -->
-
-
-
-
 
 
 
@@ -6771,6 +6796,8 @@ Pre-operative colonization with Staphylococcus aureus increases SSI risk. Screen
         <td><input type="button" id="HEPATITIS_CheckEBV_OPTION" value="EBV" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="HEPATITIS_CheckCeruloplasm_OPTION" value="Ceruloplasm" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="HEPATITIS_CheckApap_OPTION" value="Apap" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="Hepatitis_AntiLiverKidneyOption" value="anti-liver-kidney" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="Hepatitis_AntiLiverOption" value="anti-liver" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
     <tr>

@@ -183,10 +183,9 @@ WriteCirrhosisPlan() {
     //////////////////////////////
     // Etiology
     var optionNameList = [ "CirrhosisViralHepOption", "CirrhosisANAOption", "CirrhosisSmoothMuscleOption", 
-                        "CirrhosisMitoOption", "CirrhosisFerritinOption", "CirrhosisCeruloplasmOption", 
-                        "CirrhosisAntiTyypsinOption"];
+                        "CirrhosisMitoOption", "CirrhosisAntiLiverKidneyOption", "CirrhosisAntiLiverOption",
+                        "CirrhosisFerritinOption", "CirrhosisCeruloplasmOption", "CirrhosisAntiTyypsinOption"];
     WriteListOfSelectedActions(activeControlPanel, "Workup etiology, check ", optionNameList)
-
 
     // Varices
     subPlanActionList = ["CirrhosisEGDResultOption", "CirrhosisGIBleedOption", "CirrhosisPropranololOption"];
@@ -763,9 +762,8 @@ AppendNumberToString(startStr, numValue) {
 //
 // [WriteCHFPlan]
 //
-// *** Check urine Chloride, daily
-//
 // Updated 2023-10-31 - Implemented core plan as 5 groups: BB, ACE/ARB, SGLT2, MRA, Diuresis
+// Updated 2024-4-28 - Added CPAP, CKD adjusted diuretic doses, more reasons to not give ACE/ARB
 ////////////////////////////////////////////////////////////////////////////////
 function 
 WriteCHFPlan() {
@@ -898,6 +896,10 @@ WriteCHFPlan() {
     var optionNameList = [ "CHFTriggerDietOption", "CHFTriggerComplianceOption", "CHFTriggerMedChangesOption", "CHFTriggerAKIOption", "CHFTriggerFluidsOption" ];
     WriteListOfSelectedValues(activeControlPanel, "Possible triggers for this exacerbation include: ", false, "", optionNameList, "")
 
+    // Comments
+    WriteCommentIfSelected(activeControlPanel, 'CHFIncreaseDiuresisForCKD');
+
+
     ///////////////////////////////
     // New Workup
     WriteActionIfSelected(activeControlPanel, 'CHFXrayOption');
@@ -929,6 +931,20 @@ WriteCHFPlan() {
             'CHFBumexOption', 'CHFThiazideOption', 'CHFNoDiureticOption']; 
     WriteListOfSubActions("Diuresis", optionNameList)
 
+
+    ///////////////////////////////
+    // Oxygen, Diet and Fluids
+    WriteActionIfSelected(activeControlPanel, 'CHFCPAPOption');
+    WriteActionIfSelected(activeControlPanel, 'CHF2gNaDietOption');
+    WriteActionIfSelected(activeControlPanel, 'CHFFluidRestrictOption');
+    WriteActionIfSelected(activeControlPanel, 'CHFCompressionStockingsOption');
+    WriteActionIfSelected(activeControlPanel, 'CHFDietEdOption');
+
+    ///////////////////////////////
+    // Monitoring
+    WriteActionIfSelected(activeControlPanel, 'CHFIOOption');
+    WriteActionIfSelected(activeControlPanel, 'CHFDailyWeightOption');
+
     ///////////////////////////////
     // ICD
     planStr = MedNote_GetCPOptionValue("CHFICDOption");
@@ -939,18 +955,6 @@ WriteCHFPlan() {
     if ((planStr != null) && (planStr != "")) {
         WriteAction(planStr);
     }
-
-    ///////////////////////////////
-    // Diet and Fluids
-    WriteActionIfSelected(activeControlPanel, 'CHF2gNaDietOption');
-    WriteActionIfSelected(activeControlPanel, 'CHFFluidRestrictOption');
-    WriteActionIfSelected(activeControlPanel, 'CHFCompressionStockingsOption');
-    WriteActionIfSelected(activeControlPanel, 'CHFDietEdOption');
-
-    ///////////////////////////////
-    // Monitoring
-    WriteActionIfSelected(activeControlPanel, 'CHFIOOption');
-    WriteActionIfSelected(activeControlPanel, 'CHFDailyWeightOption');
 } // WriteCHFPlan
 
 
@@ -1134,7 +1138,7 @@ WriteSepsisPlan() {
             planStr = "There were changes in " + g_SOFA_DIFFERENNCES;
             WriteComment(planStr);
         } else {
-            planStr = "The SOFA score dud not change significantly";
+            planStr = "The SOFA score did not change significantly";
             planStr += " (from " + g_BASELINE_SOFA_SCORE + " to " + g_CURRENT_SOFA_SCORE + ")";
             WriteComment(planStr);
         }
@@ -1462,7 +1466,8 @@ WriteGIBleedPlan() {
 //
 // [PrintDiabetesPlan]
 //
-// Updated 2021-2-15
+// 2021-2-15 - Updated
+// 2024-4-28 - Added subplan sections, inpatient PO meds, statins, SGLT2, ACE/ARB
 ////////////////////////////////////////////////////////////////////////////////
 function 
 PrintDiabetesPlan() { 
@@ -1498,42 +1503,46 @@ PrintDiabetesPlan() {
     WriteListOfSelectedFormatStrings(activeControlPanel, optionNameList);
     WriteCommentIfSelected(activeControlPanel, "DiabetesStatusShowWhenDiagnosedOption");
     WriteCommentIfSelected(activeControlPanel, "DiabetesStatusShowHomeRegimenOption");
-    WriteCommentIfSelected(activeControlPanel, "DiabetesStatusShowDailyStatusOption");
-
-    // SGLT2
-    var optionNameList = [ "DMSGLT2IndicationsDM2Option", "DMSGLT2IndicationsCKDOption", 
-                            "DMSGLT2IndicationsHFrEFOption", "DMSGLT2IndicationsUACROver200Option" ]
-    WriteListOfSelectedValues(activeControlPanel, "Indications for starting an SGLT2 inhibitor include: ", false, "", optionNameList, "")
-    var optionNameList = [ "DMSGLT2ContraindicationsGFRBelow30Option", "DMSGLT2ContraindicationsDM1Option",
-                            "DMSGLT2ContraindicationsTransplantOption", "DMSGLT2ContraindicationsDKAOption",
-                            "DMSGLT2ContraindicationsImunosuppressedOption", "DMSGLT2ContraindicationsPKDOption",
-                            "DMSGLT2ContraindicationsSLEOption", "DMSGLT2ContraindicationsANCAOption" ]
-    WriteListOfSelectedValues(activeControlPanel, "Do not start an SGLT2 inhibitor due to contraindications: ", false, "", optionNameList, "")
-
+    WriteCommentIfSelected(activeControlPanel, "DMShowDailyStatusOption");
+    WriteCommentIfSelected(activeControlPanel, "DMGoalGlcOption");
 
     // Workup
     WriteActionIfSelected(activeControlPanel, "DiabetesWorkupGetA1cOption");
     WriteActionIfSelected(activeControlPanel, "DiabetesWorkupGetUrineAlbProtCrOption");
 
-    // Insulin
-    WriteActionIfSelected(activeControlPanel, "DiabetesInsulinHoldPOOption");
+    // 1. Orall Anti-Hyperglycemics
+    var optionNameList = [ 'DiabetesInsulinHoldPOOption', 'DMInpatientOralsOption', 'DMMetforminOption']; 
+    WriteListOfSubActions("Oral Anti-Hyperglycemics", optionNameList)
 
-    // Insulin
+    // 2. Insulin
     WriteCommentIfSelected(activeControlPanel, "DiabetesInsulinReducedHomeRegimenOption");
     var actionNameList = [ "DiabetesInsulinGlargineOption", "DiabetesInsulinLisproOption", "DiabetesInsulinSlidingScaleOption"];
     WriteListOfSubActions("Insulin", actionNameList);
 
-    // SGLT2
-    WriteActionIfSelected(activeControlPanel, "DMSGLT2EmpagliflozinOption");
-    WriteActionIfSelected(activeControlPanel, "DMSGLT2ReduceInsulinOption");
-    WriteActionIfSelected(activeControlPanel, "DMSGLT2ExplainGFRDropOption");
+    // 3. SGLT2
+    var optionNameList = [ 'DMSGLT2DapagliflozinOption', 'DMSGLT2EmpagliflozinOption', 
+            'DMSGLT2ReduceInsulinOption', 'DMSGLT2ExplainGFRDropOption', 'DMNoSGLT2Option']; 
+    WriteListOfSubActions("SGLT2 Inhibitor", optionNameList)
+
+    // 4. ACE/ARB
+    var optionNameList = [ 'DMLisinoprilOption', 'DMLosartanOption', 'DMARNIOption', 'DMNoACEARBOption']; 
+    WriteListOfSubActions("Angiotensin Blockade", optionNameList)
+
+    // 5. Statin
+    var optionNameList = [ 'DMAtorvaOption']; 
+    WriteListOfSubActions("Statin", optionNameList)
+
+    // 6. Neuropathy
+    var optionNameList = [ 'DMGabapentinOption']; 
+    WriteListOfSubActions("Neuropathic Pain", optionNameList)
+
+    // Education
+    var optionNameList = [ 'DiabetesDMEducationOption', 'DiabetesNutritionEducationOption']; 
+    WriteListOfSubActions("Patient Education", optionNameList)
 
     // Followup
-    WriteActionIfSelected(activeControlPanel, "DiabetesDMEducationOption");
-    WriteActionIfSelected(activeControlPanel, "DiabetesNutritionEducationOption");
-    WriteActionIfSelected(activeControlPanel, "DiabetesFollowupOphthoOption");
-    WriteActionIfSelected(activeControlPanel, "DiabetesFollowupPodiatryOption");
-    WriteActionIfSelected(activeControlPanel, "DiabetesFollowupEndocrineOption");
+    var optionNameList = [ 'DiabetesFollowupOphthoOption', 'DiabetesFollowupPodiatryOption', 'DiabetesFollowupEndocrineOption']; 
+    WriteListOfSubActions("Followup", optionNameList)
 } // PrintDiabetesPlan
 
 
@@ -4024,7 +4033,9 @@ WriteHepatitisPlan() {
     // Workup
     var optionNameList = [ 'HEPATITIS_CheckHepAIgG_OPTION', 'HEPATITIS_CheckHepAIgM_OPTION', 'HEPATITIS_CheckHepBIgAg_OPTION',
                             'HEPATITIS_CheckHepBPCR_OPTION',  'HEPATITIS_CheckHepDIgG_OPTION', 'HEPATITIS_CheckHepEIgG_OPTION',
-                            'HEPATITIS_CheckCMV_OPTION', 'HEPATITIS_CheckEBV_OPTION', 'HEPATITIS_CheckCeruloplasm_OPTION', 'HEPATITIS_CheckApap_OPTION']; 
+                            'HEPATITIS_CheckCMV_OPTION', 'HEPATITIS_CheckEBV_OPTION', 
+                            'Hepatitis_AntiLiverKidneyOption', 'Hepatitis_AntiLiverOption', 
+                            'HEPATITIS_CheckCeruloplasm_OPTION', 'HEPATITIS_CheckApap_OPTION']; 
     WriteListOfSelectedActions(activeControlPanel, "Check ", optionNameList)
 
     // Treat
