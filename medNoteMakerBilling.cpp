@@ -34,11 +34,7 @@
 // These are the main windows that we show/hide to expose different subgroups of funtions and outputs.
 var g_PlanDivElement = null;
 var g_PlanTableElement = null;
-var g_DiagnosisButtonsDivElement = null;
 var g_HelpDivElement = null;
-var g_OptionWindowDivElement = null;
-var g_RecommendationsDivElement = null;
-var g_InpatientTableElement = null;
 var g_ToolBarElement = null;
 
 // Runtime state for printing a plan. Each plan section is in a different row
@@ -97,186 +93,44 @@ var g_ImportCatalog;
 
 ////////////////////////////////////////////////////////////////////////////////
 //
-// [StartMedNoteMaker]
+// [StartMedNoteMakerBilling]
 //
 // This is called by the browser to initialize the entire UI.
 ////////////////////////////////////////////////////////////////////////////////
 function 
-StartMedNoteMaker() {
+StartMedNoteMakerBilling() {
     // Load the catalog
     g_ImportCatalog = document.getElementById("ImportControlPanelCatalog");
 
     // These are the main windows that we show/hide to expose different subgroups of funtions and outputs.
     g_PlanDivElement = document.getElementById("NotePlanWindow");
     g_PlanTableElement = document.getElementById("PlanTable");
-    g_DiagnosisButtonsDivElement = document.getElementById("DiagnosisButtons");
     g_HelpDivElement = document.getElementById("HelpWindow");
-    g_OptionWindowDivElement = document.getElementById("OptionWindow");
 
     // Get some useful elements from the HTML; these will be used for input and output.
-    g_InpatientTableElement = document.getElementById("InPatientTable");
     g_ToolBarElement = document.getElementById("ToolBar");
     //LogEvent("StartMedNoteMaker. Got html elements");
 
-    if (g_InpatientTableElement) {
-        g_InpatientTableElement.style.display = "inline";
-    }    
     if (g_HelpDivElement) {
         g_HelpDivElement.style.display = "None";
     }    
 
     ShowSubWindow("HelpButtonID", "Loading pages...", false);
 
+    MedNote_OnCloseChildWindow(null);
+
     // Initialize the global state.
     // This goes in ORDER of the order in which problems typically appear in the plan.
     // So, put the highest priority items first, and the lowest priority items last.
-
-    ////////////////////////////////////
-    // Header and Footer
-    //LogEvent("StartMedNoteMaker. Initialized Plan states 3%");
-    InitPlanState("PlanHeader", WritePlanHeader);
-    InitPlanState("PlanFooter", WritePlanFooter);
-
-    ////////////////////////////////////
-    // Chief Complaints
-    //LogEvent("StartMedNoteMaker. Initialized Plan states 4%");
-    InitPlanState("NSTEMIPlan", WriteChestPainPlan);
-    InitPlanState("DKAPlan", WriteDKAPlan);
-    InitPlanState("GIBleedPlan", WriteGIBleedPlan);
-    InitPlanState("SepsisPlan", WriteSepsisPlan);
-    InitPlanState("StrokePlan", WriteStrokePlan);  
-    InitPlanState("DICPlan", WriteDICPlan);
-    InitPlanState("PEDVTPlan", WritePEDVTPlan);
-    InitPlanState("CovidPlan", WriteCovidPlan);
-    InitPlanState("EncephalopathyPlan", WriteEncephalopathyPlan);
-    InitPlanState("SyncopePlan", WriteSyncopePlan);
-    InitPlanState("OncologyPlan", WriteOncologyPlan);
-    InitPlanState("HepatitisPlan", WriteHepatitisPlan);
-    InitPlanState("PancPlan", WritePancreatitisPlan);
-    InitPlanState("GISymptomsPlan", WriteGISymptomsPlan);
-    InitPlanState("PneumoniaPlan", WritePneumoniaPlan);
-    InitPlanState("CADPlan", WriteCADPlan);
-    InitPlanState("CHFPlan", WriteCHFPlan);
-    InitPlanState("COPDPlan", WriteCOPDPlan);  
-    InitPlanState("PreopPlan", WritePreOpPlan);
-    
-    ////////////////////////////////////
-    // Complex Comorbidities 
-    InitPlanState("CirrhosisPlan", WriteCirrhosisPlan);
-    InitPlanState("HemoDialysisPlan", WriteHemodialysisPlan);
-    InitPlanState("RenalTransplantPlan", WriteRenalTransplantPlan);
-        
-    ////////////////////////////////////
-    // Renal
-    InitPlanState("AKIPlan", PrintAKIPlan);
-    InitPlanState("CKDPlan", PrintCKDPlan);
-    InitPlanState("NephroticPlan", WriteNephroticPlan);
-    InitPlanState("IVContrastPlan", WriteIVContrastPlan);
-    InitPlanState("DysphagiaPlan", WriteDysphagiaPlan);
-    InitPlanState("MBDPlan", WriteMBDPlan);
-    InitPlanState("HTNPlan", WriteHTNPlan);    
-    InitPlanState("AcidBasePlan", WriteAcidBasePlan);
-    InitPlanState("ParathyroidectomyPlan", WriteParathyroidectomyPlan);
-            
-    ////////////////////////////////////
-    // Non-Complex Comorbidities
-    InitPlanState("DiabetesPlan", PrintDiabetesPlan);
-    InitPlanState("AsthmaPlan", WriteAsthmaPlan);
-    InitPlanState("OSAPlan", WriteOSAPlan);
-    InitPlanState("AFibPlan", WriteAFibPlan);  
-    
-    ////////////////////////////////////
-    // PreExisting
-    InitPlanState("PalliativePlan", WritePalliativePlan);  
-    InitPlanState("HepCPlan", WriteHepatitisCPlan);
-    InitPlanState("LegFracturePlan", WriteLegFracturePlan);
-    InitPlanState("NephrolithiasisPlan", WriteNephrolithiasisPlan);
-    
-    ////////////////////////////////////
-    // Single-Line Capable Plans
-    InitPlanState("AnemiaPlan", WriteAnemiaPlan);
-    InitPlanState("HypokalemiaPlan", WriteHypokalemiaPlan);
-
-    InitPlanState("HyperkalemiaPlan", WriteHypERkalemiaPlan);
-    InitPlanState("HyponatremiaPlan", WriteHyponatremiaPlan);
-    InitPlanState("HypERnatremiaPlan", PrintHyperNatremiaPlan);
-    InitPlanState("HypoPhosPlan", WriteHypoPhosPlan);
-    InitPlanState("HypoCalcemiaPlan", WriteHypoCalcemiaPlan);
-    InitPlanState("HypERCalcemiaPlan", WriteHypERCalcemiaPlan);
-    InitPlanState("HypomagnesemiaPlan", WriteHypomagnesemiaPlan);
-    InitPlanState("VitDPlan", WriteVitaminDPlan);
-
-    InitPlanState("EtOHPlan", WriteEtOHPlan);
-    InitPlanState("IllicitDrugsPlan", WriteIllicitDrugsPlan);
-    InitPlanState("HypothyroidPlan", WriteHypothyroidPlan);
-    InitPlanState("GoutPlan", WriteGoutPlan);
-    InitPlanState("BPHPlan", WriteBPHPlan); 
-    InitPlanState("DepressionPlan", WriteDepressionPlan);
-    InitPlanState("GERDPlan", WriteGERDPlan);
-    InitPlanState("PressureUlcersPlan", WritePressureUlcersPlan);
-    InitPlanState("MalnutritionPlan", WriteMalnutritionPlan);
-    InitPlanState("ObesityPlan", WriteObesityPlan);
-    InitPlanState("WeaknessPlan", WriteWeaknessPlan);
-    InitPlanState("TobaccoPlan", WriteTobaccoPlan);
-    InitPlanState("MigrainesPlan", WriteMigrainePlan);
-
-    ////////////////////////////////////
-    // Footer Plans
-    InitPlanState("PreventionPlan", WritePreventionPlan);
     InitPlanState("BillingPlan", WriteBillingPlan);
+    var valueEntry = g_AllPlansDeclaration["BillingPlan"];
+    valueEntry.isSelected = 1;
+    valueEntry.planSelectStatusHTMLElement.className = "planOnStyle";
    
-    MedNote_OnCloseChildWindow(null);
-
     //LogEvent("StartMedNoteMaker. Initialized plan states");
     WritePlanBody();
-} // StartMedNoteMaker
+} // StartMedNoteMakerBilling
 
-
-
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-//
-// [OnPlanButton]
-//
-// This is called when the user clicks a button in the GUI.
-// button.id is the name of the plan state.
-////////////////////////////////////////////////////////////////////////////////
-function 
-OnPlanButton(button) {
-    //LogEvent("OnPlanButton. button.id=" + button.id);
-
-    var valueEntry = g_AllPlansDeclaration[button.id];
-    if (!valueEntry) {
-        LogEvent("OnPlanButton. null valueEntry");
-        return;
-    }
-    //LogEvent("OnPlanButton. valueEntry=" + valueEntry);
-    if (!(valueEntry.planSelectStatusHTMLElement)) {
-        LogEvent("OnPlanButton. null valueEntry.planSelectStatusHTMLElement");
-        return;
-    }
-
-    // The HTML state is visible, so that is considered the final "truth".
-    // There are cases where the runtime isSelectedFlag and the html can get out of sync, which are bugs and will be fixed.
-    if (valueEntry.planSelectStatusHTMLElement.className.toUpperCase() == "PLANOFFSTYLE") {
-        //LogEvent("OnPlanButton. Turn the option on. button.id=" + button.id);
-        valueEntry.isSelected = 1;
-        valueEntry.planSelectStatusHTMLElement.className = "planOnStyle";
-    } else {
-        //LogEvent("OnPlanButton. Turn the option off. button.id=" + button.id);
-        valueEntry.isSelected = 0;
-        valueEntry.planSelectStatusHTMLElement.className = "planOffStyle";
-        // Hide any active control panels.
-        valueEntry.activeControlPanel = null;
-    }
-    
-    WritePlanBody();
-    //LogEvent("OnPlanButton done");
-} // OnPlanButton
 
 
 
@@ -317,385 +171,6 @@ ResetNotebuilderState() {
 
 
 
-
-////////////////////////////////////////////////////////////////////////////////
-//
-// [OnPlanTypeButton]
-//
-////////////////////////////////////////////////////////////////////////////////
-function 
-OnPlanTypeButton(button) {
-    //LogEvent("OnPlanTypeButton. button.id = " + button.id);
-    
-    ////////////////////////////////////
-    if (button.id == "FullPlanOption") {
-        if  (button.value == "Full-->Plan Only") {
-            button.className="OptionBtnStyle";
-            button.value="Plan Only-->Full";
-            g_EmitBoilerplate = false;
-        } else {
-            button.className="optionOnStyle";
-            button.value="Full-->Plan Only";
-            g_EmitBoilerplate = true;
-        }        
-    }
-
-    WritePlanBody();
-} // OnPlanTypeButton
-
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-//
-// [WritePlanHeader]
-//
-////////////////////////////////////////////////////////////////////////////////
-function 
-WritePlanHeader() {
-    //LogEvent("WritePlanHeader");
-    var str;
-    var optionNameList;
-    var activeControlPanel = null;
-
-    MedNote_StartNewPlanSection(null, "PlanHeader");
-
-    WriteTextLine("Chief Complaint: ");
-    WriteTextLine("History of Present Illness:");
-    WriteTextLine("");
-    WriteTextLine("");
-
-    // Get the control panel. 
-    // This was set up by the call to MedNote_StartNewPlanSection.
-    planConfigState = g_AllPlansDeclaration['PlanHeader'];
-    activeControlPanel = planConfigState.activeControlPanel;
-    if (!activeControlPanel) {
-        LogEvent("WritePlanHeader. activeControlPanel is null");
-        return;
-    }
-
-    ///////////////////////////////////////
-    // REVIEW OF SYSTEMS:
-    //    
-    //A problem pertinent ROS inquires about the system directly related to the problem(s) identified in the HPI.
-    //An extended ROS requires two to nine systems should be documented.
-    //A complete ROS inquires about at least ten organ systems must be reviewed.
-    if (MedNote_GetCPOptionBool("RoSCannotAssessOption")) {
-        str = "Review of Systems: " + MedNote_GetCPOptionValue("RoSCannotAssessOption");
-        WriteTextLine(str);
-    } else {
-        WriteTextLine("Review of Systems:");
-        WriteCommentIfSelected(activeControlPanel, 'RoS14PointOption');
-
-        optionNameList = [ "RosFeverOption", "RosWeaknessOption", "RosWeightLossOption", "RosAppetiteOption"];
-        WriteListOfSelectedValues(activeControlPanel, "Constitutional: ", false, "", optionNameList, "")
-
-        optionNameList = [ "RosDryEyesOption", "RosBlurredVisionOption", "RosVisionChangesOption"];
-        WriteListOfSelectedValues(activeControlPanel, "Eyes: ", false, "", optionNameList, "")
-
-        optionNameList = [ "RosHearingOption", "RosMouthOption", "RosNoseOption"];
-        WriteListOfSelectedValues(activeControlPanel, "HENT: ", false, "", optionNameList, "")
-
-        optionNameList = [ "RosChestPainOption", "RosPalpitationsOption", "RosEdemaOption"];
-        WriteListOfSelectedValues(activeControlPanel, "Cardiovascular: ", false, "", optionNameList, "")
-
-        optionNameList = [ "RosDyspneaOption", "RosCoughOption", "RosDoEOption", "RosSputumOption"];
-        WriteListOfSelectedValues(activeControlPanel, "Respiratory: ", false, "", optionNameList, "")
-
-        optionNameList = [ "RosNauseaOption", "RosVomitingOption", "RosDiarrheaOption", "RosConstipationOption", "RosAbdomPainOption"];
-        WriteListOfSelectedValues(activeControlPanel, "Gastrointestinal: ", false, "", optionNameList, "")
-
-        optionNameList = [ "RosPartialVoidOption", "RosWeakStreamOption", "RosUrinaryHesitancyOption", "RosDysuriaOption"]; 
-        WriteListOfSelectedValues(activeControlPanel, "Genitourinary: ", false, "", optionNameList, "")
-
-        optionNameList = [ "RosBackPainOption", "RosShoulderPainOption", "RosHipPainOption", "RosKneePainOption"];
-        WriteListOfSelectedValues(activeControlPanel, "Musculoskeletal: ", false, "", optionNameList, "")
-
-        optionNameList = [ "RosRashOption", "RosLesionOption", "RosBruisingOption"];
-        WriteListOfSelectedValues(activeControlPanel, "Integumentary: ", false, "", optionNameList, "")
-
-        optionNameList = [ "RosHeadachesOption", "RosDizzinessOption", "RosNumbnessOption", "RosBurningOption"];
-        WriteListOfSelectedValues(activeControlPanel, "Neurological: ", false, "", optionNameList, "")
-
-        optionNameList = [ "RosDepressionOption", "RosAnxietyOption", "RosHallucinationOption"];
-        WriteListOfSelectedValues(activeControlPanel, "Psychiatric: ", false, "", optionNameList, "")
-
-        optionNameList = [ "RosMelenaOption", "RosHematocheziaOption", "RosHematemesisOption", "RosCoffeeGroundOption", "RosHematuriaOption"];
-        WriteListOfSelectedValues(activeControlPanel, "Hematologic: ", false, "", optionNameList, "")
-
-        optionNameList = [ "RosHeatOption", "RosColdOption", "RosThirstOption"];
-        WriteListOfSelectedValues(activeControlPanel, "Endocrine: ", false, "", optionNameList, "")
-
-        optionNameList = [ "RosAllergiesOption", "RosInfectionsOption"];
-        WriteListOfSelectedValues(activeControlPanel, "Allergic: ", false, "", optionNameList, "")
-
-        WriteTextLine("All other review of systems are negative.");
-    } // (!(MedNote_GetCPOptionBool("RoSCannotAssessOption")))
-    WriteTextLine("");
-
-
-    //////////////////////////
-    // HISTORIES:
-    // Past Medical History
-    optionNameList = ["PMHxHypertension", "PMHxDiabetes", "PMHxHeartFailure", "PMHxCOPD", "PMHxCirrhosis",
-                        "PMHxCoronaryArteryDisease", "PMHxCKD", "PMHxStroke", "PMHxHypoThyroid", "PMHxAnxiety",
-                        "PMHxAFib", "PMHxDepression", "PMHxTobacco", "PMHxEtOH"];
-    WriteListOfSelectedMedHistoryItems(activeControlPanel, "Medical History:", optionNameList);
-    WriteTextLine("");
-
-    // Past Surgical History
-    optionNameList = ["PSHxCholecystectomy", "PSHxArthroscopy", "PSHxAppendectomy", "PSHxHysterectomy", 
-                        "PSHxTonsillectomy", "PSHxCABG", "PSHxCSection", "PSHxBTL"];
-    WriteListOfSelectedMedHistoryItems(activeControlPanel, "Surgical History:", optionNameList);
-    WriteTextLine("");
-
-    // Past Social History
-    WriteTextLine("Social History:");
-    optionNameList = ["PHxTobacco"];
-    WriteHistoryItem(activeControlPanel, "Tobacco: ", optionNameList, "None");
-    optionNameList = ["PHxAlcohol"];
-    WriteHistoryItem(activeControlPanel, "Alcohol: ", optionNameList, "None");
-    optionNameList = ["PHxDrugs"];
-    WriteHistoryItem(activeControlPanel, "Illicits: ", optionNameList, "None");
-    WriteTextLine("");
-
-    // Family Medical History
-    WriteTextLine("Family History:");
-    WriteTextLine("Reviewed and non-contributory");
-    optionNameList = ["FHxMotherDM", "FHxMotherHTN", "FHxMotherCAD", "FHxMotherCancer", "FHxMotherCOPD", "FHxMotherNone"];
-    WriteHistoryItem(activeControlPanel, "Mother: ", optionNameList, "");
-    optionNameList = ["FHxFatherDM", "FHxFatherHTN", "FHxFatherCAD", "FHxFatherCancer", "FHxFatherCOPD", "FHxFatherNone"];
-    WriteHistoryItem(activeControlPanel, "Father: ", optionNameList, "");
-    optionNameList = ["FHxSiblingsDM", "FHxSiblingsHTN", "FHxSiblingsCAD", "FHxSiblingsCancer"];
-    WriteHistoryItem(activeControlPanel, "Siblings: ", optionNameList, "");
-    WriteTextLine("");
-
-    // Home Medications
-    optionNameList = ["PHxMedsMetoprolol", "PHxMedsLisinopril", "PHxMedsLosartan", "PHxMedsAmlodipine", "PHxMedsHCTZ", 
-                        "PHxMedsPantoprazole", "PHxMedsOxycodone", "PHxMedsCoreg", "PHxMedsFurosemide", "PHxMedsAsa", 
-                        "PHxMedsAtorvastatin", "PHxMedsApixaban", "PHxMedsClopidogrel", "PHxMedsAlbuterol", 
-                        "PHxMedsFluticSalm", "PHxMedsTiotropium", "PHxMedsMontelukast", "PHxMedsTamsulosin", 
-                        "PHxMedsMetformin"];
-    WriteListOfSelectedMedHistoryItems(activeControlPanel, "Home Medications:", optionNameList);
-    WriteTextLine("");
-
-    // Allergies
-    optionNameList = ["PHxAllergyPenicillins", "PHxAllergySulfa"];
-    WriteHistoryItem(activeControlPanel, "Allergies: ", optionNameList, "No Known Drug Allergies");
-    WriteTextLine("");
-
-    ////////////////////////
-    // PHYSICAL EXAM:
-    WriteTextLine("OBJECTIVE");
-    //WriteTextLine("Vitals: T=, HR=, BP=/, SpO2=100% on RA, Wt=");
-    WriteTextLine("Physical Exam:");
-    optionNameList = [ "AOx3Option", "NADOption", "NourishedOption", "GCSEyesOption", "GCSVerbalOption", "GCSMotorOption"];
-    WriteListOfSelectedValues(activeControlPanel, "General: ", false, "", optionNameList, "")
-
-    optionNameList = [ "OPCOption", "MucosaMoistOption", "IctericOption"];
-    WriteListOfSelectedValues(activeControlPanel, "HEENT: ", false, "", optionNameList, "")
-
-    optionNameList = [ "SuppleOption", "ThyromegalyOption", "TrachOption"];
-    WriteListOfSelectedValues(activeControlPanel, "Neck: ", false, "", optionNameList, "")
-
-    optionNameList = [ "HROption", "MurmurOption", "MurmurIncrease", "JVDOption", "EdemaOption", "PulsesOption"];
-    WriteListOfSelectedValues(activeControlPanel, "Cardiovascular: ", false, "", optionNameList, "")
-
-    optionNameList = [ "CBTAOption", "RalesOption", "WheezesOption", "LaboredOption"];
-    WriteListOfSelectedValues(activeControlPanel, "Pulmonary: ", false, "", optionNameList, "")
-
-    optionNameList = [ "BowelSoundsOption", "SoftOption", "NTOption", "NDOption", "ReboundOption", "GTubeOption"];
-    WriteListOfSelectedValues(activeControlPanel, "Abdom: ", false, "", optionNameList, "")
-
-    optionNameList = [ "RoMArmsOption", "RoMKneesOption", "RoMHipsOption", "AmputationOption", "WoundVacOption"];
-    WriteListOfSelectedValues(activeControlPanel, "Muskuloskeletal: ", false, "", optionNameList, "")
-
-    optionNameList = [ "AsterixisOption", "CNIntactOption", "5/5BUEOption", "5/5BLEOption", "BabinskiOption"];
-    WriteListOfSelectedValues(activeControlPanel, "Neurologic: ", false, "", optionNameList, "")
-
-    optionNameList = [ "RashesOption", "LesionsOption", "UlcersOption"];
-    WriteListOfSelectedValues(activeControlPanel, "Dermatologic: ", false, "", optionNameList, "")
-
-    optionNameList = [ "AccessTypeOption", "AccessBruitOption", "AccessThrillOption", "AccessAugmentationOption"];
-    WriteListOfSelectedValues(activeControlPanel, "Access: ", false, "", optionNameList, "")
-
-    WriteTextLine("");
-    WriteTextLine("ASSESSMENT/PLAN");
-    //LogEvent("FINISH WritePlanHeader");
-} // WritePlanHeader
-
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-//
-// [WritePlanFooter]
-//
-////////////////////////////////////////////////////////////////////////////////
-function 
-WritePlanFooter() {
-    var str;
-    var modifierStr;
-    var activeControlPanel = null;
-    var verbosityLevel = "verbose";
-    var reasonOptionStr;
-    var reasonList;
-    var optionNameList;
-
-    MedNote_StartNewPlanSection(null, "PlanFooter");
-
-    // Get the control panel. 
-    // This was set up by the call to MedNote_StartNewPlanSection.
-    planConfigState = g_AllPlansDeclaration['PlanFooter'];
-    activeControlPanel = planConfigState.activeControlPanel;
-    if (!activeControlPanel) {
-        LogEvent("WritePlanFooter. activeControlPanel is null");
-        return;
-    }
-
-    // Collect all of the 1-liner tiny plans. This will not print, instead
-    // it will call PrintSingleLinePlanAtEnd, which will append the text to
-    // the g_TinyPlanStringList.
-    g_TinyPlanStringList = []
-    for (var planName in g_AllPlansDeclaration) {
-        var valueEntry = g_AllPlansDeclaration[planName];
-        if ((valueEntry.isSelected) && (valueEntry.PrintFunction) && (valueEntry.PrintSingleLine >= 1)) {
-            //LogEvent("WritePlanFooter write plan: " + planName);
-            valueEntry.PrintFunction();
-        }
-        if ((valueEntry.isSelected) && (valueEntry.SingleLinePlans.length > 0)) {
-            for (var index = 0; index < valueEntry.SingleLinePlans.length; index++) {
-                g_TinyPlanStringList.push(valueEntry.SingleLinePlans[index])
-            }
-        }
-    }
-
-    // Now, write all single-line plans at the end
-    for (var index = 0; index < g_TinyPlanStringList.length; index++) {
-        WriteComment(g_TinyPlanStringList[index]);
-    }
-
-
-    if (g_IsPrimary) {
-        str = MedNote_GetCPOptionValue("DietOption");
-        if ("" != str) {
-            WriteTextLine("");
-            WriteTextLine(PROBLEM_SECTION_HEADER_PREFIX + "Fluids/Nutrition" + PROBLEM_SECTION_HEADER_SUFFIX);
-            WriteComment(PLAN_ACTION_TEXT_LINE_PREFIX + str);
-        }
-
-        str = MedNote_GetCPOptionValue("DVTProphylaxisOption");
-        if ("" != str) {
-            WriteTextLine("");
-            WriteTextLine(PROBLEM_SECTION_HEADER_PREFIX + "Prophylaxis" + PROBLEM_SECTION_HEADER_SUFFIX);
-            WriteComment(PLAN_ACTION_TEXT_LINE_PREFIX + str);
-        }
-
-        if (MedNote_GetCPOptionBool("DispoDisplayDischargePlanning")) {
-            WriteTextLine("");
-            WriteTextLine(PROBLEM_SECTION_HEADER_PREFIX + "Discharge Planning" + PROBLEM_SECTION_HEADER_SUFFIX);
-            /////////////////////////
-            // PT Recommendations
-            str = MedNote_GetCPOptionValue("DispoPTRecsOption");
-            if ((str != null) && (str != "")) {
-                modifierStr = MedNote_GetCPOptionValue("DispoPatientAgreeOption");
-                if ((modifierStr != null) && (modifierStr != "")) {
-                    str = str + " and " + modifierStr;
-                }
-                WriteComment("PT recommends: " + str);
-            }
-            /////////////////////////
-            // Build up a list of reasons why the patient cannot be discharged.
-            reasonList = "";
-            reasonOptionStr = MedNote_GetCPOptionValue("DispoInsuranceOption");
-            if ((reasonOptionStr != null) && (reasonOptionStr != "")) {
-                if (reasonList != "") {
-                    reasonList = reasonList + ", ";
-                }
-                reasonList = reasonList + reasonOptionStr;
-            }
-            reasonOptionStr = MedNote_GetCPOptionValue("DispoIVAbxOption");
-            if ((reasonOptionStr != null) && (reasonOptionStr != "")) {
-                if (reasonList != "") {
-                    reasonList = reasonList + ", ";
-                }
-                reasonList = reasonList + reasonOptionStr;
-            }
-            reasonOptionStr = MedNote_GetCPOptionValue("DispoDysphagiaOption");
-            if ((reasonOptionStr != null) && (reasonOptionStr != "")) {
-                if (reasonList != "") {
-                    reasonList = reasonList + ", ";
-                }
-                reasonList = reasonList + reasonOptionStr;
-            }
-            reasonOptionStr = MedNote_GetCPOptionValue("DispoAMSOption");
-            if ((reasonOptionStr != null) && (reasonOptionStr != "")) {
-                if (reasonList != "") {
-                    reasonList = reasonList + ", ";
-                }
-                reasonList = reasonList + reasonOptionStr;
-            }
-            reasonOptionStr = MedNote_GetCPOptionValue("DispoMedicalOption");
-            if ((reasonOptionStr != null) && (reasonOptionStr != "")) {
-                if (reasonList != "") {
-                    reasonList = reasonList + ", ";
-                }
-                reasonList = reasonList + reasonOptionStr;
-            }
-            if ("" != reasonList) {
-                WriteComment("Barriers to discharge: " + reasonList);
-            }
-        
-            /////////////////////////
-            // PT actions
-            WriteCommentIfSelected(activeControlPanel, 'DispoPTOption');
-
-            /////////////////////////
-            // Followup appointments
-            var actionNameList = [ "DispoClinicPCPOption", "DischargeFollowUpID", "DischargeFollowUpGI",
-                                    "DischargeFollowUpRenal", "DischargeFollowUpCards", "DischargeFollowUpOnc",
-                                    "DischargeFollowUpNeuro", "DischargeFollowUpSurgery",
-                                    "DischargeFollowUpEndocrine"];
-            WriteListOfSubActions("Followup appointments after discharge:", actionNameList);
-
-            /////////////////////////
-            // Equipment
-            WriteCommentIfSelected(activeControlPanel, 'WeaknessHospBed1Option');
-            WriteCommentIfSelected(activeControlPanel, 'WeaknessHospBed2Option');
-            WriteCommentIfSelected(activeControlPanel, 'WeaknessWheelchairOption');
-    
-            /////////////////////////
-            // Discharge Meds
-            WriteCommentIfSelected(activeControlPanel, 'DispoPneumovaxOption');
-            WriteCommentIfSelected(activeControlPanel, 'DispoHAVVaccineOption');
-            WriteCommentIfSelected(activeControlPanel, 'DispoHBVVaccineOption');
-            WriteCommentIfSelected(activeControlPanel, 'DispoNarcanOption');
-        } // Discharge Planning
-
-
-        /////////////////////////
-        // Code status Section
-        str = MedNote_GetCPOptionValue("CodeStatusOption");
-        if ("" != str) {
-            WriteTextLine("");
-            WriteTextLine(PROBLEM_SECTION_HEADER_PREFIX + "Code Status" + PROBLEM_SECTION_HEADER_SUFFIX);
-            WriteTextLine(str);
-        }
-    } // if (g_IsPrimary)
-
-    WriteTextLine("");
-} // WritePlanFooter
-
-
-
-
-
-
-
 ////////////////////////////////////////////////////////////////////////////////
 //
 // [WritePlanBody]
@@ -704,58 +179,20 @@ WritePlanFooter() {
 function 
 WritePlanBody() {
     //LogEvent("WritePlanBody");
-    //var oneLinerPlanList = [];
     var index;
 
     // Clear the output and prepare to write a new plan.
     if (g_PlanTableElement) {
         Util_RemoveAllChildNodes(g_PlanTableElement);
     }  
-    if (g_RecommendationsDivElement) {
-        Util_RemoveAllChildNodes(g_RecommendationsDivElement);
-    }          
     g_CurrentPlanSectionTextElement = null;
-
-    if (g_EmitBoilerplate) {
-        WritePlanHeader();
-    }  
-
-    g_WritingPlanSection = true;
-    for (var planName in g_AllPlansDeclaration) {
-        var valueEntry = g_AllPlansDeclaration[planName];
-        if ((valueEntry.isSelected) && (valueEntry.PrintFunction) && (planName != "BillingPlan")) {
-            //LogEvent("Body write plan: " + planName);
-            if (valueEntry.PrintSingleLine >= 1) {
-                // If this is a tiny plan, then the control panel should show up in place, but
-                // The plan body is empty - it will appear as a comment/action in the footer.
-                // So, to just create the control panel, call startNewPlanSection.
-                MedNote_StartNewPlanSection("", planName);
-            } else {
-                // Otherwise, call the print function, which will in turn call MedNote_StartNewPlanSection.
-                // We let the print function make the call because it will pass the appropriate plan title.
-                valueEntry.SingleLinePlans = [];
-                valueEntry.PrintFunction();
-            }
-        }
-    }
     g_WritingPlanSection = false;
 
-    //if (g_EmitBoilerplate) {
-    WritePlanFooter();
-    WriteTextLine(" ");
-    WriteTextLine(" ");
-        
     var valueEntry = g_AllPlansDeclaration["BillingPlan"];
-    if ((valueEntry.isSelected) && (valueEntry.PrintFunction)) {
+    if (valueEntry.PrintFunction) {
+        //LogEvent("WritePlanBody BillingPlan");
         valueEntry.SingleLinePlans = [];
         valueEntry.PrintFunction();
-    }
-
-    for (var planName in g_AllPlansDeclaration) {
-        var valueEntry = g_AllPlansDeclaration[planName];
-        if ((valueEntry) && (valueEntry.isSelected == 2)) {
-            valueEntry.isSelected = 0;
-        }
     }
 } // WritePlanBody
 
@@ -1265,14 +702,8 @@ ShowSubWindow(windowName, statusTextStr, showHelpClose) {
     if (g_PlanDivElement) {
         g_PlanDivElement.style.display = "None";
     }
-    if (g_DiagnosisButtonsDivElement) {
-        g_DiagnosisButtonsDivElement.style.display = "None";        
-    }
     if (g_HelpDivElement) {
         g_HelpDivElement.style.display = "None";
-    }
-    if (g_OptionWindowDivElement) {
-        g_OptionWindowDivElement.style.display = "None";
     }
 
     ////////////////////////////////////
@@ -1323,9 +754,6 @@ MedNote_OnCloseChildWindow(button) {
     if (g_ToolBarElement) {
         g_ToolBarElement.style.display = "inline";
     }
-    if (g_DiagnosisButtonsDivElement) {
-        g_DiagnosisButtonsDivElement.style.display = "inline";        
-    }
     if (g_PlanDivElement) {
         g_PlanDivElement.style.display = "inline";
     }
@@ -1333,9 +761,6 @@ MedNote_OnCloseChildWindow(button) {
 
     if (g_HelpDivElement) {
         g_HelpDivElement.style.display = "None";
-    }
-    if (g_OptionWindowDivElement) {
-        g_OptionWindowDivElement.style.display = "None";
     }
 } // MedNote_OnCloseChildWindow
 
@@ -2307,234 +1732,5 @@ WriteListOfSelectedFormatStrings(activeControlPanel, optionNameList) {
     }
 } // WriteListOfSelectedFormatStrings
 
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-//
-// [NB_ProblemMarkerSelect]
-//
-// This is called when the user selects a different prefix for problems.
-////////////////////////////////////////////////////////////////////////////////
-function 
-NB_OnProblemMarkerSelect(menuControl) {
-    var selectedItem = menuControl.options[menuControl.selectedIndex].value;
-    if (selectedItem == "MEDNOTEMAKER_PROBLEM_MARKER_POUND_PAREN") {
-        PROBLEM_SECTION_HEADER_PREFIX = "#) ";
-        PROBLEM_SECTION_HEADER_SUFFIX = " ";
-    } else if (selectedItem == "MEDNOTEMAKER_PROBLEM_MARKER_POUND_SPACE") {
-        PROBLEM_SECTION_HEADER_PREFIX = "# ";
-        PROBLEM_SECTION_HEADER_SUFFIX = " ";
-    } else if (selectedItem == "MEDNOTEMAKER_PROBLEM_MARKER_POUND_NOSPACE") {
-        PROBLEM_SECTION_HEADER_PREFIX = "#";
-        PROBLEM_SECTION_HEADER_SUFFIX = " ";
-    } else if (selectedItem == "MEDNOTEMAKER_PROBLEM_MARKER_DASH") {
-        PROBLEM_SECTION_HEADER_PREFIX = "-";
-        PROBLEM_SECTION_HEADER_SUFFIX = ":";
-    } else if (selectedItem == "MEDNOTEMAKER_PROBLEM_MARKER_NOTHING") {
-        PROBLEM_SECTION_HEADER_PREFIX = "";
-        PROBLEM_SECTION_HEADER_SUFFIX = "";
-    }
-
-    WritePlanBody();
-} // NB_ProblemMarkerSelect
-
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-//
-// [NB_OnProblemSectionSelect]
-//
-// This is called when the user selects a different prefix for major plan sections.
-////////////////////////////////////////////////////////////////////////////////
-function 
-NB_OnProblemSectionSelect(menuControl) {
-    var selectedItem = menuControl.options[menuControl.selectedIndex].value;
-    //LogEvent("selectedItem=" + selectedItem);
-    if (selectedItem == "MEDNOTEMAKER_PROBLEM_SECTIONS_ASSESSMENT_PLAN") {
-        g_ProblemLayout = PROBLEM_ASSESSMENT_PLAN_SUBSECTIONS;
-    } else if (selectedItem == "MEDNOTEMAKER_PROBLEM_SECTIONS_PLAN") {
-        g_ProblemLayout = PROBLEM_ONLY_PLAN_SUBSECTIONS;
-    } else if (selectedItem == "MEDNOTEMAKER_PROBLEM_SECTIONS_NONE") {
-        g_ProblemLayout = PROBLEM_NO_SUBSECTIONS;
-    }
-
-    WritePlanBody();
-} // NB_OnProblemSectionSelect
-
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-//
-// [NB_OnProblemSectionLabelSelect]
-//
-// This is called when the user selects a different prefix for labels.
-// Options tried:  foo:   [foo]  {foo}   //foo    /foo    [foo]  =Foo=
-////////////////////////////////////////////////////////////////////////////////
-function 
-NB_OnProblemSectionLabelSelect(menuControl) {
-    var selectedItem = menuControl.options[menuControl.selectedIndex].value;
-    if (selectedItem == "MEDNOTEMAKER_PROBLEM_SECTIONS_LABEL_SLASH_COLON") {
-        SUBSECTION_SUBHEADER_OPEN_PREFIX = "/";
-        SUBSECTION_SUBHEADER_CLOSE_SUFFIX = ":";
-    } else if (selectedItem == "MEDNOTEMAKER_PROBLEM_SECTIONS_LABEL_DOUBLESLASH_COLON") {
-        SUBSECTION_SUBHEADER_OPEN_PREFIX = "//";
-        SUBSECTION_SUBHEADER_CLOSE_SUFFIX = ":";
-    } else if (selectedItem == "MEDNOTEMAKER_PROBLEM_SECTIONS_LABEL_COLON") {
-        SUBSECTION_SUBHEADER_OPEN_PREFIX = "";
-        SUBSECTION_SUBHEADER_CLOSE_SUFFIX = ":";
-    } else if (selectedItem == "MEDNOTEMAKER_PROBLEM_SECTIONS_LABEL_NONE") {
-        SUBSECTION_SUBHEADER_OPEN_PREFIX = "";
-        SUBSECTION_SUBHEADER_CLOSE_SUFFIX = "";
-    }
-
-    WritePlanBody();
-} // NB_OnProblemSectionLabelSelect
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-//
-// [NB_OnActionPrefixSelect]
-//
-// This is called when the user selects a different prefix for actions.
-////////////////////////////////////////////////////////////////////////////////
-function 
-NB_OnActionPrefixSelect(menuControl) {
-    var selectedItem = menuControl.options[menuControl.selectedIndex].value;
-    if (selectedItem == "MEDNOTEMAKER_ACTION_PREFIX_DASH_SPACE") {
-        PLAN_ACTION_TEXT_LINE_PREFIX = "- ";
-    } else if (selectedItem == "MEDNOTEMAKER_ACTION_PREFIX_DASH") {
-        PLAN_ACTION_TEXT_LINE_PREFIX = "-";
-    } else if (selectedItem == "MEDNOTEMAKER_ACTION_PREFIX_NONE") {
-        PLAN_ACTION_TEXT_LINE_PREFIX = "";
-    }
-
-    WritePlanBody();
-} // NB_OnActionPrefixSelect
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-//
-// [NB_OnCommentPrefixSelect]
-//
-// This is called when the user selects a different prefix for comments.
-////////////////////////////////////////////////////////////////////////////////
-function 
-NB_OnCommentPrefixSelect(menuControl) {
-    var selectedItem = menuControl.options[menuControl.selectedIndex].value;
-    if (selectedItem == "MEDNOTEMAKER_ACTION_PREFIX_DASH_SPACE") {
-        PLAN_COMMENT_TEXT_LINE_PREFIX = "- ";
-    } else if (selectedItem == "MEDNOTEMAKER_ACTION_PREFIX_DASH") {
-        PLAN_COMMENT_TEXT_LINE_PREFIX = "-";
-    } else if (selectedItem == "MEDNOTEMAKER_ACTION_PREFIX_NONE") {
-        PLAN_COMMENT_TEXT_LINE_PREFIX = "";
-    }
-
-    WritePlanBody();
-} // NB_OnCommentPrefixSelect
-
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-//
-// [MedNote_ToggleTinyPlan]
-//
-////////////////////////////////////////////////////////////////////////////////
-function 
-MedNote_ToggleTinyPlan(button, planSectionName) {
-    var planSectionEntry;
-    //LogEvent("MedNote_ToggleTinyPlan. planSectionName=" + planSectionName);
-    //LogEvent("button.id = " + button.id);
-
-    planSectionEntry = g_AllPlansDeclaration[planSectionName];
-    if (!planSectionEntry) {
-        LogEvent("MedNote_ToggleTinyPlan. null planSectionEntry");
-        return;
-    }
-
-    if  (planSectionEntry.PrintSingleLine == 1) {
-        button.className="CPOptionDisabledStyle";
-        planSectionEntry.PrintSingleLine = 0;
-    } else if (planSectionEntry.PrintSingleLine == 0) {
-        button.className="CPOptionOnStyle";
-        planSectionEntry.PrintSingleLine = 1;
-    }        
-
-    //LogEvent("MedNote_ToggleTinyPlan. call MedNote_RedrawPlanEntry");
-    MedNote_RedrawPlanEntry(planSectionEntry);
-    //LogEvent("MedNote_ToggleTinyPlan. MedNote_RedrawPlanEntry returned");
-
-    // Redraw the footer so we can include the plan as a tinyplan.
-    var footerConfigState = g_AllPlansDeclaration['PlanFooter'];
-    MedNote_RedrawPlanEntry(footerConfigState);
-} // MedNote_ToggleTinyPlan
-
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-//
-// [PrintSingleLinePlanAtEnd]
-//
-////////////////////////////////////////////////////////////////////////////////
-function 
-PrintSingleLinePlanAtEnd(planName, planTitleStr, planActionStr) {
-    //LogEvent("PrintSingleLinePlanAtEnd for plan: " + planName);
-    //LogEvent("planTitleStr=" + planTitleStr);
-    //LogEvent("planActionStr=" + planActionStr);
-
-    planConfigState = g_AllPlansDeclaration[planName];
-    if (planConfigState.PrintSingleLine <= 0) {
-        return(false);
-    }
-
-    textStr = PROBLEM_SECTION_HEADER_PREFIX + planTitleStr + PROBLEM_SECTION_HEADER_SUFFIX + " - " + planActionStr;
-    g_TinyPlanStringList.push(textStr)
-
-    return(true);
-} // PrintSingleLinePlanAtEnd
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-//
-// [AddSingleLinePlanAtEnd]
-//
-////////////////////////////////////////////////////////////////////////////////
-function 
-AddSingleLinePlanAtEnd(planSectionName, planTitleStr, planActionStr) {
-    //LogEvent("AddSingleLinePlanAtEnd. planTitleStr=" + planTitleStr);
-    //LogEvent("AddSingleLinePlanAtEnd. planActionStr=" + planActionStr);
-    var planSectionEntry;
-
-    planSectionEntry = g_AllPlansDeclaration[planSectionName];
-    //LogEvent("MedNote_CPReload. planSectionEntry=" + planSectionEntry);
-    if (!planSectionEntry) {
-        LogEvent("AddSingleLinePlanAtEnd. null planSectionEntry");
-        return;
-    }
-
-    textStr = PROBLEM_SECTION_HEADER_PREFIX + planTitleStr + PROBLEM_SECTION_HEADER_SUFFIX + " - " + planActionStr;
-    planSectionEntry.SingleLinePlans.push(textStr)
-} // AddSingleLinePlanAtEnd
 
 
