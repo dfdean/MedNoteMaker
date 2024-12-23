@@ -24,11 +24,11 @@
     <script src="./JSBuildingBlocks.cpp" type="text/javascript"></script>
     <script src="./medNoteMakerPlans.cpp" type="text/javascript"></script>
     <script src="./medNoteMakerTables.cpp" type="text/javascript"></script>
-    <script src="./medNoteMakerMain.cpp" type="text/javascript"></script>
+    <script src="./medNoteMakerBilling.cpp" type="text/javascript"></script>
 </head>
 
 
-<body bgcolor="white" onLoad="StartMedNoteMaker()">
+<body bgcolor="white" onLoad="StartMedNoteMakerBilling()">
 <div id="entirePage" style="width:100%; text-align:left;">
 
 
@@ -40,8 +40,8 @@
     <div id="navBar">
     <ul>
     <li class="navBarTab"><a href="./index.html" title="Main">Main</a></li>
-    <li class="navBarActiveTab"><a href="./medNoteMaker.html" title="MedNote">MedNote</a></li>    
-    <li class="navBarTab"><a href="./medNoteMakerBilling.html" title="MedNote">Med Billing</a></li>    
+    <li class="navBarTab"><a href="./medNoteMaker.html" title="MedNote">MedNote</a></li>    
+    <li class="navBarActiveTab"><a href="./medNoteMakerBilling.html" title="MedNote">Med Billing</a></li>    
     <li class="navBarTab"><a href="./medicine.html" title="Medicine">Medicine</a></li>    
     <li class="navBarTab"><a href="./sourceCode.html" title="Source Code">Source Code</a></li>
     <li class="navBarTab"><a href="./siliconValley.html" title="Silicon Valley">Silicon Valley</a></li>
@@ -55,76 +55,6 @@
 
 
 <div id="mainContent" style="width:100%; text-align:left;">
-
-<!--//////////////////////////////////////////////////-->
-<!-- Top ToolBar Buttons -->
-<!-- -->
-<!-- RefreshBtnID has to be on the end, because it is often invisible. If it is in the middle of a row, then there is a gap when it is invisible. -->
-<!--//////////////////////////////////////////////////-->
-<table border="0" style="background-color:#E0E0E0; padding:5px; overflow-x:auto;" id="ToolBar">
-<tr style="background-color:#E0E0E0">
-<td><input type="button" id="FullPlanOption" value="Full-->Plan Only" class="OptionBtnStyle" onclick="OnPlanTypeButton(this)" > </td>
-
-<td style="background-color:#E0E0E0">
-<label for="NB_ProblemMarkerSelect">Problem Marker:&nbsp;&nbsp;&nbsp;&nbsp;</label><br>
-<select id="NB_ProblemMarkerSelect" onchange="NB_OnProblemMarkerSelect(this)">
-  <option value="MEDNOTEMAKER_PROBLEM_MARKER_POUND_PAREN" selected>#) probName</option>
-  <option value="MEDNOTEMAKER_PROBLEM_MARKER_POUND_SPACE"># probName</option>
-  <option value="MEDNOTEMAKER_PROBLEM_MARKER_POUND_NOSPACE">#probName</option>
-  <option value="MEDNOTEMAKER_PROBLEM_MARKER_DASH">-probName</option>
-    <!--  <option value="MEDNOTEMAKER_PROBLEM_MARKER_NUMBER">1. probName</option> -->
-  <option value="MEDNOTEMAKER_PROBLEM_MARKER_NOTHING">probName</option>
-</select> 
-</td>
-
-<td>
-<label for="NB_ProblemSectionSelect">Problem Sections:</label><br>
-<select id="NB_ProblemSectionSelect" onchange="NB_OnProblemSectionSelect(this)">
-  <option value="MEDNOTEMAKER_PROBLEM_SECTIONS_ASSESSMENT_PLAN" >Assessment: xxxx Plan: xxxx</option>
-  <option value="MEDNOTEMAKER_PROBLEM_SECTIONS_PLAN" selected>xxxx Plan: xxxx</option>
-  <option value="MEDNOTEMAKER_PROBLEM_SECTIONS_NONE">xxxx</option>
-</select> 
-</td>
-
-<td>
-<label for="NB_ProblemSectionLabelSelect">Section Labels:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><br>
-<select id="NB_ProblemSectionLabelSelect" onchange="NB_OnProblemSectionLabelSelect(this)">
-  <option value="MEDNOTEMAKER_PROBLEM_SECTIONS_LABEL_SLASH_COLON" selected>/Plan:</option>
-  <option value="MEDNOTEMAKER_PROBLEM_SECTIONS_LABEL_DOUBLESLASH_COLON">//Plan:</option>
-  <option value="MEDNOTEMAKER_PROBLEM_SECTIONS_LABEL_COLON" >Plan:</option>
-  <option value="MEDNOTEMAKER_PROBLEM_SECTIONS_LABEL_NONE">Plan</option>
-</select> 
-</td>
-
-
-<td>
-<label for="NB_ActionPrefixSelect">Action Prefix:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><br>
-<select id="NB_ActionPrefixSelect" onchange="NB_OnActionPrefixSelect(this)">
-  <option value="MEDNOTEMAKER_ACTION_PREFIX_DASH_SPACE" selected>- Give Med</option>
-  <option value="MEDNOTEMAKER_ACTION_PREFIX_DASH" >-Give med</option>
-  <option value="MEDNOTEMAKER_ACTION_PREFIX_NONE">Give med</option>
-</select> 
-</td>
-
-
-<td>
-<label for="NB_CommentPrefixSelect">Comment Prefix:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><br>
-<select id="NB_CommentPrefixSelect" onchange="NB_OnCommentPrefixSelect(this)">
-  <option value="MEDNOTEMAKER_ACTION_PREFIX_DASH_SPACE">- comment</option>
-  <option value="MEDNOTEMAKER_ACTION_PREFIX_DASH">-comment</option>
-  <option value="MEDNOTEMAKER_ACTION_PREFIX_NONE" selected>comment</option>
-</select> 
-</td>
-
-
-<td>
-<input type="button" id="HelpButtonID" value="About/Hints..." class="OptionBtnStyle" onclick="OnShowWindowButton(this)" >
-</td>
-
-
-
-</tr>
-</table>
 </div>
 
 
@@ -132,111 +62,13 @@
 
 <!--//////////////////////////////////////////////////-->
 <!-- Diagnoses - Plan Buttons -->
+<!-- Ugh. HACK FIXME BUGBUG. Leave this here for now. The code that writes plans expects to find a button. -->
 <!--//////////////////////////////////////////////////-->
-<div id="DiagnosisButtons" style="display:inline;">
-<table id="InPatientTable" border="0">
-<tr> 
-    <td><b>Critical</b></td>   
-    <td><input type="button" id="SepsisPlan" value="Sepsis" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="NSTEMIPlan" value="NSTEMI" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="DKAPlan" value="DKA" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="GIBleedPlan" value="GI Bleed" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="StrokePlan" value="Stroke" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="DICPlan" value="DIC" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="PEDVTPlan" value="PE/DVT" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="CovidPlan" value="Covid" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-</tr>
-
+<table id="InPatientTable" border="0" style="display:None;">
 <tr>
-    <td><b>CV/Pulm</b></td>  
-    <td><input type="button" id="PneumoniaPlan" value="Pneumonia" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="CADPlan" value="CAD" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="CHFPlan" value="CHF" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="COPDPlan" value="COPD" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="AFibPlan" value="A-Fib" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="AsthmaPlan" value="Asthma" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="OSAPlan" value="OSA" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-</tr>
-
-<tr>
-    <td><b>Renal</b></td> 
-    <td><input type="button" id="AKIPlan" value="AKI" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="CKDPlan" value="CKD" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="HemoDialysisPlan" value="ESRD" class="planOffStyle" onclick="OnPlanButton(this)" ></td>    
-    <td><input type="button" id="RenalTransplantPlan" value="Renal-xplant" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="NephroticPlan" value="Nephrotic" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="HTNPlan" value="HTN" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-</tr>
-
-<tr>
-    <td><b>Renal 2</b></td> 
-    <td><input type="button" id="MBDPlan" value="MBD" class="planOffStyle" onclick="OnPlanButton(this)" ></td>  
-    <td><input type="button" id="NephrolithiasisPlan" value="Renal Stones" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="BPHPlan" value="BPH" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="IVContrastPlan" value="IV Contrast" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="VitDPlan" value="Low Vit D" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-</tr>
-    
-<tr>
-    <td><b>Electrolytes</b></td> 
-    <td><input type="button" id="AcidBasePlan" value="Acid-Base" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="HypokalemiaPlan" value="Low K" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="HyperkalemiaPlan" value="High K" class="planOffStyle" onclick="OnPlanButton(this)" ></td>    
-    <td><input type="button" id="HyponatremiaPlan" value="Low Na" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="HypERnatremiaPlan" value="High Na" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="HypomagnesemiaPlan" value="Low Mg" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="HypoPhosPlan" value="Low Phos" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="HypERCalcemiaPlan" value="High Ca" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="HypoCalcemiaPlan" value="Low Ca" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-</tr>
-
-<tr>
-    <td><b>GI/Endo</b></td> 
-    <td><input type="button" id="DiabetesPlan" value="Diabetes" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="CirrhosisPlan" value="Cirrhosis" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="HepatitisPlan" value="Hepatitis" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="PancPlan" value="Pancreatitis" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="HepCPlan" value="Hep C" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="HypothyroidPlan" value="Hypothyroid" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="GERDPlan" value="GERD" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="DysphagiaPlan" value="Dysphagia" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="GISymptomsPlan" value="GI Symptoms" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <!-- <td><input type="button" id="ParathyroidectomyPlan" value="Parathyroidectomy" class="planOffStyle" onclick="OnPlanButton(this)" ></td> -->
-</tr>
-
-<tr>
-    <td><b>PreExisting</b></td> 
-    <td><input type="button" id="ObesityPlan" value="Obesity" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="TobaccoPlan" value="Tobacco" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="IllicitDrugsPlan" value="Illicit Drugs" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="EtOHPlan" value="Alcohol" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="DepressionPlan" value="Depression" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="GoutPlan" value="Gout" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="MalnutritionPlan" value="Malnutrition" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="WeaknessPlan" value="Weakness" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="MigrainesPlan" value="Migraines" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-</tr>
-
-<tr>
-    <td><b>Misc</b></td> 
-    <td><input type="button" id="AnemiaPlan" value="Anemia" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="OncologyPlan" value="Oncology" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="EncephalopathyPlan" value="AMS" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="SyncopePlan" value="Syncope" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="PressureUlcersPlan" value="PressureUlcers" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="LegFracturePlan" value="LegFracture" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="PreopPlan" value="Preop" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="PalliativePlan" value="Palliative" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-</tr>
-
-<tr>
-    <td><b>Billing</b></td> 
     <td><input type="button" id="BillingPlan" value="Billing" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
-    <td><input type="button" id="PreventionPlan" value="Prevention" class="planOffStyle" onclick="OnPlanButton(this)" ></td>
 </tr>
-
 </table>
-</div> <!--DiagnosisButtons-->
 
 
 
@@ -387,6 +219,46 @@ Dr Gareth Gilkey - He taught me through his example what it means to be a doctor
 
 
 
+<!--//////////////////////////////////////////////////-->
+<!-- IMPORT WINDOW -->
+<!--//////////////////////////////////////////////////-->
+<br>
+<div ID="ImportWindow"  style="display:None;">
+Paste labs from your electronic medical record system
+<br>
+<p>In SCM, click the "Trending Results" tab, select one or more rows and then copy to the Clipboard (Control-C) and then paste into the text box.
+
+<br><br>
+<textarea id="ScraperInput" rows="10" cols="80" style="border:4px outset;">
+</textarea>
+
+<br>
+<table border="0" style="padding:1px;" id="PatientSelectToolBar">
+<td><input type="button" id="CloseImportButtonID" value="Cancel" class="OptionBtnStyle" onclick="MedNote_OnCloseChildWindow(this)" ></td>
+</tr>
+</table>
+</div>
+
+
+
+
+<!--//////////////////////////////////////////////////-->
+<!-- TEXTEDIT WINDOW -->
+<!--//////////////////////////////////////////////////-->
+<br>
+<div ID="TextEditWindow"  style="display:None;">
+<table border="0" style="padding:1px;" id="PatientSelectToolBar">
+<td><input type="button" id="CloseImportButtonID" value="Cancel" class="OptionBtnStyle" onclick="MedNote_OnCloseChildWindow(this)" ></td>
+</tr>
+</table>
+<br>
+<textarea id="TextEditorInput" rows="120" cols="150" style="border:4px outset;">
+</textarea>
+</div>
+
+
+
+
 
 <!--//////////////////////////////////////////////////-->
 <!-- PLAN WINDOW -->
@@ -474,9 +346,13 @@ Dr Gareth Gilkey - He taught me through his example what it means to be a doctor
 This is the catalog, not visible HTML elements. These nodes will be used by the code
 to insert the appropriate elements into the control panel. -->
 <!--//////////////////////////////////////////////////-->
+<!-- 
+<iframe ID="ImportControlPanelCatalog" src="./medNoteMakerControlPanels.html" style="display:None;">> xxxx </iframe>
+-->
+
+
+
 <div ID="ControlPanelCatalog" style="display:None;">
-
-
 
 <!-------------------------------------------------------->
 <!-- HEADER CONTROLS -->
@@ -1404,6 +1280,7 @@ to insert the appropriate elements into the control panel. -->
         <td><input type="button" id="AKICystatinCTrendOption" value="Trend CysC" class="CPOptionDisabledStyle" toggleState="0" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AKITrendUrineOption" value="Trend Urine" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AKIEstimateGFROption" value="Estimate GFR" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <!--<td><input type="button" id="AKIBaselineGFROption" value="Baseline Urine" class="CPOptionOnStyle" toggleState="0" onclick="MedNote_OnCPOptionButton(this)" ></td>-->
     </tr>
 
     <tr>
@@ -1547,6 +1424,7 @@ to insert the appropriate elements into the control panel. -->
         <tr>
         <td><b><u>Acid Base</u></b></td>
         <td><input type="button" id="AcidBaseTypeOption" value="Acid Base" class="CPOptionOnStyle" toggleState="0" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <!-- <td><input type="button" id="AcidBaseVerbosityOption" value="Verbose" class="CPOptionOnStyle" toggleState="0" onclick="MedNote_OnCPOptionButton(this)" ></td> -->
         <td><input type="button" value="Reload" class="CPGroupOnStyle" onclick="MedNote_CPReload(this, 'AcidBasePlan')" ></td>
         <td><input type="button" value="Hide" class="CPGroupOnStyle" onclick="MedNote_CPToggleControls(this)" ></td>
         </tr>
@@ -1731,6 +1609,10 @@ to insert the appropriate elements into the control panel. -->
         <td><input type="button" id="AcidBaseDiffPrimaryBiliaryCirrhosisOption" value="PBC" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AcidBaseDiffChronicUTIOption" value="Chronic UTI" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AcidBaseDiffTolueneOption" value="Toluene" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+<!--        <td><input type="button" id="AcidBaseDiffSickleCellOption" value="Sickle cell" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>-->
+<!--        <td><input type="button" id="AcidBaseDiffHepatitisOption" value="Hepatitis" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td> -->
+<!--        <td><input type="button" id="AcidBaseDiffHyperthyroidOption" value="Hyperthyroid" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td> -->
+<!--        <td><input type="button" id="AcidBaseDiffHyperparathyroidOption" value="Hyperparathyroid" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td> -->
     </tr>
 
     <tr>
@@ -1754,6 +1636,7 @@ to insert the appropriate elements into the control panel. -->
     <tr>
         <td></td>
         <td><input type="button" id="AcidBaseRTAIVDiffNSAIDsOption" value="NSAIDs" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+<!--        <td><input type="button" id="AcidBaseRTAIVDiffHIVOption" value="HIV" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td> -->
         <td><input type="button" id="AcidBaseRTAIVDiffAddisonOption" value="Addison" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AcidBaseRTAIVDiffsickleCellOption" value="Sickle cell" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="AcidBaseRTAIVDiffLupusOption" value="Lupus" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
@@ -1941,6 +1824,32 @@ Renal Tubular Acidosis:
         <td><input type="button" id="CHFNoBetaBlockerOption" value="Brady" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
     </tr>
 
+<!--
+    <tr>
+        <td><input type="button" value="SGLT2 Indications" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" id="CHFSGLT2IndicationsDM2Option" value="DM2" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="CHFSGLT2IndicationsCKDOption" value="CKD" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="CHFSGLT2IndicationsHFrEFOption" value="HFrEF" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="CHFSGLT2IndicationsUACROver200Option" value="Albuminuria" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
+    <tr>
+        <td><input type="button" value="SGLT2 Contraindications" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
+        <td><input type="button" id="CHFSGLT2ContraindicationsGFRBelow30Option" value="GFR below 30" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="CHFSGLT2ContraindicationsDM1Option" value="DM 1" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="CHFSGLT2ContraindicationsTransplantOption" value="Transplant" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="CHFSGLT2ContraindicationsDKAOption" value="Past DKA" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+
+    <tr>
+        <td></td>
+        <td><input type="button" id="CHFSGLT2ContraindicationsImunosuppressedOption" value="imunosuppressed" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="CHFSGLT2ContraindicationsPKDOption" value="PKD" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="CHFSGLT2ContraindicationsSLEOption" value="SLE" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="CHFSGLT2ContraindicationsANCAOption" value="ANCA" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+    </tr>
+--->
+
     <tr>
         <td><input type="button" value="3. SGLT2" class="CPGroupOnStyle" onclick="MedNote_OnCPGroupButton(this)" ></td>
         <td><input type="button" id="CHFSGLT2DapagliflozinOption" value="Dapagliflozin" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
@@ -2111,6 +2020,7 @@ Renal Tubular Acidosis:
         <td><input type="button" id="HTNMetoprololTarOption" value="MetopTar 12.5" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="HTNMetoprololSuccOption" value="MetopXL 25" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="HTNCarvedilolOption" value="Coreg 3.125" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <!-- <td><input type="button" id="HTNNSBBOption" value="See Cirrhosis" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td> -->
     </tr>
 
     <tr>
@@ -3241,6 +3151,10 @@ SGLT2 Criteria
         <td>&nbsp;</td>
         <td><input type="button" id="CKDCausesShow2YrRiskOption" value="ESRD Risk" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
         <td><input type="button" id="CKDCausesRiskPaperCitationOption" value="Risk Paper" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+<!--
+        <td><input type="button" id="CKDStatusTreatHTNOption" value="Treat HTN" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+        <td><input type="button" id="CKDStatusTreatDMOption" value="Treat DM" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
+-->
         <td><input type="button" id="CKDStatusTransplantOption" value="Xplant None" class="CPOptionDisabledStyle" toggleState="-1" onclick="MedNote_OnCPOptionButton(this)" ></td>
 
     </tr>
@@ -3666,7 +3580,7 @@ Lung disease with normal DLCO is like a crumpled up paper sac. The surface area 
     <p><b>PD Hints</b>
     <ul>
     <li>If the patient is on Icodextran at home, then check all sliding scale glucose measurements with a test insensitive to Icodextran, such as serum Glucose, not fingetstick
-    <li>If slow draining, add 500 units Heparin to each bag
+    <li>If slow draining, add 500 units Heparin to each bag"
     </ul>
 
 </div> <!-- xID="CPHintText" -->
@@ -7644,7 +7558,7 @@ Stage IV pressure ulcers extend into bone or muscle, as is seen in Figure 5
        If immunocompromised and unvaccinated, then do a 3-dose series.
 
     <li>Zoster - 2 doses if born 1980 or later or Zoster-Recombinant
-        <brdults aged 50 years or older should receive the recombinant (inactivated) herpes zoster vaccine to reduce the incidence of zoster and postherpetic neuralgia. The recombinant vaccine is administered intramuscularly in two doses, with an interval of 2 to 6 months between doses. This patients previous episode of herpes zoster does not provide immunity against future episodes and should not preclude additional zoster vaccination. In addition, persons who received the live attenuated herpes zoster vaccine, such as this patient, should be offered the recombinant herpes zoster vaccine given its incr eased efficacy
+        <brdults aged 50 years or older should receive the recombinant (inactivated) herpes zoster vaccine to reduce the incidence of zoster and postherpetic neuralgia. The recombinant vaccine is administered intramuscularly in two doses, with an interval of 2 to 6 months between doses. This patient's previous episode of herpes zoster does not provide immunity against future episodes and should not preclude additional zoster vaccination. In addition, persons who received the live attenuated herpes zoster vaccine, such as this patient, should be offered the recombinant herpes zoster vaccine given its incr eased efficacy
 
     <li>HPV 27yo-45yo
 
@@ -7771,6 +7685,10 @@ Stage IV pressure ulcers extend into bone or muscle, as is seen in Figure 5
         <td><b><u>Billing</u></b></td>
         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
         <td><input type="button" value="Show Hints" class="CPGroupOnStyle" onclick="MedNote_CPToggleHints(this)" ></td>
+<!--
+        <td><input type="button" value="Reload" class="CPGroupOnStyle" onclick="MedNote_CPReload(this, 'XXXXXXXXX')" ></td>
+        <td><input type="button" value="Hide" class="CPGroupOnStyle" onclick="MedNote_CPToggleControls(this)" ></td>
+-->
         </tr>
     </table>
 </div> <!-- xID="CPHeader" -->
